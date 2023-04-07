@@ -17,7 +17,18 @@ class PedidoController extends Controller
 
     public function create()
     {
-        return view('pedidos.create');
+        //obtener el ultimo pedido
+        $ultimoPedido = Pedido::latest()->first();
+
+        //obterner el ultimo pedido y sumarle 1
+        $ultimoPedido = $ultimoPedido ? $ultimoPedido->codPedido + 1 : 1;
+
+        //obtener el usuario logueado
+        $usuario = auth()->user();
+
+        //retornar la vista con los datos
+        return view('pedidos.create')->with('ultimoPedido', $ultimoPedido)->with('usuario', $usuario);
+
     }
 
     public function store(Request $request)

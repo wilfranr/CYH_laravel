@@ -9,11 +9,15 @@ class Pedido extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'cliente_id',
-        'fecha_pedido',
-        'fecha_entrega',
+        'codPedido',
+        'codUsuario',
+        'codCliente',
+        'codMaquina',
+        'fecha_creacion',
+        'fecha_modificacion',
+        'descripcion',
+        'contacto',
         'estado',
-        'observaciones'
     ];
 
     public function cliente()

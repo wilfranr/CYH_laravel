@@ -12,13 +12,26 @@
 <body>
     {{-- Components --}}
     <x-navbar />
-
+    {{-- Contenido --}}
     <main class="container">
         @yield('content')
-        
+
     </main>
+    {{-- Scripts --}}
     <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
-    
+    <script>
+        // Obtener el elemento select
+        const tipoDocumentoSelect = document.getElementById('tipo_documento');
+        // Obtener el campo dv
+        const dvField = document.getElementById('dv-field');
+        // Agregar evento onchange al select
+        tipoDocumentoSelect.addEventListener('change', function() {
+            // Si la opción seleccionada es NIT, mostrar el campo dv
+            dvField.style.display = tipoDocumentoSelect.value === 'NIT' ? 'block' : 'none';
+        });
+        console.log(tipoDocumentoSelect);
+    </script>
+
 </body>
 
 </html>

@@ -18,7 +18,7 @@
                             Pedidos
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Crear Pedido</a></li>
+                            <li><a class="dropdown-item" href="{{ route('pedidos.create')}}">Crear Pedido</a></li>
                             <li><a class="dropdown-item" href="{{ route('pedidos.index') }}">Ver Pedidos</a></li>
                             {{-- <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
@@ -30,8 +30,8 @@
                             Terceros
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Crear Tercero</a></li>
-                            <li><a class="dropdown-item" href="#">Ver Terceros</a></li>
+                            <li><a class="dropdown-item" href="{{ route('terceros.create') }}">Crear Tercero</a></li>
+                            <li><a class="dropdown-item" href="{{ route('terceros.index') }}">Ver Terceros</a></li>
                             {{-- <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                         </ul>

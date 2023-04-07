@@ -9,13 +9,13 @@ class Tercero extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'razon_social',
+        'nombre',
         'tipo_documento',
         'numero_documento',
         'direccion',
         'telefono',
         'email',
-        'rol',
+        'tipo',
         'dv',
         'ciudad_id',
         'departamento_id',

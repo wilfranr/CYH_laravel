@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('terceros', function (Blueprint $table) {
             $table->id();
-            $table->string('razon_social');
+            $table->string('nombre');
             $table->string('tipo_documento');
             $table->string('numero_documento');
             $table->string('direccion');

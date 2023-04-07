@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\TerceroController;
 
 
 /*
@@ -43,11 +45,21 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 //ruta de logo
 Route::get('/resize-logo', 'LogoController@resizeLogo');
 
-//ruta de crear pedido
-Route::get('/crear-pedido', 'PedidoController@create');
-
 //ruta de ver pedidos
 Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+
+//ruta de crear pedido
+Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
+
+//ruta para ver terceros
+Route::get('/terceros', [TerceroController::class, 'index'])->name('terceros.index');
+
+//ruta para crear terceros
+Route::get('/terceros/create', [TerceroController::class, 'create'])->name('terceros.create');
+
+//ruta para almacenar terceros
+Route::post('/terceros',[TerceroController::class, 'store'])->name('terceros.store');
+
 
 
 
