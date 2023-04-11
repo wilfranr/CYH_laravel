@@ -11,6 +11,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\TerceroController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,6 +60,8 @@ Route::get('/terceros/create', [TerceroController::class, 'create'])->name('terc
 
 //ruta para almacenar terceros
 Route::post('/terceros',[TerceroController::class, 'store'])->name('terceros.store');
+
+
 
 
 

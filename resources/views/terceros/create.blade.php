@@ -9,11 +9,11 @@
             @csrf
             <div class="row">
                 <div class="form-group">
-                    <label for="rol">Tipo Tercero</label>
-                    <select name="rol" id="rol" class="form-control">
+                    <label for="tipo">Tipo Tercero</label>
+                    <select name="tipo" id="tipo" class="form-control">
                         <option value="">-- Seleccione un tipo --</option>
-                        <option value="cliente" {{ old('rol') == 'cliente' ? 'selected' : '' }}>Cliente</option>
-                        <option value="proveedor" {{ old('rol') == 'proveedor' ? 'selected' : '' }}>Proveedor</option>
+                        <option value="cliente" {{ old('tipo') == 'cliente' ? 'selected' : '' }}>Cliente</option>
+                        <option value="proveedor" {{ old('tipo') == 'proveedor' ? 'selected' : '' }}>Proveedor</option>
                     </select>
                 </div>
             </div>
@@ -23,6 +23,7 @@
                         <label for="numero_documento">No. Documento</label>
                         <input type="text" name="numero_documento" id="numero_documento" class="form-control"
                             value="{{ old('numero_documento') }}">
+                        <input type="hidden" name="puntos" value="{{ old('puntos') }}">
                     </div>
                     <div class="form-group">
                         <label for="nombre">Razon social</label>
@@ -36,12 +37,22 @@
                     </div>
                     <div class="form-group">
                         <label for="pais">País</label>
-                        <select class="form-control" name="pais_id">
+                        <select class="form-control" name="pais_id" id="pais_id">
                             @foreach ($paises as $pais)
                                 <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                             @endforeach
                         </select>
-                            
+                    </div>
+                    <div class="form-group">
+                        <label for="email-facturacion">Email de Facturación</label>
+                        <input type="email" name="email_facturacion" id="email-facturacion" class="form-control"
+                            value="{{ old('email_facturacion') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="rut">Rut</label>
+                        <input type="file" name="rut" id="rut" class="form-control"
+                            value="{{ old('rut') }}">
+
                     </div>
 
                 </div>
@@ -56,11 +67,13 @@
                             <option value="ce" {{ old('tipo_documento') == 'ce' ? 'selected' : '' }}>Cédula de
                                 extranjería</option>
                         </select>
+                        <div class="form-group" id="dv-field" style="display:none">
+                            <label for="dv">DV</label>
+                            <input type="text" class="form-control" id="dv" name="dv"
+                                placeholder="Ingrese el digito de verificación del Nit" value="{{ old('dv') }}">
+                        </div>
                     </div>
-                    <div class="form-group" id="dv-field" style="display:none">
-                        <label for="dv">DV</label>
-                        <input type="text" class="form-control" id="dv" name="dv">
-                    </div>
+
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" class="form-control"
@@ -71,20 +84,63 @@
                         <input type="text" name="telefono" id="telefono" class="form-control"
                             value="{{ old('telefono') }}">
                     </div>
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" name="ciudad" id="ciudad" class="form-control"
+                            value="{{ old('ciudad') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="sitioWeb">Sitio Web</label>
+                        <input type="text" name="sitioWeb" id="sitioWeb" class="form-control"
+                            value="{{ old('sitioWeb') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="certBanco">Certificación bancaria</label>
+                        <input type="file" name="certBanco" id="certBanco" class="form-control"
+                            value="{{ old('certBanco') }}">
+                    </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 border border-warning mt-4">
 
 
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control"
-                            value="{{ old('email') }}">
+                        <h3>Contactos de tercero</h3>
+                        <label for="contactos">Contacto 1:</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="contactos" id="contactos" class="form-control"
+                                    value="{{ old('contactos') }}" placeholder="Nombre">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="contactos" id="contactos" class="form-control"
+                                    value="{{ old('contactos') }}" placeholder="Teléfono">
+                            </div>
+                        </div>
+                        <label for="contactos">Contacto 2:</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="contactos" id="contactos" class="form-control"
+                                    value="{{ old('contactos') }}" placeholder="Nombre">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="contactos" id="contactos" class="form-control"
+                                    value="{{ old('contactos') }}" placeholder="Teléfono">
+                            </div>
+                        </div>
+                        <label for="contactos">Contacto 3:</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="contactos" id="contactos" class="form-control"
+                                    value="{{ old('contactos') }}" placeholder="Nombre">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" name="contactos" id="contactos" class="form-control"
+                                    value="{{ old('contactos') }}" placeholder="Teléfono">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Crear tercero</button>
         </form>
+        <button type="submit" class="btn btn-primary mt-3">Crear tercero</button>
     </div>
 @endsection
-
-

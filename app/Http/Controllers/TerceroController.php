@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Tercero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Pais;
+use App\Models\Departamento;
 
 
 class TerceroController extends Controller
@@ -39,16 +41,39 @@ class TerceroController extends Controller
         return view('terceros.create', ['paises' => $paises]);
     }
 
+    // public function getDepartamentos(Request $request)
+    // {
+    //     $departamentos = Departamento::where('pais_id', $request->pais_id)->get();
+    //     return response()->json($departamentos);
+    // }
+
     public function store(Request $request)
     {
         // 1. Obtener los datos enviados por el formulario
         $data = $request->validate([
-            'rol' => ['required', 'in:cliente,proveedor'],
+            'tipo' => ['required', 'in:cliente,proveedor'],
             'nombre' => ['required', 'string', 'max:255'],
             'email' => ['nullable', 'email', 'max:255'],
             'telefono' => ['nullable', 'string', 'max:20'],
-
+            'direccion' => ['nullable', 'string', 'max:255'],
+            'numero_documento' => ['nullable', 'string', 'max:20'],
+            'pais_id' => ['nullable', 'integer'],
+            'departamento_id' => ['nullable', 'integer'],
+            // 'ciudad_id' => ['nullable', 'integer'],
+            //'codigo_postal' => ['nullable', 'string', 'max:20'],
+            //'observaciones' => ['nullable', 'string', 'max:255'],
+            'tipo_documento' => ['nullable', 'in:cedula,cedula_extranjeria,nit,nit_extranjeria,otros'],
+            'dv' => ['nullable', 'string', 'max:1'],
+            //'forma_pago' => ['nullable', 'string', 'max:255'],
+            //'email_factura_electronica' => ['nullable', 'email', 'max:255'],
+            //'rut' => ['nullable', 'string', 'max:255'],
+            //'certificacion_bancaria' => ['nullable', 'string', 'max:255'],
+            //'sitio_web' => ['nullable', 'string', 'max:255'],
+            //'puntos' => ['nullable', 'integer'],
             
+            
+
+
             // ... agregar aquí todas las reglas de validación necesarias
         ]);
 
@@ -57,10 +82,25 @@ class TerceroController extends Controller
 
         // 3. Crear una instancia del modelo Tercero y asignar los datos validados
         $tercero = new Tercero();
-        $tercero->tipo = $data['rol'];
+        $tercero->tipo = $data['tipo'];
         $tercero->nombre = $data['nombre'];
         $tercero->email = $data['email'];
         $tercero->telefono = $data['telefono'];
+        $tercero->direccion = $data['direccion'];
+        $tercero->numero_documento = $data['numero_documento'];
+        $tercero->pais_id = $data['pais_id'];
+        //$tercero->ciudad_id = $data['ciudad_id'];
+        //$tercero->codigo_postal = $data['codigo_postal'];
+        //$tercero->observaciones = $data['observaciones'];
+        $tercero->tipo_documento = $data['tipo_documento'];
+        $tercero->dv = $data['dv'];
+        //$tercero->forma_pago = $data['forma_pago'];
+        //$tercero->email_factura_electronica = $data['email_factura_electronica'];
+//$tercero->rut = $data['rut'];
+        //$tercero->certificacion_bancaria = $data['certificacion_bancaria'];
+        //$tercero->sitio_web = $data['sitio_web'];
+        //$tercero->puntos = $data['puntos'];
+
         // ... asignar aquí todas las propiedades del modelo
 
         // 4. Guardar el nuevo tercero en la base de datos

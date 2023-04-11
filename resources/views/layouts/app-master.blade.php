@@ -27,10 +27,12 @@
         // Agregar evento onchange al select
         tipoDocumentoSelect.addEventListener('change', function() {
             // Si la opción seleccionada es NIT, mostrar el campo dv
-            dvField.style.display = tipoDocumentoSelect.value === 'NIT' ? 'block' : 'none';
+            dvField.style.display = tipoDocumentoSelect.value === 'nit' ? 'block' : 'none';
         });
-        console.log(tipoDocumentoSelect);
-    </script>
+
+    
+</script>
+
 
 </body>
 
