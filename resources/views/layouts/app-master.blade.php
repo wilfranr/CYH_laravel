@@ -19,6 +19,7 @@
     </main>
     {{-- Scripts --}}
     <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
+
     <script>
         // Obtener el elemento select
         const tipoDocumentoSelect = document.getElementById('tipo_documento');
@@ -30,8 +31,25 @@
             dvField.style.display = tipoDocumentoSelect.value === 'nit' ? 'block' : 'none';
         });
 
-    
-</script>
+        const paisSelect = document.getElementById('pais_id');
+        paisSelect.addEventListener('change', function() {
+            const paisCodigo = this.value;
+            console.log(paisCodigo);
+            fetch('/ciudades/' + paisCodigo)
+                .then(response => response.json())
+                .then(data => {
+                    const ciudadSelect = document.getElementById('ciudad');
+                    
+                    ciudadSelect.innerHTML = '';
+                    data.ciudades.forEach(ciudad => {
+                        const option = document.createElement('option');
+                        option.value = ciudad.CiudadID;
+                        option.text = ciudad.CiudadNombre;
+                        ciudadSelect.appendChild(option);
+                    });
+                });
+        });
+    </script>
 
 
 </body>

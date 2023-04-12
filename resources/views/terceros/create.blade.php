@@ -36,13 +36,15 @@
                             value="{{ old('direccion') }}">
                     </div>
                     <div class="form-group">
-                        <label for="pais">País</label>
-                        <select class="form-control" name="pais_id" id="pais_id">
+                        <label for="pais_id">País</label>
+                        <select name="pais_id" id="pais_id" class="form-control">
+                            <option value="">Seleccione un país</option>
                             @foreach ($paises as $pais)
-                                <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
+                                <option value="{{ $pais->PaisCodigo }}">{{ $pais->PaisNombre }}</option>
                             @endforeach
                         </select>
                     </div>
+                    
                     <div class="form-group">
                         <label for="email-facturacion">Email de Facturación</label>
                         <input type="email" name="email_facturacion" id="email-facturacion" class="form-control"
@@ -86,9 +88,10 @@
                     </div>
                     <div class="form-group">
                         <label for="ciudad">Ciudad</label>
-                        <input type="text" name="ciudad" id="ciudad" class="form-control"
-                            value="{{ old('ciudad') }}">
+                    
+                    <select name="ciudad" id="ciudad" class="form-control"></select>
                     </div>
+                    
                     <div class="form-group">
                         <label for="sitioWeb">Sitio Web</label>
                         <input type="text" name="sitioWeb" id="sitioWeb" class="form-control"

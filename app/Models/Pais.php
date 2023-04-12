@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pais extends Model
 {
-    use HasFactory;
-    protected $fillable = ['nombre', 'codigo'];
-    protected $table = 'paises';
-    protected $primaryKey = 'id_pais';
+    protected $primaryKey = 'PaisCodigo';
+    public $incrementing = false;
+
+    public function ciudades()
+    {
+        return $this->hasMany(Ciudad::class, 'PaisCodigo');
+    }
 }

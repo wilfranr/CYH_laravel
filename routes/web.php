@@ -9,6 +9,8 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\TerceroController;
+use App\Http\Controllers\CiudadController;
+
 
 
 
@@ -60,6 +62,13 @@ Route::get('/terceros/create', [TerceroController::class, 'create'])->name('terc
 
 //ruta para almacenar terceros
 Route::post('/terceros',[TerceroController::class, 'store'])->name('terceros.store');
+
+//ruta para ver tercero creado
+Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros.show');
+
+//ciudades
+Route::get('/ciudades/{codigo_pais}', [CiudadController::class, 'getCiudadesByPais']);
+
 
 
 

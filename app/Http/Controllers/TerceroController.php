@@ -35,10 +35,13 @@ class TerceroController extends Controller
 
     public function create()
     {
-        $paises = DB::table('paises')->get();
+        
+
+        $paises = DB::table('pais')->get();
+        $ciudades = DB::table('ciudad')->get();
 
 
-        return view('terceros.create', ['paises' => $paises]);
+        return view('terceros.create')->with('paises', $paises)->with('ciudades', $ciudades);
     }
 
     // public function getDepartamentos(Request $request)
@@ -59,7 +62,7 @@ class TerceroController extends Controller
             'numero_documento' => ['nullable', 'string', 'max:20'],
             'pais_id' => ['nullable', 'integer'],
             'departamento_id' => ['nullable', 'integer'],
-            // 'ciudad_id' => ['nullable', 'integer'],
+            'ciudad_id' => ['nullable', 'integer'],
             //'codigo_postal' => ['nullable', 'string', 'max:20'],
             //'observaciones' => ['nullable', 'string', 'max:255'],
             'tipo_documento' => ['nullable', 'in:cedula,cedula_extranjeria,nit,nit_extranjeria,otros'],
@@ -70,8 +73,8 @@ class TerceroController extends Controller
             //'certificacion_bancaria' => ['nullable', 'string', 'max:255'],
             //'sitio_web' => ['nullable', 'string', 'max:255'],
             //'puntos' => ['nullable', 'integer'],
-            
-            
+
+
 
 
             // ... agregar aquí todas las reglas de validación necesarias
@@ -89,14 +92,14 @@ class TerceroController extends Controller
         $tercero->direccion = $data['direccion'];
         $tercero->numero_documento = $data['numero_documento'];
         $tercero->pais_id = $data['pais_id'];
-        //$tercero->ciudad_id = $data['ciudad_id'];
+        $tercero->ciudad_id = $data['ciudad_id'];
         //$tercero->codigo_postal = $data['codigo_postal'];
         //$tercero->observaciones = $data['observaciones'];
         $tercero->tipo_documento = $data['tipo_documento'];
         $tercero->dv = $data['dv'];
         //$tercero->forma_pago = $data['forma_pago'];
         //$tercero->email_factura_electronica = $data['email_factura_electronica'];
-//$tercero->rut = $data['rut'];
+        //$tercero->rut = $data['rut'];
         //$tercero->certificacion_bancaria = $data['certificacion_bancaria'];
         //$tercero->sitio_web = $data['sitio_web'];
         //$tercero->puntos = $data['puntos'];
@@ -110,6 +113,20 @@ class TerceroController extends Controller
         return redirect()->route('terceros.show', ['id' => $tercero->id])
             ->with('success', 'El tercero se ha creado exitosamente.');
     }
+
+    public function show($id)
+    {
+        $tercero = Tercero::findOrFail($id);
+        return view('terceros.show', compact('tercero'));
+    }
+    // public function show($id)
+    // {
+    //     $tercero = Tercero::findOrFail($id);
+    //     $contactos = $tercero->contactos;
+
+    //     return view('terceros.show', compact('tercero', 'contactos'));
+    // }
+
 
     public function edit(Tercero $tercero)
     {
