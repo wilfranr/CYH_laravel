@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Tercero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 use App\Models\Pais;
 use App\Models\Departamento;
+use App\Models\Ciudad;
 
 
 class TerceroController extends Controller
@@ -35,13 +37,13 @@ class TerceroController extends Controller
 
     public function create()
     {
-        
+
 
         $paises = DB::table('pais')->get();
         $ciudades = DB::table('ciudad')->get();
 
 
-        return view('terceros.create')->with('paises', $paises)->with('ciudades', $ciudades);
+        return view('terceros.create')->with('paises', $paises)->with('ciudad', $ciudades);
     }
 
     // public function getDepartamentos(Request $request)
@@ -60,18 +62,18 @@ class TerceroController extends Controller
             'telefono' => ['nullable', 'string', 'max:20'],
             'direccion' => ['nullable', 'string', 'max:255'],
             'numero_documento' => ['nullable', 'string', 'max:20'],
-            'pais_id' => ['nullable', 'integer'],
-            'departamento_id' => ['nullable', 'integer'],
-            'ciudad_id' => ['nullable', 'integer'],
-            //'codigo_postal' => ['nullable', 'string', 'max:20'],
+            'pais_id' => ['nullable', 'string', 'max:3'],
+            // 'departamento_id' => ['nullable', 'integer'],
+            'ciudad' => ['nullable', 'integer'],
+            // 'codigo_postal' => ['nullable', 'string', 'max:20'],
             //'observaciones' => ['nullable', 'string', 'max:255'],
-            'tipo_documento' => ['nullable', 'in:cedula,cedula_extranjeria,nit,nit_extranjeria,otros'],
+            'tipo_documento' => ['required', 'in:cedula,nit,ce'],
             'dv' => ['nullable', 'string', 'max:1'],
             //'forma_pago' => ['nullable', 'string', 'max:255'],
-            //'email_factura_electronica' => ['nullable', 'email', 'max:255'],
-            //'rut' => ['nullable', 'string', 'max:255'],
-            //'certificacion_bancaria' => ['nullable', 'string', 'max:255'],
-            //'sitio_web' => ['nullable', 'string', 'max:255'],
+            'email_facturacion' => ['nullable', 'email', 'max:255'],
+            'rut' => ['nullable', 'file', 'mimes:pdf', 'max:1024'],
+            'certificacion_bancaria' => ['nullable', 'file', 'mimes:pdf', 'max:1024'],
+            'sitioWeb' => ['nullable', 'string', 'max:255'],
             //'puntos' => ['nullable', 'integer'],
 
 
@@ -91,17 +93,29 @@ class TerceroController extends Controller
         $tercero->telefono = $data['telefono'];
         $tercero->direccion = $data['direccion'];
         $tercero->numero_documento = $data['numero_documento'];
-        $tercero->pais_id = $data['pais_id'];
-        $tercero->ciudad_id = $data['ciudad_id'];
-        //$tercero->codigo_postal = $data['codigo_postal'];
+        $tercero->PaisCodigo = $data['pais_id'];
+        if (isset($data['ciudad'])) {
+            $tercero->CiudadID = $data['ciudad'];
+        }
+
+        // $tercero->codigo_postal = $data['codigo_postal'];
         //$tercero->observaciones = $data['observaciones'];
         $tercero->tipo_documento = $data['tipo_documento'];
         $tercero->dv = $data['dv'];
         //$tercero->forma_pago = $data['forma_pago'];
-        //$tercero->email_factura_electronica = $data['email_factura_electronica'];
+        $tercero->email_factura_electronica = $data['email_facturacion'];
         //$tercero->rut = $data['rut'];
-        //$tercero->certificacion_bancaria = $data['certificacion_bancaria'];
-        //$tercero->sitio_web = $data['sitio_web'];
+        // Guardar el archivo de certificación bancaria (si se ha proporcionado uno)
+        if ($request->hasFile('certificacion_bancaria')) {
+            $certificacion = $request->file('certificacion_bancaria')->store('certificaciones');
+            $tercero->certificacion_bancaria = $certificacion;
+        }
+        //guardar archivo rut
+        if ($request->hasFile('rut')) {
+            $rut = $request->file('rut')->store('rut');
+            $tercero->rut = $rut;
+        }
+        $tercero->sitio_web = $data['sitioWeb'];
         //$tercero->puntos = $data['puntos'];
 
         // ... asignar aquí todas las propiedades del modelo
@@ -114,11 +128,21 @@ class TerceroController extends Controller
             ->with('success', 'El tercero se ha creado exitosamente.');
     }
 
+
+
     public function show($id)
     {
         $tercero = Tercero::findOrFail($id);
         return view('terceros.show', compact('tercero'));
     }
+
+    public function downloadCertificacion($id)
+    {
+        $tercero = Tercero::findOrFail($id);
+        $pathToFile = storage_path('app/' . $tercero->certificacion_bancaria);
+        return response()->download($pathToFile);
+    }
+
     // public function show($id)
     // {
     //     $tercero = Tercero::findOrFail($id);

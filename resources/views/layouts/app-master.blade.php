@@ -34,7 +34,6 @@
         const paisSelect = document.getElementById('pais_id');
         paisSelect.addEventListener('change', function() {
             const paisCodigo = this.value;
-            console.log(paisCodigo);
             fetch('/ciudades/' + paisCodigo)
                 .then(response => response.json())
                 .then(data => {
@@ -46,6 +45,7 @@
                         option.value = ciudad.CiudadID;
                         option.text = ciudad.CiudadNombre;
                         ciudadSelect.appendChild(option);
+                        
                     });
                 });
         });

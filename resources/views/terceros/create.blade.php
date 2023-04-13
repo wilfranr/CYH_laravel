@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h1 class="mb-5">Crear tercero</h1>
-        <form method="POST" action="{{ route('terceros.store') }}">
+        <form method="POST" action="{{ route('terceros.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="form-group">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pais_id">País</label>
-                        <select name="pais_id" id="pais_id" class="form-control">
+                        <select name="pais_id" id="pais_id" class="form-control" required>
                             <option value="">Seleccione un país</option>
                             @foreach ($paises as $pais)
                                 <option value="{{ $pais->PaisCodigo }}">{{ $pais->PaisNombre }}</option>
@@ -61,7 +61,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="tipo_documento">Tipo</label>
-                        <select name="tipo_documento" id="tipo_documento" class="form-control">
+                        <select name="tipo_documento" id="tipo_documento" class="form-control" required>
                             <option value="">-- Seleccione un tipo de documento --</option>
                             <option value="cedula" {{ old('tipo_documento') == 'cedula' ? 'selected' : '' }}>Cédula de
                                 ciudadanía</option>
@@ -89,7 +89,12 @@
                     <div class="form-group">
                         <label for="ciudad">Ciudad</label>
                     
-                    <select name="ciudad" id="ciudad" class="form-control"></select>
+                    <select name="ciudad" id="ciudad" class="form-control" required>
+                        <option value="">Seleccione una ciudad</option>
+                        
+                            
+                        
+                    </select>
                     </div>
                     
                     <div class="form-group">
@@ -98,9 +103,9 @@
                             value="{{ old('sitioWeb') }}">
                     </div>
                     <div class="form-group">
-                        <label for="certBanco">Certificación bancaria</label>
-                        <input type="file" name="certBanco" id="certBanco" class="form-control"
-                            value="{{ old('certBanco') }}">
+                        <label for="certificacion_bancaria">Certificación bancaria</label>
+                        <input type="file" name="certificacion_bancaria" id="certificacion_bancaria" class="form-control"
+                            value="{{ old('certificacion_bancaria') }}">
                     </div>
                 </div>
                 <div class="col-md-6 border border-warning mt-4">

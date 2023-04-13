@@ -17,9 +17,8 @@ class Tercero extends Model
         'email',
         'tipo',
         'dv',
-        'ciudad_id',
-        'departamento_id',
-        'pais_id',
+        'PaisCodigo',
+        'CiudadID',
         'codigo_postal',
         'estado',
         'forma_pago',
@@ -29,6 +28,15 @@ class Tercero extends Model
         'sitio_web',
         'puntos'
     ];
+    public function pais()
+    {
+        return $this->belongsTo(Pais::class, 'PaisCodigo', 'PaisCodigo');
+    }
+    public function ciudad()
+    {
+        return $this->belongsTo(Ciudad::class, 'CiudadID', 'CiudadID');
+    }
+
 
     public function cliente()
     {

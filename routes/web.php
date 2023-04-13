@@ -69,6 +69,11 @@ Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros
 //ciudades
 Route::get('/ciudades/{codigo_pais}', [CiudadController::class, 'getCiudadesByPais']);
 
+//ruta para descargar certificacion
+Route::get('terceros/{id}/certificacion', [TerceroController::class, 'downloadCertificacion'])->name('terceros.downloadCertificacion');
+
+
+
 
 
 
