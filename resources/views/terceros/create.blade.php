@@ -44,7 +44,7 @@
                             @endforeach
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="email-facturacion">Email de Facturación</label>
                         <input type="email" name="email_facturacion" id="email-facturacion" class="form-control"
@@ -54,6 +54,19 @@
                         <label for="rut">Rut</label>
                         <input type="file" name="rut" id="rut" class="form-control"
                             value="{{ old('rut') }}">
+
+                    </div>
+                    <div class="form-group border border-warning mt-4 p-3">
+
+                        <label for="maquina">Máquina</label>
+                        <select class="form-control" name="maquinas[]" multiple="multiple">
+                            @foreach ($maquinas as $maquina)
+                                <option value="{{ $maquina['id'] }}">{{ $maquina['text'] }}</option>
+                            @endforeach
+                        </select>
+
+                        <a href="{{ route('maquinas.create') }}" class="btn btn-primary mt-2">Agregar nueva máquina</a>
+
 
                     </div>
 
@@ -88,15 +101,15 @@
                     </div>
                     <div class="form-group">
                         <label for="ciudad">Ciudad</label>
-                    
-                    <select name="ciudad" id="ciudad" class="form-control" required>
-                        <option value="">Seleccione una ciudad</option>
-                        
-                            
-                        
-                    </select>
+
+                        <select name="ciudad" id="ciudad" class="form-control" required>
+                            <option value="">Seleccione una ciudad</option>
+
+
+
+                        </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="sitioWeb">Sitio Web</label>
                         <input type="text" name="sitioWeb" id="sitioWeb" class="form-control"
@@ -104,51 +117,37 @@
                     </div>
                     <div class="form-group">
                         <label for="certificacion_bancaria">Certificación bancaria</label>
-                        <input type="file" name="certificacion_bancaria" id="certificacion_bancaria" class="form-control"
-                            value="{{ old('certificacion_bancaria') }}">
+                        <input type="file" name="certificacion_bancaria" id="certificacion_bancaria"
+                            class="form-control" value="{{ old('certificacion_bancaria') }}">
                     </div>
-                </div>
-                <div class="col-md-6 border border-warning mt-4">
-
-
-                    <div class="form-group">
-                        <h3>Contactos de tercero</h3>
-                        <label for="contactos">Contacto 1:</label>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="contactos" id="contactos" class="form-control"
-                                    value="{{ old('contactos') }}" placeholder="Nombre">
+                    <div class="border border-warning mt-4 p-3">
+                        <hr>
+                        <h2>Contactos de tercero</h2>
+                        <div id="contactos">
+                            <div class="form-group">
+                                <label for="nombre_contacto_1">Nombre:</label>
+                                <input type="text" name="nombre_contacto_1" id="nombre_contacto_1"
+                                    class="form-control" required>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" name="contactos" id="contactos" class="form-control"
-                                    value="{{ old('contactos') }}" placeholder="Teléfono">
+                            <div class="form-group">
+                                <label for="telefono_contacto_1">Teléfono:</label>
+                                <input type="text" name="telefono_contacto_1" id="telefono_contacto_1"
+                                    class="form-control">
                             </div>
-                        </div>
-                        <label for="contactos">Contacto 2:</label>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="contactos" id="contactos" class="form-control"
-                                    value="{{ old('contactos') }}" placeholder="Nombre">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="contactos" id="contactos" class="form-control"
-                                    value="{{ old('contactos') }}" placeholder="Teléfono">
+                            <div class="form-group">
+                                <label for="email_contacto_1">Correo electrónico:</label>
+                                <input type="email" name="email_contacto_1" id="email_contacto_1"
+                                    class="form-control">
                             </div>
                         </div>
-                        <label for="contactos">Contacto 3:</label>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="contactos" id="contactos" class="form-control"
-                                    value="{{ old('contactos') }}" placeholder="Nombre">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="contactos" id="contactos" class="form-control"
-                                    value="{{ old('contactos') }}" placeholder="Teléfono">
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-success" id="agregar-contacto">Agregar contacto</button>
+                        <hr>
                     </div>
+
                 </div>
+
         </form>
         <button type="submit" class="btn btn-primary mt-3">Crear tercero</button>
     </div>
 @endsection
+

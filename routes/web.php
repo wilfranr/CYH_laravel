@@ -72,6 +72,12 @@ Route::get('/ciudades/{codigo_pais}', [CiudadController::class, 'getCiudadesByPa
 //ruta para descargar certificacion
 Route::get('terceros/{id}/certificacion', [TerceroController::class, 'downloadCertificacion'])->name('terceros.downloadCertificacion');
 
+//rutas maquinas
+Route::get('maquinas/create', 'MaquinaController@create')->name('maquinas.create');
+Route::post('maquinas', 'MaquinaController@store')->name('maquinas.store');
+Route::get('maquinas', 'MaquinaController@index')->name('maquinas.index');
+
+
 
 
 

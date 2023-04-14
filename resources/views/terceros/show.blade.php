@@ -11,14 +11,21 @@
         <p>Email: {{ $tercero->email }}</p>
         <p>País: {{ $tercero->pais->PaisNombre }}</p>
         <p>Ciudad: {{ $tercero->ciudad->CiudadNombre }}</p>
-        <p>Email Facturación: {{ $tercero->email_factura_electronica  }}</p>
+        <p>Email Facturación: {{ $tercero->email_factura_electronica }}</p>
+
         <p>Sitio Web: {{ $tercero->sitio_web }}</p>
-        <p>Certificación bancaria: <a href="{{ route('terceros.downloadCertificacion', ['id' => $tercero->id]) }}">Descargar</a></p>
+        <p>Certificación bancaria:
+            <a href="{{ route('terceros.downloadCertificacion', ['id' => $tercero->id]) }}">Descargar</a>
+        </p>
+
+
+        <h3>Maquinas:</h3>
+        @foreach ($tercero->maquinas as $maquina)
+            <p>{{ $maquina->tipo }} {{ $maquina->marca }} {{ $maquina->modelo }} {{ $maquina->serie }}</p>
+        @endforeach
 
 
 
-
-        <hr>
         {{-- <h3>Contactos:</h3>
     <ul>
         @foreach ($contactos as $contacto)

@@ -6,10 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Tercero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Maquina;
+use App\Models\Contacto;
+
 
 use App\Models\Pais;
 use App\Models\Departamento;
 use App\Models\Ciudad;
+
 
 
 class TerceroController extends Controller
@@ -41,9 +45,12 @@ class TerceroController extends Controller
 
         $paises = DB::table('pais')->get();
         $ciudades = DB::table('ciudad')->get();
+        $maquinas = Maquina::allWithConcatenatedData();
 
 
-        return view('terceros.create')->with('paises', $paises)->with('ciudad', $ciudades);
+
+
+        return view('terceros.create')->with('paises', $paises)->with('ciudad', $ciudades)->with('maquinas', $maquinas);
     }
 
     // public function getDepartamentos(Request $request)
@@ -122,6 +129,20 @@ class TerceroController extends Controller
 
         // 4. Guardar el nuevo tercero en la base de datos
         $tercero->save();
+        // Si se ha seleccionado alguna máquina, asociarla al tercero
+        // Asociar las máquinas seleccionadas al nuevo tercero
+        $maquinas_ids = $request->input('maquinas');
+        $tercero->maquinas()->attach($maquinas_ids);
+
+        foreach ($request->contactos as $contacto) {
+            $contactoTercero = new Contacto;
+            $contactoTercero->nombre = $contacto['nombre'];
+            $contactoTercero->email = $contacto['email'];
+            $contactoTercero->telefono = $contacto['telefono'];
+            $contactoTercero->save();
+
+            $tercero->contactos()->attach($contactoTercero->id);
+        }
 
         // 5. Redirigir al usuario a la página de detalles del nuevo tercero con un mensaje de éxito
         return redirect()->route('terceros.show', ['id' => $tercero->id])

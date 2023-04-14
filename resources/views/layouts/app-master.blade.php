@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CYH IMPORTACIONES</title>
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -19,8 +21,13 @@
     </main>
     {{-- Scripts --}}
     <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 
     <script>
+        
         // Obtener el elemento select
         const tipoDocumentoSelect = document.getElementById('tipo_documento');
         // Obtener el campo dv
@@ -49,6 +56,27 @@
                     });
                 });
         });
+        $(document).ready(function () {
+        let contadorContactos = 2;
+
+        $('#agregar-contacto').on('click', function () {
+            $('#contactos').append(`
+                <hr>
+                <div class="form-group">
+                    <label for="nombre_contacto_${contadorContactos}">Nombre:</label>
+                    <input type="text" name="nombre_contacto_${contadorContactos}" id="nombre_contacto_${contadorContactos}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono_contacto_${contadorContactos}">Teléfono:</label>
+                    <input type="text" name="telefono_contacto_${contadorContactos}" id="telefono_contacto_${contadorContactos}" class="form-control">
+                </div>
+            `);
+
+            contadorContactos++;
+        });
+    });
+        
+        
     </script>
 
 

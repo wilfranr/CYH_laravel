@@ -47,4 +47,14 @@ class Tercero extends Model
     {
         return $this->hasOne(Proveedor::class);
     }
+
+    public function maquinas()
+    {
+        return $this->belongsToMany(Maquina::class, 'tercero_maquina', 'tercero_id', 'maquina_id');
+    }
+
+    public function contactos()
+    {
+        return $this->belongsToMany(Contacto::class, 'contacto_tercero', 'tercero_id', 'contacto_id');
+    }
 }
