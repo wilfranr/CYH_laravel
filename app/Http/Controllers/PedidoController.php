@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Tercero;
+use App\Models\Pais;
+use App\Models\Maquina;
+use App\Models\Lista;
 
 
 class PedidoController extends Controller
@@ -26,8 +30,21 @@ class PedidoController extends Controller
         //obtener el usuario logueado
         $usuario = auth()->user();
 
+        //obtener terceros
+        $Terceros = Tercero::all();
+
+        //obtener paises
+        $paises = Pais::all();
+
+        //obtener maquinas
+        $maquinas = Maquina::all();
+
+        //obtener sistemas desde listas
+        $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
+
+
         //retornar la vista con los datos
-        return view('pedidos.create')->with('ultimoPedido', $ultimoPedido)->with('usuario', $usuario);
+        return view('pedidos.create')->with('ultimoPedido', $ultimoPedido)->with('usuario', $usuario)->with('Terceros', $Terceros)->with('paises', $paises)->with('maquinas', $maquinas)->with('sistemas', $sistemas);
 
     }
 
@@ -45,6 +62,13 @@ class PedidoController extends Controller
         ]);
 
         Pedido::create($request->all());
+        if ($request->hasFile('fotos')) {
+            foreach ($request->file('fotos') as $foto) {
+                $rutaFoto = $foto->store('public/fotos');
+                // aquí guarda la ruta de la foto en la base de datos o en un arreglo, según sea necesario
+            }
+        }
+        
 
         return redirect()->route('pedidos.index')
             ->with('success', 'Pedido creado satisfactoriamente.');

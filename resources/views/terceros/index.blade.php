@@ -1,4 +1,5 @@
 @extends('layouts.app-master')
+@section('title', 'Terceros')
 
 @section('content')
     <div class="container">
@@ -9,13 +10,15 @@
             </div>
         </div>
 
-        <table class="table">
+        <table class="table" id="terceros-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Tipo</th>
+                    <th>Identificacion</th>
                     <th>Acciones</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -24,11 +27,11 @@
                         <td>{{ $tercero->id }}</td>
                         <td>{{ $tercero->nombre }}</td>
                         <td>{{ $tercero->tipo }}</td>
+                        <td>{{ $tercero->numero_documento }}</td>
                         <td>
                             <a href="{{ route('terceros.show', $tercero->id) }}" class="btn btn-sm btn-info">Ver</a>
-                            <a href="{{ route('terceros.edit', $tercero->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                            <form action="{{ route('terceros.destroy', $tercero->id) }}" method="POST"
-                                style="display: inline">
+                            {{-- <a href="{{ route('terceros.edit', $tercero->id) }}" class="btn btn-sm btn-primary">Editar</a> --}}
+                            <form action="" method="POST" style="display: inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger"
@@ -41,40 +44,18 @@
         </table>
         <a href="{{ route('terceros.create') }}" class="btn btn-primary">Agregar tercero</a>
     </div>
-@endsection
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-@push('scripts')
+
     <script>
+        //busqueda dinámica en tabla terceros
         $(document).ready(function() {
             $('#search').on('keyup', function() {
-                $value = $(this).val();
-                $.ajax({
-                    type: 'get',
-                    url: '{{ URL::to('search') }}',
-                    data: {
-                        'search': $value
-                    },
-                    success: function(data) {
-                        $('tbody').html(data);
-                    }
+                var value = $(this).val().toLowerCase();
+                $('table tbody tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
-            })
-        });
-        success: function(data) {
-            var tableBody = $('#table-body');
-            tableBody.empty();
-
-            $.each(data.data, function(index, tercero) {
-                var row = '<tr>';
-                row += '<td>' + tercero.nombre + '</td>';
-                row += '<td>' + tercero.apellido + '</td>';
-                row += '<td>' + tercero.cedula + '</td>';
-                // Agregar más columnas según las necesidades
-                row += '</tr>';
-                tableBody.append(row);
             });
-
-            // Agregar código para mostrar la paginación
-        }
+        });
     </script>
-@endpush
+@endsection

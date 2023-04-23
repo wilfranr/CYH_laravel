@@ -10,6 +10,9 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\TerceroController;
 use App\Http\Controllers\CiudadController;
+use App\Http\Controllers\ListaController;
+use App\Http\Controllers\UserController;
+
 
 
 
@@ -76,6 +79,39 @@ Route::get('terceros/{id}/certificacion', [TerceroController::class, 'downloadCe
 Route::get('maquinas/create', 'MaquinaController@create')->name('maquinas.create');
 Route::post('maquinas', 'MaquinaController@store')->name('maquinas.store');
 Route::get('maquinas', 'MaquinaController@index')->name('maquinas.index');
+Route::get('/terceros/{id}/maquinas', [TerceroController::class, 'getMaquinasByTercero'])->name('terceros.maquinas');
+
+//ruta listas
+Route::get('/listas', [ListaController::class, 'index'])->name('listas.index');
+Route::get('/listas/create', [ListaController::class, 'create'])->name('listas.create');
+Route::post('/listas', [ListaController::class, 'store'])->name('listas.store');
+Route::get('/listas/{id}', [ListaController::class, 'show'])->name('listas.show');
+Route::get('/listas/{id}/edit', [ListaController::class, 'edit'])->name('listas.edit');
+Route::put('/listas/{id}/update', [ListaController::class, 'update'])->name('listas.update');
+Route::delete('/listas/{id}', [ListaController::class, 'destroy'])->name('listas.destroy');
+
+//rutas pedidos
+Route::get('/pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
+Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
+Route::put('/pedidos/{id}/update', [PedidoController::class, 'update'])->name('pedidos.update');
+Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
+
+
+//rutas usuarios
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+//Crear contacto
+// Route::post('/terceros/crearConContactos', 'TerceroController@crearConContactos')->name('terceros.crearConContactos');
+
+
+
+
 
 
 

@@ -36,6 +36,19 @@
               <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Administración
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('listas.index') }}">Listas</a></li>
+                            <li><a class="dropdown-item" href="{{ route('users.index') }}">Usuarios</a></li>
+                            {{-- <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
+                        </ul>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>

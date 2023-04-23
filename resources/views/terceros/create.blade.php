@@ -124,30 +124,80 @@
                         <hr>
                         <h2>Contactos de tercero</h2>
                         <div id="contactos">
-                            <div class="form-group">
-                                <label for="nombre_contacto_1">Nombre:</label>
-                                <input type="text" name="nombre_contacto_1" id="nombre_contacto_1"
-                                    class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="telefono_contacto_1">Teléfono:</label>
-                                <input type="text" name="telefono_contacto_1" id="telefono_contacto_1"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="email_contacto_1">Correo electrónico:</label>
-                                <input type="email" name="email_contacto_1" id="email_contacto_1"
-                                    class="form-control">
-                            </div>
+                            <input type="hidden" name="contadorContactos" value="2">
+                            
                         </div>
+
                         <button type="button" class="btn btn-success" id="agregar-contacto">Agregar contacto</button>
                         <hr>
                     </div>
 
                 </div>
 
+
+                
         </form>
         <button type="submit" class="btn btn-primary mt-3">Crear tercero</button>
     </div>
+    <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+        // Obtener el elemento select
+        const tipoDocumentoSelect = document.getElementById('tipo_documento');
+        // Obtener el campo dv
+        const dvField = document.getElementById('dv-field');
+        //Agregar evento onchange al select
+        tipoDocumentoSelect.addEventListener('change', function() {
+            // Si la opción seleccionada es NIT, mostrar el campo dv
+            dvField.style.display = tipoDocumentoSelect.value === 'nit' ? 'block' : 'none';
+        });
+
+        const paisSelect = document.getElementById('pais_id');
+        paisSelect.addEventListener('change', function() {
+            const paisCodigo = this.value;
+            fetch('/ciudades/' + paisCodigo)
+                .then(response => response.json())
+                .then(data => {
+                    const ciudadSelect = document.getElementById('ciudad');
+
+                    ciudadSelect.innerHTML = '';
+                    data.ciudades.forEach(ciudad => {
+                        const option = document.createElement('option');
+                        option.value = ciudad.CiudadID;
+                        option.text = ciudad.CiudadNombre;
+                        ciudadSelect.appendChild(option);
+
+                    });
+                });
+        });
+        $(document).ready(function() {
+            let contadorContactos = 1;
+
+            $('#agregar-contacto').on('click', function() {
+                $('#contactos').append(`
+                <hr>
+                <div class="form-group">
+                    <label for="nombre_contacto_${contadorContactos}">Nombre:</label>
+                    <input type="text" name="nombre_contacto_${contadorContactos}" id="nombre_contacto_${contadorContactos}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono_contacto_${contadorContactos}">Teléfono:</label>
+                    <input type="text" name="telefono_contacto_${contadorContactos}" id="telefono_contacto_${contadorContactos}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email_contacto_${contadorContactos}">Correo electrónico:</label>
+                    <input type="email" name="email_contacto_${contadorContactos}" id="email_contacto_${contadorContactos}" class="form-control">
+                </div>
+                </hr>
+
+            `);
+
+                contadorContactos++;
+            });
+        });
+    </script>
+
 @endsection
 
