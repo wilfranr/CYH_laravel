@@ -20,7 +20,7 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $user, $id)
     {
         $validated = $request->validate([
             'name' => 'required',
@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully!');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
     //metodo show
     public function show(User $user, $id)

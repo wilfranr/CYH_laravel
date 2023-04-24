@@ -34,7 +34,8 @@ class MaquinaController extends Controller
 
     public function index()
 {
-    $maquinas = Maquina::selectRaw('CONCAT(marca, " ", modelo) AS nombre, id')->get();
+    $maquinas = Maquina::all();
+    
     return view('maquinas.index', compact('maquinas'));
 }
 

@@ -43,6 +43,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('listas.index') }}">Listas</a></li>
+                            <li><a class="dropdown-item" href="{{ route('maquinas.index') }}">Maquinas</a></li>
                             <li><a class="dropdown-item" href="{{ route('users.index') }}">Usuarios</a></li>
                             {{-- <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
@@ -50,7 +51,7 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        <a class="nav-link active" href="{{ route('articulos.index')}}" tabindex="-1" aria-disabled="true">Artículos</a>
                     </li>
                 </ul>
                 <form class="d-flex">

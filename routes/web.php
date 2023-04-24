@@ -12,6 +12,8 @@ use App\Http\Controllers\TerceroController;
 use App\Http\Controllers\CiudadController;
 use App\Http\Controllers\ListaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\MaquinaController;
 
 
 
@@ -76,10 +78,13 @@ Route::get('/ciudades/{codigo_pais}', [CiudadController::class, 'getCiudadesByPa
 Route::get('terceros/{id}/certificacion', [TerceroController::class, 'downloadCertificacion'])->name('terceros.downloadCertificacion');
 
 //rutas maquinas
-Route::get('maquinas/create', 'MaquinaController@create')->name('maquinas.create');
-Route::post('maquinas', 'MaquinaController@store')->name('maquinas.store');
-Route::get('maquinas', 'MaquinaController@index')->name('maquinas.index');
-Route::get('/terceros/{id}/maquinas', [TerceroController::class, 'getMaquinasByTercero'])->name('terceros.maquinas');
+Route::get('/maquinas', [MaquinaController::class, 'index'])->name('maquinas.index');
+Route::get('/maquinas/create', [MaquinaController::class, 'create'])->name('maquinas.create');
+Route::post('/maquinas', [MaquinaController::class, 'store'])->name('maquinas.store');
+Route::get('/maquinas/{id}', [MaquinaController::class, 'show'])->name('maquinas.show');
+Route::get('/maquinas/{id}/edit', [MaquinaController::class, 'edit'])->name('maquinas.edit');
+Route::put('/maquinas/{id}/update', [MaquinaController::class, 'update'])->name('maquinas.update');
+Route::delete('/maquinas/{id}', [MaquinaController::class, 'destroy'])->name('maquinas.destroy');
 
 //ruta listas
 Route::get('/listas', [ListaController::class, 'index'])->name('listas.index');
@@ -106,8 +111,16 @@ Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edi
 Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
-//Crear contacto
-// Route::post('/terceros/crearConContactos', 'TerceroController@crearConContactos')->name('terceros.crearConContactos');
+//rutas articulos
+Route::get('/articulos', [ArticuloController::class, 'index'])->name('articulos.index');
+Route::get('/articulos/create', [ArticuloController::class, 'create'])->name('articulos.create');
+Route::post('/articulos', [ArticuloController::class, 'store'])->name('articulos.store');
+Route::get('/articulos/{id}', [ArticuloController::class, 'show'])->name('articulos.show');
+Route::get('/articulos/{id}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
+Route::put('/articulos/{id}/update', [ArticuloController::class, 'update'])->name('articulos.update');
+Route::delete('/articulos/{id}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
+
+
 
 
 

@@ -172,12 +172,6 @@ class TerceroController extends Controller
 
     }
 
-
-
-
-
-
-
     public function show($id)
     {
         $tercero = Tercero::findOrFail($id);

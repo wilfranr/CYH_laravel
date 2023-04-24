@@ -38,5 +38,7 @@
                 </div>
             </div>
         </div>
+        {{-- Boton para crear usuarios --}}
+        <a href="{{ route('users.create') }}" class="btn btn-outline-primary">Crear usuario</a>
     </div>
 @endsection
