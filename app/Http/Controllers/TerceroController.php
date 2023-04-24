@@ -207,6 +207,7 @@ class TerceroController extends Controller
     public function update(Request $request, Tercero $tercero)
     {
         // Lógica para actualizar un tercero existente
+        
     }
 
     public function destroy(Tercero $tercero)

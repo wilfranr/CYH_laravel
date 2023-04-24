@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Maquina;
 
+
 class MaquinaController extends Controller
 {
     /**
@@ -52,9 +53,10 @@ class MaquinaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Maquina $maquina, $id)
     {
-        //
+        return view('maquinas.edit', compact('maquina'));
+        
     }
 
     /**
@@ -64,9 +66,24 @@ class MaquinaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Maquina $maquina, $id)
     {
-        //
+        //buscar la maquina a actualizar
+        $maquina = Maquina::find($id);
+        //validar los datos del formulario
+        $request->validate([
+            'marca' => 'required',
+            'modelo' => 'required',
+            'serie' => 'required',
+        ]);
+        //actualizar los datos de la maquina
+        $maquina->marca = $request->marca;
+        $maquina->modelo = $request->modelo;
+        $maquina->serie = $request->serie;
+        $maquina->save();
+
+        //redireccionar a la vista de maquinas
+        return redirect()->route('maquinas.show', $maquina->id)->with('success', 'Maquina actualizada correctamente');
     }
 
     /**

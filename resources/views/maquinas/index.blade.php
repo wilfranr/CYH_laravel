@@ -10,6 +10,12 @@
                 <th>Tipo</th>
                 <th>Marca</th>
                 <th>Modelo</th>
+                <th>Serie</th>
+                <th>Arreglo</th>
+                <th>Foto</th>
+                <th>Foto ID</th>
+                <th>Fecha de creación</th>
+
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -20,6 +26,11 @@
                     <td>{{ $maquina->tipo }}</td>
                     <td>{{ $maquina->marca }}</td>
                     <td>{{ $maquina->modelo }}</td>
+                    <td>{{ $maquina->serie }}</td>
+                    <td>{{ $maquina->arreglo }}</td>
+                    <td>{{ $maquina->foto }}</td>
+                    <td>{{ $maquina->foto_id }}</td>
+                    <td>{{ $maquina->created_at }}</td>
                     <td>
                         <a href="{{ route('maquinas.show', $maquina->id) }}" class="btn btn-primary">Ver</a>
                         <a href="{{ route('maquinas.edit', $maquina->id) }}" class="btn btn-warning">Editar</a>
