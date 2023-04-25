@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-04-2023 a las 01:55:44
+-- Tiempo de generación: 25-04-2023 a las 03:53:23
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -32,11 +32,25 @@ CREATE TABLE `articulos` (
   `sistema` varchar(255) NOT NULL,
   `definicion` text NOT NULL,
   `referencia` varchar(255) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `cantidad` int(11) DEFAULT NULL,
   `comentarios` text DEFAULT NULL,
+  `descripcionEspecifica` text DEFAULT NULL,
+  `peso` varchar(11) DEFAULT NULL,
+  `fotoDescriptiva` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `articulos`
+--
+
+INSERT INTO `articulos` (`id`, `sistema`, `definicion`, `referencia`, `cantidad`, `comentarios`, `descripcionEspecifica`, `peso`, `fotoDescriptiva`, `created_at`, `updated_at`) VALUES
+(2, 'b', 'a', 'a', 2, 'a', NULL, NULL, NULL, '2023-04-24 06:14:02', '2023-04-24 06:14:02'),
+(4, '4', '7', 'dasd33', NULL, 'Sin comentarios', 'Seal', '200', NULL, '2023-04-25 05:49:30', '2023-04-25 05:49:30'),
+(5, '4', '7', 'dasd33', NULL, 'Sin comentarios', 'Seal', '200', NULL, '2023-04-25 05:51:10', '2023-04-25 05:51:10'),
+(6, '4', '7', 'dasd33', NULL, 'Sin comentarios', 'Seal', '200', NULL, '2023-04-25 05:55:06', '2023-04-25 05:55:06'),
+(7, 'Motor', 'Seal O Ring', 'tuerca346788', NULL, 'No', 'Seal', '300', NULL, '2023-04-25 05:55:39', '2023-04-25 05:55:39');
 
 -- --------------------------------------------------------
 
@@ -4555,7 +4569,11 @@ INSERT INTO `listas` (`id`, `tipo`, `nombre`, `definicion`, `foto`, `created_at`
 (3, 'marca', 'perkins', 'Marca inglesa que maneja repuestos varios', 'public/fotos/83y5CkvjNgLjLJv9WDae2ptwrcImR3dwRETgJdPe.jpg', '2023-04-15 13:12:22', '2023-04-15 13:12:22'),
 (4, 'sistema', 'Transmision', 'sello de labio', NULL, '2023-04-15 13:16:47', '2023-04-15 13:25:02'),
 (5, 'sistema', 'Motor', 'Engrane', NULL, '2023-04-15 13:17:16', '2023-04-15 13:17:16'),
-(6, 'medida', 'peso', 'Fuerza con que la Tierra atrae a un cuerpo, por acción de la gravedad.', 'public/fotos/g1SehERveYnZTiXFm3usZnOlxclBVRn44ZJ3AZUf.jpg', '2023-04-15 18:10:47', '2023-04-15 18:10:47');
+(6, 'medida', 'peso', 'Fuerza con que la Tierra atrae a un cuerpo, por acción de la gravedad.', 'public/fotos/g1SehERveYnZTiXFm3usZnOlxclBVRn44ZJ3AZUf.jpg', '2023-04-15 18:10:47', '2023-04-15 18:10:47'),
+(7, 'Descripción común', 'Seal O Ring', 'Un O-Ring es una junta de \r\nforma toroidal, habitualmente \r\nde goma, cuya función es la de \r\nasegurar la estanqueidad de \r\nfluidos', NULL, '2023-04-25 04:39:09', '2023-04-25 04:39:09'),
+(8, 'Descripción común', 'Sello de labio', 'Un sello de labio es un dispositivo mecánico pasivo que se usa para sellar los puntos de salida del eje en motores eléctricos y otras máquinas de salida rotativas y recíprocas.', NULL, '2023-04-25 04:54:35', '2023-04-25 04:54:35'),
+(9, 'Descripción común', 'otro', 'otro', NULL, '2023-04-25 04:55:14', '2023-04-25 04:55:14'),
+(10, 'sistema', 'otro', 'otro', NULL, '2023-04-25 04:55:40', '2023-04-25 04:55:40');
 
 -- --------------------------------------------------------
 
@@ -4583,6 +4601,20 @@ CREATE TABLE `maquinas` (
 INSERT INTO `maquinas` (`id`, `tipo`, `marca`, `modelo`, `serie`, `arreglo`, `foto`, `fotoId`, `created_at`, `updated_at`) VALUES
 (1, 'CARGADOR', 'CATERPILLAR', '936', '33Z01760', '1SD32F14', 'NULL', 'NULL', NULL, NULL),
 (2, 'MOTOR', 'PERKINS', '1004', 'AA70228', '2SAD3F1A', 'NULL', 'NULL', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maquina_articulo`
+--
+
+CREATE TABLE `maquina_articulo` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `maquina_id` bigint(20) UNSIGNED NOT NULL,
+  `articulo_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4616,7 +4648,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (21, '2023_04_14_034655_create_contactos_table', 8),
 (22, '2023_04_15_062817_create_listas_table', 9),
 (23, '2023_04_15_084542_create_articulos_table', 10),
-(24, '2023_04_15_085237_create_foto_articulo_table', 11);
+(24, '2023_04_15_085237_create_foto_articulo_table', 11),
+(25, '2023_04_24_231413_create_maquina_articulo_table', 12);
 
 -- --------------------------------------------------------
 
@@ -5240,6 +5273,14 @@ ALTER TABLE `maquinas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `maquina_articulo`
+--
+ALTER TABLE `maquina_articulo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `maquina_articulo_maquina_id_foreign` (`maquina_id`),
+  ADD KEY `maquina_articulo_articulo_id_foreign` (`articulo_id`);
+
+--
 -- Indices de la tabla `migrations`
 --
 ALTER TABLE `migrations`
@@ -5306,7 +5347,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -5348,7 +5389,7 @@ ALTER TABLE `foto_articulo`
 -- AUTO_INCREMENT de la tabla `listas`
 --
 ALTER TABLE `listas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
@@ -5357,10 +5398,16 @@ ALTER TABLE `maquinas`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `maquina_articulo`
+--
+ALTER TABLE `maquina_articulo`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -5414,6 +5461,13 @@ ALTER TABLE `contacto_tercero`
 --
 ALTER TABLE `departamentos`
   ADD CONSTRAINT `departamentos_pais_id_foreign` FOREIGN KEY (`pais_id`) REFERENCES `paises` (`id`);
+
+--
+-- Filtros para la tabla `maquina_articulo`
+--
+ALTER TABLE `maquina_articulo`
+  ADD CONSTRAINT `maquina_articulo_articulo_id_foreign` FOREIGN KEY (`articulo_id`) REFERENCES `articulos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `maquina_articulo_maquina_id_foreign` FOREIGN KEY (`maquina_id`) REFERENCES `maquinas` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `tercero_maquina`
