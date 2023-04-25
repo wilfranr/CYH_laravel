@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Articulo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Lista;
+use App\Models\Maquina;
 
 class ArticuloController extends Controller
 {
@@ -16,6 +18,7 @@ class ArticuloController extends Controller
     public function index()
     {
         $articulos = Articulo::all();
+        
         return view('articulos.index', compact('articulos'));
     }
 
@@ -26,7 +29,10 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        return view('articulos.create');
+        $maquinas = Maquina::all();
+        $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
+        $definiciones = Lista::where('tipo', 'Descripción común')->pluck('nombre', 'id');
+        return view('articulos.create', compact('sistemas', 'definiciones', 'maquinas'));
     }
 
     /**
@@ -35,29 +41,45 @@ class ArticuloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Articulo $articulo, $id)
+    public function store(Request $request, Articulo $articulo)
     {
-        //Validar datos del formulario
-        $request->validate([
-            'sistema' => 'required',
-            'definicion' => 'required',
-            'referencia' => 'required',
-            'cantidad' => 'required',
-            'comentarios' => 'required',
+        $validatedData = $request->validate([
+            //'maquina' => 'nullable|exists:maquinas,id',
+            //'tipo_maquina' => 'nullable|exists:maquinas,id',
+            'sistema' => 'nullable|string',
+            'definicion' => 'nullable|string',
+            'referencia' => 'nullable|string',
+            'descripcion_especifica' => 'nullable|string',
+            'comentarios' => 'nullable|string',
+            'peso' => 'nullable|string',
+            'foto' => 'nullable|image|max:2048', // Agregamos validación para imágenes
         ]);
+        //dd($request->all()) ;
 
-        //crear un nuevo articulo
         $articulo = new Articulo();
-        $articulo->sistema = $request->sistema;
-        $articulo->definicion = $request->definicion;
-        $articulo->referencia = $request->referencia;
-        $articulo->cantidad = $request->cantidad;
-        $articulo->comentarios = $request->comentarios;
+        //$articulo->maquina_id = $validatedData['maquina'];
+        //$articulo->tipo_maquina_id = $validatedData['tipo_maquina'];
+        $articulo->sistema = $validatedData['sistema'];
+        $articulo->definicion = $validatedData['definicion'];
+        $articulo->referencia = $validatedData['referencia'];
+        $articulo->descripcionEspecifica = $validatedData['descripcion_especifica'];
+        $articulo->comentarios = $validatedData['comentarios'];
+        $articulo->peso = $validatedData['peso'];
+
+        // Guardar la foto en el storage
+        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
+            $rutaFoto = $request->foto->store('public/fotos');
+            $articulo->ruta_foto = $rutaFoto;
+        }
+        // Asociar las máquinas con el artículo
+        $maquinasIds = $request->input('maquinas', []);
+        $articulo->maquinas()->sync($maquinasIds);
+
         $articulo->save();
 
-        //redireccionar a la vista de articulos
-        return redirect()->route('articulos.show', $articulo->id)->with('success', 'Articulo creado correctamente');
+        return redirect()->route('articulos.index')->with('success', 'Artículo agregado correctamente.');
     }
+
 
     /**
      * Display the specified resource.
@@ -124,14 +146,13 @@ class ArticuloController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    $articulo = Articulo::find($id);
-    if($articulo){
-        $articulo->delete();
-        return redirect()->route('articulos.index')->with('success', 'Artículo eliminado correctamente');
-    }else{
-        return redirect()->route('articulos.index')->with('error', 'No se pudo eliminar el artículo');
+    {
+        $articulo = Articulo::find($id);
+        if ($articulo) {
+            $articulo->delete();
+            return redirect()->route('articulos.index')->with('success', 'Artículo eliminado correctamente');
+        } else {
+            return redirect()->route('articulos.index')->with('error', 'No se pudo eliminar el artículo');
+        }
     }
-}
-
 }

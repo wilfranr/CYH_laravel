@@ -15,6 +15,8 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>Fabricante de máquina</th>
+                                        <th>Tipo de máquina</th>
                                         <th>Sistema</th>
                                         <th>Definición</th>
                                         <th>Referencia</th>
@@ -26,6 +28,14 @@
                                 <tbody>
                                     @foreach ($articulos as $articulo)
                                         <tr>
+                                            <td>@foreach ($articulo->maquinas as $maquina)
+                                                {{ $maquina->pivot->marca }}
+                                            @endforeach</td>
+                                            <td>
+                                                @foreach ($articulo->maquinas as $maquina)
+                                                    {{ $maquina->pivot->fabricante }}
+                                                @endforeach
+                                            </td>
                                             <td>{{ $articulo->sistema }}</td>
                                             <td>{{ $articulo->definicion }}</td>
                                             <td>{{ $articulo->referencia }}</td>

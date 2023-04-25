@@ -14,6 +14,9 @@ class Articulo extends Model
         'referencia',
         'cantidad',
         'comentarios',
+        'descripcion_especifica',
+        'peso',
+        'foto_descriptiva'
     ];
     public function pedido()
     {
@@ -26,4 +29,10 @@ class Articulo extends Model
     {
         return $this->hasMany(Foto::class);
     }
+
+    public function maquinas()
+{
+    return $this->belongsToMany(Maquina::class, 'maquina_articulo');
+}
+
 }

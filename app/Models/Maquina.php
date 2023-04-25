@@ -25,7 +25,7 @@ class Maquina extends Model
     public static function allWithConcatenatedData()
     {
         return self::all()->map(function ($maquina) {
-            $concatenatedData = $maquina->tipo.' '.$maquina->marca.' '.$maquina->modelo.' '.$maquina->serie;
+            $concatenatedData = $maquina->tipo . ' ' . $maquina->marca . ' ' . $maquina->modelo . ' ' . $maquina->serie;
             return [
                 'id' => $maquina->id,
                 'text' => $concatenatedData
@@ -33,4 +33,8 @@ class Maquina extends Model
         });
     }
 
+    public function articulos()
+    {
+        return $this->belongsToMany(Articulo::class);
+    }
 }
