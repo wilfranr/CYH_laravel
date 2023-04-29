@@ -10,42 +10,27 @@ use App\Models\Maquina;
 
 class ArticuloController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $articulos = Articulo::all();
-        
+
         return view('articulos.index', compact('articulos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $maquinas = Maquina::all();
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
         $definiciones = Lista::where('tipo', 'Descripción común')->pluck('nombre', 'id');
+        $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
         return view('articulos.create', compact('sistemas', 'definiciones', 'maquinas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, Articulo $articulo)
     {
         $validatedData = $request->validate([
             //'maquina' => 'nullable|exists:maquinas,id',
             //'tipo_maquina' => 'nullable|exists:maquinas,id',
+            'marca' => 'nullable|string',
             'sistema' => 'nullable|string',
             'definicion' => 'nullable|string',
             'referencia' => 'nullable|string',
@@ -59,6 +44,7 @@ class ArticuloController extends Controller
         $articulo = new Articulo();
         //$articulo->maquina_id = $validatedData['maquina'];
         //$articulo->tipo_maquina_id = $validatedData['tipo_maquina'];
+        $articulo->marca = $validatedData['marca'];
         $articulo->sistema = $validatedData['sistema'];
         $articulo->definicion = $validatedData['definicion'];
         $articulo->referencia = $validatedData['referencia'];
@@ -69,82 +55,65 @@ class ArticuloController extends Controller
         // Guardar la foto en el storage
         if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
             $rutaFoto = $request->foto->store('public/fotos');
-            $articulo->ruta_foto = $rutaFoto;
+            $articulo->fotoDescriptiva = $rutaFoto;
         }
         // Asociar las máquinas con el artículo
-        $maquinasIds = $request->input('maquinas', []);
-        $articulo->maquinas()->sync($maquinasIds);
+        $maquinas = Maquina::all();
+        foreach ($maquinas as $maquina) {
+            $maquina->articulos()->attach($articulo->id, ['fabricante' => $request->fabricante, 'tipo_maquina' => $request->tipo_maquina]);
+        }
+
+
 
         $articulo->save();
 
         return redirect()->route('articulos.index')->with('success', 'Artículo agregado correctamente.');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function show(Articulo $articulo, $id)
     {
         $articulo = Articulo::find($id);
         return view('articulos.show', compact('articulo'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Articulo $articulo, $id)
     {
         $articulo = Articulo::find($id);
-        return view('articulos.edit', compact('articulo'));
+        $marca = Lista::where('tipo', 'marca')->get();
+        return view('articulos.edit', compact('articulo', 'marca'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Articulo $articulo, $id)
     {
 
         //buscar el articulo a actualizar
         $articulo = Articulo::find($id);
         //validar los datos del formulario
+        //dd($request->all());
         $request->validate([
+            'marca' => 'required',
             'sistema' => 'required',
             'definicion' => 'required',
             'referencia' => 'required',
-            'cantidad' => 'required',
-            'comentarios' => 'required',
+            'comentarios' => 'nullable|string',
         ]);
 
         //Actualizar los datos del articulo
+        $articulo->marca = $request->marca;
         $articulo->sistema = $request->sistema;
         $articulo->definicion = $request->definicion;
         $articulo->referencia = $request->referencia;
-        $articulo->cantidad = $request->cantidad;
         $articulo->comentarios = $request->comentarios;
-        $articulo->save();
 
-        //redireccionar a la vista de articulos
-        return redirect()->route('articulos.show', $articulo->id)->with('success', 'Articulo actualizado correctamente');
+        if ($articulo->save()) {
+            // redireccionar a la vista de articulos
+            return redirect()->route('articulos.show', $articulo->id)->with('success', 'Articulo actualizado correctamente');
+        } else {
+            // en caso de error, redireccionar con un mensaje de error
+            return redirect()->back()->with('error', 'Error al actualizar el artículo.');
+        }
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $articulo = Articulo::find($id);

@@ -11,6 +11,19 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
+                                <div class="form-group row">
+                                    <label for="marca"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Marca fabricante') }}</label>
+    
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="marca" name="marca" required>
+                                            <option value="">Seleccione una marca fabricante</option>
+                                            @foreach($marca as $m)
+                                                <option value="{{ $m->nombre }}" {{ $m->nombre == $articulo->marca ? 'selected' : '' }}>{{ $m->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <label for="sistema"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Sistema') }}</label>
 
@@ -61,38 +74,20 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="cantidad"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Cantidad') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="cantidad" type="number"
-                                        class="form-control @error('cantidad') is-invalid @enderror" name="cantidad"
-                                        value="{{ $articulo->cantidad }}" required>
-
-                                    @error('cantidad')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            
 
                             <div class="form-group row">
                                 <label for="comentarios"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Comentarios') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="comentarios" class="form-control @error('comentarios') is-invalid @enderror" name="comentarios" required>{{ $articulo->comentarios }}</textarea>
+                                    <textarea id="comentarios" class="form-control  name="comentarios" >{{ $articulo->comentarios }}</textarea>
 
-                                    @error('comentarios')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                            
                                 </div>
                             </div>
-                            <button class="btn btn-outline-primary" type="submit">Editar</button>
+                            <button class="btn btn-outline-primary" type="submit">Guardar</button>
+                            <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
                         </form>
                     </div>
                 </div>

@@ -19,13 +19,18 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3 font-weight-bold">Cantidad:</div>
-                            <div class="col-md-9">{{ $articulo->cantidad }}</div>
+                            <div class="col-md-3 font-weight-bold">Marca:</div>
+                            <div class="col-md-9">{{ $articulo->marca }}</div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-3 font-weight-bold">Comentarios:</div>
                             <div class="col-md-9">{{ $articulo->comentarios }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 font-weight-bold">Foto descriptiva:</div>
+                            <div class="col-md-9"><img src="{{ asset('storage/app/'.$articulo->fotoDescriptiva) }}" alt="{{ $articulo->descripcionEspecifica }}">
+                            </div>
                         </div>
 
                         <div class="row mt-3">
@@ -39,6 +44,7 @@
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

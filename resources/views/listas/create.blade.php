@@ -6,9 +6,15 @@
         <form action="{{ route('listas.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="tipo">Tipo:</label>
-                <input type="text" class="form-control" name="tipo" id="tipo" required>
+                <label for="tipo">Tipo</label>
+                <select class="form-control" id="tipo" name="tipo" required>
+                    <option value="0">Seleccione un tipo</option>
+                    @foreach($listasPadre as $listaPadre)
+                        <option value="{{ $listaPadre->nombre }}">{{ $listaPadre->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
+            
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" name="nombre" id="nombre" required>

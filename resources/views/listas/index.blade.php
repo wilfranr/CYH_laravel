@@ -21,7 +21,7 @@
                         <td>{{ $lista->tipo }}</td>
                         <td>{{ $lista->nombre }}</td>
                         <td>{{ $lista->definicion }}</td>
-                        <td>{{ $lista->foto }}</td>
+                        <td><img src="{{ asset('storage/fotos/'.$lista->foto) }}" alt="Foto de la lista" width="100px"></td>
                         <td>
                             <a href="{{ route('listas.show', $lista->id) }}" class="btn btn-sm btn-success">Ver</a>
                             <a href="{{ route('listas.edit', $lista->id) }}" class="btn btn-sm btn-primary">Editar</a>

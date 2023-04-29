@@ -45,6 +45,7 @@
                             <li><a class="dropdown-item" href="{{ route('listas.index') }}">Listas</a></li>
                             <li><a class="dropdown-item" href="{{ route('maquinas.index') }}">Maquinas</a></li>
                             <li><a class="dropdown-item" href="{{ route('users.index') }}">Usuarios</a></li>
+                            <li><a class="dropdown-item" href="{{ route('listasPadre.index') }}">Listas Padre</a></li>
                             {{-- <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                         </ul>

@@ -28,7 +28,9 @@
                     <td>{{ $maquina->modelo }}</td>
                     <td>{{ $maquina->serie }}</td>
                     <td>{{ $maquina->arreglo }}</td>
-                    <td>{{ $maquina->foto }}</td>
+                    <td><img src="{{ asset('storage/maquinas/'.$maquina->foto) }}" alt="Foto de la máquina" width="100px">
+                    </td>
+
                     <td>{{ $maquina->foto_id }}</td>
                     <td>{{ $maquina->created_at }}</td>
                     <td>

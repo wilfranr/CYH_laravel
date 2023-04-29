@@ -4,10 +4,11 @@
 <div class="container">
   <h1>{{ $maquina->tipo }}</h1>
   <p><strong>Marca:</strong> {{ $maquina->marca }}</p>
+  <p><strong>Tipo maquina:</strong> {{ $maquina->tipo }}</p>
   <p><strong>Modelo:</strong> {{ $maquina->modelo }}</p>
   <p><strong>Serie:</strong> {{ $maquina->serie }}</p>
   <p><strong>Arreglo:</strong> {{ $maquina->arreglo }}</p>
-  <p><strong>Foto:</strong> {{ $maquina->foto }}</p>
+  <p><strong>Foto:</strong> <img src="{{ asset('storage/maquinas/'.$maquina->foto) }}" alt="Foto de la máquina" width="400px"></p>
   <p><strong>Foto ID:</strong> {{ $maquina->foto_id }}</p>
   <p><strong>Fecha de creación:</strong> {{ $maquina->created_at }}</p>
   <a href="{{ route('maquinas.index') }}" class="btn btn-secondary">Regresar</a>

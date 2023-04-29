@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lista;
 use Illuminate\Http\Request;
+use App\Models\ListaPadre;
 
 
 class ListaController extends Controller
@@ -16,8 +17,8 @@ class ListaController extends Controller
 
     public function create()
     {
-
-        return view('listas.create');
+        $listasPadre = ListaPadre::all();
+        return view('listas.create', compact('listasPadre'));
     }
 
     public function store(Request $request)
@@ -55,7 +56,8 @@ class ListaController extends Controller
     public function edit($id)
 {
     $lista = Lista::findOrFail($id);
-    return view('listas.edit', compact('lista'));
+    $listasPadre = ListaPadre::all();
+    return view('listas.edit', compact('lista', 'listasPadre'));
 }
 
 

@@ -10,31 +10,31 @@
                         <form method="POST" action="{{ route('articulos.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="marca_maquina"
+                                <label for="marca"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Marca fabricante') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" id="maquina" name="maquina">
-                                        <option value="">Seleecione una marca fabricante</option>
-                                        @foreach($maquinas as $maquina)
-                                        <option value="{{ $maquina->id }}">{{ $maquina->marca }}</option>
+                                    <select class="form-control" id="marca" name="marca">
+                                        <option value="">Seleccione una marca fabricante</option>
+                                        @foreach ($maquinas as $id => $nombre)
+                                            <option value="{{ $nombre }}">{{ $nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="tipo_maquina"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Tipo de maquina') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-control" id="tipo_maquina" name="tipo_maquina">
                                         <option value="">Seleecione una máquina</option>
-                                        @foreach($maquinas as $maquina)
+                                        @foreach ($maquinas as $maquina)
                                         <option value="{{ $maquina->id }}">{{ $maquina->tipo }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row">
                                 <label for="sistema"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Sistema') }}</label>
@@ -56,7 +56,7 @@
                                 <div class="col-md-6">
                                     <select class="form-control" id="definicion" name="definicion">
                                         <option value="">Seleccione una descripción común</option>
-                                        @foreach($definiciones as $id => $nombre)
+                                        @foreach ($definiciones as $id => $nombre)
                                             <option value="{{ $nombre }}">{{ $nombre }}</option>
                                         @endforeach
                                     </select>
@@ -86,8 +86,8 @@
 
                                 <div class="col-md-6">
                                     <input id="descripcion_especifica" type="text"
-                                        class="form-control @error('descripcion_especifica') is-invalid @enderror" name="descripcion_especifica"
-                                        value="{{ old('descripcion_especifica') }}" required>
+                                        class="form-control @error('descripcion_especifica') is-invalid @enderror"
+                                        name="descripcion_especifica" value="{{ old('descripcion_especifica') }}" required>
 
                                     @error('descripcion_especifica')
                                         <span class="invalid-feedback" role="alert">
@@ -102,7 +102,7 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Comentarios') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="comentarios" class="form-control @error('comentarios') is-invalid @enderror" name="comentarios" required>{{ old('comentarios') }}</textarea>
+                                    <textarea id="comentarios" class="form-control @error('comentarios') is-invalid @enderror" name="comentarios">{{ old('comentarios') }}</textarea>
 
                                     @error('comentarios')
                                         <span class="invalid-feedback" role="alert">
@@ -137,7 +137,10 @@
 
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-3">Crear</button>
+                            <div class="form-group row">
+                                <button type="submit" class="btn btn-primary mt-3">Crear</button>
+                                <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
+                            </div>
                         </form>
                     </div>
                 </div>

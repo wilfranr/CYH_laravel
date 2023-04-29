@@ -10,9 +10,12 @@
             @method('PUT')
 
             <div class="form-group">
-                
-                <label for="tipo">Tipo:</label>
-                <input type="text" class="form-control" name="tipo" id="tipo" value="{{ $lista->tipo }}" required>
+                <label for="tipo">Tipo</label>
+                <select class="form-control" id="tipo" name="tipo">
+                    @foreach($listasPadre as $listaPadre)
+                        <option value="{{ $listaPadre->nombre }}">{{ $listaPadre->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -20,7 +23,6 @@
             </div>
             <div class="form-group">
                 <label for="definicion">Definición:</label>
-                <input type="text" name="nombre" value="{{ $lista->nombre }}">
                 <textarea name="definicion">{{ $lista->definicion }}</textarea>
 
             </div>

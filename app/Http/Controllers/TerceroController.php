@@ -56,11 +56,7 @@ class TerceroController extends Controller
         return view('terceros.create')->with('paises', $paises)->with('ciudad', $ciudades)->with('maquinas', $maquinas);
     }
 
-    // public function getDepartamentos(Request $request)
-    // {
-    //     $departamentos = Departamento::where('pais_id', $request->pais_id)->get();
-    //     return response()->json($departamentos);
-    // }
+
 
     public function store(Request $request)
     {
@@ -126,7 +122,7 @@ class TerceroController extends Controller
 
         // 4. Guardar el nuevo tercero en la base de datos
         $tercero->save();
-        
+
 
         // Asociar las máquinas seleccionadas al nuevo tercero
         //si no vienen maquinas, continuar
@@ -134,14 +130,14 @@ class TerceroController extends Controller
             $maquinas_ids = $request->input('maquinas');
             $tercero->maquinas()->attach($maquinas_ids);
         }
-       
-        
-        
-        
+
+
+
+
         // dd($contadorContactos);
         // Crear los contactos del tercero
         //si no se ingresan contactos, continuar
-        
+
         for ($i = 1; $i <= $data['contadorContactos']; $i++) {
             // Validar los datos del formulario del contacto
             $dataContacto = $request->validate([
@@ -149,15 +145,15 @@ class TerceroController extends Controller
                 'telefono_contacto_' . $i => ['nullable', 'string', 'max:20'],
                 'email_contacto_' . $i => ['nullable', 'email', 'max:255'],
             ]);
-            
-            
+
+
             // Crear el contacto
             $contacto = new Contacto();
             $contacto->nombre = $request->{'nombre_contacto_' . $i};
             $contacto->telefono = $request->{'telefono_contacto_' . $i};
             $contacto->email = $request->{'email_contacto_' . $i};
             $contacto->save();
-            
+
             // Agregar la relación a la tabla intermedia
             $tercero->contactos()->attach($contacto->id);
             // 5. Redirigir al usuario a la página de detalles del nuevo tercero con un mensaje de éxito
@@ -168,8 +164,7 @@ class TerceroController extends Controller
         $tercero->contactos()->sync($request->contactos);
         // 5. Redirigir al usuario a la página de detalles del nuevo tercero con un mensaje de éxito
         return redirect()->route('terceros.show', ['id' => $tercero->id])
-        ->with('success', 'El tercero se ha creado exitosamente.');
-
+            ->with('success', 'El tercero se ha creado exitosamente.');
     }
 
     public function show($id)
@@ -186,13 +181,6 @@ class TerceroController extends Controller
         return response()->download($pathToFile);
     }
 
-    // public function show($id)
-    // {
-    //     $tercero = Tercero::findOrFail($id);
-    //     $contactos = $tercero->contactos;
-
-    //     return view('terceros.show', compact('tercero', 'contactos'));
-    // }
     public function getMaquinasByTercero($id)
     {
         $maquinas = Tercero::findOrFail($id)->maquinas;
@@ -204,11 +192,28 @@ class TerceroController extends Controller
         return view('terceros.edit', compact('tercero'));
     }
 
-    public function update(Request $request, Tercero $tercero)
+    public function update(Request $request, Tercero $tercero, $id)
     {
-        // Lógica para actualizar un tercero existente
-        
+        $tercero = Tercero::find($id);
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'telefono' => 'required|string|max:255',
+        ]);
+
+
+        if (!$tercero) {
+            return back()->with('error', 'El tercero que intenta actualizar no existe');
+        }
+
+        $tercero->nombre = $request->nombre;
+        $tercero->direccion = $request->direccion;
+        $tercero->telefono = $request->telefono;
+        $tercero->save();
+
+        return redirect()->route('terceros.show', $tercero->id)->with('success', 'Tercero actualizado exitosamente');
     }
+
 
     public function destroy(Tercero $tercero)
     {

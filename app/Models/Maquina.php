@@ -35,6 +35,7 @@ class Maquina extends Model
 
     public function articulos()
     {
-        return $this->belongsToMany(Articulo::class);
+        return $this->belongsToMany(Articulo::class, 'maquina_articulo')
+            ->withPivot('fabricante', 'tipo_maquina');
     }
 }

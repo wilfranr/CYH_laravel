@@ -2,12 +2,13 @@
 @section('title', 'Terceros')
 
 @section('content')
-    <div class="container">
-        <h1>Terceros</h1>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <input type="text" name="search" id="search" class="form-control" placeholder="Buscar">
-            </div>
+<div class="container">
+    <h1>Terceros</h1>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <a href="{{ route('terceros.create') }}" class="btn btn-primary">Agregar tercero</a>
+            <input type="text" name="search" id="search" class="form-control" placeholder="Buscar">
+        </div>
         </div>
 
         <table class="table" id="terceros-table">
@@ -30,9 +31,10 @@
                         <td>{{ $tercero->numero_documento }}</td>
                         <td>
                             <a href="{{ route('terceros.show', $tercero->id) }}" class="btn btn-sm btn-info">Ver</a>
-                            {{-- <a href="{{ route('terceros.edit', $tercero->id) }}" class="btn btn-sm btn-primary">Editar</a> --}}
+                            <a href="{{ route('terceros.edit', $tercero->id) }}" class="btn btn-sm btn-primary">Editar</a>
                             <form action="" method="POST" style="display: inline">
                                 @csrf
+
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger"
                                     onclick="return confirm('¿Está seguro de que desea eliminar este tercero?')">Eliminar</button>
@@ -42,7 +44,6 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="{{ route('terceros.create') }}" class="btn btn-primary">Agregar tercero</a>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

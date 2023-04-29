@@ -15,12 +15,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Fabricante de máquina</th>
-                                        <th>Tipo de máquina</th>
+                                        <th>Fabricante</th>
                                         <th>Sistema</th>
                                         <th>Definición</th>
                                         <th>Referencia</th>
-                                        <th>Cantidad</th>
                                         <th>Comentarios</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -28,18 +26,10 @@
                                 <tbody>
                                     @foreach ($articulos as $articulo)
                                         <tr>
-                                            <td>@foreach ($articulo->maquinas as $maquina)
-                                                {{ $maquina->pivot->marca }}
-                                            @endforeach</td>
-                                            <td>
-                                                @foreach ($articulo->maquinas as $maquina)
-                                                    {{ $maquina->pivot->fabricante }}
-                                                @endforeach
-                                            </td>
+                                            <td>{{ $articulo->marca }}</td>
                                             <td>{{ $articulo->sistema }}</td>
                                             <td>{{ $articulo->definicion }}</td>
                                             <td>{{ $articulo->referencia }}</td>
-                                            <td>{{ $articulo->cantidad }}</td>
                                             <td>{{ $articulo->comentarios }}</td>
                                             <td>
                                                 <a href="{{ route('articulos.show', $articulo->id) }}"

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-04-2023 a las 03:53:23
+-- Tiempo de generación: 29-04-2023 a las 11:00:49
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `articulos` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `marca` varchar(50) NOT NULL,
   `sistema` varchar(255) NOT NULL,
   `definicion` text NOT NULL,
   `referencia` varchar(255) NOT NULL,
@@ -36,7 +37,7 @@ CREATE TABLE `articulos` (
   `comentarios` text DEFAULT NULL,
   `descripcionEspecifica` text DEFAULT NULL,
   `peso` varchar(11) DEFAULT NULL,
-  `fotoDescriptiva` varchar(50) DEFAULT NULL,
+  `fotoDescriptiva` varchar(200) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -45,12 +46,10 @@ CREATE TABLE `articulos` (
 -- Volcado de datos para la tabla `articulos`
 --
 
-INSERT INTO `articulos` (`id`, `sistema`, `definicion`, `referencia`, `cantidad`, `comentarios`, `descripcionEspecifica`, `peso`, `fotoDescriptiva`, `created_at`, `updated_at`) VALUES
-(2, 'b', 'a', 'a', 2, 'a', NULL, NULL, NULL, '2023-04-24 06:14:02', '2023-04-24 06:14:02'),
-(4, '4', '7', 'dasd33', NULL, 'Sin comentarios', 'Seal', '200', NULL, '2023-04-25 05:49:30', '2023-04-25 05:49:30'),
-(5, '4', '7', 'dasd33', NULL, 'Sin comentarios', 'Seal', '200', NULL, '2023-04-25 05:51:10', '2023-04-25 05:51:10'),
-(6, '4', '7', 'dasd33', NULL, 'Sin comentarios', 'Seal', '200', NULL, '2023-04-25 05:55:06', '2023-04-25 05:55:06'),
-(7, 'Motor', 'Seal O Ring', 'tuerca346788', NULL, 'No', 'Seal', '300', NULL, '2023-04-25 05:55:39', '2023-04-25 05:55:39');
+INSERT INTO `articulos` (`id`, `marca`, `sistema`, `definicion`, `referencia`, `cantidad`, `comentarios`, `descripcionEspecifica`, `peso`, `fotoDescriptiva`, `created_at`, `updated_at`) VALUES
+(8, 'CATERPILLAR', 'Transmision', 'Seal O Ring', 'Cadena', NULL, NULL, 'Seal', '200', 'public/fotos/9wJwBoS2YOJLGqV3B8515KO3S14J0yoceaUdPPwJ.jpg', '2023-04-29 07:28:15', '2023-04-29 13:29:58'),
+(18, 'KOMATSU', 'Transmision', 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', NULL, '2023-04-29 13:11:31', '2023-04-29 13:29:00'),
+(19, 'XCMG', 'Bomba hidráulica', 'otro', 'Manguera1', NULL, NULL, 'Manguera', '200', 'public/fotos/dIVQZJ6CamEAWYxeoE9MVTfFYQTNyCHrrNqDrc2H.jpg', '2023-04-29 13:32:49', '2023-04-29 13:32:49');
 
 -- --------------------------------------------------------
 
@@ -4565,15 +4564,52 @@ CREATE TABLE `listas` (
 
 INSERT INTO `listas` (`id`, `tipo`, `nombre`, `definicion`, `foto`, `created_at`, `updated_at`) VALUES
 (1, 'medida', 'diametro', 'Línea recta que une dos puntos de una circunferencia, de una curva cerrada o de la superficie de una esfera pasando por su centro.', 'storage/public/fotos/WvNSxydoONwtxFSckzuxaK6CA3vDIXp3uSdV8gGO.png', '2023-04-15 11:47:42', '2023-04-15 12:55:21'),
-(2, 'marca', 'Caterpillar', 'Marca norte americana que maneja diferentes repuestos', 'storage/public/fotos/fddUmn2enPouCz97w0mCejOaDMPP4G1kmmksWLJr.jpg', '2023-04-15 11:52:53', '2023-04-15 12:43:25'),
-(3, 'marca', 'perkins', 'Marca inglesa que maneja repuestos varios', 'public/fotos/83y5CkvjNgLjLJv9WDae2ptwrcImR3dwRETgJdPe.jpg', '2023-04-15 13:12:22', '2023-04-15 13:12:22'),
+(2, 'marca', 'CATERPILLAR', 'Marca norte americana que maneja diferentes repuestos', 'storage/public/fotos/fddUmn2enPouCz97w0mCejOaDMPP4G1kmmksWLJr.jpg', '2023-04-15 11:52:53', '2023-04-29 12:15:38'),
+(3, 'marca', 'PERKINS', 'Marca inglesa que maneja repuestos varios', 'public/fotos/83y5CkvjNgLjLJv9WDae2ptwrcImR3dwRETgJdPe.jpg', '2023-04-15 13:12:22', '2023-04-29 12:15:53'),
 (4, 'sistema', 'Transmision', 'sello de labio', NULL, '2023-04-15 13:16:47', '2023-04-15 13:25:02'),
 (5, 'sistema', 'Motor', 'Engrane', NULL, '2023-04-15 13:17:16', '2023-04-15 13:17:16'),
 (6, 'medida', 'peso', 'Fuerza con que la Tierra atrae a un cuerpo, por acción de la gravedad.', 'public/fotos/g1SehERveYnZTiXFm3usZnOlxclBVRn44ZJ3AZUf.jpg', '2023-04-15 18:10:47', '2023-04-15 18:10:47'),
 (7, 'Descripción común', 'Seal O Ring', 'Un O-Ring es una junta de \r\nforma toroidal, habitualmente \r\nde goma, cuya función es la de \r\nasegurar la estanqueidad de \r\nfluidos', NULL, '2023-04-25 04:39:09', '2023-04-25 04:39:09'),
 (8, 'Descripción común', 'Sello de labio', 'Un sello de labio es un dispositivo mecánico pasivo que se usa para sellar los puntos de salida del eje en motores eléctricos y otras máquinas de salida rotativas y recíprocas.', NULL, '2023-04-25 04:54:35', '2023-04-25 04:54:35'),
 (9, 'Descripción común', 'otro', 'otro', NULL, '2023-04-25 04:55:14', '2023-04-25 04:55:14'),
-(10, 'sistema', 'otro', 'otro', NULL, '2023-04-25 04:55:40', '2023-04-25 04:55:40');
+(10, 'sistema', 'otro', 'otro', NULL, '2023-04-25 04:55:40', '2023-04-25 04:55:40'),
+(11, 'marca', 'XCMG', 'Es una empresa multinacional de China fundada en marzo de 1989 en la ciudad de Xuzhou. Su equipo de fabricación. Incluye:  cargadoras, excavadoras, camiones pesados, bombas de hormigón, bulldozers, plataformas elevadoras y más.\r\n\r\nCuentan con nuevos productos, uno de ellos es una grúa de 200 toneladas, tiene tubos de 4000 toneladas, cargadoras de 12 toneladas y más.', 'public/fotos/cPVgsSQrF5N56tkob3OOen7Foz46UvfPPy2b5ag9.png', '2023-04-29 09:41:10', '2023-04-29 09:41:10'),
+(12, 'marca', 'HITACHI', 'Hitachi, es otra de las empresas japonesas que se suman a esta lista. Se dedican a la elaboración de: volquete, máquinas de reciclaje, carretillas elevadoras, cargadoras de ruedas, compactadoras y excavadoras.', 'public/fotos/3GLNiF225N8E1MyiJUiGHD2Mh0MWPmvbzshTN1vn.jpg', '2023-04-29 09:44:36', '2023-04-29 09:44:36'),
+(13, '0', 'damian', 'assasa', NULL, '2023-04-29 09:50:45', '2023-04-29 09:50:45'),
+(14, 'Tipo Maquina', 'Bulldozer', 'Los bulldozers son máquinas versátiles que permiten realizar diversos trabajos en sectores como la construcción, la minería y las fuerzas armadas. Algunos de sus usos son: Roturación del terreno. Empuje de materiales y balones sueltos. Nivelación y recebo de pistas. Excavaciones en línea recta.', 'public/fotos/AITbHC5PUNgj4coPN880ah2fcjIa9liljl8Em9nt.jpg', '2023-04-29 09:52:26', '2023-04-29 09:52:26'),
+(15, 'Tipo Maquina', 'Excavadora', 'Se denomina excavadora (pala excavadora) a una máquina autopropulsada, sobre neumáticos u orugas, con una estructura capaz de girar al menos 360º que excava terrenos, o carga, eleva, gira y descarga material por la acción de la cuchara, fijada a un conjunto formado por pluma y brazo o balancín, sin que la estructura portante o chasis se desplace.', 'public/fotos/KLfepJVrxWoSYeATs7iOqFoeBO576KlFJ7oLCKA1.jpg', '2023-04-29 09:53:39', '2023-04-29 09:53:39'),
+(16, 'Modelo Maquina', 'D6R', 'Bulldozer fabricado por \r\nCaterpillar, con números de \r\nserie.', NULL, '2023-04-29 10:07:56', '2023-04-29 10:07:56'),
+(17, 'Modelo Maquina', 'PC200-7', 'Excavadora fabricada por komatsu', NULL, '2023-04-29 10:09:55', '2023-04-29 10:09:55'),
+(18, 'Modelo Maquina', '4FRT555T', 'Cargador Komatsu', NULL, '2023-04-29 10:38:05', '2023-04-29 10:38:05'),
+(19, 'Tipo Maquina', 'Cargador', 'Se le conoce también como cargador de cubo, pala o cargador frontal y es un tipo de tractor que tiene un cangilón ancho y cuadrado. Este va unido por dos brazos que recogen el material suelto de la tierra (arena o grava por ejemplo). Estos brazos del cargador se mueven por el suelo de un lugar a otro, sin empujar el material. Dicho de otro modo, un cargador se usa para mover un material almacenado a nivel del suelo y depositarlo en un camión de carga o en una excavación de zanja abierta. El cargador puede aparecer como un accesorio desprendible o estar montado permanentemente.', NULL, '2023-04-29 10:39:28', '2023-04-29 10:39:28'),
+(20, 'marca', 'KOMATSU', 'Es una de las empresas de maquinaria pesada originaria de Japón, sus equipos se especializan en maquinarias de construcción, equipamiento industrial, equipo de minería y material militar. La compañía japonesa, bajó el precio de sus productos un 20% debido a la devaluación del Yen Japonés frente al dólar estadounidense.', NULL, '2023-04-29 10:40:51', '2023-04-29 10:40:51'),
+(21, 'Modelo Maquina', '936', 'Cargador de ruedas', NULL, '2023-04-29 10:45:11', '2023-04-29 10:45:11'),
+(22, 'sistema', 'Bomba hidráulica', 'Una bomba hidráulica o bomba de agua es una máquina generadora que transforma la energía con la que es accionada (generalmente energía mecánica) en energía del fluido incompresible que mueve.', NULL, '2023-04-29 13:31:36', '2023-04-29 13:31:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lista_padres`
+--
+
+CREATE TABLE `lista_padres` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `lista_padres`
+--
+
+INSERT INTO `lista_padres` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(2, 'sistema', '2023-04-29 09:29:56', '2023-04-29 09:29:56'),
+(4, 'marca', '2023-04-29 09:30:09', '2023-04-29 09:30:09'),
+(5, 'medida', '2023-04-29 09:30:15', '2023-04-29 09:30:15'),
+(6, 'Descripción común', '2023-04-29 09:30:36', '2023-04-29 09:30:36'),
+(7, 'Tipo Maquina', '2023-04-29 09:31:22', '2023-04-29 09:31:22'),
+(8, 'Modelo Maquina', '2023-04-29 09:31:38', '2023-04-29 09:31:38');
 
 -- --------------------------------------------------------
 
@@ -4588,8 +4624,8 @@ CREATE TABLE `maquinas` (
   `modelo` varchar(255) NOT NULL,
   `serie` varchar(255) NOT NULL,
   `arreglo` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL,
-  `fotoId` varchar(255) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `fotoId` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4599,8 +4635,11 @@ CREATE TABLE `maquinas` (
 --
 
 INSERT INTO `maquinas` (`id`, `tipo`, `marca`, `modelo`, `serie`, `arreglo`, `foto`, `fotoId`, `created_at`, `updated_at`) VALUES
-(1, 'CARGADOR', 'CATERPILLAR', '936', '33Z01760', '1SD32F14', 'NULL', 'NULL', NULL, NULL),
-(2, 'MOTOR', 'PERKINS', '1004', 'AA70228', '2SAD3F1A', 'NULL', 'NULL', NULL, NULL);
+(1, 'Cargador', 'KOMATSU', '936', '33Z01760', '1SD32F14', 'NULL', 'NULL', '2023-04-02 03:10:15', '2023-04-29 12:59:23'),
+(2, 'Motor', 'PERKINS', '1004', 'AA70228', '2SAD3F1A', 'NULL', 'NULL', '0000-00-00 00:00:00', NULL),
+(3, 'Cargador', 'KOMATSU', '4FRT555T', '5T5666Y', '45566HTY666', '', '', '2023-04-29 03:07:55', '2023-04-29 03:07:55'),
+(4, 'Bulldozer', 'CATERPILLAR', 'D6R', '12345', '12345', '1682749546_OIP (2).jpeg', NULL, '2023-04-29 10:21:56', '2023-04-29 13:01:26'),
+(5, 'Bulldozer', 'CATERPILLAR', '936', '12345', '12345', '1682748621_OIP (1).jpeg', NULL, '2023-04-29 11:10:21', '2023-04-29 13:01:38');
 
 -- --------------------------------------------------------
 
@@ -4649,7 +4688,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2023_04_15_062817_create_listas_table', 9),
 (23, '2023_04_15_084542_create_articulos_table', 10),
 (24, '2023_04_15_085237_create_foto_articulo_table', 11),
-(25, '2023_04_24_231413_create_maquina_articulo_table', 12);
+(25, '2023_04_24_231413_create_maquina_articulo_table', 12),
+(26, '2023_04_29_032054_create_lista_padres_table', 13);
 
 -- --------------------------------------------------------
 
@@ -5267,6 +5307,12 @@ ALTER TABLE `listas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `lista_padres`
+--
+ALTER TABLE `lista_padres`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
@@ -5347,7 +5393,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -5389,13 +5435,19 @@ ALTER TABLE `foto_articulo`
 -- AUTO_INCREMENT de la tabla `listas`
 --
 ALTER TABLE `listas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `lista_padres`
+--
+ALTER TABLE `lista_padres`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `maquina_articulo`
@@ -5407,7 +5459,7 @@ ALTER TABLE `maquina_articulo`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`

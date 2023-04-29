@@ -14,6 +14,7 @@ use App\Http\Controllers\ListaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\MaquinaController;
+use App\Http\Controllers\ListaPadreController;
 
 
 
@@ -59,16 +60,12 @@ Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index'
 //ruta de crear pedido
 Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
 
-//ruta para ver terceros
+//ruta terceros
 Route::get('/terceros', [TerceroController::class, 'index'])->name('terceros.index');
-
-//ruta para crear terceros
 Route::get('/terceros/create', [TerceroController::class, 'create'])->name('terceros.create');
-
-//ruta para almacenar terceros
 Route::post('/terceros',[TerceroController::class, 'store'])->name('terceros.store');
-
-//ruta para ver tercero creado
+Route::get('/terceros/{id}/edit', [TerceroController::class, 'edit'])->name('terceros.edit');
+Route::put('/terceros/{id}/update', [TerceroController::class, 'update'])->name('terceros.update');
 Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros.show');
 
 //ciudades
@@ -119,6 +116,15 @@ Route::get('/articulos/{id}', [ArticuloController::class, 'show'])->name('articu
 Route::get('/articulos/{id}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
 Route::put('/articulos/{id}/update', [ArticuloController::class, 'update'])->name('articulos.update');
 Route::delete('/articulos/{id}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
+
+//rutas listas padre
+Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listasPadre.index');
+Route::get('/listasPadre/create', [ListaPadreController::class, 'create'])->name('listasPadre.create');
+Route::post('/listasPadre', [ListaPadreController::class, 'store'])->name('listasPadre.store');
+Route::get('/listasPadre/{listaPadre}/edit', [ListaPadreController::class, 'edit'])->name('listasPadre.edit');
+Route::put('/listasPadre/{listaPadre}', [ListaPadreController::class, 'update'])->name('listasPadre.update');
+Route::delete('/listasPadre/{listaPadre}', [ListaPadreController::class, 'destroy'])->name('listasPadre.destroy');
+
 
 
 

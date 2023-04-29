@@ -9,6 +9,7 @@ class Articulo extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'marca',
         'sistema',
         'definicion',
         'referencia',
@@ -30,9 +31,9 @@ class Articulo extends Model
         return $this->hasMany(Foto::class);
     }
 
-    public function maquinas()
-{
-    return $this->belongsToMany(Maquina::class, 'maquina_articulo');
-}
-
+    // public function maquinas()
+    // {
+    //     return $this->belongsToMany(Maquina::class, 'maquina_articulo')
+    //         ->withPivot('id');
+    // }
 }
