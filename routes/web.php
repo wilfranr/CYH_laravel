@@ -123,7 +123,7 @@ Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listas
 Route::get('/listasPadre/create', [ListaPadreController::class, 'create'])->name('listasPadre.create');
 Route::post('/listasPadre', [ListaPadreController::class, 'store'])->name('listasPadre.store');
 Route::get('/listasPadre/{listaPadre}/edit', [ListaPadreController::class, 'edit'])->name('listasPadre.edit');
-Route::put('/listasPadre/{listaPadre}', [ListaPadreController::class, 'update'])->name('listasPadre.update');
+Route::put('/listasPadre/{id}/update', [ListaPadreController::class, 'update'])->name('listasPadre.update');
 Route::delete('/listasPadre/{listaPadre}', [ListaPadreController::class, 'destroy'])->name('listasPadre.destroy');
 
 

@@ -19,7 +19,7 @@
                         <form action="{{ route('listasPadre.destroy', $listaPadre) }}" method="post" style="display:inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Estas seguro de eliminar esta lista padre? esta acción no se puede deshacer')">Eliminar</button>
                         </form>
                     </td>
                 </tr>

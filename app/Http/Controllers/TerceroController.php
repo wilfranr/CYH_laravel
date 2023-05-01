@@ -131,9 +131,6 @@ class TerceroController extends Controller
             $tercero->maquinas()->attach($maquinas_ids);
         }
 
-
-
-
         // dd($contadorContactos);
         // Crear los contactos del tercero
         //si no se ingresan contactos, continuar

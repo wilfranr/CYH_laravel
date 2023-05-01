@@ -34,8 +34,7 @@
                                             <td>{{ $articulo->referencia }}</td>
                                             <td>{{ $articulo->comentarios }}</td>
                                             <td>
-                                                <img src="{{ asset('storage/' . $articulo->foto) }}" alt=""
-                                                    width="200"></td>
+                                                <img src="{{ asset('storage/articulos/'. $articulo->fotoDescriptiva) }}" alt="Foto de la lista" width="100px"></td>
                                             <td>
                                                 <img src="{{ asset('storage/' . $articulo->foto_medida) }}" alt=""
                                                     width="200"></td>

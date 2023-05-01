@@ -32,8 +32,9 @@ class ListaPadreController extends Controller
         return view('listasPadre.edit', compact('listaPadre'));
     }
 
-    public function update(UpdateListaPadreRequest $request, ListaPadre $listaPadre)
+    public function update(UpdateListaPadreRequest $request, $id)
     {
+        $listaPadre = ListaPadre::findOrFail($id);
         $listaPadre->nombre = $request->nombre;
         $listaPadre->save();
         return redirect()->route('listasPadre.index');

@@ -19,6 +19,12 @@ class Articulo extends Model
         'peso',
         'fotoDescriptiva'
     ];
+
+    public function medidas()
+    {
+        return $this->belongsToMany(Medida::class, 'articulo_medida', 'articulo_id', 'medida_id');
+    }
+
     public function pedido()
     {
         return $this->belongsTo(Pedido::class);

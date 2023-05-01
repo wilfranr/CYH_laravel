@@ -29,7 +29,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 font-weight-bold">Foto descriptiva:</div>
-                            <div class="col-md-9"><img src="{{ asset('storage/app/'.$articulo->fotoDescriptiva) }}" alt="{{ $articulo->descripcionEspecifica }}">
+                            <div class="col-md-9"><img src="{{ asset('storage/articulos/'. $articulo->fotoDescriptiva) }}" alt="Foto de la lista" width="100px">
                             </div>
                         </div>
 

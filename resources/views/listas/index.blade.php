@@ -34,6 +34,10 @@
                 </tr>
             </thead>
             <tbody>
+                {{-- ordenar en orden alfabetico --}}
+                @php
+                    $listas = $listas->sortBy('tipo');
+                @endphp
                 @foreach ($listas as $lista)
                     <tr>
                         <td>{{ $lista->tipo }}</td>

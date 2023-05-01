@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Lista;
 use App\Models\Maquina;
+use App\Models\Medida;
+
 
 class ArticuloController extends Controller
 {
@@ -21,8 +23,10 @@ class ArticuloController extends Controller
     {
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
         $definiciones = Lista::where('tipo', 'Descripción común')->pluck('nombre', 'id');
+        $medidas = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
+        $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
         $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
-        return view('articulos.create', compact('sistemas', 'definiciones', 'maquinas'));
+        return view('articulos.create', compact('sistemas', 'definiciones', 'maquinas', 'medidas', 'unidadMedidas'));
     }
 
     public function store(Request $request, Articulo $articulo)
@@ -31,7 +35,7 @@ class ArticuloController extends Controller
             //'maquina' => 'nullable|exists:maquinas,id',
             //'tipo_maquina' => 'nullable|exists:maquinas,id',
             'marca' => 'nullable|string',
-            'sistema' => 'nullable|string',
+            //'sistema' => 'nullable|string',
             'definicion' => 'nullable|string',
             'referencia' => 'nullable|string',
             'descripcion_especifica' => 'nullable|string',
@@ -52,10 +56,14 @@ class ArticuloController extends Controller
         $articulo->comentarios = $validatedData['comentarios'];
         $articulo->peso = $validatedData['peso'];
 
-        // Guardar la foto en el storage
-        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
-            $rutaFoto = $request->foto->store('public/fotos');
-            $articulo->fotoDescriptiva = $rutaFoto;
+        // Procesar la foto descriptiva del artículo, si se proporcionó
+        if ($request->hasFile('foto-descriptiva')) {
+            $fotoDescriptiva = $request->file('foto-descriptiva');
+            $filename = time() . '_' . $fotoDescriptiva->getClientOriginalName();
+            $filepath = $fotoDescriptiva->storeAs('public/articulos', $filename);
+            $articulo->fotoDescriptiva = $filename;
+        }else{
+            $articulo->fotoDescriptiva = 'no-imagen.jpg';
         }
         // Asociar las máquinas con el artículo
         $maquinas = Maquina::all();
@@ -63,9 +71,14 @@ class ArticuloController extends Controller
             $maquina->articulos()->attach($articulo->id, ['fabricante' => $request->fabricante, 'tipo_maquina' => $request->tipo_maquina]);
         }
 
-
-
+        //asociar las medidas con el artículo
+        $medidas = Medida::all();
+        foreach ($medidas as $medida) {
+            $medida->articulos()->attach($articulo->id, ['medida' => $request->medida, 'unidad_medida' => $request->unidad_medida]);
+        }
         $articulo->save();
+
+        
 
         return redirect()->route('articulos.index')->with('success', 'Artículo agregado correctamente.');
     }
@@ -107,12 +120,12 @@ class ArticuloController extends Controller
 
         // Procesar la foto descriptiva del artículo, si se proporcionó
         if ($request->hasFile('foto-descriptiva')) {
-            $foto = $request->file('foto-descriptiva');
-            $filename = time() . '_' . $foto->getClientOriginalName();
-            $filepath = $foto->storeAs('public/articulos', $filename);
-            $articulo->foto = $filename;
+            $fotoDescriptiva = $request->file('foto-descriptiva');
+            $filename = time() . '_' . $fotoDescriptiva->getClientOriginalName();
+            $filepath = $fotoDescriptiva->storeAs('public/articulos', $filename);
+            $articulo->fotoDescriptiva = $filename;
         }else{
-            $articulo->foto = 'no-imagen.jpg';
+            $articulo->fotoDescriptiva = 'no-imagen.jpg';
         }
 
         if ($articulo->save()) {
