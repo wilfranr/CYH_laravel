@@ -32,7 +32,7 @@
                         <td>
                             <a href="{{ route('terceros.show', $tercero->id) }}" class="btn btn-sm btn-info">Ver</a>
                             <a href="{{ route('terceros.edit', $tercero->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                            <form action="" method="POST" style="display: inline">
+                            <form action="{{ route('terceros.destroy', $tercero->id) }}" method="POST" style="display: inline">
                                 @csrf
 
                                 @method('DELETE')
@@ -60,3 +60,4 @@
         });
     </script>
 @endsection
+

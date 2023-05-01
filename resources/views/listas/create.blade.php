@@ -24,8 +24,8 @@
                 <textarea class="form-control" name="definicion" id="definicion" required></textarea>
             </div>
             <div class="form-group">
-                <label for="foto">Foto:</label>
-                <input type="file" class="form-control-file" name="foto" id="foto">
+                <label for="fotoLista">Foto:</label>
+                <input type="file" class="form-control-file" name="fotoLista" id="fotoLista">
             </div>
             <button type="submit" class="btn btn-primary">Crear Lista</button>
         </form>

@@ -16,10 +16,12 @@
                                 <thead>
                                     <tr>
                                         <th>Fabricante</th>
-                                        <th>Sistema</th>
+                                        {{-- <th>Sistema</th> --}}
                                         <th>Definición</th>
                                         <th>Referencia</th>
                                         <th>Comentarios</th>
+                                        <th>Foto</th>
+                                        <th>Foto medida</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -27,10 +29,16 @@
                                     @foreach ($articulos as $articulo)
                                         <tr>
                                             <td>{{ $articulo->marca }}</td>
-                                            <td>{{ $articulo->sistema }}</td>
+                                            {{-- <td>{{ $articulo->sistema }}</td> --}}
                                             <td>{{ $articulo->definicion }}</td>
                                             <td>{{ $articulo->referencia }}</td>
                                             <td>{{ $articulo->comentarios }}</td>
+                                            <td>
+                                                <img src="{{ asset('storage/' . $articulo->foto) }}" alt=""
+                                                    width="200"></td>
+                                            <td>
+                                                <img src="{{ asset('storage/' . $articulo->foto_medida) }}" alt=""
+                                                    width="200"></td>
                                             <td>
                                                 <a href="{{ route('articulos.show', $articulo->id) }}"
                                                     class="btn btn-sm btn-primary">Ver</a>
@@ -40,7 +48,7 @@
                                                     style="display: inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este artículo?')">Eliminar</button>
                                                 </form>
                                             </td>
                                         </tr>

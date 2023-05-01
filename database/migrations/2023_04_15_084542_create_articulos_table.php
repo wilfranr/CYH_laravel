@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('referencia');
             $table->integer('cantidad');
             $table->text('comentarios')->nullable();
+            $table->text('descripcion_especifica')->nullable();
+            $table->string('peso')->nullable();
+            $table->string('fotoDescriptiva')->nullable();
+            $table->string('marca')->nullable();
+            
             $table->timestamps();
         });
     }

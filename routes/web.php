@@ -67,6 +67,7 @@ Route::post('/terceros',[TerceroController::class, 'store'])->name('terceros.sto
 Route::get('/terceros/{id}/edit', [TerceroController::class, 'edit'])->name('terceros.edit');
 Route::put('/terceros/{id}/update', [TerceroController::class, 'update'])->name('terceros.update');
 Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros.show');
+Route::delete('/terceros/{id}', [TerceroController::class, 'destroy'])->name('terceros.destroy');
 
 //ciudades
 Route::get('/ciudades/{codigo_pais}', [CiudadController::class, 'getCiudadesByPais']);

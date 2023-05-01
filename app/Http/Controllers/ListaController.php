@@ -35,10 +35,14 @@ class ListaController extends Controller
         $lista->nombre = $request->nombre;
         $lista->definicion = $request->definicion;
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $rutaFoto = $foto->store('public/fotos');
-            $lista->foto = $rutaFoto;
+        // Procesar la foto de la lista, si se proporcionó
+        if ($request->hasFile('fotoLista')) {
+            $foto = $request->file('fotoLista');
+            $filename = time() . '_' . $foto->getClientOriginalName();
+            $filepath = $foto->storeAs('public/listas', $filename);
+            $lista->foto = $filename;
+        }else{
+            $lista->foto = 'no-imagen.jpg';
         }
 
         $lista->save();
@@ -61,24 +65,27 @@ class ListaController extends Controller
 }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Lista $lista, $id)
     {
         $lista = Lista::findOrFail($id);
         $request->validate([
             'tipo' => 'required',
             'nombre' => 'required',
-            'definicion' => 'required',
-            'foto' => 'image|nullable'
+            'definicion' => 'required'
         ]);
 
         $lista->tipo = $request->tipo;
         $lista->nombre = $request->nombre;
         $lista->definicion = $request->definicion;
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $rutaFoto = $foto->store('public/fotos');
-            $lista->foto = $rutaFoto;
+        // Procesar la foto de la lista, si se proporcionó
+        if ($request->hasFile('fotoLista')) {
+            $foto = $request->file('fotoLista');
+            $filename = time() . '_' . $foto->getClientOriginalName();
+            $filepath = $foto->storeAs('public/listas', $filename);
+            $lista->foto = $filename;
+        }else{
+            $lista->foto = 'no-imagen.jpg';
         }
 
         $lista->save();
@@ -86,10 +93,14 @@ class ListaController extends Controller
         return redirect()->route('listas.index')->with('success', 'La lista ha sido actualizada exitosamente.');
     }
 
-    public function destroy(Lista $lista)
+    public function destroy($id)
     {
-        $lista->delete();
-
-        return redirect()->route('listas.index')->with('success', 'La lista ha sido eliminada exitosamente.');
+        $lista = Lista::findOrFail($id);
+        if ($lista) {
+            $lista->delete();
+            return redirect()->route('listas.index')->with('success', 'La lista ha sido eliminada exitosamente.');
+        }else{
+            return redirect()->route('listas.index')->with('error', 'La lista no pudo ser eliminada.');
+        }
     }
 }

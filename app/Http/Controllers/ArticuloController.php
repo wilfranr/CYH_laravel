@@ -45,7 +45,7 @@ class ArticuloController extends Controller
         //$articulo->maquina_id = $validatedData['maquina'];
         //$articulo->tipo_maquina_id = $validatedData['tipo_maquina'];
         $articulo->marca = $validatedData['marca'];
-        $articulo->sistema = $validatedData['sistema'];
+        // $articulo->sistema = $validatedData['sistema'];
         $articulo->definicion = $validatedData['definicion'];
         $articulo->referencia = $validatedData['referencia'];
         $articulo->descripcionEspecifica = $validatedData['descripcion_especifica'];
@@ -92,7 +92,7 @@ class ArticuloController extends Controller
         //dd($request->all());
         $request->validate([
             'marca' => 'required',
-            'sistema' => 'required',
+            'sistema' => 'nullable|string',
             'definicion' => 'required',
             'referencia' => 'required',
             'comentarios' => 'nullable|string',
@@ -104,6 +104,16 @@ class ArticuloController extends Controller
         $articulo->definicion = $request->definicion;
         $articulo->referencia = $request->referencia;
         $articulo->comentarios = $request->comentarios;
+
+        // Procesar la foto descriptiva del artículo, si se proporcionó
+        if ($request->hasFile('foto-descriptiva')) {
+            $foto = $request->file('foto-descriptiva');
+            $filename = time() . '_' . $foto->getClientOriginalName();
+            $filepath = $foto->storeAs('public/articulos', $filename);
+            $articulo->foto = $filename;
+        }else{
+            $articulo->foto = 'no-imagen.jpg';
+        }
 
         if ($articulo->save()) {
             // redireccionar a la vista de articulos

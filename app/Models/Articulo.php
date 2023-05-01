@@ -17,7 +17,7 @@ class Articulo extends Model
         'comentarios',
         'descripcion_especifica',
         'peso',
-        'foto_descriptiva'
+        'fotoDescriptiva'
     ];
     public function pedido()
     {

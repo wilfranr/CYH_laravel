@@ -39,7 +39,7 @@
                         <form method="POST" action="{{ route('maquinas.destroy', $maquina->id) }}" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar esta maquina?')">Eliminar</button>
                         </form>
                     </td>
                 </tr>

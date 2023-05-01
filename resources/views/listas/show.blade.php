@@ -21,7 +21,7 @@
                                 <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
 
                                 <div class="col-md-6">
-                                    <img src="{{ asset($lista->foto) }}" alt="{{ $lista->nombre }}" class="img-fluid">
+                                    <img src="{{ asset('storage/listas/'. $lista->foto) }}" alt="Foto de la lista" width="100px" class="img-fluid">
                                 </div>
                             </div>
                         @endif

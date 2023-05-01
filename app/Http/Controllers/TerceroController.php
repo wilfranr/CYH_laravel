@@ -187,9 +187,9 @@ class TerceroController extends Controller
         return response()->json($maquinas);
     }
 
-    public function edit(Tercero $tercero)
+    public function edit(Tercero $tercero, $id)
     {
-        return view('terceros.edit', compact('tercero'));
+        return view('terceros.edit', compact('tercero', 'id'));
     }
 
     public function update(Request $request, Tercero $tercero, $id)
@@ -201,11 +201,6 @@ class TerceroController extends Controller
             'telefono' => 'required|string|max:255',
         ]);
 
-
-        if (!$tercero) {
-            return back()->with('error', 'El tercero que intenta actualizar no existe');
-        }
-
         $tercero->nombre = $request->nombre;
         $tercero->direccion = $request->direccion;
         $tercero->telefono = $request->telefono;
@@ -215,8 +210,14 @@ class TerceroController extends Controller
     }
 
 
-    public function destroy(Tercero $tercero)
+    public function destroy($id)
     {
-        // Lógica para eliminar un tercero existente
+        $tercero = Tercero::find($id);
+        if ($tercero) {
+            $tercero->delete();
+            return redirect()->route('terceros.index')->with('success', 'Tercero eliminado correctamente');
+        } else {
+            return redirect()->route('terceros.index')->with('error', 'No se pudo eliminar el tercero');
+        }
     }
 }

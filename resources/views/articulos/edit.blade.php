@@ -24,7 +24,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <label for="sistema"
+                                {{-- <label for="sistema"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Sistema') }}</label>
 
                                 <div class="col-md-6">
@@ -37,7 +37,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="form-group row">
@@ -84,6 +84,16 @@
                                     <textarea id="comentarios" class="form-control  name="comentarios" >{{ $articulo->comentarios }}</textarea>
 
                             
+                                </div>
+                            </div>
+                            {{-- Foto descriptiva --}}
+                            <div class="form-group row">
+                                <label for="foto-descriptiva"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Foto descriptiva') }}</label>
+
+                                <div class="col-md-6">
+                                    <input type="file" name="foto-descriptiva" id="foto-descriptiva" class="form-control-file">
+
                                 </div>
                             </div>
                             <button class="btn btn-outline-primary" type="submit">Guardar</button>
