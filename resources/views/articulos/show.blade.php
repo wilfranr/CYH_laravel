@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ $articulo->sistema }}</div>
+                    <div class="card-header">{{ $articulo->definicion }}</div>
 
                     <div class="card-body">
                         <div class="row">
@@ -27,17 +27,42 @@
                             <div class="col-md-3 font-weight-bold">Comentarios:</div>
                             <div class="col-md-9">{{ $articulo->comentarios }}</div>
                         </div>
+
+                        
                         <div class="row">
                             <div class="col-md-3 font-weight-bold">Foto descriptiva:</div>
-                            <div class="col-md-9"><img src="{{ asset('storage/articulos/'. $articulo->fotoDescriptiva) }}" alt="Foto de la lista" width="100px">
+                            <div class="col-md-9"><img src="{{ asset('storage/articulos/' . $articulo->fotoDescriptiva) }}"
+                                    alt="Foto de la lista" width="100px">
                             </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-3 font-weight-bold">Tipo Medida:</div>
+                            @foreach ($articulo->medidas as $medida)
+                            @endforeach
+                            <p>{{ $medida->nombre }} </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 font-weight-bold">Foto medida:</div>
+                            <div class="col-md-9"><img src="{{ asset('storage/articulos/' . $medida->fotoMedida) }}"
+                                    alt="Foto de medida" width="100px">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 font-weight-bold">Valor:</div>
+                                <p>{{ $medida->valor }} {{ $medida->unidad }} </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 font-weight-bold">Id:</div>
+                                <p>{{ $medida->idMedida }} </p>
                         </div>
 
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
                                 <a href="{{ route('articulos.edit', $articulo->id) }}" class="btn btn-primary">Editar</a>
-                                <form action="{{ route('articulos.destroy', $articulo->id) }}" method="POST" class="d-inline-block">
+                                <form action="{{ route('articulos.destroy', $articulo->id) }}" method="POST"
+                                    class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Eliminar</button>

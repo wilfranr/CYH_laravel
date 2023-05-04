@@ -5,3 +5,7 @@ SELECT * FROM maquinas;
 SELECT * FROM listas;
 --traer articulos
 SELECT * FROM articulos;
+--traer medidas
+SELECT * FROM medidas;
+--traer contactos de tercero
+SELECT * FROM contactos

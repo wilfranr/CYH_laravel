@@ -13,7 +13,7 @@
                                 <div class="form-group row">
                                     <label for="marca"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Marca fabricante') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <select class="form-select" id="marca" name="marca">
                                             <option value="">Seleccione una marca fabricante</option>
@@ -49,11 +49,11 @@
                                         </select>
                                     </div>
                                 </div> --}}
-                    
+
                                 <div class="form-group row">
                                     <label for="definicion"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Definición') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <select class="form-select" id="definicion" name="definicion">
                                             <option value="">Seleccione una descripción común</option>
@@ -63,16 +63,16 @@
                                         </select>
                                     </div>
                                 </div>
-                    
+
                                 <div class="form-group row">
                                     <label for="referencia"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Referencia') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <input id="referencia" type="text"
                                             class="form-control @error('referencia') is-invalid @enderror" name="referencia"
                                             value="{{ old('referencia') }}" required>
-                    
+
                                         @error('referencia')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -80,16 +80,17 @@
                                         @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="form-group row">
                                     <label for="descripcion_especifica"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Descripción específica') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <input id="descripcion_especifica" type="text"
                                             class="form-control @error('descripcion_especifica') is-invalid @enderror"
-                                            name="descripcion_especifica" value="{{ old('descripcion_especifica') }}" required>
-                    
+                                            name="descripcion_especifica" value="{{ old('descripcion_especifica') }}"
+                                            required>
+
                                         @error('descripcion_especifica')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -97,14 +98,14 @@
                                         @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="form-group row">
                                     <label for="comentarios"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Comentarios') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <textarea id="comentarios" class="form-control @error('comentarios') is-invalid @enderror" name="comentarios">{{ old('comentarios') }}</textarea>
-                    
+
                                         @error('comentarios')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -115,12 +116,12 @@
                                 <div class="form-group row">
                                     <label for="peso"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Peso (lbs)') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <input id="peso" type="text"
                                             class="form-control @error('peso') is-invalid @enderror" name="peso"
                                             value="{{ old('peso') }}" required>
-                    
+
                                         @error('peso')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -132,7 +133,7 @@
                                 <div class="form-group row">
                                     <label for="foto-descriptiva"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Foto descriptiva') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <input type="file" name="foto" id="foto" class="form-control">
                                     </div>
@@ -142,13 +143,38 @@
                     </div>
                     {{-- Segunda columna --}}
                     <div class="col-md-6">
-                        <div class="card">
+                        <div id="medidas">
+                            <input type="hidden" name="contadorMedidas" value="2">
+
+                        </div>
+
+                        <button type="button" class="btn btn-success" id="agregar-medida">Agregar medida</button>
+
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <button type="submit" class="btn btn-primary mt-3">Crear</button>
+                    <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
+                </div>
+            </form>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                let contadorMedidas = 1;
+                $('#agregar-medida').on('click', function() {
+                    $('#medidas').append(`
+                    <div class="card">
                             <div class="card-header">{{ __('Medidas') }}</div>
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label for="marca"
+                                    <label for="fotoMedidas"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Foto de medidas') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <input type="file" name="fotoMedidas" id="fotoMedidas" class="form-control">
                                     </div>
@@ -156,7 +182,7 @@
                                 <div class="form-group row">
                                     <label for="tipoMedida"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Tipo de medida') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <select class="form-select" id="tipoMedida" name="tipoMedida">
                                             <option value="">Seleccione un tipo de medida</option>
@@ -169,34 +195,48 @@
                                 <div class="form-group row">
                                     <label for="valorMedida"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Valor medida') }}</label>
-                    
+
                                     <div class="col-md-6">
                                         <input id="valorMedida" type="text"
                                             class="form-control @error('valorMedida') is-invalid @enderror"
-                                            name="valorMedida" value="{{ old('descripcion_especifica') }}" required>
-                    
+                                            name="valorMedida" value="{{ old('valorMedida') }}" required>
+
                                         @error('valorMedida')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+
                                         <select class="form-select" id="unidadMedida" name="unidadMedida">
                                             <option value="">Unidad de medida</option>
                                             @foreach ($unidadMedidas as $id => $nombre)
                                                 <option value="{{ $nombre }}">{{ $nombre }}</option>
                                             @endforeach
                                         </select>
+
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <div class="form-group row">
+                                    <label for="idMedida"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Id Medida') }}</label>
 
-                <div class="form-group row">
-                    <button type="submit" class="btn btn-primary mt-3">Crear</button>
-                    <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
-                </div>
-            </form>
-        </div>
+                                    <div class="col-md-6">
+                                        <input id="idMedida" type="text"
+                                            class="form-control @error('idMedida') is-invalid @enderror" name="idMedida"
+                                            value="{{ old('id_medida') }}" required>
+
+                                        @error('idMedida')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+            `);
+
+                    contadorMedidas++;
+                });
+            });
+        </script>
     @endsection

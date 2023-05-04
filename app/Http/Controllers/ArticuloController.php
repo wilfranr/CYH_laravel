@@ -62,7 +62,7 @@ class ArticuloController extends Controller
             $filename = time() . '_' . $fotoDescriptiva->getClientOriginalName();
             $filepath = $fotoDescriptiva->storeAs('public/articulos', $filename);
             $articulo->fotoDescriptiva = $filename;
-        }else{
+        } else {
             $articulo->fotoDescriptiva = 'no-imagen.jpg';
         }
         // Asociar las máquinas con el artículo
@@ -71,14 +71,41 @@ class ArticuloController extends Controller
             $maquina->articulos()->attach($articulo->id, ['fabricante' => $request->fabricante, 'tipo_maquina' => $request->tipo_maquina]);
         }
 
-        //asociar las medidas con el artículo
-        $medidas = Medida::all();
-        foreach ($medidas as $medida) {
-            $medida->articulos()->attach($articulo->id, ['medida' => $request->medida, 'unidad_medida' => $request->unidad_medida]);
-        }
-        $articulo->save();
 
+        $articulo->save();
+        // dd($contadorMedidas);
+        // Crear las medidas del articulo
+        //si no se ingresan meiddas, continuar
+
+        // Validar los datos del formulario de medidas
+        $dataMedida = $request->validate([
+            'contadorMedidas' => ['required', 'integer', 'min:1'],
+            'fotoMedida' => ['nullable', 'string', 'max:255'],
+            'tipoMedida' => ['nullable', 'string', 'max:255'],
+            'valorMedida' => ['nullable', 'string', 'max:255'],
+            'unidadMedida' => ['nullable', 'string', 'max:255'],
+            'idMedida' => ['nullable', 'string', 'max:255'],
+
+        ]);
         
+
+        // Crear las medidas
+        $medidas = [];
+        for ($i = 1; $i <= $dataMedida['contadorMedidas']; $i++) {
+            $medida = new Medida();
+            $medida->foto = $dataMedida['fotoMedida'] ?? null;
+            $medida->nombre = $dataMedida['tipoMedida'] ?? null;
+            $medida->valor = $dataMedida['valorMedida'] ?? null;
+            $medida->unidad = $dataMedida['unidadMedida'] ?? null;
+            $medida->idMedida = $dataMedida['idMedida'] ?? null;
+            $medida->save();
+            $medidas[] = $medida;
+        }
+        //dd($dataMedida);
+        // Asociar las medidas al artículo
+        $articulo->medidas()->saveMany($medidas);
+
+
 
         return redirect()->route('articulos.index')->with('success', 'Artículo agregado correctamente.');
     }
@@ -86,10 +113,11 @@ class ArticuloController extends Controller
     public function show(Articulo $articulo, $id)
     {
         $articulo = Articulo::find($id);
+
         return view('articulos.show', compact('articulo'));
     }
 
-    public function edit(Articulo $articulo, $id)
+    public function edit(Articulo $articulo,  $id)
     {
         $articulo = Articulo::find($id);
         $marca = Lista::where('tipo', 'marca')->get();
@@ -124,7 +152,7 @@ class ArticuloController extends Controller
             $filename = time() . '_' . $fotoDescriptiva->getClientOriginalName();
             $filepath = $fotoDescriptiva->storeAs('public/articulos', $filename);
             $articulo->fotoDescriptiva = $filename;
-        }else{
+        } else {
             $articulo->fotoDescriptiva = 'no-imagen.jpg';
         }
 

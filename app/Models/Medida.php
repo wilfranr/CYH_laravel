@@ -13,6 +13,9 @@ class Medida extends Model
         'nombre',
         'unidad',
         'valor',
+        'tipo',
+        'idMedida',
+        'foto'
     ];
 
     public function articulos()
