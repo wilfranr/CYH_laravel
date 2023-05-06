@@ -28,7 +28,11 @@
                     <td>{{ $maquina->modelo }}</td>
                     <td>{{ $maquina->serie }}</td>
                     <td>{{ $maquina->arreglo }}</td>
-                    <td><img src="{{ asset('storage/maquinas/'.$maquina->foto) }}" alt="Foto de la máquina" width="100px">
+                    <td>
+                        <a href="{{ asset('storage/maquinas/'.$maquina->foto) }}" target="_blank">
+                            <img src="{{ asset('storage/maquinas/'.$maquina->foto) }}" alt="Foto de la máquina" width="100px">
+                        </a>
+                        
                     </td>
 
                     <td>{{ $maquina->foto_id }}</td>

@@ -15,29 +15,31 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Fabricante</th>
                                         {{-- <th>Sistema</th> --}}
                                         <th>Definición</th>
                                         <th>Referencia</th>
                                         <th>Comentarios</th>
                                         <th>Foto</th>
-                                        <th>Foto medida</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($articulos as $articulo)
                                         <tr>
+                                            <td>{{ $articulo->id }}</td>
                                             <td>{{ $articulo->marca }}</td>
                                             {{-- <td>{{ $articulo->sistema }}</td> --}}
                                             <td>{{ $articulo->definicion }}</td>
                                             <td>{{ $articulo->referencia }}</td>
                                             <td>{{ $articulo->comentarios }}</td>
                                             <td>
-                                                <img src="{{ asset('storage/articulos/'. $articulo->fotoDescriptiva) }}" alt="Foto de la lista" width="100px"></td>
-                                            <td>
-                                                <img src="{{ asset('storage/' . $articulo->foto_medida) }}" alt=""
-                                                    width="200"></td>
+                                            <a href="{{ asset('storage/articulos/'. $articulo->fotoDescriptiva) }}" target="_blank">
+                                                <img src="{{ asset('storage/articulos/'. $articulo->fotoDescriptiva) }}" alt="Foto de la lista" width="100px">
+                                            </a>
+                                            </td>
+                                            
                                             <td>
                                                 <a href="{{ route('articulos.show', $articulo->id) }}"
                                                     class="btn btn-sm btn-primary">Ver</a>

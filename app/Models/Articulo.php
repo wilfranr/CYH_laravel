@@ -17,7 +17,8 @@ class Articulo extends Model
         'comentarios',
         'descripcion_especifica',
         'peso',
-        'fotoDescriptiva'
+        'fotoDescriptiva',
+        'fotoMedida',
     ];
 
     public function medidas()

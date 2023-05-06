@@ -120,7 +120,7 @@
                                     <div class="col-md-6">
                                         <input id="peso" type="text"
                                             class="form-control @error('peso') is-invalid @enderror" name="peso"
-                                            value="{{ old('peso') }}" required>
+                                            value="{{ old('peso') }}">
 
                                         @error('peso')
                                             <span class="invalid-feedback" role="alert">
@@ -135,11 +135,70 @@
                                         class="col-md-4 col-form-label text-md-right">{{ __('Foto descriptiva') }}</label>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="foto" id="foto" class="form-control">
+                                        <input type="file" name="foto-descriptiva" id="foto-descriptiva"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                {{-- Foto medida --}}
+                                <div class="form-group row">
+                                    <label for="fotoMedida"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Foto de medidas') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input type="file" name="fotoMedida" id="fotoMedida" class="form-control">
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card mb-5">
+                            <div class="card-header">{{ __('Modelos juegos y cruces') }}</div>
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label for="cambio"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Cambio (Referencia)') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="cambio" name="cambio" type="text"
+                                        class="form-control @error('Cambio (Referencia)') is-invalid @enderror" name="Cambio (Referencia)"
+                                        value="{{ old('Cambio (Referencia)') }}">
+                                        
+                                        @error('Cambio (Referencia)')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        
+                                    </div>
+                                    
+
+                                </div>
+                                <div class="form-group row">
+                                    <label for="juego"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Hace parte de:') }}</label>
+
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="juego[]" multiple="multiple">
+                                            @foreach ($articulos as $articulo)
+                                                <option value="{{ $articulo['id'] }}">{{ $articulo['referencia'] }}</option>
+                                            @endforeach
+                                        </select>
+                                        
+                                        @error('juego')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        
+                                    </div>
+                                    
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
                     {{-- Segunda columna --}}
                     <div class="col-md-6">
@@ -150,35 +209,28 @@
 
                         <button type="button" class="btn btn-success" id="agregar-medida">Agregar medida</button>
 
-                        
-                            </div>
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-primary mt-3">Crear</button>
+                            <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <button type="submit" class="btn btn-primary mt-3">Crear</button>
-                    <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
-                </div>
-            </form>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                let contadorMedidas = 1;
-                $('#agregar-medida').on('click', function() {
-                    $('#medidas').append(`
+    </div>
+
+    
+    </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let contadorMedidas = 1;
+            $('#agregar-medida').on('click', function() {
+                $('#medidas').append(`
                     <div class="card">
                             <div class="card-header">{{ __('Medidas') }}</div>
                             <div class="card-body">
-                                <div class="form-group row">
-                                    <label for="fotoMedidas"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Foto de medidas') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input type="file" name="fotoMedidas" id="fotoMedidas" class="form-control">
-                                    </div>
-                                </div>
+                                
                                 <div class="form-group row">
                                     <label for="tipoMedida"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Tipo de medida') }}</label>
@@ -199,7 +251,7 @@
                                     <div class="col-md-6">
                                         <input id="valorMedida" type="text"
                                             class="form-control @error('valorMedida') is-invalid @enderror"
-                                            name="valorMedida" value="{{ old('valorMedida') }}" required>
+                                            name="valorMedida" value="{{ old('valorMedida') }}" >
 
                                         @error('valorMedida')
                                             <span class="invalid-feedback" role="alert">
@@ -223,7 +275,7 @@
                                     <div class="col-md-6">
                                         <input id="idMedida" type="text"
                                             class="form-control @error('idMedida') is-invalid @enderror" name="idMedida"
-                                            value="{{ old('id_medida') }}" required>
+                                            value="{{ old('id_medida') }}" >
 
                                         @error('idMedida')
                                             <span class="invalid-feedback" role="alert">
@@ -235,8 +287,8 @@
 
             `);
 
-                    contadorMedidas++;
-                });
+                contadorMedidas++;
             });
-        </script>
-    @endsection
+        });
+    </script>
+@endsection

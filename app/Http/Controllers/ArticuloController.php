@@ -21,12 +21,13 @@ class ArticuloController extends Controller
 
     public function create()
     {
+        $articulos = Articulo::all();
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
         $definiciones = Lista::where('tipo', 'Descripción común')->pluck('nombre', 'id');
         $medidas = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
         $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
         $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
-        return view('articulos.create', compact('sistemas', 'definiciones', 'maquinas', 'medidas', 'unidadMedidas'));
+        return view('articulos.create', compact('sistemas', 'definiciones', 'maquinas', 'medidas', 'unidadMedidas', 'articulos'));
     }
 
     public function store(Request $request, Articulo $articulo)
@@ -65,6 +66,18 @@ class ArticuloController extends Controller
         } else {
             $articulo->fotoDescriptiva = 'no-imagen.jpg';
         }
+
+        // Procesar la foto de la medida, si se proporcionó
+        if ($request->hasFile('fotoMedida')) {
+            $fotoMedida = $request->file('fotoMedida');
+            $filename = time() . '_' . $fotoMedida->getClientOriginalName();
+            $filepath = $fotoMedida->storeAs('public/articulos', $filename);
+            $articulo->fotoMedida = $filename;
+        } else {
+            $articulo->fotoMedida = 'no-imagen.jpg';
+        }
+
+
         // Asociar las máquinas con el artículo
         $maquinas = Maquina::all();
         foreach ($maquinas as $maquina) {
@@ -80,26 +93,26 @@ class ArticuloController extends Controller
         // Validar los datos del formulario de medidas
         $dataMedida = $request->validate([
             'contadorMedidas' => ['required', 'integer', 'min:1'],
-            'fotoMedida' => ['nullable', 'string', 'max:255'],
             'tipoMedida' => ['nullable', 'string', 'max:255'],
             'valorMedida' => ['nullable', 'string', 'max:255'],
             'unidadMedida' => ['nullable', 'string', 'max:255'],
             'idMedida' => ['nullable', 'string', 'max:255'],
 
         ]);
-        
+
 
         // Crear las medidas
         $medidas = [];
+        $medida = new Medida();
         for ($i = 1; $i <= $dataMedida['contadorMedidas']; $i++) {
-            $medida = new Medida();
-            $medida->foto = $dataMedida['fotoMedida'] ?? null;
             $medida->nombre = $dataMedida['tipoMedida'] ?? null;
             $medida->valor = $dataMedida['valorMedida'] ?? null;
             $medida->unidad = $dataMedida['unidadMedida'] ?? null;
             $medida->idMedida = $dataMedida['idMedida'] ?? null;
-            $medida->save();
+            // Procesar la foto de la medida, si se proporcionó
+
             $medidas[] = $medida;
+            $medida->save();
         }
         //dd($dataMedida);
         // Asociar las medidas al artículo
@@ -107,7 +120,7 @@ class ArticuloController extends Controller
 
 
 
-        return redirect()->route('articulos.index')->with('success', 'Artículo agregado correctamente.');
+        return redirect()->route('articulos.show', $articulo->id)->with('success', 'Artículo agregado correctamente.');
     }
 
     public function show(Articulo $articulo, $id)
@@ -117,34 +130,55 @@ class ArticuloController extends Controller
         return view('articulos.show', compact('articulo'));
     }
 
-    public function edit(Articulo $articulo,  $id)
-    {
-        $articulo = Articulo::find($id);
-        $marca = Lista::where('tipo', 'marca')->get();
-        return view('articulos.edit', compact('articulo', 'marca'));
-    }
+    public function edit($id)
+{
+    // Obtener el artículo que se va a editar
+    $articulo = Articulo::findOrFail($id);
 
-    public function update(Request $request, Articulo $articulo, $id)
-    {
+    // Obtener las medidas del artículo
+    $medidas = $articulo->medidas;
 
-        //buscar el articulo a actualizar
-        $articulo = Articulo::find($id);
-        //validar los datos del formulario
-        //dd($request->all());
-        $request->validate([
-            'marca' => 'required',
-            'sistema' => 'nullable|string',
-            'definicion' => 'required',
-            'referencia' => 'required',
+    //obtener las definiciones de la lista 
+    $definiciones = Lista::where('tipo', 'Descripcion comun')->pluck('nombre', 'id');
+    $tipoMedida = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
+    $unidades = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
+
+    //obtener la marca
+    $marca = Lista::where('tipo', 'marca')->get();
+
+    // Mostrar la vista de edición con los datos del artículo y sus medidas
+    return view('articulos.edit', compact('articulo', 'medidas', 'definiciones', 'marca', 'unidades', 'tipoMedida'));
+}
+
+
+    // public function edit(Articulo $articulo,  $id)
+    // {
+    //     $articulo = Articulo::find($id);
+    //     $definiciones = Lista::where('tipo', 'Descripción común')->pluck('nombre', 'id');
+    //     $marca = Lista::where('tipo', 'marca')->get();
+    //     $medidas = Medida::where('nombre', 'unidad', 'valor', 'idMedida')->pluck('nombre', 'id');
+    //     return view('articulos.edit', compact('articulo', 'marca', 'definiciones', 'medidas'));
+    // }
+
+    public function update(Request $request, Articulo $articulo)
+    {
+        $validatedData = $request->validate([
+            'marca' => 'nullable|string',
+            'definicion' => 'nullable|string',
+            'referencia' => 'nullable|string',
+            'descripcion_especifica' => 'nullable|string',
             'comentarios' => 'nullable|string',
+            'peso' => 'nullable|string',
+            'foto' => 'nullable|image|max:2048',
         ]);
 
-        //Actualizar los datos del articulo
-        $articulo->marca = $request->marca;
-        $articulo->sistema = $request->sistema;
-        $articulo->definicion = $request->definicion;
-        $articulo->referencia = $request->referencia;
-        $articulo->comentarios = $request->comentarios;
+        // Actualizar los campos del artículo
+        $articulo->marca = $validatedData['marca'];
+        $articulo->definicion = $validatedData['definicion'];
+        $articulo->referencia = $validatedData['referencia'];
+        $articulo->descripcionEspecifica = $validatedData['descripcion_especifica'];
+        $articulo->comentarios = $validatedData['comentarios'];
+        $articulo->peso = $validatedData['peso'];
 
         // Procesar la foto descriptiva del artículo, si se proporcionó
         if ($request->hasFile('foto-descriptiva')) {
@@ -152,18 +186,52 @@ class ArticuloController extends Controller
             $filename = time() . '_' . $fotoDescriptiva->getClientOriginalName();
             $filepath = $fotoDescriptiva->storeAs('public/articulos', $filename);
             $articulo->fotoDescriptiva = $filename;
-        } else {
-            $articulo->fotoDescriptiva = 'no-imagen.jpg';
         }
 
-        if ($articulo->save()) {
-            // redireccionar a la vista de articulos
-            return redirect()->route('articulos.show', $articulo->id)->with('success', 'Articulo actualizado correctamente');
-        } else {
-            // en caso de error, redireccionar con un mensaje de error
-            return redirect()->back()->with('error', 'Error al actualizar el artículo.');
+        // Guardar los cambios
+        $articulo->save();
+
+        // Actualizar las medidas del artículo
+        $dataMedida = $request->validate([
+            'contadorMedidas' => ['required', 'integer', 'min:1'],
+            'fotoMedida' => ['nullable', 'string', 'max:255'],
+            'tipoMedida' => ['nullable', 'string', 'max:255'],
+            'valorMedida' => ['nullable', 'string', 'max:255'],
+            'unidadMedida' => ['nullable', 'string', 'max:255'],
+            'idMedida' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        // Eliminar todas las medidas antiguas del artículo
+        $articulo->medidas()->delete();
+
+        // Crear las nuevas medidas del artículo
+        $medidas = [];
+        for ($i = 1; $i <= $dataMedida['contadorMedidas']; $i++) {
+            $medida = new Medida();
+            $medida->nombre = $dataMedida['tipoMedida'][$i - 1] ?? null;
+            $medida->valor = $dataMedida['valorMedida'][$i - 1] ?? null;
+            $medida->unidad = $dataMedida['unidadMedida'][$i - 1] ?? null;
+            $medida->idMedida = $dataMedida['idMedida'][$i - 1] ?? null;
+
+            // Procesar la foto de la medida, si se proporcionó
+            if ($request->hasFile('fotoMedida' . $i)) {
+                $fotoMedida = $request->file('fotoMedida' . $i);
+                $filename = time() . '_' . $fotoMedida->getClientOriginalName();
+                $filepath = $fotoMedida->storeAs('public/medidas', $filename);
+                $medida->foto = $filename;
+            } else {
+                $medida->foto = 'no-imagen.jpg';
+            }
+            // Guardar la medida
+            $medida->save();
+            $medidas[] = $medida;
         }
+        // Asociar las medidas al artículo
+        $articulo->medidas()->saveMany($medidas);
+        // Redireccionar al usuario
+        return redirect()->route('articulos.index')->with('success', 'Artículo actualizado correctamente.');
     }
+
 
     public function destroy($id)
     {

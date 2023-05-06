@@ -69,6 +69,7 @@
 
 
                     </div>
+                    
 
                 </div>
                 <div class="col-md-6">
@@ -125,7 +126,7 @@
                         <h2>Contactos de tercero</h2>
                         <div id="contactos">
                             <input type="hidden" name="contadorContactos" value="2">
-                            
+
                         </div>
 
                         <button type="button" class="btn btn-success" id="agregar-contacto">Agregar contacto</button>
@@ -135,7 +136,7 @@
                 </div>
 
 
-                
+
         </form>
         <button type="submit" class="btn btn-primary mt-3">Crear tercero</button>
     </div>
@@ -143,7 +144,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script>
+    <script>
         // Obtener el elemento select
         const tipoDocumentoSelect = document.getElementById('tipo_documento');
         // Obtener el campo dv
@@ -200,4 +201,3 @@
     </script>
 
 @endsection
-

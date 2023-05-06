@@ -52,14 +52,14 @@
                         <div class="form-group row">
                             <label for="serie" class="col-md-4 col-form-label text-md-right">{{__('Serie')}}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="serie" id="serie" required>
+                                <input type="text" class="form-control" name="serie" id="serie" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="arreglo" class="col-md-4 col-form-label text-md-right">{{__('Arreglo')}}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="arreglo" id="arreglo" required>
+                                <input type="text" class="form-control" name="arreglo" id="arreglo" >
                             </div>
                         </div>
 
@@ -83,6 +83,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Crear') }}
                                 </button>
+                                <a href="{{  route('maquinas.index')}}" class="btn btn-secondary">Volver</a>
                             </div>
                         </div>
                     </form>
