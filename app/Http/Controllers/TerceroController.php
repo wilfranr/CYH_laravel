@@ -114,7 +114,7 @@ class TerceroController extends Controller
         }
         //guardar archivo rut
         if ($request->hasFile('rut')) {
-            $rut = $request->file('rut')->store('rut');
+            $rut = $request->file('rut')->storePublicly('rut', 'public');
             $tercero->rut = $rut;
         }
         $tercero->sitio_web = $data['sitioWeb'];
@@ -184,27 +184,84 @@ class TerceroController extends Controller
         return response()->json($maquinas);
     }
 
-    public function edit(Tercero $tercero, $id)
+    public function edit($id)
     {
-        return view('terceros.edit', compact('tercero', 'id'));
+        $tercero = Tercero::findOrFail($id);
+        $paises = DB::table('pais')->get();
+        $ciudades = DB::table('ciudad')->get();
+        $maquinas = Maquina::allWithConcatenatedData();
+        return view('terceros.edit', compact('tercero', 'paises', 'ciudades', 'maquinas', 'id'));
     }
 
     public function update(Request $request, Tercero $tercero, $id)
     {
         $tercero = Tercero::find($id);
         $request->validate([
+            'tipo' => 'required|in:cliente,proveedor',
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
             'telefono' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            //'tipo_documento' => 'required|in:cedula,nit,ce',
+            //'dv' => 'nullable|string|max:1',
+            'email_facturacion' => 'nullable|email|max:255',
+            'sitio_web' => 'nullable|string|max:255',
+            'certificacion_bancaria' => 'nullable|file|mimes:pdf|max:1024',
+            'rut' => 'nullable|file|mimes:pdf|max:1024',
+            'puntos' => 'nullable|integer',
+            'pais_id' => 'nullable|string|max:3',
+            'ciudad' => 'nullable|integer',
+            'departamento_id' => 'nullable|integer',
+            'codigo_postal' => 'nullable|string|max:20',
+            'observaciones' => 'nullable|string|max:255',
+            //          'forma_pago' => 'nullable|string|max:255',
+            'maquinas' => 'nullable|array',
+            'maquinas.*' => 'nullable|integer',
+            'contactos' => 'nullable|array',
+            'contactos.*' => 'nullable|integer',
+
         ]);
 
+        $tercero->tipo = $request->tipo;
         $tercero->nombre = $request->nombre;
         $tercero->direccion = $request->direccion;
         $tercero->telefono = $request->telefono;
+        $tercero->email = $request->email;
+        //$tercero->tipo_documento = $request->tipo_documento;
+        //$tercero->dv = $request->dv;
+        $tercero->email_factura_electronica = $request->email_facturacion;
+        $tercero->sitio_web = $request->sitio_web;
+        $tercero->certificacion_bancaria = $request->certificacion_bancaria;
+        $tercero->rut = $request->rut;
+        $tercero->puntos = $request->puntos;
+        $tercero->PaisCodigo = $request->pais_id;
+        $tercero->CiudadID = $request->ciudad;
+        $tercero->codigo_postal = $request->codigo_postal;
+        $tercero->forma_pago = $request->forma_pago;
         $tercero->save();
 
         return redirect()->route('terceros.show', $tercero->id)->with('success', 'Tercero actualizado exitosamente');
     }
+
+    public function preview($id)
+    {
+        $tercero = Tercero::findOrFail($id);
+        return view('terceros.preview', compact('tercero'));
+    }
+
+    public function updateRut(Request $request, $id)
+    {
+        $tercero = Tercero::findOrFail($id);
+        if ($request->hasFile('rut')) {
+            $rut = $request->file('rut');
+            $rutName = time() . '_' . $rut->getClientOriginalName();
+            $rut->move(public_path('rut'), $rutName);
+            $tercero->rut = $rutName;
+            $tercero->save();
+        }
+        return redirect()->route('terceros.preview', $id);
+    }
+
 
 
     public function destroy($id)

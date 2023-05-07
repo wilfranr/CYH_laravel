@@ -8,4 +8,6 @@ SELECT * FROM articulos;
 --traer medidas
 SELECT * FROM medidas;
 --traer contactos de tercero
-SELECT * FROM contactos
+SELECT * FROM contactos;
+--traer terceros
+SELECT * FROM terceros;

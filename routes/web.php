@@ -54,10 +54,8 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 //ruta de logo
 Route::get('/resize-logo', 'LogoController@resizeLogo');
 
-//ruta de ver pedidos
+//rutas pedidos
 Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
-
-//ruta de crear pedido
 Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
 
 //ruta terceros
@@ -68,6 +66,11 @@ Route::get('/terceros/{id}/edit', [TerceroController::class, 'edit'])->name('ter
 Route::put('/terceros/{id}/update', [TerceroController::class, 'update'])->name('terceros.update');
 Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros.show');
 Route::delete('/terceros/{id}', [TerceroController::class, 'destroy'])->name('terceros.destroy');
+
+//rutas para previsualizar rut
+Route::get('/terceros/{id}/preview', [TerceroController::class, 'preview'])->name('terceros.preview');
+Route::post('/terceros/{id}/updateRut', [TerceroController::class, 'updateRut'])->name('terceros.updateRut');
+
 
 //ciudades
 Route::get('/ciudades/{codigo_pais}', [CiudadController::class, 'getCiudadesByPais']);

@@ -12,14 +12,10 @@ use Debugbar;
 class CiudadController extends Controller
 
 {
-    public function getCiudadesByPais($codigo_pais)
-{
-    try {
-        $ciudades = Ciudad::where('PaisCodigo', $codigo_pais)->get();
+    public function getCiudadesByPais($paisCodigo) {
+        $ciudades = Ciudad::where('PaisCodigo', $paisCodigo)->get();
         return response()->json(['ciudades' => $ciudades]);
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
     }
-}
+    
 
 }
