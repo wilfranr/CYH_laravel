@@ -2,8 +2,15 @@
 
 @section('content')
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+
         <h1>Listas</h1>
-        <label  for="tipo">Filtrar</label>
+        <label for="tipo">Filtrar</label>
         <select class="form-control" id="tipo" name="tipo" required>
             <option value="">Todos</option>
             @php
@@ -44,8 +51,9 @@
                         <td>{{ $lista->nombre }}</td>
                         <td>{{ $lista->definicion }}</td>
                         <td>
-                            <a href="{{ asset('storage/listas/'. $lista->foto) }}" target="_blank">
-                                <img src="{{ asset('storage/listas/'. $lista->foto) }}" alt="Foto de la lista" width="100px">
+                            <a href="{{ asset('storage/listas/' . $lista->foto) }}" target="_blank">
+                                <img src="{{ asset('storage/listas/' . $lista->foto) }}" alt="Foto de la lista"
+                                    width="100px">
                             </a>
                         </td>
                         <td>
@@ -55,7 +63,8 @@
                                 style="display: inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar esta lista?')">Eliminar</button>
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('¿Está seguro de que desea eliminar esta lista?')">Eliminar</button>
                             </form>
                         </td>
                     </tr>

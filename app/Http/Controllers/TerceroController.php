@@ -99,7 +99,9 @@ class TerceroController extends Controller
         $tercero->telefono = $data['telefono'];
         $tercero->direccion = $data['direccion'];
         $tercero->numero_documento = $data['numero_documento'];
-        $tercero->PaisCodigo = $data['pais_id'];
+        if (isset($data['pais_id'])) {
+            $tercero->PaisCodigo = $data['pais_id'];
+        }
         if (isset($data['ciudad'])) {
             $tercero->CiudadID = $data['ciudad'];
         }
@@ -196,31 +198,7 @@ class TerceroController extends Controller
     public function update(Request $request, Tercero $tercero, $id)
     {
         $tercero = Tercero::find($id);
-        $request->validate([
-            'tipo' => 'required|in:cliente,proveedor',
-            'nombre' => 'required|string|max:255',
-            'direccion' => 'required|string|max:255',
-            'telefono' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            //'tipo_documento' => 'required|in:cedula,nit,ce',
-            //'dv' => 'nullable|string|max:1',
-            'email_facturacion' => 'nullable|email|max:255',
-            'sitio_web' => 'nullable|string|max:255',
-            'certificacion_bancaria' => 'nullable|file|mimes:pdf|max:1024',
-            'rut' => 'nullable|file|mimes:pdf|max:1024',
-            'puntos' => 'nullable|integer',
-            'pais_id' => 'nullable|string|max:3',
-            'ciudad' => 'nullable|integer',
-            'departamento_id' => 'nullable|integer',
-            'codigo_postal' => 'nullable|string|max:20',
-            'observaciones' => 'nullable|string|max:255',
-            //          'forma_pago' => 'nullable|string|max:255',
-            'maquinas' => 'nullable|array',
-            'maquinas.*' => 'nullable|integer',
-            'contactos' => 'nullable|array',
-            'contactos.*' => 'nullable|integer',
-
-        ]);
+        
 
         $tercero->tipo = $request->tipo;
         $tercero->nombre = $request->nombre;

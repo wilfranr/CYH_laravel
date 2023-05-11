@@ -122,7 +122,7 @@ class MaquinaController extends Controller
         $maquina->save();
 
         //redireccionar a la vista de maquinas
-        return redirect()->route('maquinas.show', $maquina->id)->with('success', 'Maquina actualizada correctamente');
+        return redirect()->route('maquinas.index', $maquina->id)->with('success', 'Maquina actualizada correctamente');
     }
 
     /**

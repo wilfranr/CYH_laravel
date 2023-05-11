@@ -3,6 +3,7 @@
 @section('title', 'Crear tercero')
 
 @section('content')
+
     <div class="container">
         <h1 class="mb-5">Crear tercero</h1>
         <form method="POST" action="{{ route('terceros.store') }}" enctype="multipart/form-data">
@@ -10,7 +11,7 @@
             <div class="row">
                 <div class="form-group">
                     <label for="tipo">Tipo Tercero</label>
-                    <select name="tipo" id="tipo" class="form-control">
+                    <select name="tipo" id="tipo" class="form-select">
                         <option value="">-- Seleccione un tipo --</option>
                         <option value="cliente" {{ old('tipo') == 'cliente' ? 'selected' : '' }}>Cliente</option>
                         <option value="proveedor" {{ old('tipo') == 'proveedor' ? 'selected' : '' }}>Proveedor</option>
@@ -59,7 +60,7 @@
                     <div class="form-group border border-warning mt-4 p-3">
 
                         <label for="maquina">Máquina</label>
-                        <select class="form-control" name="maquinas[]" multiple="multiple">
+                        <select class="form-select" name="maquinas[]" multiple="multiple">
                             @foreach ($maquinas as $maquina)
                                 <option value="{{ $maquina['id'] }}">{{ $maquina['text'] }}</option>
                             @endforeach
@@ -69,13 +70,13 @@
 
 
                     </div>
-                    
+
 
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="tipo_documento">Tipo</label>
-                        <select name="tipo_documento" id="tipo_documento" class="form-control" required>
+                        <select name="tipo_documento" id="tipo_documento" class="form-select" required>
                             <option value="">-- Seleccione un tipo de documento --</option>
                             <option value="cedula" {{ old('tipo_documento') == 'cedula' ? 'selected' : '' }}>Cédula de
                                 ciudadanía</option>
@@ -103,7 +104,7 @@
                     <div class="form-group">
                         <label for="ciudad">Ciudad</label>
 
-                        <select name="ciudad" id="ciudad" class="form-control" required>
+                        <select name="ciudad" id="ciudad" class="form-select" required>
                             <option value="">Seleccione una ciudad</option>
 
 
@@ -137,13 +138,25 @@
 
 
 
+
         </form>
         <button type="submit" class="btn btn-primary mt-3">Crear tercero</button>
     </div>
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
+
+
+    <!-- Incluye la librería de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    
+
+    <script>
+        $(document).ready(function() {
+            $('.form-select').select2();
+        });
+    </script>
     <script>
         // Obtener el elemento select
         const tipoDocumentoSelect = document.getElementById('tipo_documento');
@@ -174,6 +187,7 @@
                 });
         });
         $(document).ready(function() {
+
             let contadorContactos = 1;
 
             $('#agregar-contacto').on('click', function() {
@@ -197,6 +211,7 @@
 
                 contadorContactos++;
             });
+
         });
     </script>
 

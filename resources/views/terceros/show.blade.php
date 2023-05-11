@@ -9,8 +9,8 @@
         <p>Dirección: {{ $tercero->direccion }}</p>
         <p>Teléfono: {{ $tercero->telefono }}</p>
         <p>Email: {{ $tercero->email }}</p>
-        <p>País: {{ $tercero->pais->PaisNombre }}</p>
-        <p>Ciudad: {{ $tercero->ciudad->CiudadNombre }}</p>
+        <p>Pais: @if ($tercero->pais) {{ $tercero->pais->PaisNombre }} @endif</p>
+        <p>Ciudad: @if ($tercero->ciudad) {{ $tercero->ciudad->CiudadNombre }} @endif</p>
         <p>Email Facturación: {{ $tercero->email_factura_electronica }}</p>
 
         <p>Sitio Web: {{ $tercero->sitio_web }}</p>
@@ -22,8 +22,10 @@
 
         <h3>Maquinas:</h3>
         @foreach ($tercero->maquinas as $maquina)
-            <p>{{ $maquina->tipo }} {{ $maquina->marca }} {{ $maquina->modelo }} {{ $maquina->serie }}</p>
-            <a href="https://hce-part.com/hyundai/hose/11n700030/" target="blank">Ficha tecnica</a>
+            <ul>
+                <li>{{ $maquina->tipo }} {{ $maquina->marca }} {{ $maquina->modelo }} {{ $maquina->serie }}</li>
+                <a href="https://hce-part.com/hyundai/hose/11n700030/" target="blank">Ficha tecnica</a>
+            </ul>
         @endforeach
 
 

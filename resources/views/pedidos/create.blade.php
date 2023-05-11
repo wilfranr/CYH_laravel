@@ -55,6 +55,10 @@
                         <div class="form-group">
                             <label for="maquina_id">Máquina:</label>
                             <select name="maquina_id" id="maquina_id" class="form-control">
+                                @foreach($maquinas as $id => $maquina)
+                                    <option value="{{ $id }}">{{ $maquina->tipo }}</option>
+                                @endforeach
+
                             </select>
                         </div>
 

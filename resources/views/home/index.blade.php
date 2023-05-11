@@ -2,14 +2,13 @@
 @section('content')
     <h1>
         @auth
-            Bienvenido {{ auth()->user()->name }}
+            Bienvenido {{ Auth::user()->name }}!
             <a href="logout">Cerrar sesión</a>
-        @endauth
-        @guest
-            Bienvenido invitado
+        @else
+            Bienvenido Invitado!
             <a href="login">Iniciar sesión</a>
-        @endguest
+        @endauth
+
+
     </h1>
-    
 @endsection
-    
