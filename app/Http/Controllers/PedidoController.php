@@ -8,6 +8,7 @@ use App\Models\Tercero;
 use App\Models\Pais;
 use App\Models\Maquina;
 use App\Models\Lista;
+use App\Models\Articulo;
 
 
 class PedidoController extends Controller
@@ -42,9 +43,12 @@ class PedidoController extends Controller
         //obtener sistemas desde listas
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
 
+        //obtener articulos
+        $articulos = Articulo::all();
+
 
         //retornar la vista con los datos
-        return view('pedidos.create')->with('ultimoPedido', $ultimoPedido)->with('usuario', $usuario)->with('Terceros', $Terceros)->with('paises', $paises)->with('maquinas', $maquinas)->with('sistemas', $sistemas);
+        return view('pedidos.create')->with('ultimoPedido', $ultimoPedido)->with('usuario', $usuario)->with('Terceros', $Terceros)->with('paises', $paises)->with('maquinas', $maquinas)->with('sistemas', $sistemas)->with('articulos', $articulos);
 
     }
 

@@ -66,6 +66,9 @@ Route::get('/terceros/{id}/edit', [TerceroController::class, 'edit'])->name('ter
 Route::put('/terceros/{id}/update', [TerceroController::class, 'update'])->name('terceros.update');
 Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros.show');
 Route::delete('/terceros/{id}', [TerceroController::class, 'destroy'])->name('terceros.destroy');
+Route::get('/terceros/{tercero_id}/maquinas', [TerceroController::class, 'getMaquinasByTercero'])->name('terceros.maquinas');
+Route::get('/terceros/{tercero_id}/contactos', [TerceroController::class, 'getContactosByTercero'])->name('terceros.contactos');
+
 
 //rutas para previsualizar rut
 Route::get('/terceros/{id}/preview', [TerceroController::class, 'preview'])->name('terceros.preview');
@@ -120,6 +123,7 @@ Route::get('/articulos/{id}', [ArticuloController::class, 'show'])->name('articu
 Route::get('/articulos/{id}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
 Route::put('/articulos/{id}/update', [ArticuloController::class, 'update'])->name('articulos.update');
 Route::delete('/articulos/{id}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
+
 
 //rutas listas padre
 Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listasPadre.index');

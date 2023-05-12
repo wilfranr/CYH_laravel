@@ -49,10 +49,6 @@ class TerceroController extends Controller
         $paises = DB::table('pais')->get();
         $ciudades = DB::table('ciudad')->get();
         $maquinas = Maquina::allWithConcatenatedData();
-
-
-
-
         return view('terceros.create')->with('paises', $paises)->with('ciudad', $ciudades)->with('maquinas', $maquinas);
     }
 
@@ -184,6 +180,12 @@ class TerceroController extends Controller
     {
         $maquinas = Tercero::findOrFail($id)->maquinas;
         return response()->json($maquinas);
+    }
+
+    public function getContactosByTercero($id)
+    {
+        $contactos = Tercero::findOrFail($id)->contactos;
+        return response()->json($contactos);
     }
 
     public function edit($id)
