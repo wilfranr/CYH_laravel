@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('foto_articulo', function (Blueprint $table) {
+        Schema::create('articulo_temporal', function (Blueprint $table) {
             $table->id();
-            $table->integer('IdArticulo');
-            $table->unsignedBigInteger('articulo_temporal_id');
-            $table->string('ruta');
+            $table->unsignedBigInteger('pedido_id');
+            $table->string('referencia');
+            $table->string('definicion');
+            $table->string('sistema');
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foto_articulo');
+        Schema::dropIfExists('articulo_temporal');
     }
 };

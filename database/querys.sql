@@ -11,3 +11,13 @@ SELECT * FROM medidas;
 SELECT * FROM contactos;
 --traer terceros
 SELECT * FROM terceros;
+--traer usuarios
+SELECT * FROM users;
+--traer datos de tabla maquinas
+SELECT * FROM maquinas;
+--traer datos de pedidos
+SELECT * FROM pedidos;
+--maquinas pedidos
+SELECT * FROM maquinas_pedido;
+--contactos pedidos
+SELECT * FROM contactos_pedido;

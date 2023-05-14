@@ -38,9 +38,9 @@ class Tercero extends Model
     }
 
 
-    public function cliente()
+    public function pedidos()
     {
-        return $this->hasOne(Cliente::class);
+        return $this->hasMany(Pedido::class);
     }
 
     public function proveedor()

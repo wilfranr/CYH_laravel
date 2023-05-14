@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -15,6 +14,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\ListaPadreController;
+use App\Http\Controllers\FotoArticuloTemporalController;
+use App\Http\Controllers\FotoController;
+
 
 
 
@@ -53,10 +55,6 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 
 //ruta de logo
 Route::get('/resize-logo', 'LogoController@resizeLogo');
-
-//rutas pedidos
-Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
-Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
 
 //ruta terceros
 Route::get('/terceros', [TerceroController::class, 'index'])->name('terceros.index');
@@ -100,10 +98,24 @@ Route::put('/listas/{id}/update', [ListaController::class, 'update'])->name('lis
 Route::delete('/listas/{id}', [ListaController::class, 'destroy'])->name('listas.destroy');
 
 //rutas pedidos
+Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
+Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
 Route::get('/pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
 Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
 Route::put('/pedidos/{id}/update', [PedidoController::class, 'update'])->name('pedidos.update');
 Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
+//foto articulo temporal
+Route::get('/pedidos/{articuloTemporal}/fotos', [FotoArticuloTemporalController::class, 'index'])->name('fotos.index');
+
+Route::post('/fotos', [FotoArticuloTemporalController::class, 'store'])->name('fotos.store');
+
+
+
+
+
+
+
 
 
 //rutas usuarios

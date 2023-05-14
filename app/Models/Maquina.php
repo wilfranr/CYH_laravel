@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Maquina extends Model
 {
     use HasFactory;
@@ -37,5 +38,11 @@ class Maquina extends Model
     {
         return $this->belongsToMany(Articulo::class, 'maquina_articulo')
             ->withPivot('fabricante', 'tipo_maquina');
+    }
+
+    // maquinas_pedido
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class, 'maquinas_pedido', 'maquina_id', 'pedido_id')->withTimestamps();
     }
 }

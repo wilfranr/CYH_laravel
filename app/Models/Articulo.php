@@ -38,6 +38,11 @@ class Articulo extends Model
         return $this->hasMany(Foto::class);
     }
 
+    public function imagenes()
+    {
+        return $this->hasMany(Imagen::class);
+    }
+
     // public function maquinas()
     // {
     //     return $this->belongsToMany(Maquina::class, 'maquina_articulo')

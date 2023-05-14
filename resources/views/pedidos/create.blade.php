@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Pedido # {{ $ultimoPedido }}</h1>
-        <form action="" method="post">
+        <form action="{{ route('pedidos.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 {{-- boton para buscar cliente --}}
@@ -22,9 +22,10 @@
                     <div class="form-group">
                         {{-- mostrar cliente seleccionado --}}
                         <div class="form-group">
-                            <label for="cliente_id">Cliente</label>
-                            <input type="hidden" name="cliente_id" id="cliente_id" value="">
+                            <label for="tercero_id">Cliente</label>
+                            <input type="hidden" name="tercero_id" id="tercero_id" value="">
                             <input type="text" class="form-control" id="cliente_nombre" value="" readonly>
+                            <input for="estado" type="hidden" name="estado" value="Nuevo">
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,80 +91,98 @@
 
                     </div>
                 </div>
-                <form method="POST" action="" id="formulario-articulo">
-                    @csrf
-                    <div class="row" id="div-detalle">
-                        <h2>Detalle</h2>
-                        <div class="col-md-6">
-                            <div class="form-group mt-3">
-                                <label for="referencia">Referencia</label>
-                                <select name="referencia" id="referencia" class="form-select">
-                                    <option value="">Seleccione</option>
-                                    @foreach ($articulos as $id => $articulo)
-                                        <option value="{{ $articulo->id }}">{{ $articulo->referencia }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="sistema">Sistema</label>
-                                <select name="sistema" class="form-select" id="sistema">
-                                    <option value="">Seleccione</option>
-                                    @foreach ($sistemas as $id => $nombre)
-                                        <option value="{{ $nombre }}">{{ $nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="comentarios">Comentarios</label>
-                                <textarea name="comentarios" id="comentarios" cols="20" rows="5" class="form-control"></textarea>
-                            </div>
+
+                <div class="row" id="div-detalle">
+                    <h2>Detalle</h2>
+                    <div class="col-md-6">
+                        <div class="form-group mt-3">
+                            <label for="referencia">Referencia</label>
+                            <select name="referencia" id="referencia" class="form-select">
+                                <option value="">Seleccione</option>
+                                @foreach ($articulos as $id => $articulo)
+                                    <option value="{{ $articulo->id }}">{{ $articulo->referencia }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="definicion">Definición</label>
-                                <input type="text" name="definicion" id="definicion" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="cantidad">Cantidad</label>
-                                <input type="number" name="cantidad" class="form-control" id="cantidad" required>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="foto">Foto</label>
-                                <input type="file" name="fotos[]" multiple class="form-control">
-                            </div>
-                            <div class="form-group mt-3">
-                                <button class="btn btn-primary mb-5" id="boton-agregar-articulo" type="button">Agregar
-                                    artículo</button>
-                            </div>
+                        <div class="form-group">
+                            <label for="sistema">Sistema</label>
+                            <select name="sistema" class="form-select" id="sistema">
+                                <option value="">Seleccione</option>
+                                @foreach ($sistemas as $id => $nombre)
+                                    <option value="{{ $nombre }}">{{ $nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comentarios">Comentarios</label>
+                            <textarea name="comentarios" id="comentarios" cols="20" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="definicion">Definición</label>
+                            <input type="text" name="definicion" id="definicion" class="form-control"
+                                value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control" id="cantidad" required>
+                        </div>
+                        {{-- <div class="form-group mt-3">
+                            <label for="foto">Foto</label>
+                            <input type="file" name="fotos[]" multiple class="form-control" id="fotos">
+                        </div>
+                        <div class="form-group">
+                            <div id="preview"></div>
+
+                        </div> --}}
+
+                        <div class="form-group mt-3">
+                            <label for="fotos">Fotos:</label>
+                            <div id="dropzone" class="dropzone"></div>
+                        </div>
 
 
-                </form>
 
 
-            </div>
+                        <div class="form-group mt-3">
+                            <button class="btn btn-primary mb-5" id="boton-agregar-articulo" type="button">Agregar
+                                artículo</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <table id="tabla-articulos">
+                        <thead>
+                            <tr>
+                                <th>Sistema</th>
+                                <th>Definición</th>
+                                <th>Referencia</th>
+                                <th>Cantidad</th>
+                                <th>Comentarios</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí irán las filas de los artículos -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="comentariosPedido">
+                    {{-- comentarios del pedido --}}
+                    <label for="comentario">Comentarios del pedido</label>
+                    <textarea name="comentario" id="comentario" cols="20" rows="5" class="form-control"></textarea>
+                </div>
 
-
+                <div>
+                    <button type="submit" class="btn btn-primary">Crear pedido</button>
+                </div>
+        </form>
     </div>
 
-    <div class="container">
-        <table id="tabla-articulos">
-            <thead>
-                <tr>
-                    <th>Sistema</th>
-                    <th>Definición</th>
-                    <th>Referencia</th>
-                    <th>Cantidad</th>
-                    <th>Comentarios</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí irán las filas de los artículos -->
-            </tbody>
-        </table>
-    </div>
+
+
+
 
 
     {{-- Modal de clientes --}}
@@ -220,12 +239,42 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Agregar enlaces al archivo JS y CSS de Dropzone -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+
+    <script>
+        // Configuración de Dropzone
+        Dropzone.options.dropzone = {
+            url: '{{ route('fotos.store') }}', // Ruta que recibirá el archivo
+            paramName: 'fotos', // Nombre del campo que contiene los archivos
+            maxFilesize: 2, // Tamaño máximo de cada archivo (en MB)
+            addRemoveLinks: true, // Mostrar el enlace para remover cada archivo
+            dictRemoveFile: 'Remover', // Texto del enlace para remover cada archivo
+            dictDefaultMessage: 'Arrastra tus archivos aquí o haz clic para seleccionar', // Texto por defecto
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            init: function() {
+                this.on('success', function(file, response) {
+                    // Cuando un archivo se carga exitosamente, agregar el ID del archivo a un campo oculto
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: 'fotos_ids[]',
+                        value: response.id
+                    }).appendTo('form');
+                });
+            }
+        };
+    </script>
+
 
     <script>
         //busqueda dinámica en tabla terceros
         $(document).ready(function() {
             //ocultar div maquina
             $('#maquina').hide();
+
             // Capturar el evento de clic en el botón "Seleccionar" de la tabla de clientes
             $(document).on('click', '.seleccionar-cliente', function() {
                 //mostrar div maquina
@@ -233,7 +282,7 @@
                 // Cerramos el modal
                 $('#modalClientes').modal('hide');
                 // Actualizar los datos del formulario de crear pedido con los datos del cliente seleccionado
-                $('#cliente_id').val($(this).data('id'));
+                $('#tercero_id').val($(this).data('id'));
                 $('#cliente_nombre').val($(this).data('nombre'));
                 $('#numero_documento').val($(this).data('identificacion'));
                 $('#direccion').val($(this).data('direccion'));
@@ -249,7 +298,7 @@
             //cargar maquinas
             function cargarMaquinas() {
                 // Obtener el valor del ID del tercero seleccionado
-                var tercero_id = $('#cliente_id').val();
+                var tercero_id = $('#tercero_id').val();
 
                 // Hacer una petición AJAX al servidor para obtener las maquinas del tercero
                 $.ajax({
@@ -292,7 +341,7 @@
             //cargar contactos de tercero
             function cargarContactos() {
                 // Obtener el valor del ID del tercero seleccionado
-                var tercero_id = $('#cliente_id').val();
+                var tercero_id = $('#tercero_id').val();
 
                 // Hacer una petición AJAX al servidor para obtener las maquinas del tercero
                 $.ajax({
@@ -336,6 +385,32 @@
             $('#cantidad').val(1);
 
         }
+
+        // $('#fotos').on('change', function() {
+        //     // Limpiar la vista previa existente
+        //     $('#preview').empty();
+
+        //     // Obtener las imágenes seleccionadas
+        //     var files = $(this).get(0).files;
+
+        //     // Iterar sobre las imágenes y mostrar miniaturas
+        //     for (var i = 0; i < files.length; i++) {
+        //         var file = files[i];
+        //         var reader = new FileReader();
+
+        //         reader.onload = function(e) {
+        //             // Crear un elemento <img> con la miniatura
+        //             var img = $('<img>').attr('src', e.target.result).css('width', '100px');
+        //             // Agregar la miniatura al contenedor de vista previa
+        //             $('#preview').append(img);
+        //         };
+
+        //         // Leer el archivo y mostrar la miniatura
+        //         reader.readAsDataURL(file);
+        //     }
+        // });
+
+
         $('#boton-agregar-articulo').click(function() {
             // obtener los valores del formulario
             var sistema = $('#sistema').val();

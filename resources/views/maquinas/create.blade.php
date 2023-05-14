@@ -67,12 +67,16 @@
                             <label for="fotoMaquina" class="col-md-4 col-form-label text-md-right">{{__('Foto Maquina')}}</label>
                             <div class="col-md-6">
                                 <input type="file" class="form-control" name="fotoMaquina" id="fotoMaquina" >
+                                <img id="preview" src="#" alt="Vista previa de la imagen"
+                                    style="max-width: 200px; max-height: 200px;">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="fotoId" class="col-md-4 col-form-label text-md-right">{{__('Foto ID')}}</label>
                             <div class="col-md-6">
                                 <input type="file" class="form-control" name="fotoId" id="fotoId" >
+                                <img id="preview2" src="#" alt="Vista previa de la imagen"
+                                    style="max-width: 200px; max-height: 200px;">
                             </div>
                         </div>
 
@@ -91,5 +95,45 @@
             </div>
         </div>
     </div>
+    <script>
+            // Obtener el elemento del input de carga de archivo y el elemento de la vista previa
+            var inputImagen = document.getElementById('fotoMaquina');
+            var inputImagen2 = document.getElementById('fotoId');
+            var imagenPreview = document.getElementById('preview');
+            var imagenPreview2 = document.getElementById('preview2');
+
+            // Agregar un evento de cambio al input de carga de archivo
+            inputImagen.addEventListener('change', function() {
+                // Verificar si se seleccionó un archivo
+                if (inputImagen.files && inputImagen.files[0]) {
+                    // Crear un objeto FileReader para leer el archivo
+                    var reader = new FileReader();
+
+                    // Configurar la función de carga del FileReader
+                    reader.onload = function(e) {
+                        // Asignar la imagen cargada a la vista previa
+                        imagenPreview.src = e.target.result;
+                    }
+
+                    // Leer el archivo seleccionado como una URL de datos
+                    reader.readAsDataURL(inputImagen.files[0]);
+                }
+                if (inputImagen2.files && inputImagen2.files[0]) {
+                    // Crear un objeto FileReader para leer el archivo
+                    var reader = new FileReader();
+
+                    // Configurar la función de carga del FileReader
+                    reader.onload = function(e) {
+                        // Asignar la imagen cargada a la vista previa
+                        imagenPreview2.src = e.target.result;
+                    }
+
+                    // Leer el archivo seleccionado como una URL de datos
+                    reader.readAsDataURL(inputImagen2.files[0]);
+                }
+            });
+
+            
+    </script>
 </div
 @endsection
