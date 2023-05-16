@@ -50,7 +50,8 @@ class Pedido extends Model
     }
 
     public function articulosTemporales()
-    {
-        return $this->hasMany(ArticuloTemporal::class);
-    }
+{
+    return $this->hasMany(ArticuloTemporal::class);
+}
+
 }

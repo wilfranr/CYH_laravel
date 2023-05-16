@@ -21,3 +21,5 @@ SELECT * FROM pedidos;
 SELECT * FROM maquinas_pedido;
 --contactos pedidos
 SELECT * FROM contactos_pedido;
+--traer datos de articulo_temporal
+SELECT * FROM articulo_temporal;

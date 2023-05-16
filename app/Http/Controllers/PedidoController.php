@@ -82,68 +82,99 @@ class PedidoController extends Controller
             }
         }
 
-        // Crear los artículos temporales
-    foreach ($request->articulos as $articulo) {
-        $articuloTemporal = ArticuloTemporal::create([
-            'pedido_id' => $pedido->id,
-            'referencia' => $articulo['referencia'],
-            'definicion' => $articulo['definicion'],
-            'sistema' => $articulo['sistema'],
-            'cantidad' => $articulo['cantidad'],
-        ]);
+        // Agregar cada articulo al pedido
+        $data = [
+            'contadorArticulos' => $request->input('contadorArticulos'),
+            // Otros datos que necesites
+        ];
+        for ($i = 1; $i <= $data['contadorArticulos']; $i++) {
+            // Validar los datos del formulario del artículo temporal
+            $dataArticulo = $request->validate([
+                'referencia' . $i => ['nullable', 'string', 'max:255'],
+                'definicion' . $i => ['nullable', 'string', 'max:255'],
+                'comentario' . $i => ['nullable', 'string', 'max:255'],
+            ]);
 
-        // Guardar las fotos del artículo temporal
-        if ($request->hasFile('fotos')) {
-            foreach ($request->file('fotos') as $foto) {
-                $fotoArticuloTemporal = new FotoArticuloTemporal;
-                $fotoArticuloTemporal->articulo_temporal_id = $articuloTemporal->id;
-                $fotoArticuloTemporal->ruta = $foto->store('public/fotos');
-                $fotoArticuloTemporal->save();
-            }
+            // Crear el artículo temporal
+            $articuloTemporal = new ArticuloTemporal();
+            $articuloTemporal->pedido_id = $pedido->id;
+            $articuloTemporal->referencia = $request->input('referencia' . $i);
+            $articuloTemporal->definicion = $request->input('definicion' . $i);
+            $articuloTemporal->comentarios = $request->input('comentario' . $i);
+            $articuloTemporal->save();
+
+            // Agregar la relación a la tabla pivot
+            $pedido->articulosTemporales()->attach($articuloTemporal->id);
         }
-    }
+
+        // Sincronizar los artículos asociados al pedido
+        $pedido->articulosTemporales()->sync($request->articulosTemporales);
+
+        return redirect()->route('pedidos.show', ['id' => $pedido->id])
+            ->with('success', 'El pedido se ha creado exitosamente.');
+
+
+
         return redirect()->route('pedidos.index')
             ->with('success', 'Pedido creado satisfactoriamente.');
     }
 
-
-
-
-
-    public function show(Pedido $pedido)
+    public function show(Pedido $pedido, $id)
     {
+        $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales'])->find($id);
+
         return view('pedidos.show', compact('pedido'));
     }
 
-    public function edit(Pedido $pedido)
+    public function edit($id)
     {
-        return view('pedidos.edit', compact('pedido'));
+        $pedido = Pedido::findOrFail($id);
+        $articulosTemporales = $pedido->articulosTemporales;
+
+        return view('pedidos.edit', compact('pedido', 'articulosTemporales'));
     }
 
-    public function update(Request $request, Pedido $pedido)
+
+
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'codPedido' => 'required',
-            'codUsuario' => 'required',
-            'codCliente' => 'required',
-            'codMaquina' => 'required',
-            'fecha_creacion' => 'required',
-            'descripcion' => 'required',
-            'contacto' => 'required',
-            'estado' => 'required',
+            'comentario' => 'nullable|string',
+            'estado' => 'nullable|string'
         ]);
 
-        $pedido->update($request->all());
+        $pedido = Pedido::findOrFail($id);
+        $pedido->comentario = $request->input('comentario');
+        $pedido->estado = $request->input('estado');
+        $pedido->save();
 
-        return redirect()->route('pedidos.index')
+        // Actualizar los artículos temporales asociados al pedido
+        // Actualizar los registros relacionados en la relación "hasMany"
+        $articulosTemporales = $request->input('articulos-temporales');
+
+        if (!is_null($articulosTemporales)) {
+            foreach ($articulosTemporales as $articuloTemporalData) {
+                $articuloTemporal = ArticuloTemporal::find($articuloTemporalData['id']);
+                $articuloTemporal->referencia = $articuloTemporalData['referencia'];
+                $articuloTemporal->definicion = $articuloTemporalData['definicion'];
+                // ... actualizar otros campos del articuloTemporal ...
+                $articuloTemporal->save();
+            }
+        }
+
+        return redirect()->route('pedidos.show', ['id' => $pedido->id])
             ->with('success', 'Pedido actualizado satisfactoriamente.');
     }
 
-    public function destroy(Pedido $pedido)
-    {
-        $pedido->delete();
 
-        return redirect()->route('pedidos.index')
-            ->with('success', 'Pedido eliminado satisfactoriamente.');
+    public function destroy($id)
+    {
+        $pedido = Pedido::find($id);
+        if ($pedido) {
+            $pedido->delete();
+            return redirect()->route('pedidos.index')->with('success', 'Tercero eliminado correctamente');
+        } else {
+            return redirect()->route('pedidos.index')->with('error', 'No se pudo eliminar el tercero');
+        }
     }
 }

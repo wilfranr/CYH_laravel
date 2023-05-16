@@ -112,12 +112,6 @@ Route::post('/fotos', [FotoArticuloTemporalController::class, 'store'])->name('f
 
 
 
-
-
-
-
-
-
 //rutas usuarios
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');

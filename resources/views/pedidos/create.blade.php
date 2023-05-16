@@ -23,8 +23,8 @@
                         {{-- mostrar cliente seleccionado --}}
                         <div class="form-group">
                             <label for="tercero_id">Cliente</label>
-                            <input type="hidden" name="tercero_id" id="tercero_id" value="">
-                            <input type="text" class="form-control" id="cliente_nombre" value="" readonly>
+                            <input type="hidden" name="tercero_id" id="tercero_id" value="" required>
+                            <input type="text" class="form-control" id="cliente_nombre" value="" readonly required>
                             <input for="estado" type="hidden" name="estado" value="Nuevo">
                         </div>
                     </div>
@@ -91,10 +91,12 @@
 
                     </div>
                 </div>
+                <input type="hidden" name="articulos-temporales" id="articulos-temporales">
+
 
                 <div class="row" id="div-detalle">
                     <h2>Detalle</h2>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="form-group mt-3">
                             <label for="referencia">Referencia</label>
                             <select name="referencia" id="referencia" class="form-select">
@@ -137,46 +139,35 @@
 
                         </div> --}}
 
-                        <div class="form-group mt-3">
-                            <label for="fotos">Fotos:</label>
-                            <div id="dropzone" class="dropzone"></div>
-                        </div>
+                    <div class="form-group mt-3">
+                        <label for="fotos">Fotos:</label>
+                        <div id="dropzone" class="dropzone"></div>
+                    </div>
 
 
 
 
-                        <div class="form-group mt-3">
-                            <button class="btn btn-primary mb-5" id="boton-agregar-articulo" type="button">Agregar
-                                artículo</button>
-                        </div>
+                    <div class="form-group mt-3">
+                        <button class="btn btn-primary mb-5" id="boton-agregar-articulo" type="button">Agregar
+                            artículo</button>
                     </div>
                 </div>
-                <div class="container">
-                    <table id="tabla-articulos">
-                        <thead>
-                            <tr>
-                                <th>Sistema</th>
-                                <th>Definición</th>
-                                <th>Referencia</th>
-                                <th>Cantidad</th>
-                                <th>Comentarios</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Aquí irán las filas de los artículos -->
-                        </tbody>
-                    </table>
-                </div>
-                <div id="comentariosPedido">
-                    {{-- comentarios del pedido --}}
-                    <label for="comentario">Comentarios del pedido</label>
-                    <textarea name="comentario" id="comentario" cols="20" rows="5" class="form-control"></textarea>
-                </div>
+            </div>
+            <div id="articulos">
+                <input type="hidden" name="contadorArticulos" value="2">
 
-                <div>
-                    <button type="submit" class="btn btn-primary">Crear pedido</button>
-                </div>
+            </div>
+
+            
+            <div id="comentariosPedido">
+                {{-- comentarios del pedido --}}
+                <label for="comentario">Comentarios del pedido</label>
+                <textarea name="comentario" id="comentario" cols="20" rows="5" class="form-control"></textarea>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Crear pedido</button>
+            </div>
         </form>
     </div>
 
@@ -322,9 +313,6 @@
 
             }
 
-
-
-
             // Capturar el evento de cambio en el campo de búsqueda de clientes
             $('#search').on('keyup', function() {
                 var value = $(this).val().toLowerCase();
@@ -380,6 +368,52 @@
                     }
                 });
             });
+            let contadorArticulos = 1;
+
+            $('#boton-agregar-articulo').on('click', function() {
+                $('#articulos').append(`
+                <hr>
+                <div class="form-group">
+                    <label for="referencia">Referencia</label>
+                    <select name="referencia${contadorArticulos}" id="referencia${contadorArticulos}" class="form-select">
+                        <option value="">Seleccione</option>
+                        @foreach ($articulos as $id => $articulo)
+                            <option value="{{ $articulo->id }}">{{ $articulo->referencia }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sistema">Sistema</label>
+                    <select name="sistema${contadorArticulos}" class="form-select" id="sistema${contadorArticulos}">
+                        <option value="">Seleccione</option>
+                        @foreach ($sistemas as $id => $nombre)
+                            <option value="{{ $nombre }}">{{ $nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comentarios">Comentarios</label>
+                    <textarea name="comentarios${contadorArticulos}" id="comentarios${contadorArticulos}" cols="20" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="definicion">Definición</label>
+                    <input type="text" name="definicion${contadorArticulos}" id="definicion${contadorArticulos}" class="form-control"
+                        value="">
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad${contadorArticulos}" class="form-control" id="cantidad${contadorArticulos}" required>
+                </div>
+
+                
+                </hr>
+
+            `);
+
+                contadorArticulos++;
+            });
+
+            
         });
         if ($('#cantidad').val() == '') {
             $('#cantidad').val(1);
@@ -411,7 +445,7 @@
         // });
 
 
-        $('#boton-agregar-articulo').click(function() {
+        $('#boton-agregar-articulos').click(function() {
             // obtener los valores del formulario
             var sistema = $('#sistema').val();
             var definicion = $('#definicion').val();

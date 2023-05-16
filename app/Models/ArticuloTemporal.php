@@ -16,7 +16,8 @@ class ArticuloTemporal extends Model
         'referencia',
         'definicion',
         'sistema',
-        'cantidad'
+        'cantidad',
+        'comentarios'
     ];
 
     public function fotos()
@@ -26,7 +27,7 @@ class ArticuloTemporal extends Model
 
     public function pedido()
     {
-        return $this->belongsTo(Pedido::class);
+        return $this->belongsToMany(Pedido::class);
     }
 
     public function fotosArticuloTemporal()

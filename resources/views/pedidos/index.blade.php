@@ -45,11 +45,13 @@
                         <td>
                             <a href="{{ route('pedidos.show', $pedido->id) }}" class="btn btn-primary">Ver</a>
                             <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning">Editar</a>
-                            <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST"
+                                style="display: inline">
                                 @csrf
+
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('¿Está seguro de eliminar este pedido?')">Eliminar</button>
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('¿Está seguro de que desea eliminar este pedido?')">Eliminar</button>
                             </form>
                         </td>
                     </tr>
