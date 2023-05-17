@@ -150,16 +150,6 @@ class ArticuloController extends Controller
     return view('articulos.edit', compact('articulo', 'medidas', 'definiciones', 'marca', 'unidades', 'tipoMedida'));
 }
 
-
-    // public function edit(Articulo $articulo,  $id)
-    // {
-    //     $articulo = Articulo::find($id);
-    //     $definiciones = Lista::where('tipo', 'Descripción común')->pluck('nombre', 'id');
-    //     $marca = Lista::where('tipo', 'marca')->get();
-    //     $medidas = Medida::where('nombre', 'unidad', 'valor', 'idMedida')->pluck('nombre', 'id');
-    //     return view('articulos.edit', compact('articulo', 'marca', 'definiciones', 'medidas'));
-    // }
-
     public function update(Request $request, Articulo $articulo)
     {
         $validatedData = $request->validate([
@@ -231,7 +221,6 @@ class ArticuloController extends Controller
         // Redireccionar al usuario
         return redirect()->route('articulos.index')->with('success', 'Artículo actualizado correctamente.');
     }
-
 
     public function destroy($id)
     {

@@ -63,6 +63,12 @@
                         <label for="cantidad{{ $index }}">Cantidad</label>
                         <input type="number" name="articulos_temporales[{{ $index }}][cantidad]" value="{{ $articuloTemporal->cantidad }}">
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="comentarios{{ $index }}">Comentarios</label>
+                        <input type="text" name="articulos_temporales[{{ $index }}][comentarios]" value="{{ $articuloTemporal->comentarios }}">
+                    </div>
+
                     <input type="hidden" name="estado" id="estado" value="Procesando">
                     <!-- Mostrar otros campos si es necesario -->
                 </div>

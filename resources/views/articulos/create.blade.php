@@ -137,16 +137,23 @@
                                     <div class="col-md-6">
                                         <input type="file" name="foto-descriptiva" id="foto-descriptiva"
                                             class="form-control">
+                                            <img id="preview2" src="#" alt="Vista previa de la imagen"
+                                    style="max-width: 200px; max-height: 200px;">
                                     </div>
                                 </div>
                                 {{-- Foto medida --}}
                                 <div class="form-group row">
-                                    <label for="fotoMedida"
+                                    <label for="foto-medida"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Foto de medidas') }}</label>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="fotoMedida" id="fotoMedida" class="form-control">
+                                        <input type="file" name="foto-medida" id="foto-medida" class="form-control">
+                                        <img id="preview" src="#" alt="Vista previa de la imagen"
+                                    style="max-width: 200px; max-height: 200px;">
                                     </div>
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -160,17 +167,17 @@
 
                                     <div class="col-md-6">
                                         <input id="cambio" name="cambio" type="text"
-                                        class="form-control @error('Cambio (Referencia)') is-invalid @enderror" name="Cambio (Referencia)"
-                                        value="{{ old('Cambio (Referencia)') }}">
-                                        
+                                            class="form-control @error('Cambio (Referencia)') is-invalid @enderror"
+                                            name="Cambio (Referencia)" value="{{ old('Cambio (Referencia)') }}">
+
                                         @error('Cambio (Referencia)')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
-                                        
+
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="form-group row">
@@ -180,18 +187,19 @@
                                     <div class="col-md-6">
                                         <select class="form-control" name="juego[]" multiple="multiple">
                                             @foreach ($articulos as $articulo)
-                                                <option value="{{ $articulo['id'] }}">{{ $articulo['referencia'] }}</option>
+                                                <option value="{{ $articulo['id'] }}">{{ $articulo['referencia'] }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        
+
                                         @error('juego')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
-                                        
+
                                     </div>
-                                    
+
 
                                 </div>
 
@@ -218,10 +226,15 @@
         </div>
     </div>
 
-    
+
     </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Agregar enlaces al archivo JS y CSS de Dropzone -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+
+
     <script>
         $(document).ready(function() {
             let contadorMedidas = 1;
@@ -289,6 +302,31 @@
 
                 contadorMedidas++;
             });
+
+            
+        });
+        
+    </script>
+    <script>
+        // Vista previa de la imagen
+        document.getElementById("foto-medida").addEventListener("change", function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("preview").src = e.target.result;
+            };
+            reader.readAsDataURL(e.target.files[0]);
         });
     </script>
+
+    <script>
+        // Vista previa de la imagen
+        document.getElementById("foto-descriptiva").addEventListener("change", function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("preview2").src = e.target.result;
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        });
+    </script>
+
 @endsection

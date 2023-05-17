@@ -16,6 +16,8 @@ use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\ListaPadreController;
 use App\Http\Controllers\FotoArticuloTemporalController;
 use App\Http\Controllers\FotoController;
+use App\Http\Controllers\ArticuloTemporalController;
+
 
 
 
@@ -129,6 +131,8 @@ Route::get('/articulos/{id}', [ArticuloController::class, 'show'])->name('articu
 Route::get('/articulos/{id}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
 Route::put('/articulos/{id}/update', [ArticuloController::class, 'update'])->name('articulos.update');
 Route::delete('/articulos/{id}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
+
+
 
 
 //rutas listas padre
