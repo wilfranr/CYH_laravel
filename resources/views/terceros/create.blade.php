@@ -57,20 +57,72 @@
                             value="{{ old('rut') }}">
 
                     </div>
-                    <div class="form-group border border-warning mt-4 p-3">
+                    <div class="form-group border border-warning mt-4 p-3 maquina" id="maquina">
 
                         <label for="maquina">Máquina</label>
-                        <select class="form-select" name="maquinas[]" multiple="multiple">
+                        <select class="form-select2" name="maquinas[]" multiple="multiple">
                             @foreach ($maquinas as $maquina)
                                 <option value="{{ $maquina['id'] }}">{{ $maquina['text'] }}</option>
                             @endforeach
                         </select>
 
                         <a href="{{ route('maquinas.create') }}" class="btn btn-primary mt-2">Agregar nueva máquina</a>
-
-
                     </div>
-
+                    <div class="form-group border border-warning mt-4 p-3" id="rango">
+                        <label for="rango">Rango de productos</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Marca</h4>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="1" id="rango1">
+                                        <label for="rango1">1</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="2" id="rango2">
+                                        <label for="rango2">2</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="3" id="rango3">
+                                        <label for="rango3">3</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="4" id="rango4">
+                                        <label for="rango4">4</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="5" id="rango5">
+                                        <label for="rango5">5</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Sistema</h4>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="1" id="rango1">
+                                        <label for="rango1">1</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="2" id="rango2">
+                                        <label for="rango2">2</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="3" id="rango3">
+                                        <label for="rango3">3</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="4" id="rango4">
+                                        <label for="rango4">4</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="rango[]" value="5" id="rango5">
+                                        <label for="rango5">5</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="col-md-6">
@@ -150,24 +202,14 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    
+
 
     <script>
         $(document).ready(function() {
-            $('.form-select').select2();
+            $('.form-select2').select2();
         });
     </script>
     <script>
-        // Obtener el elemento select
-        const tipoDocumentoSelect = document.getElementById('tipo_documento');
-        // Obtener el campo dv
-        const dvField = document.getElementById('dv-field');
-        //Agregar evento onchange al select
-        tipoDocumentoSelect.addEventListener('change', function() {
-            // Si la opción seleccionada es NIT, mostrar el campo dv
-            dvField.style.display = tipoDocumentoSelect.value === 'nit' ? 'block' : 'none';
-        });
-
         const paisSelect = document.getElementById('pais_id');
         paisSelect.addEventListener('change', function() {
             const paisCodigo = this.value;
@@ -187,6 +229,16 @@
                 });
         });
         $(document).ready(function() {
+            // Obtener el elemento select
+            const tipoDocumentoSelect = document.getElementById('tipo_documento');
+            // Obtener el campo dv
+            const dvField = document.getElementById('dv-field');
+            //Agregar evento onchange al select
+            tipoDocumentoSelect.addEventListener('change', function() {
+                // Si la opción seleccionada es NIT, mostrar el campo dv
+                dvField.style.display = tipoDocumentoSelect.value === 'nit' ? 'block' : 'none';
+            });
+
 
             let contadorContactos = 1;
 
@@ -211,7 +263,20 @@
 
                 contadorContactos++;
             });
-
+        });
+        //si seleccione tipo tercero cliente, mostrar div #maquina
+        $('.maquina').hide();
+        $('#rango').hide();
+        const tipoTerceroSelect = document.getElementById('tipo');
+        const maquinaDiv = document.getElementById('maquina');
+        tipoTerceroSelect.addEventListener('change', function() {
+            if (tipoTerceroSelect.value === 'cliente') {
+                $('.maquina').show();
+                $('#rango').hide();
+            } else {
+                $('.maquina').hide();
+                $('#rango').show();
+            }
         });
     </script>
 
