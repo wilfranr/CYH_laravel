@@ -10,14 +10,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Maquina;
 use App\Models\Contacto;
-
-
+use App\Models\Marca;
+use App\Models\Sistemas;
 
 use App\Models\Pais;
 use App\Models\Departamento;
 use App\Models\Ciudad;
-
-
+use Termwind\Components\Dd;
 
 class TerceroController extends Controller
 {
@@ -49,7 +48,11 @@ class TerceroController extends Controller
         $paises = DB::table('pais')->get();
         $ciudades = DB::table('ciudad')->get();
         $maquinas = Maquina::allWithConcatenatedData();
-        return view('terceros.create')->with('paises', $paises)->with('ciudad', $ciudades)->with('maquinas', $maquinas);
+        $marcas = Marca::all();
+        $sistemas = Sistemas::all();
+
+
+        return view('terceros.create')->with('paises', $paises)->with('ciudad', $ciudades)->with('maquinas', $maquinas)->with('marcas', $marcas)->with('sistemas', $sistemas);
     }
 
 
@@ -77,15 +80,8 @@ class TerceroController extends Controller
             'certificacion_bancaria' => ['nullable', 'file', 'mimes:pdf', 'max:1024'],
             'sitioWeb' => ['nullable', 'string', 'max:255'],
             'contadorContactos' => ['integer'],
-
-
-            //'puntos' => ['nullable', 'integer'],
-
-            // ... agregar aquí todas las reglas de validación necesarias
         ]);
 
-        // 2. Validar los datos según las reglas de validación necesarias
-        // ... no hace falta hacer nada extra ya que Laravel hace esto automáticamente con el método validate
 
         // 3. Crear una instancia del modelo Tercero y asignar los datos validados
         $tercero = new Tercero();
@@ -121,6 +117,22 @@ class TerceroController extends Controller
         // 4. Guardar el nuevo tercero en la base de datos
         $tercero->save();
 
+        // Obtener las marcas seleccionadas
+        $marcasSeleccionadas = $request->input('marca', []);
+
+        
+
+        // Asociar las marcas seleccionadas al tercero
+        $tercero->marcas()->sync($marcasSeleccionadas);
+
+        //obtener los sistemas seleccionados
+        $sistemasSeleccionados = $request->input('sistema', []);
+
+        
+
+        //asociar los sistemas seleccionados al tercero
+        $tercero->sistemas()->sync($sistemasSeleccionados);
+
 
         // Asociar las máquinas seleccionadas al nuevo tercero
         //si no vienen maquinas, continuar
@@ -129,37 +141,48 @@ class TerceroController extends Controller
             $tercero->maquinas()->attach($maquinas_ids);
         }
 
-        // dd($contadorContactos);
-        // Crear los contactos del tercero
-        //si no se ingresan contactos, continuar
+        // Crear los contactos del tercero si se ha ingresado al menos un contacto
+        if ($data['contadorContactos'] >= 1) {
+            for ($i = 1; $i <= $data['contadorContactos']; $i++) {
+                // Validar los datos del formulario del contacto
+                $dataContacto = $request->validate([
+                    'nombre_contacto_' . $i => ['required', 'string', 'max:255'],
+                    'telefono_contacto_' . $i => ['nullable', 'string', 'max:20'],
+                    'email_contacto_' . $i => ['nullable', 'email', 'max:255'],
+                ]);
 
-        for ($i = 1; $i <= $data['contadorContactos']; $i++) {
-            // Validar los datos del formulario del contacto
+                // Crear el contacto
+                $contacto = new Contacto();
+                $contacto->nombre = $request->{'nombre_contacto_' . $i};
+                $contacto->telefono = $request->{'telefono_contacto_' . $i};
+                $contacto->email = $request->{'email_contacto_' . $i};
+                $contacto->save();
+
+                // Agregar la relación a la tabla intermedia
+                $tercero->contactos()->attach($contacto->id);
+            }
+        } else {
+            // Validar los datos del formulario del contacto cuando hay un solo contacto
             $dataContacto = $request->validate([
-                'nombre_contacto_' . $i => ['required', 'string', 'max:255'],
-                'telefono_contacto_' . $i => ['nullable', 'string', 'max:20'],
-                'email_contacto_' . $i => ['nullable', 'email', 'max:255'],
+                'nombre_contacto_1' => ['required', 'string', 'max:255'],
+                'telefono_contacto_1' => ['nullable', 'string', 'max:20'],
+                'email_contacto_1' => ['nullable', 'email', 'max:255'],
             ]);
-
 
             // Crear el contacto
             $contacto = new Contacto();
-            $contacto->nombre = $request->{'nombre_contacto_' . $i};
-            $contacto->telefono = $request->{'telefono_contacto_' . $i};
-            $contacto->email = $request->{'email_contacto_' . $i};
+            $contacto->nombre = $request->nombre_contacto_1;
+            $contacto->telefono = $request->telefono_contacto_1;
+            $contacto->email = $request->email_contacto_1;
             $contacto->save();
 
             // Agregar la relación a la tabla intermedia
             $tercero->contactos()->attach($contacto->id);
-            // 5. Redirigir al usuario a la página de detalles del nuevo tercero con un mensaje de éxito
-            return redirect()->route('terceros.show', ['id' => $tercero->id])
-                ->with('success', 'El tercero se ha creado exitosamente.');
         }
-        //Sincronizar los contactos asociados al tercero
-        $tercero->contactos()->sync($request->contactos);
-        // 5. Redirigir al usuario a la página de detalles del nuevo tercero con un mensaje de éxito
-        return redirect()->route('terceros.show', ['id' => $tercero->id])
-            ->with('success', 'El tercero se ha creado exitosamente.');
+
+
+        // Redirigir al usuario a la página de detalles del nuevo tercero con un mensaje de éxito
+        return redirect()->route('terceros.show', $tercero->id)->with('success', 'Tercero creado exitosamente');
     }
 
     public function show($id)
@@ -200,7 +223,7 @@ class TerceroController extends Controller
     public function update(Request $request, Tercero $tercero, $id)
     {
         $tercero = Tercero::find($id);
-        
+
 
         $tercero->tipo = $request->tipo;
         $tercero->nombre = $request->nombre;
@@ -241,8 +264,6 @@ class TerceroController extends Controller
         }
         return redirect()->route('terceros.preview', $id);
     }
-
-
 
     public function destroy($id)
     {

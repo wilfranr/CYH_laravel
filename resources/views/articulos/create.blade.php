@@ -137,8 +137,8 @@
                                     <div class="col-md-6">
                                         <input type="file" name="foto-descriptiva" id="foto-descriptiva"
                                             class="form-control">
-                                            <img id="preview2" src="#" alt="Vista previa de la imagen"
-                                    style="max-width: 200px; max-height: 200px;">
+                                        <img id="preview2" src="#" alt="Vista previa de la imagen"
+                                            style="max-width: 200px; max-height: 200px;">
                                     </div>
                                 </div>
                                 {{-- Foto medida --}}
@@ -149,7 +149,7 @@
                                     <div class="col-md-6">
                                         <input type="file" name="foto-medida" id="foto-medida" class="form-control">
                                         <img id="preview" src="#" alt="Vista previa de la imagen"
-                                    style="max-width: 200px; max-height: 200px;">
+                                            style="max-width: 200px; max-height: 200px;">
                                     </div>
 
 
@@ -245,67 +245,62 @@
                             <div class="card-body">
                                 
                                 <div class="form-group row">
-                                    <label for="tipoMedida"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Tipo de medida') }}</label>
+    <label for="tipoMedida" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de medida') }}</label>
 
-                                    <div class="col-md-6">
-                                        <select class="form-select" id="tipoMedida" name="tipoMedida">
-                                            <option value="">Seleccione un tipo de medida</option>
-                                            @foreach ($medidas as $id => $nombre)
-                                                <option value="{{ $nombre }}">{{ $nombre }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="valorMedida"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Valor medida') }}</label>
+    <div class="col-md-6">
+        <select class="form-select" id="tipoMedida" name="tipoMedida[]">
+            <option value="">Seleccione un tipo de medida</option>
+            @foreach ($medidas as $id => $nombre)
+                <option value="{{ $nombre }}">{{ $nombre }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="valorMedida" class="col-md-4 col-form-label text-md-right">{{ __('Valor medida') }}</label>
 
-                                    <div class="col-md-6">
-                                        <input id="valorMedida" type="text"
-                                            class="form-control @error('valorMedida') is-invalid @enderror"
-                                            name="valorMedida" value="{{ old('valorMedida') }}" >
+    <div class="col-md-6">
+        <input id="valorMedida" type="text" class="form-control @error('valorMedida') is-invalid @enderror"
+            name="valorMedida[]" value="{{ old('valorMedida') }}">
 
-                                        @error('valorMedida')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+        @error('valorMedida')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
 
-                                        <select class="form-select" id="unidadMedida" name="unidadMedida">
-                                            <option value="">Unidad de medida</option>
-                                            @foreach ($unidadMedidas as $id => $nombre)
-                                                <option value="{{ $nombre }}">{{ $nombre }}</option>
-                                            @endforeach
-                                        </select>
+        <select class="form-select" id="unidadMedida" name="unidadMedida[]">
+            <option value="">Unidad de medida</option>
+            @foreach ($unidadMedidas as $id => $nombre)
+                <option value="{{ $nombre }}">{{ $nombre }}</option>
+            @endforeach
+        </select>
 
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="idMedida"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Id Medida') }}</label>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="idMedida" class="col-md-4 col-form-label text-md-right">{{ __('Id Medida') }}</label>
 
-                                    <div class="col-md-6">
-                                        <input id="idMedida" type="text"
-                                            class="form-control @error('idMedida') is-invalid @enderror" name="idMedida"
-                                            value="{{ old('id_medida') }}" >
+    <div class="col-md-6">
+        <input id="idMedida" type="text" class="form-control @error('idMedida') is-invalid @enderror"
+            name="idMedida[]" value="{{ old('id_medida') }}">
 
-                                        @error('idMedida')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
+        @error('idMedida')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+
 
             `);
 
                 contadorMedidas++;
             });
 
-            
+
         });
-        
     </script>
     <script>
         // Vista previa de la imagen
@@ -328,5 +323,4 @@
             reader.readAsDataURL(e.target.files[0]);
         });
     </script>
-
 @endsection

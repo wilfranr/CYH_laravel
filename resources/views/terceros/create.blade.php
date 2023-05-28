@@ -74,53 +74,27 @@
                             <div class="col-md-6">
                                 <h4>Marca</h4>
                                 <ul>
+                                    @foreach ($marcas as $marca)
                                     <li>
-                                        <input type="checkbox" name="rango[]" value="1" id="rango1">
-                                        <label for="rango1">1</label>
+                                        <input type="checkbox" name="marca[]" value="{{ $marca->id }}" id="marca{{ $marca->id }}">
+                                        <label for="marca{{ $marca->id }}">{{ $marca->nombre }}</label>
                                     </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="2" id="rango2">
-                                        <label for="rango2">2</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="3" id="rango3">
-                                        <label for="rango3">3</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="4" id="rango4">
-                                        <label for="rango4">4</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="5" id="rango5">
-                                        <label for="rango5">5</label>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="col-md-6">
-                                <h4>Sistema</h4>
+                                <h4>Sistemas</h4>
                                 <ul>
+                                    @foreach ($sistemas as $sistema)
                                     <li>
-                                        <input type="checkbox" name="rango[]" value="1" id="rango1">
-                                        <label for="rango1">1</label>
+                                        <input type="checkbox" name="sistema[]" value="{{ $sistema->id }}" id="sistema{{ $sistema->id }}">
+                                        <label for="sistema{{ $sistema->id }}">{{ $sistema->nombre }}</label>
                                     </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="2" id="rango2">
-                                        <label for="rango2">2</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="3" id="rango3">
-                                        <label for="rango3">3</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="4" id="rango4">
-                                        <label for="rango4">4</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="rango[]" value="5" id="rango5">
-                                        <label for="rango5">5</label>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
+                            
+                            
                         </div>
                     </div>
 

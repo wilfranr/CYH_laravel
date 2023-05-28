@@ -90,33 +90,26 @@ class ArticuloController extends Controller
         // Crear las medidas del articulo
         //si no se ingresan meiddas, continuar
 
-        // Validar los datos del formulario de medidas
-        $dataMedida = $request->validate([
-            'contadorMedidas' => ['required', 'integer', 'min:1'],
-            'tipoMedida' => ['nullable', 'string', 'max:255'],
-            'valorMedida' => ['nullable', 'string', 'max:255'],
-            'unidadMedida' => ['nullable', 'string', 'max:255'],
-            'idMedida' => ['nullable', 'string', 'max:255'],
+        // Obtener los datos del formulario de medidas
+        $dataMedida = $request->only(['contadorMedidas', 'tipoMedida', 'valorMedida', 'unidadMedida', 'idMedida']);
 
-        ]);
-
-
-        // Crear las medidas
-        $medidas = [];
-        $medida = new Medida();
-        for ($i = 1; $i <= $dataMedida['contadorMedidas']; $i++) {
-            $medida->nombre = $dataMedida['tipoMedida'] ?? null;
-            $medida->valor = $dataMedida['valorMedida'] ?? null;
-            $medida->unidad = $dataMedida['unidadMedida'] ?? null;
-            $medida->idMedida = $dataMedida['idMedida'] ?? null;
-            // Procesar la foto de la medida, si se proporcionó
-
-            $medidas[] = $medida;
+        // Crear y asociar las medidas al artículo
+        for ($i = 0; $i < $dataMedida['contadorMedidas']; $i++) {
+            $medida = new Medida();
+            $medida->nombre = $dataMedida['tipoMedida'][$i] ?: null;
+            $medida->valor = $dataMedida['valorMedida'][$i] ?: null;
+            $medida->unidad = $dataMedida['unidadMedida'][$i] ?: null;
+            $medida->idMedida = $dataMedida['idMedida'][$i] ?: null;
             $medida->save();
+
+            // Asociar la medida al artículo en la tabla pivot
+            $articulo->medidas()->attach($medida->id);
         }
-        //dd($dataMedida);
-        // Asociar las medidas al artículo
-        $articulo->medidas()->saveMany($medidas);
+
+
+
+
+
 
 
 
@@ -131,24 +124,24 @@ class ArticuloController extends Controller
     }
 
     public function edit($id)
-{
-    // Obtener el artículo que se va a editar
-    $articulo = Articulo::findOrFail($id);
+    {
+        // Obtener el artículo que se va a editar
+        $articulo = Articulo::findOrFail($id);
 
-    // Obtener las medidas del artículo
-    $medidas = $articulo->medidas;
+        // Obtener las medidas del artículo
+        $medidas = $articulo->medidas;
 
-    //obtener las definiciones de la lista 
-    $definiciones = Lista::where('tipo', 'Descripcion comun')->pluck('nombre', 'id');
-    $tipoMedida = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
-    $unidades = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
+        //obtener las definiciones de la lista 
+        $definiciones = Lista::where('tipo', 'Descripcion comun')->pluck('nombre', 'id');
+        $tipoMedida = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
+        $unidades = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
 
-    //obtener la marca
-    $marca = Lista::where('tipo', 'marca')->get();
+        //obtener la marca
+        $marca = Lista::where('tipo', 'marca')->get();
 
-    // Mostrar la vista de edición con los datos del artículo y sus medidas
-    return view('articulos.edit', compact('articulo', 'medidas', 'definiciones', 'marca', 'unidades', 'tipoMedida'));
-}
+        // Mostrar la vista de edición con los datos del artículo y sus medidas
+        return view('articulos.edit', compact('articulo', 'medidas', 'definiciones', 'marca', 'unidades', 'tipoMedida'));
+    }
 
     public function update(Request $request, Articulo $articulo)
     {

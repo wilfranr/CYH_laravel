@@ -34,33 +34,38 @@
                             <div class="col-md-9"><a href="{{ asset('storage/articulos/' . $articulo->fotoDescriptiva) }}"
                                     target="_blank"><img
                                         src="{{ asset('storage/articulos/' . $articulo->fotoDescriptiva) }}"
-                                        alt="Foto de la lista" width="500px"></a>
+                                        alt="Foto de articulo" width="200px"></a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 font-weight-bold">Foto medida:</div>
                             <div class="col-md-9">
                                 <a href="{{ asset('storage/articulos/' . $articulo->fotoMedida) }}" target="_blank">
-                                    <img src="{{ asset('storage/articulos/' . $articulo->fotoMedida) }}" alt="Foto de medida"
-                                        width="500px">
+                                    <img src="{{ asset('storage/articulos/' . $articulo->fotoMedida) }}"
+                                        alt="Foto de medida" width="200px">
                                 </a>
                             </div>
 
                         </div>
-                        @foreach ($articulo->medidas as $medida)
-                        @endforeach
+                        @foreach ($articulo->medidas as $index => $medida)
+                            <h3>Medida {{ $index + 1 }}</h3>
                             <div class="row">
                                 <div class="col-md-3 font-weight-bold">Tipo Medida:</div>
-                                <p>{{ $medida->nombre }} </p>
+                                <p>{{ isset($medida->nombre) ? $medida->nombre : '' }} </p>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 font-weight-bold">Valor:</div>
-                                <p>{{ $medida->valor }} {{ $medida->unidad }} </p>
+                                <p>{{ isset($medida->valor) ? $medida->valor : '' }}
+                                    {{ isset($medida->unidad) ? $medida->unidad : '' }} </p>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 font-weight-bold">Id:</div>
-                                <p>{{ $medida->idMedida }} </p>
+                                <p>{{ isset($medida->idMedida) ? $medida->idMedida : '' }} </p>
                             </div>
+                        @endforeach
+
+
+
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
