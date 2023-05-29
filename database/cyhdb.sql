@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2023 a las 06:59:34
+-- Tiempo de generación: 29-05-2023 a las 04:21:21
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -50,7 +50,21 @@ CREATE TABLE `articulos` (
 INSERT INTO `articulos` (`id`, `marca`, `sistema`, `definicion`, `referencia`, `cantidad`, `comentarios`, `descripcionEspecifica`, `peso`, `fotoDescriptiva`, `fotoMedida`, `created_at`, `updated_at`) VALUES
 (1, 'CATERPILLAR', NULL, 'Seal O Ring', 'dasd33', NULL, NULL, 'Seal', NULL, '1683347004_engranajes-y-transmisiones.jpg', '1683347004_R (3).jpeg', '2023-05-06 09:23:24', '2023-05-06 09:23:24'),
 (2, 'CATERPILLAR', NULL, 'Seal O Ring', 'FDFDF', NULL, NULL, 'Seal', NULL, '1683347210_engranajes-y-transmisiones.jpg', '1683347210_R (3).jpeg', '2023-05-06 09:26:50', '2023-05-06 09:26:50'),
-(3, 'HITACHI', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', NULL, '1683347247_engranajes-y-transmisiones.jpg', '1683347247_R (3).jpeg', '2023-05-06 09:27:27', '2023-05-06 09:27:27');
+(3, 'HITACHI', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', NULL, '1683347247_engranajes-y-transmisiones.jpg', '1683347247_R (3).jpeg', '2023-05-06 09:27:27', '2023-05-06 09:27:27'),
+(4, 'CATERPILLAR', NULL, 'Plow Bolt', '3F5108', NULL, NULL, 'Tornillo para cuchillería', NULL, '1684292369_R (4).jpeg', 'no-imagen.jpg', '2023-05-17 07:59:29', '2023-05-17 07:59:29'),
+(5, 'KOMATSU', NULL, 'Plow Bolt', '2043233', NULL, NULL, 'Tornilo para cuchillería de bulldozer', NULL, '1684292929_R (5).jpeg', 'no-imagen.jpg', '2023-05-17 08:08:49', '2023-05-17 08:08:49'),
+(6, 'Otro', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', '1685312879_OIP (4).jpeg', 'no-imagen.jpg', '2023-05-29 03:27:59', '2023-05-29 03:27:59'),
+(7, 'PERKINS', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:33:56', '2023-05-29 03:33:56'),
+(8, 'CATERPILLAR', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:39:33', '2023-05-29 03:39:33'),
+(9, 'XCMG', NULL, 'otro', 'Cadena', NULL, NULL, 'Sello', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:40:26', '2023-05-29 03:40:26'),
+(10, 'PERKINS', NULL, 'otro', 'arandela', NULL, NULL, 'prueba2', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:46:12', '2023-05-29 03:46:12'),
+(11, 'PERKINS', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'prueba2', '2332', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:47:10', '2023-05-29 03:47:10'),
+(12, 'CATERPILLAR', NULL, 'Seal O Ring', 'copa', NULL, NULL, 'Sello', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:47:43', '2023-05-29 03:47:43'),
+(13, 'PERKINS', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:50:52', '2023-05-29 03:50:52'),
+(14, 'CATERPILLAR', NULL, 'Sello de labio', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:54:48', '2023-05-29 03:54:48'),
+(15, 'CATERPILLAR', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
+(16, 'KOMATSU', NULL, 'Plow Bolt', 'arandela', NULL, NULL, 'prueba2', '200', '1685314927_OIP (6).jpeg', 'no-imagen.jpg', '2023-05-29 04:02:07', '2023-05-29 04:02:07'),
+(17, 'KOMATSU', NULL, 'Plow Bolt', 'arandela', NULL, NULL, 'prueba2', '200', '1685314994_OIP (6).jpeg', 'no-imagen.jpg', '2023-05-29 04:03:14', '2023-05-29 04:03:14');
 
 -- --------------------------------------------------------
 
@@ -71,12 +85,46 @@ CREATE TABLE `articulo_medida` (
 --
 
 INSERT INTO `articulo_medida` (`id`, `articulo_id`, `medida_id`, `created_at`, `updated_at`) VALUES
-(38, 1, 25, NULL, NULL),
-(39, 1, 26, NULL, NULL),
-(40, 2, 27, NULL, NULL),
-(41, 2, 27, NULL, NULL),
-(42, 3, 28, NULL, NULL),
-(43, 3, 28, NULL, NULL);
+(52, 8, 1, NULL, NULL),
+(53, 8, 2, NULL, NULL),
+(54, 9, 3, NULL, NULL),
+(55, 9, 4, NULL, NULL),
+(56, 13, 5, NULL, NULL),
+(57, 13, 6, NULL, NULL),
+(58, 14, 7, NULL, NULL),
+(59, 14, 8, NULL, NULL),
+(60, 15, 9, NULL, NULL),
+(61, 15, 10, NULL, NULL),
+(62, 16, 11, NULL, NULL),
+(63, 17, 12, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `articulo_temporal`
+--
+
+CREATE TABLE `articulo_temporal` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pedido_id` bigint(20) UNSIGNED NOT NULL,
+  `referencia` varchar(255) DEFAULT NULL,
+  `definicion` varchar(255) DEFAULT NULL,
+  `sistema` varchar(255) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `comentarios` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `articulo_temporal`
+--
+
+INSERT INTO `articulo_temporal` (`id`, `pedido_id`, `referencia`, `definicion`, `sistema`, `cantidad`, `comentarios`, `created_at`, `updated_at`) VALUES
+(7, 10, '1', 'aa', NULL, 1, NULL, '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
+(8, 11, '1', 'aa', NULL, 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
+(9, 11, 'arandela', 'def', 'sis', 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
+(10, 12, NULL, 'Emaquetadura de botella', NULL, NULL, NULL, '2023-05-17 08:38:50', '2023-05-17 08:38:50');
 
 -- --------------------------------------------------------
 
@@ -4481,7 +4529,52 @@ INSERT INTO `contactos` (`id`, `nombre`, `telefono`, `email`, `created_at`, `upd
 (24, 'contacto de cliente 8', '6578676', 'email@fact', '2023-04-24 04:39:48', '2023-04-24 04:39:48'),
 (25, 'contacto de cliente 7', '6578676', 'email@fact', '2023-04-24 04:41:24', '2023-04-24 04:41:24'),
 (26, 'contacto de cliente 7', '6578676', 'email@fact', '2023-04-24 04:44:18', '2023-04-24 04:44:18'),
-(27, 'contacto de cliente 2', '6578676', 'email@fact', '2023-04-24 04:52:22', '2023-04-24 04:52:22');
+(27, 'contacto de cliente 2', '6578676', 'email@fact', '2023-04-24 04:52:22', '2023-04-24 04:52:22'),
+(28, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-09 08:49:05', '2023-05-09 08:49:05'),
+(29, 'Cesar Villamizar', '31254014852', 'trasnmaquiobras@hotmail.com', '2023-05-17 08:33:26', '2023-05-17 08:33:26'),
+(30, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-28 21:56:11', '2023-05-28 21:56:11'),
+(31, 'contacto de cliente 2', '6578676', 'w@q', '2023-05-28 22:02:16', '2023-05-28 22:02:16'),
+(32, 'contacto de cliente 2', '6578676', 'w@q', '2023-05-28 22:03:21', '2023-05-28 22:03:21'),
+(33, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-28 22:05:07', '2023-05-28 22:05:07'),
+(34, 'contacto de cliente 5', '6578676', NULL, '2023-05-28 23:00:26', '2023-05-28 23:00:26'),
+(35, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-28 23:05:31', '2023-05-28 23:05:31'),
+(36, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-28 23:13:21', '2023-05-28 23:13:21'),
+(37, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-28 23:17:36', '2023-05-28 23:17:36'),
+(38, 'contacto de cliente 1', '6578676', 'email@fact', '2023-05-28 23:19:20', '2023-05-28 23:19:20'),
+(39, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-28 23:24:22', '2023-05-28 23:24:22'),
+(40, 'contacto de cliente 8', '6578676', 'wilfranr@gmail.com', '2023-05-28 23:29:31', '2023-05-28 23:29:31'),
+(41, 'contacto de cliente 7', '6578676', 'wilfranr@gmail.com', '2023-05-28 23:30:50', '2023-05-28 23:30:50'),
+(42, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-28 23:34:25', '2023-05-28 23:34:25'),
+(43, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-28 23:41:54', '2023-05-28 23:41:54'),
+(44, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:01:18', '2023-05-29 00:01:18'),
+(45, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-29 00:05:24', '2023-05-29 00:05:24'),
+(46, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:06:34', '2023-05-29 00:06:34'),
+(47, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-29 00:08:42', '2023-05-29 00:08:42'),
+(48, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-29 00:09:07', '2023-05-29 00:09:07'),
+(49, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-29 00:12:05', '2023-05-29 00:12:05'),
+(50, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-29 00:16:04', '2023-05-29 00:16:04'),
+(51, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:17:16', '2023-05-29 00:17:16'),
+(52, 'contacto cliente 7', '6578676', 'email@fact', '2023-05-29 00:17:16', '2023-05-29 00:17:16'),
+(53, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:41:18', '2023-05-29 00:41:18'),
+(54, 'contacto de cliente 2', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:44:10', '2023-05-29 00:44:10'),
+(55, 'contacto cliente 7', '6578676', 'email@fact', '2023-05-29 00:44:10', '2023-05-29 00:44:10'),
+(56, 'contacto de cliente 5', '6578676', 'email@fact', '2023-05-29 00:45:02', '2023-05-29 00:45:02'),
+(57, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:52:21', '2023-05-29 00:52:21'),
+(58, 'contacto cliente 7', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:52:21', '2023-05-29 00:52:21'),
+(59, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 00:52:59', '2023-05-29 00:52:59'),
+(60, 'contacto de cliente 7', '6578676', 'email@fact', '2023-05-29 00:54:41', '2023-05-29 00:54:41'),
+(61, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:04:07', '2023-05-29 01:04:07'),
+(62, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:04:32', '2023-05-29 01:04:32'),
+(63, 'contacto cliente 7', '6578676', 'email@fact', '2023-05-29 01:04:32', '2023-05-29 01:04:32'),
+(64, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:10:02', '2023-05-29 01:10:02'),
+(65, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:25:17', '2023-05-29 01:25:17'),
+(66, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:26:22', '2023-05-29 01:26:22'),
+(67, 'contacto cliente 7', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:26:22', '2023-05-29 01:26:22'),
+(68, 'contacto de cliente 5', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:26:53', '2023-05-29 01:26:53'),
+(69, 'contacto cliente 7', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:26:53', '2023-05-29 01:26:53'),
+(70, 'contacto de cliente 2', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:41:21', '2023-05-29 01:41:21'),
+(71, 'contacto cliente 7', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:41:21', '2023-05-29 01:41:21'),
+(72, 'contacto de cliente 2', '6578676', 'email@fact', '2023-05-29 01:43:06', '2023-05-29 01:43:06');
 
 -- --------------------------------------------------------
 
@@ -4502,25 +4595,14 @@ CREATE TABLE `contacto_tercero` (
 --
 
 INSERT INTO `contacto_tercero` (`id`, `contacto_id`, `tercero_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 41, NULL, NULL),
-(2, 3, 43, NULL, NULL),
-(3, 4, 45, NULL, NULL),
-(4, 5, 47, NULL, NULL),
-(5, 6, 50, NULL, NULL),
-(6, 7, 56, NULL, NULL),
-(7, 8, 58, NULL, NULL),
-(8, 9, 59, NULL, NULL),
-(9, 10, 61, NULL, NULL),
-(10, 11, 62, NULL, NULL),
-(11, 12, 69, NULL, NULL),
-(12, 13, 70, NULL, NULL),
-(13, 14, 71, NULL, NULL),
-(18, 19, 74, NULL, NULL),
-(19, 20, 77, NULL, NULL),
-(20, 21, 78, NULL, NULL),
-(21, 22, 81, NULL, NULL),
-(22, 23, 82, NULL, NULL),
-(23, 24, 83, NULL, NULL);
+(64, 65, 54, NULL, NULL),
+(65, 66, 55, NULL, NULL),
+(66, 67, 55, NULL, NULL),
+(67, 68, 56, NULL, NULL),
+(68, 69, 56, NULL, NULL),
+(69, 70, 61, NULL, NULL),
+(70, 71, 61, NULL, NULL),
+(71, 72, 63, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4561,6 +4643,21 @@ CREATE TABLE `failed_jobs` (
 CREATE TABLE `foto_articulo` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `IdArticulo` int(11) NOT NULL,
+  `ruta` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `articulo_temporal_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagenes_articulo`
+--
+
+CREATE TABLE `imagenes_articulo` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `articulo_id` bigint(20) UNSIGNED NOT NULL,
   `ruta` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -4623,7 +4720,11 @@ INSERT INTO `listas` (`id`, `tipo`, `nombre`, `definicion`, `foto`, `created_at`
 (38, 'Medida', 'Alto', 'Alto', 'no-imagen.jpg', '2023-05-06 09:54:36', '2023-05-06 09:54:36'),
 (39, 'Medida', 'Largo', 'Largo', 'no-imagen.jpg', '2023-05-06 09:54:45', '2023-05-06 09:54:45'),
 (40, 'Medida', 'Ancho', 'Ancho', 'no-imagen.jpg', '2023-05-06 09:54:55', '2023-05-06 09:54:55'),
-(41, 'Medida', 'Radio', 'Radio', 'no-imagen.jpg', '2023-05-06 09:55:39', '2023-05-06 09:55:39');
+(41, 'Medida', 'Radio', 'Radio', 'no-imagen.jpg', '2023-05-06 09:55:39', '2023-05-06 09:55:39'),
+(42, 'Medida', 'Volumen', 'Volumen', 'no-imagen.jpg', '2023-05-11 07:27:36', '2023-05-11 07:27:36'),
+(44, 'Sistema', 'prueba', 'prueba', 'no-imagen.jpg', '2023-05-11 07:30:36', '2023-05-11 07:30:36'),
+(47, 'Descripción común', 'Plow Bolt', 'Tornillo avellanado', '1684291893_832588a47488d1064f175392e9e6732c--countersunk-bolts-zero.jpg', '2023-05-17 07:51:33', '2023-05-17 07:51:33'),
+(49, 'Unidad medida', 'In', 'Pulgada', 'no-imagen.jpg', '2023-05-17 08:23:18', '2023-05-17 08:23:18');
 
 -- --------------------------------------------------------
 
@@ -4680,7 +4781,37 @@ INSERT INTO `maquinas` (`id`, `tipo`, `marca`, `modelo`, `serie`, `arreglo`, `fo
 (3, 'Cargador', 'KOMATSU', '4FRT555T', '5T5666Y', '45566HTY666', '1682954062_OIP (4).jpeg', '', '2023-04-29 03:07:55', '2023-05-01 20:14:22'),
 (4, 'Bulldozer', 'CATERPILLAR', 'D6R', '12345', '12345', '1682954019_R.jpeg', NULL, '2023-04-29 10:21:56', '2023-05-01 20:13:39'),
 (5, 'Bulldozer', 'CATERPILLAR', '936', '12345', '12345', '1682748621_OIP (1).jpeg', NULL, '2023-04-29 11:10:21', '2023-04-29 13:01:38'),
-(6, 'Motoniveladora', 'CATERPILLAR', '120M', 'xjr00210', '12345', '1682773013_OIP (3).jpeg', NULL, '2023-04-29 17:56:53', '2023-04-29 17:56:53');
+(6, 'Motoniveladora', 'CATERPILLAR', '120M', 'xjr00210', '12345', '1682773013_OIP (3).jpeg', NULL, '2023-04-29 17:56:53', '2023-04-29 17:56:53'),
+(7, 'Cargador', 'CATERPILLAR', 'PC200-7', 'xjr00210', '12345', NULL, NULL, '2023-05-17 08:30:10', '2023-05-17 08:30:10');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maquinas_pedido`
+--
+
+CREATE TABLE `maquinas_pedido` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `maquina_id` bigint(20) UNSIGNED NOT NULL,
+  `pedido_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `maquinas_pedido`
+--
+
+INSERT INTO `maquinas_pedido` (`id`, `maquina_id`, `pedido_id`, `created_at`, `updated_at`) VALUES
+(107, 5, 4, '2023-05-16 06:52:53', '2023-05-16 06:52:53'),
+(108, 2, 5, '2023-05-16 07:02:58', '2023-05-16 07:02:58'),
+(109, 1, 6, '2023-05-16 07:04:03', '2023-05-16 07:04:03'),
+(110, 2, 7, '2023-05-16 07:11:05', '2023-05-16 07:11:05'),
+(111, 2, 8, '2023-05-16 07:13:46', '2023-05-16 07:13:46'),
+(112, 2, 9, '2023-05-16 07:14:12', '2023-05-16 07:14:12'),
+(113, 2, 10, '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
+(114, 2, 11, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
+(115, 7, 12, '2023-05-17 08:38:50', '2023-05-17 08:38:50');
 
 -- --------------------------------------------------------
 
@@ -4695,6 +4826,28 @@ CREATE TABLE `maquina_articulo` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcas`
+--
+
+CREATE TABLE `marcas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `marcas`
+--
+
+INSERT INTO `marcas` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'Caterpillar', '0000-00-00 00:00:00', NULL),
+(2, 'Komatsu', '2023-05-28 16:45:14', '2023-05-28 05:00:00'),
+(3, 'Hitachi', '2023-05-27 16:44:43', '2023-05-27 16:44:43');
 
 -- --------------------------------------------------------
 
@@ -4719,34 +4872,18 @@ CREATE TABLE `medidas` (
 --
 
 INSERT INTO `medidas` (`id`, `nombre`, `unidad`, `valor`, `tipo`, `idMedida`, `foto`, `created_at`, `updated_at`) VALUES
-(1, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:32:07', '2023-05-06 08:32:07'),
-(2, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:32:07', '2023-05-06 08:32:07'),
-(3, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:33:19', '2023-05-06 08:33:19'),
-(4, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:33:19', '2023-05-06 08:33:19'),
-(5, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:41:52', '2023-05-06 08:41:52'),
-(6, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:41:52', '2023-05-06 08:41:52'),
-(7, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:46:44', '2023-05-06 08:46:44'),
-(8, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:46:44', '2023-05-06 08:46:44'),
-(9, 'diametro', NULL, '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:48:25', '2023-05-06 08:48:25'),
-(10, 'diametro', NULL, '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:48:25', '2023-05-06 08:48:25'),
-(11, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:51:20', '2023-05-06 08:51:20'),
-(12, 'diametro', 'mm', '30', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:51:20', '2023-05-06 08:51:20'),
-(13, 'peso', 'mm', '200', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:52:27', '2023-05-06 08:52:27'),
-(14, 'peso', 'mm', '200', NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:52:27', '2023-05-06 08:52:27'),
-(15, 'diametro', NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:54:09', '2023-05-06 08:54:09'),
-(16, 'diametro', NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:54:09', '2023-05-06 08:54:09'),
-(17, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:57:00', '2023-05-06 08:57:00'),
-(18, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:57:00', '2023-05-06 08:57:00'),
-(19, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:58:21', '2023-05-06 08:58:21'),
-(20, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-05-06 08:58:21', '2023-05-06 08:58:21'),
-(21, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-06 09:12:17', '2023-05-06 09:12:17'),
-(22, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-06 09:12:17', '2023-05-06 09:12:17'),
-(23, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-06 09:20:19', '2023-05-06 09:20:19'),
-(24, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-06 09:20:19', '2023-05-06 09:20:19'),
-(25, 'diametro', 'mm', '30', NULL, 'E', NULL, '2023-05-06 09:23:24', '2023-05-06 09:23:24'),
-(26, 'diametro', 'mm', '30', NULL, 'E', NULL, '2023-05-06 09:23:24', '2023-05-06 09:23:24'),
-(27, 'peso', 'Kg', '200', NULL, NULL, NULL, '2023-05-06 09:26:50', '2023-05-06 09:26:50'),
-(28, 'diametro', 'Kg', '30', NULL, NULL, NULL, '2023-05-06 09:27:27', '2023-05-06 09:27:27');
+(1, 'Volumen', 'cc', '200', NULL, 'D', NULL, '2023-05-29 03:39:33', '2023-05-29 03:39:33'),
+(2, 'Volumen', 'cc', '200', NULL, 'D', NULL, '2023-05-29 03:39:33', '2023-05-29 03:39:33'),
+(3, 'diametro', 'mm', '30', NULL, 'E', NULL, '2023-05-29 03:40:26', '2023-05-29 03:40:26'),
+(4, 'diametro', 'mm', '30', NULL, 'E', NULL, '2023-05-29 03:40:26', '2023-05-29 03:40:26'),
+(5, 'Alto', 'Kg', '76', NULL, '76', NULL, '2023-05-29 03:50:52', '2023-05-29 03:50:52'),
+(6, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-29 03:50:52', '2023-05-29 03:50:52'),
+(7, 'Radio', 'cc', '2', NULL, '7', NULL, '2023-05-29 03:54:48', '2023-05-29 03:54:48'),
+(8, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-29 03:54:48', '2023-05-29 03:54:48'),
+(9, 'diametro', 'Kg', '1', NULL, '7', NULL, '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
+(10, 'peso', 'Kg', '678', NULL, '7', NULL, '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
+(11, 'diametro', 'mm', '1', NULL, '7', NULL, '2023-05-29 04:02:07', '2023-05-29 04:02:07'),
+(12, 'diametro', 'mm', '1', NULL, '7', NULL, '2023-05-29 04:03:14', '2023-05-29 04:03:14');
 
 -- --------------------------------------------------------
 
@@ -4786,7 +4923,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2023_05_01_190203_create_medidas_table', 14),
 (28, '2023_05_01_190713_create_articulo_medida_table', 15),
 (29, '2023_05_01_192659_drop_table_articulo_medida', 16),
-(30, '2023_05_01_192936_create_articulo_medida_table', 17);
+(30, '2023_05_01_192936_create_articulo_medida_table', 17),
+(31, '2023_05_14_041205_create_imagenes_articulo_table', 18),
+(32, '2023_05_14_163917_create_maquinas_pedido_table', 19),
+(33, '2023_05_14_210635_create_articulo_temporal_table', 20),
+(34, '2023_05_16_021614_create_pedidos_articulos_temporales_table', 21),
+(35, '2023_05_28_163134_create_marcas_table', 22),
+(37, '2023_05_28_163813_create_terceros_marcas_table', 23),
+(38, '2023_05_28_192729_create_sistemas_table', 24);
 
 -- --------------------------------------------------------
 
@@ -5120,15 +5264,41 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `pedidos` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `codPedido` varchar(255) NOT NULL,
-  `codUsuario` int(11) NOT NULL,
-  `codCliente` int(11) NOT NULL,
-  `codMaquina` int(11) NOT NULL,
-  `fecha_creacion` date NOT NULL,
-  `fecha_modificacion` date NOT NULL,
-  `descripcion` varchar(255) NOT NULL,
-  `contacto` varchar(255) NOT NULL,
-  `estado` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `tercero_id` int(11) NOT NULL,
+  `maquina_id` int(11) DEFAULT NULL,
+  `comentario` varchar(255) DEFAULT NULL,
+  `contacto_id` int(11) DEFAULT NULL,
+  `estado` varchar(255) NOT NULL DEFAULT 'Nuevo',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `user_id`, `tercero_id`, `maquina_id`, `comentario`, `contacto_id`, `estado`, `created_at`, `updated_at`) VALUES
+(4, 1, 3, NULL, '5', NULL, 'Nuevo', '2023-05-16 06:52:53', '2023-05-16 06:52:53'),
+(5, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:02:58', '2023-05-16 07:02:58'),
+(6, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:04:03', '2023-05-16 07:04:03'),
+(7, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:11:05', '2023-05-16 07:11:05'),
+(8, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:13:46', '2023-05-16 07:13:46'),
+(9, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:14:12', '2023-05-16 07:14:12'),
+(10, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
+(11, 1, 1, NULL, NULL, 28, 'Procesando', '2023-05-16 07:21:34', '2023-05-16 07:47:05'),
+(12, 1, 4, NULL, NULL, 29, 'Procesando', '2023-05-17 08:38:50', '2023-05-17 08:48:14');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos_articulos_temporales`
+--
+
+CREATE TABLE `pedidos_articulos_temporales` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pedido_id` bigint(20) UNSIGNED NOT NULL,
+  `articulo_temporal_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5155,6 +5325,27 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sistemas`
+--
+
+CREATE TABLE `sistemas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sistemas`
+--
+
+INSERT INTO `sistemas` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(3, 'Motor', '2023-05-01 20:23:09', '2023-05-01 20:23:09'),
+(4, 'Bomba hidráulica', '2023-05-21 20:23:09', '2023-05-21 20:23:09');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `terceros`
 --
 
@@ -5167,8 +5358,8 @@ CREATE TABLE `terceros` (
   `telefono` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dv` varchar(255) DEFAULT NULL,
-  `CiudadID` int(11) NOT NULL,
-  `PaisCodigo` char(3) DEFAULT NULL,
+  `CiudadID` int(11) DEFAULT 2257,
+  `PaisCodigo` char(3) DEFAULT 'COL',
   `codigo_postal` varchar(255) DEFAULT NULL,
   `estado` varchar(255) DEFAULT 'activo',
   `forma_pago` varchar(255) DEFAULT NULL,
@@ -5176,7 +5367,7 @@ CREATE TABLE `terceros` (
   `rut` varchar(255) DEFAULT NULL,
   `certificacion_bancaria` varchar(255) DEFAULT NULL,
   `sitio_web` varchar(255) DEFAULT NULL,
-  `puntos` int(11) NOT NULL DEFAULT 0,
+  `puntos` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `tipo` varchar(255) DEFAULT NULL
@@ -5187,65 +5378,18 @@ CREATE TABLE `terceros` (
 --
 
 INSERT INTO `terceros` (`id`, `nombre`, `tipo_documento`, `numero_documento`, `direccion`, `telefono`, `email`, `dv`, `CiudadID`, `PaisCodigo`, `codigo_postal`, `estado`, `forma_pago`, `email_factura_electronica`, `rut`, `certificacion_bancaria`, `sitio_web`, `puntos`, `created_at`, `updated_at`, `tipo`) VALUES
-(24, 'saer', 'nit', '64564564', 'asdf', '444987987', 'w@q', '7', 2257, 'COL', NULL, NULL, NULL, 'email@factura', NULL, NULL, NULL, 0, '2023-04-13 07:39:17', '2023-05-07 08:11:33', 'proveedor'),
-(28, 'fdgfgfdfdfd', 'cedula', '23423432443534', 'asdf', '222', 'email@sssss', NULL, 2257, 'COL', NULL, NULL, NULL, 'email@factura', 'MbkLa3vStrMKyXwCQDj0YdWn5VQamSU1XIuYMIZI.pdf', 'certificaciones/tJpJ14yjg6wLSocYAjiBTkBFUhy1UxG1121bfcgm.pdf', 'www.provvedor.com', 0, '2023-04-13 08:08:38', '2023-04-13 08:08:38', 'cliente'),
-(29, 'dfgdfgfd', 'cedula', '435345435', 'asdf', '444', 'email@sssss', NULL, 2257, 'COL', NULL, NULL, NULL, 'email@factura', 'rut/aAp25f90NF4yd1fbnwqvfjZQjaxdtmz7cziAuZqW.pdf', 'certificaciones/O9ktn9fJWvTdE6avBo7SkjjQ4CIbRH8wUJONX3jI.pdf', 'www.prveedor.com', 0, '2023-04-13 08:22:13', '2023-04-13 08:22:13', 'cliente'),
-(30, 'assdfgf', 'cedula', '8768687', 'asdf', '222', 'email@sssss', NULL, 2257, 'COL', NULL, NULL, NULL, 'email@factura', NULL, NULL, 'www.prveedor.com', 0, '2023-04-14 08:16:51', '2023-04-14 08:16:51', 'cliente'),
-(31, 'fdgfgfdg', 'cedula', '435345345', 'asdf', '222', 'email@sssss', NULL, 2257, 'COL', NULL, NULL, NULL, 'email@factura', NULL, NULL, 'www.prveedor.com', 0, '2023-04-14 08:20:48', '2023-04-14 08:20:48', 'cliente'),
-(32, 'cliente con contacto1', 'cedula', '765786555', 'asdf', '444', 'wilfranr@gmail.com', NULL, 174, 'BRB', NULL, NULL, NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 06:28:48', '2023-04-23 06:28:48', 'cliente'),
-(33, 'cliente con contacto2', 'cedula', '454365645', 'asdf', '444', 'w@q', NULL, 2257, 'COL', NULL, NULL, NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 06:37:18', '2023-04-23 06:37:18', 'cliente'),
-(34, 'cliente con contacto3', 'cedula', '4534534', 'asdf', '222', 'w@q', NULL, 193, 'BOL', NULL, NULL, NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 06:52:33', '2023-04-23 06:52:33', 'cliente'),
-(35, 'cliente con contacto4', 'cedula', '6547654', 'asdf', '444', 'w@q', NULL, 193, 'BOL', NULL, NULL, NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 06:58:52', '2023-04-23 06:58:52', 'cliente'),
-(36, 'cliente con contacto4', 'cedula', '6547654', 'asdf', '444', 'w@q', NULL, 34, 'ALB', NULL, NULL, NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 07:02:11', '2023-04-23 07:02:11', 'cliente'),
-(37, 'cliente con contacto5', 'cedula', '5345345', 'asdf', '6578676', 'w@q', NULL, 1, 'AFG', NULL, NULL, NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 23:34:45', '2023-04-23 23:34:45', 'cliente'),
-(38, 'cliente con contacto6', 'cedula', '5345345', 'asdf', '6578676', 'w@q', NULL, 64, 'ARE', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 23:35:54', '2023-04-23 23:35:54', 'cliente'),
-(39, 'cliente con contacto7', 'cedula', '5345345', 'asdf', '6578676', 'w@q', NULL, 34, 'ALB', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 23:39:22', '2023-04-23 23:39:22', 'cliente'),
-(40, 'cliente con contacto7', 'cedula', '5345345', 'asdf', '6578676', 'w@q', NULL, 64, 'ARE', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.provvedor.com', 0, '2023-04-23 23:41:22', '2023-04-23 23:41:22', 'cliente'),
-(41, 'cliente con contacto7', 'cedula', '453534534', 'asdf', '6578676', 'email@fact', NULL, 61, 'AIA', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 01:54:39', '2023-04-24 01:54:39', 'cliente'),
-(42, 'cliente con contacto7', 'cedula', '453534534', 'asdf', '6578676', 'email@fact', NULL, 130, 'AUS', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 01:54:50', '2023-04-24 01:54:50', 'cliente'),
-(43, 'cliente con contacto8', 'cedula', '453534534', 'asdf', '6578676', 'email@fact', NULL, 4091, 'ATA', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 01:56:10', '2023-04-24 01:56:10', 'cliente'),
-(44, 'cliente con contacto8', 'cedula', '453534534', 'asdf', '6578676', 'email@fact', NULL, 4092, 'ATF', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 01:56:42', '2023-04-24 01:56:42', 'cliente'),
-(45, 'cliente con contacto9', 'cedula', '453534534', 'asdf', '6578676', 'email@fact', NULL, 2265, 'COL', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 01:57:30', '2023-04-24 01:57:30', 'cliente'),
-(46, 'Cliente con contacto 10', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 2265, 'COL', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:08:06', '2023-04-24 02:08:06', 'cliente'),
-(47, 'Cliente con contacto 11', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 2259, 'COL', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:11:56', '2023-04-24 02:11:56', 'cliente'),
-(48, 'Cliente 12', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 130, 'AUS', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:15:22', '2023-04-24 02:15:22', 'cliente'),
-(49, 'cliente con contacto13', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 3245, 'CHE', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:15:56', '2023-04-24 02:15:56', 'cliente'),
-(50, 'cliente con contacto14', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 206, 'BRA', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:16:57', '2023-04-24 02:16:57', 'cliente'),
-(51, 'cliente con contacto15', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 144, 'AZE', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:20:27', '2023-04-24 02:20:27', 'cliente'),
-(52, 'cliente con contacto16', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 4092, 'ATF', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:25:25', '2023-04-24 02:25:25', 'cliente'),
-(53, 'cliente con contacto17', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 64, 'ARE', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:26:36', '2023-04-24 02:26:36', 'cliente'),
-(54, 'cliente con contacto18', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 552, 'BDI', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:27:05', '2023-04-24 02:27:05', 'cliente'),
-(55, 'cliente con contacto18', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 4092, 'ATF', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:27:12', '2023-04-24 02:27:12', 'cliente'),
-(56, 'cliente con contacto18', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 69, 'ARG', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:27:25', '2023-04-24 02:27:25', 'cliente'),
-(57, 'cliente con contacto19', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 1523, 'AUT', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:29:18', '2023-04-24 02:29:18', 'cliente'),
-(58, 'cliente con contacto20', 'cedula', '453456436', 'asdf', '6578676', 'email@fact', NULL, 126, 'ARM', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:31:09', '2023-04-24 02:31:09', 'cliente'),
-(59, 'cliente con contacto20', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 2265, 'COL', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:32:04', '2023-04-24 02:32:04', 'cliente'),
-(60, 'cliente con contacto21', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 1523, 'AUT', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:33:13', '2023-04-24 02:33:13', 'cliente'),
-(61, 'cliente con contacto22', 'cedula', '12345', 'asdf', '3137038949', 'email@fact', NULL, 1, 'AFG', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:34:06', '2023-04-24 02:34:06', 'cliente'),
-(62, 'cliente con contacto23', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 34, 'ALB', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:35:22', '2023-04-24 02:35:22', 'cliente'),
-(63, 'cliente con contacto24', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 63, 'ATG', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:36:16', '2023-04-24 02:36:16', 'cliente'),
-(64, 'cliente con contacto25', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 63, 'ATG', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:36:46', '2023-04-24 02:36:46', 'cliente'),
-(65, 'cliente con contacto26', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 552, 'BDI', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:37:38', '2023-04-24 02:37:38', 'cliente'),
-(66, 'cliente con contacto27', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 130, 'AUS', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:37:52', '2023-04-24 02:37:52', 'cliente'),
-(67, 'cliente con contacto27', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 63, 'ATG', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:38:32', '2023-04-24 02:38:32', 'cliente'),
-(68, 'cliente con contacto28', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 33, 'ANT', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:38:57', '2023-04-24 02:38:57', 'cliente'),
-(69, 'cliente con contacto29', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 144, 'AZE', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:39:22', '2023-04-24 02:39:22', 'cliente'),
-(70, 'cliente con contacto30', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 33, 'ANT', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:39:51', '2023-04-24 02:39:51', 'cliente'),
-(71, 'cliente con contacto31', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 175, 'BEL', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:40:28', '2023-04-24 02:40:28', 'cliente'),
-(72, 'cliente con contacto32', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 144, 'AZE', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:41:46', '2023-04-24 02:41:46', 'cliente'),
-(73, 'cliente con contacto33', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 2812, 'CIV', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:42:30', '2023-04-24 02:42:30', 'cliente'),
-(74, 'cliente con contacto34', 'cedula', '12345', 'asdf', '3137038949', 'email@fact', NULL, 184, 'BLZ', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:43:04', '2023-04-24 02:43:04', 'cliente'),
-(75, 'cliente con contacto35', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 63, 'ATG', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:44:32', '2023-04-24 02:44:32', 'cliente'),
-(76, 'cliente con contacto35', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 34, 'ALB', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:45:05', '2023-04-24 02:45:05', 'cliente'),
-(77, 'cliente con contacto35', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 4091, 'ATA', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:45:34', '2023-04-24 02:45:34', 'cliente'),
-(78, 'cliente con contacto36', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 204, 'BWA', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 02:46:06', '2023-04-24 02:46:06', 'cliente'),
-(79, 'cliente con contacto37', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 1890, 'CHN', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 04:35:41', '2023-04-24 04:35:41', 'cliente'),
-(80, 'cliente con contacto38', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 585, 'DJI', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 04:36:25', '2023-04-24 04:36:25', 'cliente'),
-(81, 'cliente con contacto39', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 553, 'CYM', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 04:37:07', '2023-04-24 04:37:07', 'cliente'),
-(82, 'cliente con contacto40', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 756, 'ETH', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 04:39:00', '2023-04-24 04:39:00', 'cliente'),
-(83, 'cliente con contacto41', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 915, 'GIB', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 04:39:48', '2023-04-24 04:39:48', 'cliente'),
-(84, 'cliente con contacto42', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 2401, 'GRC', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 04:40:15', '2023-04-24 04:40:15', 'cliente'),
-(85, 'cliente con contacto43', 'cedula', '12345', 'asdf', '6578676', 'email@fact', NULL, 1889, 'CAF', NULL, 'activo', NULL, 'email@fact', NULL, NULL, 'www.provvedor.com', 0, '2023-04-24 04:40:45', '2023-04-24 04:40:45', 'cliente');
+(52, 'PROVEEDOR 1', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:21:09', '2023-05-29 01:21:09', 'proveedor'),
+(53, 'proveedor 2', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:22:24', '2023-05-29 01:22:24', 'proveedor'),
+(54, 'proveedor 3', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:25:17', '2023-05-29 01:25:17', 'proveedor'),
+(55, 'proveedor 4', 'nit', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:26:22', '2023-05-29 01:26:22', 'proveedor'),
+(56, 'proveedor 4', 'nit', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:26:53', '2023-05-29 01:26:53', 'proveedor'),
+(57, 'cliente con contacto7', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:27:25', '2023-05-29 01:27:25', 'proveedor'),
+(58, 'Provvedor 5', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:38:45', '2023-05-29 01:38:45', 'proveedor'),
+(59, 'cliente 1', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 552, 'BDI', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.provvedor.com', NULL, '2023-05-29 01:39:20', '2023-05-29 01:39:20', 'cliente'),
+(60, 'damian', 'nit', '80896995', 'asdf', '6578676', 'w@q', '8', 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:40:10', '2023-05-29 01:40:10', 'cliente'),
+(61, 'cliente con contacto7', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:41:21', '2023-05-29 01:41:21', 'cliente'),
+(62, 'damian', 'cedula', '11111', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.prveedor.com', NULL, '2023-05-29 01:42:33', '2023-05-29 01:42:33', 'cliente'),
+(63, 'damiareeee', 'cedula', '11111', 'asdf', '6578676', 'wilfranr@gmail.com', NULL, 56, 'AGO', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.prveedor.com', NULL, '2023-05-29 01:43:06', '2023-05-29 01:43:06', 'proveedor');
 
 -- --------------------------------------------------------
 
@@ -5266,39 +5410,57 @@ CREATE TABLE `tercero_maquina` (
 --
 
 INSERT INTO `tercero_maquina` (`id`, `tercero_id`, `maquina_id`, `created_at`, `updated_at`) VALUES
-(1, 31, 1, NULL, NULL),
-(2, 32, 1, NULL, NULL),
-(3, 41, 1, NULL, NULL),
-(4, 41, 2, NULL, NULL),
-(5, 42, 1, NULL, NULL),
-(6, 44, 1, NULL, NULL),
-(7, 45, 2, NULL, NULL),
-(8, 47, 2, NULL, NULL),
-(9, 49, 1, NULL, NULL),
-(10, 50, 1, NULL, NULL),
-(11, 51, 1, NULL, NULL),
-(12, 52, 1, NULL, NULL),
-(13, 55, 1, NULL, NULL),
-(14, 56, 1, NULL, NULL),
-(15, 58, 1, NULL, NULL),
-(16, 59, 2, NULL, NULL),
-(17, 61, 1, NULL, NULL),
-(18, 67, 2, NULL, NULL),
-(19, 68, 1, NULL, NULL),
-(20, 69, 1, NULL, NULL),
-(21, 70, 1, NULL, NULL),
-(22, 71, 1, NULL, NULL),
-(23, 72, 1, NULL, NULL),
-(24, 73, 1, NULL, NULL),
-(25, 74, 1, NULL, NULL),
-(26, 75, 1, NULL, NULL),
-(27, 76, 1, NULL, NULL),
-(28, 77, 1, NULL, NULL),
-(29, 78, 1, NULL, NULL),
-(30, 80, 1, NULL, NULL),
-(31, 81, 2, NULL, NULL),
-(32, 82, 1, NULL, NULL),
-(33, 83, 2, NULL, NULL);
+(45, 61, 1, NULL, NULL),
+(46, 61, 4, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tercero_marca`
+--
+
+CREATE TABLE `tercero_marca` (
+  `tercero_id` bigint(20) UNSIGNED NOT NULL,
+  `marca_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tercero_marca`
+--
+
+INSERT INTO `tercero_marca` (`tercero_id`, `marca_id`, `created_at`, `updated_at`) VALUES
+(52, 1, NULL, NULL),
+(53, 1, NULL, NULL),
+(54, 1, NULL, NULL),
+(55, 3, NULL, NULL),
+(56, 3, NULL, NULL),
+(58, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tercero_sistema`
+--
+
+CREATE TABLE `tercero_sistema` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tercero_id` bigint(20) UNSIGNED NOT NULL,
+  `sistema_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tercero_sistema`
+--
+
+INSERT INTO `tercero_sistema` (`id`, `tercero_id`, `sistema_id`, `created_at`, `updated_at`) VALUES
+(19, 54, 3, NULL, NULL),
+(20, 55, 4, NULL, NULL),
+(21, 56, 4, NULL, NULL),
+(22, 58, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5342,6 +5504,12 @@ ALTER TABLE `articulo_medida`
   ADD PRIMARY KEY (`id`),
   ADD KEY `articulo_medida_articulo_id_foreign` (`articulo_id`),
   ADD KEY `articulo_medida_medida_id_foreign` (`medida_id`);
+
+--
+-- Indices de la tabla `articulo_temporal`
+--
+ALTER TABLE `articulo_temporal`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `ciudad`
@@ -5390,6 +5558,12 @@ ALTER TABLE `foto_articulo`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `imagenes_articulo`
+--
+ALTER TABLE `imagenes_articulo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `listas`
 --
 ALTER TABLE `listas`
@@ -5408,12 +5582,26 @@ ALTER TABLE `maquinas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `maquinas_pedido`
+--
+ALTER TABLE `maquinas_pedido`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `maquinas_pedido_maquina_id_foreign` (`maquina_id`),
+  ADD KEY `maquinas_pedido_pedido_id_foreign` (`pedido_id`);
+
+--
 -- Indices de la tabla `maquina_articulo`
 --
 ALTER TABLE `maquina_articulo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `maquina_articulo_maquina_id_foreign` (`maquina_id`),
   ADD KEY `maquina_articulo_articulo_id_foreign` (`articulo_id`);
+
+--
+-- Indices de la tabla `marcas`
+--
+ALTER TABLE `marcas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `medidas`
@@ -5452,12 +5640,26 @@ ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `pedidos_articulos_temporales`
+--
+ALTER TABLE `pedidos_articulos_temporales`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidos_articulos_temporales_pedido_id_foreign` (`pedido_id`),
+  ADD KEY `pedidos_articulos_temporales_articulo_temporal_id_foreign` (`articulo_temporal_id`);
+
+--
 -- Indices de la tabla `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indices de la tabla `sistemas`
+--
+ALTER TABLE `sistemas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `terceros`
@@ -5474,6 +5676,21 @@ ALTER TABLE `tercero_maquina`
   ADD KEY `tercero_maquina_maquina_id_foreign` (`maquina_id`);
 
 --
+-- Indices de la tabla `tercero_marca`
+--
+ALTER TABLE `tercero_marca`
+  ADD PRIMARY KEY (`tercero_id`,`marca_id`),
+  ADD KEY `tercero_marca_marca_id_foreign` (`marca_id`);
+
+--
+-- Indices de la tabla `tercero_sistema`
+--
+ALTER TABLE `tercero_sistema`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `terceros_sistemas_tercero_id_foreign` (`tercero_id`),
+  ADD KEY `terceros_sistemas_sistema_id_foreign` (`sistema_id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -5488,13 +5705,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `articulo_medida`
 --
 ALTER TABLE `articulo_medida`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT de la tabla `articulo_temporal`
+--
+ALTER TABLE `articulo_temporal`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -5506,13 +5729,13 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `contactos`
 --
 ALTER TABLE `contactos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto_tercero`
 --
 ALTER TABLE `contacto_tercero`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -5533,10 +5756,16 @@ ALTER TABLE `foto_articulo`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `imagenes_articulo`
+--
+ALTER TABLE `imagenes_articulo`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `listas`
 --
 ALTER TABLE `listas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `lista_padres`
@@ -5548,7 +5777,13 @@ ALTER TABLE `lista_padres`
 -- AUTO_INCREMENT de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `maquinas_pedido`
+--
+ALTER TABLE `maquinas_pedido`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT de la tabla `maquina_articulo`
@@ -5557,16 +5792,22 @@ ALTER TABLE `maquina_articulo`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `marcas`
+--
+ALTER TABLE `marcas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `medidas`
 --
 ALTER TABLE `medidas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -5578,7 +5819,13 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos_articulos_temporales`
+--
+ALTER TABLE `pedidos_articulos_temporales`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -5587,16 +5834,28 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `sistemas`
+--
+ALTER TABLE `sistemas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `terceros`
 --
 ALTER TABLE `terceros`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `tercero_maquina`
 --
 ALTER TABLE `tercero_maquina`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT de la tabla `tercero_sistema`
+--
+ALTER TABLE `tercero_sistema`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -5629,6 +5888,13 @@ ALTER TABLE `departamentos`
   ADD CONSTRAINT `departamentos_pais_id_foreign` FOREIGN KEY (`pais_id`) REFERENCES `paises` (`id`);
 
 --
+-- Filtros para la tabla `maquinas_pedido`
+--
+ALTER TABLE `maquinas_pedido`
+  ADD CONSTRAINT `maquinas_pedido_maquina_id_foreign` FOREIGN KEY (`maquina_id`) REFERENCES `maquinas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `maquinas_pedido_pedido_id_foreign` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`) ON DELETE CASCADE;
+
+--
 -- Filtros para la tabla `maquina_articulo`
 --
 ALTER TABLE `maquina_articulo`
@@ -5636,11 +5902,32 @@ ALTER TABLE `maquina_articulo`
   ADD CONSTRAINT `maquina_articulo_maquina_id_foreign` FOREIGN KEY (`maquina_id`) REFERENCES `maquinas` (`id`) ON DELETE CASCADE;
 
 --
+-- Filtros para la tabla `pedidos_articulos_temporales`
+--
+ALTER TABLE `pedidos_articulos_temporales`
+  ADD CONSTRAINT `pedidos_articulos_temporales_articulo_temporal_id_foreign` FOREIGN KEY (`articulo_temporal_id`) REFERENCES `articulo_temporal` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pedidos_articulos_temporales_pedido_id_foreign` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`) ON DELETE CASCADE;
+
+--
 -- Filtros para la tabla `tercero_maquina`
 --
 ALTER TABLE `tercero_maquina`
   ADD CONSTRAINT `tercero_maquina_maquina_id_foreign` FOREIGN KEY (`maquina_id`) REFERENCES `maquinas` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tercero_maquina_tercero_id_foreign` FOREIGN KEY (`tercero_id`) REFERENCES `terceros` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `tercero_marca`
+--
+ALTER TABLE `tercero_marca`
+  ADD CONSTRAINT `tercero_marca_marca_id_foreign` FOREIGN KEY (`marca_id`) REFERENCES `marcas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tercero_marca_tercero_id_foreign` FOREIGN KEY (`tercero_id`) REFERENCES `terceros` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `tercero_sistema`
+--
+ALTER TABLE `tercero_sistema`
+  ADD CONSTRAINT `terceros_sistemas_sistema_id_foreign` FOREIGN KEY (`sistema_id`) REFERENCES `sistemas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `terceros_sistemas_tercero_id_foreign` FOREIGN KEY (`tercero_id`) REFERENCES `terceros` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
