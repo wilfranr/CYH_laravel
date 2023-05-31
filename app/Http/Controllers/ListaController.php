@@ -45,6 +45,16 @@ class ListaController extends Controller
             $lista->foto = 'no-imagen.jpg';
         }
 
+        // Procesar la foto de la medida si se proporcionó
+        if ($request->hasFile('fotoMedida')) {
+            $foto = $request->file('fotoMedida');
+            $filename = time() . '_' . $foto->getClientOriginalName();
+            $filepath = $foto->storeAs('public/listas', $filename);
+            $lista->fotoMedida = $filename;
+        }else{
+            $lista->fotoMedida = 'no-imagen.jpg';
+        }
+
         $lista->save();
 
         return redirect()->route('listas.index')->with('success', 'La lista ha sido creada exitosamente.');

@@ -17,5 +17,6 @@ class Lista extends Model
         'nombre',
         'definicion',
         'foto',
+        'fotoMedida',	
     ];
 }

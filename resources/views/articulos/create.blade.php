@@ -55,14 +55,20 @@
                                         class="col-md-4 col-form-label text-md-right">{{ __('Definición') }}</label>
 
                                     <div class="col-md-6">
-                                        <select class="form-select" id="definicion" name="definicion">
-                                            <option value="">Seleccione una descripción común</option>
+                                        <select class="form-select" id="definicion" name="definicion"
+                                            onchange="mostrarFotoMedida(this.value)">
+                                            <option value="">Seleccione una definición</option>
                                             @foreach ($definiciones as $id => $nombre)
-                                                <option value="{{ $nombre }}">{{ $nombre }}</option>
+                                                <option value="{{ $id }}">{{ $nombre }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+                                <img id="fotoMedida" src="{{ asset('storage/listas') }}/no-imagen.jpg" alt="Foto de medida">
+
+
+
+
 
                                 <div class="form-group row">
                                     <label for="referencia"
@@ -142,7 +148,7 @@
                                     </div>
                                 </div>
                                 {{-- Foto medida --}}
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="foto-medida"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Foto de medidas') }}</label>
 
@@ -151,10 +157,7 @@
                                         <img id="preview" src="#" alt="Vista previa de la imagen"
                                             style="max-width: 200px; max-height: 200px;">
                                     </div>
-
-
-
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -235,81 +238,86 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 
 
+
+
     <script>
         $(document).ready(function() {
+
             let contadorMedidas = 1;
             $('#agregar-medida').on('click', function() {
                 $('#medidas').append(`
                     <div class="card">
                             <div class="card-header">{{ __('Medidas') }}</div>
-                            <div class="card-body">
-                                
+                                <div class="card-body">
+                                    <div>
+                                        <label for="foto-medida">Foto de la Definición:</label>
+                                        <img id="foto-medida" src="#" alt="Foto de la Definición" style="display: none;">
+                                    </div>
+                                       
+
+                                    <div class="form-group row">
+                                        <label for="tipoMedida" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de medida') }}</label>
+                                        <select class="form-select" id="tipoMedida" name="tipoMedida[]">
+                                            <option value="">Seleccione un tipo de medida</option>
+                                                @foreach ($medidas as $id => $nombre)
+                                                    <option value="{{ $nombre }}">{{ $nombre }}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
-    <label for="tipoMedida" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de medida') }}</label>
+                                    <label for="valorMedida" class="col-md-4 col-form-label text-md-right">{{ __('Valor medida') }}</label>
 
-    <div class="col-md-6">
-        <select class="form-select" id="tipoMedida" name="tipoMedida[]">
-            <option value="">Seleccione un tipo de medida</option>
-            @foreach ($medidas as $id => $nombre)
-                <option value="{{ $nombre }}">{{ $nombre }}</option>
-            @endforeach
-        </select>
-    </div>
-</div>
-<div class="form-group row">
-    <label for="valorMedida" class="col-md-4 col-form-label text-md-right">{{ __('Valor medida') }}</label>
+                                    <div class="col-md-6">
+                                        <input id="valorMedida" type="text" class="form-control @error('valorMedida') is-invalid @enderror"
+                                            name="valorMedida[]" value="{{ old('valorMedida') }}">
 
-    <div class="col-md-6">
-        <input id="valorMedida" type="text" class="form-control @error('valorMedida') is-invalid @enderror"
-            name="valorMedida[]" value="{{ old('valorMedida') }}">
+                                        @error('valorMedida')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
 
-        @error('valorMedida')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+                                        <select class="form-select" id="unidadMedida" name="unidadMedida[]">
+                                            <option value="">Unidad de medida</option>
+                                            @foreach ($unidadMedidas as $id => $nombre)
+                                                <option value="{{ $nombre }}">{{ $nombre }}</option>
+                                            @endforeach
+                                        </select>
 
-        <select class="form-select" id="unidadMedida" name="unidadMedida[]">
-            <option value="">Unidad de medida</option>
-            @foreach ($unidadMedidas as $id => $nombre)
-                <option value="{{ $nombre }}">{{ $nombre }}</option>
-            @endforeach
-        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="idMedida" class="col-md-4 col-form-label text-md-right">{{ __('Id Medida') }}</label>
 
-    </div>
-</div>
-<div class="form-group row">
-    <label for="idMedida" class="col-md-4 col-form-label text-md-right">{{ __('Id Medida') }}</label>
+                                    <div class="col-md-6">
+                                        <input id="idMedida" type="text" class="form-control @error('idMedida') is-invalid @enderror"
+                                            name="idMedida[]" value="{{ old('id_medida') }}">
 
-    <div class="col-md-6">
-        <input id="idMedida" type="text" class="form-control @error('idMedida') is-invalid @enderror"
-            name="idMedida[]" value="{{ old('id_medida') }}">
-
-        @error('idMedida')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>
+                                        @error('idMedida')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
 
 
             `);
-
                 contadorMedidas++;
             });
+            //Ocultar boton de agregar medida
+            $('#agregar-medida').hide();
+            // Mostrar boton de agregar medida si se selecciona una definicion
+            $('#definicion').on('change', function() {
+                $('#agregar-medida').show();
+                // Obtener referencias a los elementos select e imagen
 
 
-        });
-    </script>
-    <script>
-        // Vista previa de la imagen
-        document.getElementById("foto-medida").addEventListener("change", function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById("preview").src = e.target.result;
-            };
-            reader.readAsDataURL(e.target.files[0]);
+            });
         });
     </script>
 
@@ -322,5 +330,17 @@
             };
             reader.readAsDataURL(e.target.files[0]);
         });
+    </script>
+    <script>
+        function mostrarFotoMedida(definicionId) {
+            console.log(definicionId);
+            var definicionesFotoMedida = @json($definicionesFotoMedida);
+            console.log(definicionesFotoMedida);
+            var fotoMedida = "{{ asset('storage/listas') }}/" + (definicionId && definicionId in definicionesFotoMedida ?
+                definicionesFotoMedida[definicionId] : 'no-imagen.jpg');
+                console.log(fotoMedida);
+            document.getElementById('fotoMedida').src = fotoMedida;
+            document.getElementById('fotoMedidaContainer').style.display = definicionId ? 'block' : 'none';
+        }
     </script>
 @endsection

@@ -23,7 +23,18 @@
                                 <div class="col-md-6">
                                     <img src="{{ asset('storage/listas/'. $lista->foto) }}" alt="Foto de la lista" width="100px" class="img-fluid">
                                 </div>
+                               
                             </div>
+                        @endif
+                        @if($lista->fotoMedida)
+                        <div class="form-group row">
+                            <label for="fotoMedida" class="col-md-4 col-form-label text-md-right">{{ __('Foto Medida') }}</label>
+
+                            <div class="col-md-6">
+                                <img src="{{ asset('storage/listas/'. $lista->fotoMedida) }}" alt="Foto de la lista" width="100px" class="img-fluid">
+                            </div>
+
+                        </div>
                         @endif
                     </div>
                 </div>

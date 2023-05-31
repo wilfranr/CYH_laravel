@@ -23,12 +23,27 @@ class ArticuloController extends Controller
     {
         $articulos = Articulo::all();
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
-        $definiciones = Lista::where('tipo', 'Descripción común')->pluck('nombre', 'id');
+        $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre', 'id');
+
+        // Obtener las definiciones con su respectiva foto de medida
+        $definicionesConFoto = Lista::where('tipo', 'Definición')->select('id', 'fotoMedida')->get();
+
+        $definicionesFotoMedida = [];
+        foreach ($definicionesConFoto as $definicion) {
+            $definicionesFotoMedida[$definicion->id] = $definicion->fotoMedida;
+        }
+        
+
+        //dd($definicionesFotoMedida);
+
         $medidas = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
         $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
         $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
-        return view('articulos.create', compact('sistemas', 'definiciones', 'maquinas', 'medidas', 'unidadMedidas', 'articulos'));
+
+        return view('articulos.create', compact('sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion'));
     }
+
+
 
     public function store(Request $request, Articulo $articulo)
     {
