@@ -64,7 +64,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <img id="fotoMedida" src="{{ asset('storage/listas') }}/no-imagen.jpg" alt="Foto de medida">
+                                
 
 
 
@@ -215,6 +215,11 @@
                     <div class="col-md-6">
                         <div id="medidas">
                             <input type="hidden" name="contadorMedidas" value="2">
+                            <div>
+                                <label for="foto-medida">Foto de la Medida:</label>
+                                
+                                <img id="fotoMedida" src="{{ asset('storage/listas') }}/no-imagen.jpg" alt="Foto de medida" width="300px">
+                            </div>
 
                         </div>
 
@@ -249,10 +254,7 @@
                     <div class="card">
                             <div class="card-header">{{ __('Medidas') }}</div>
                                 <div class="card-body">
-                                    <div>
-                                        <label for="foto-medida">Foto de la Definición:</label>
-                                        <img id="foto-medida" src="#" alt="Foto de la Definición" style="display: none;">
-                                    </div>
+                                    
                                        
 
                                     <div class="form-group row">

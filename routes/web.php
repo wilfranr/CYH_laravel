@@ -81,6 +81,9 @@ Route::get('/ciudades/{codigo_pais}', [CiudadController::class, 'getCiudadesByPa
 //ruta para descargar certificacion
 Route::get('terceros/{id}/certificacion', [TerceroController::class, 'downloadCertificacion'])->name('terceros.downloadCertificacion');
 
+//ruta para descargar rut
+Route::get('terceros/{id}/rut', [TerceroController::class, 'downloadRut'])->name('terceros.downloadRut');
+
 //rutas maquinas
 Route::get('/maquinas', [MaquinaController::class, 'index'])->name('maquinas.index');
 Route::get('/maquinas/create', [MaquinaController::class, 'create'])->name('maquinas.create');

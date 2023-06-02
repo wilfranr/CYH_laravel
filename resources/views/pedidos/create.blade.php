@@ -91,62 +91,10 @@
 
                     </div>
                 </div>
-                <input type="hidden" name="articulos-temporales" id="articulos-temporales">
 
 
                 <div class="row" id="div-detalle">
                     <h2>Detalle</h2>
-                    {{-- <div class="col-md-6">
-                        <div class="form-group mt-3">
-                            <label for="referencia">Referencia</label>
-                            <select name="referencia" id="referencia" class="form-select">
-                                <option value="">Seleccione</option>
-                                @foreach ($articulos as $id => $articulo)
-                                    <option value="{{ $articulo->id }}">{{ $articulo->referencia }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="sistema">Sistema</label>
-                            <select name="sistema" class="form-select" id="sistema">
-                                <option value="">Seleccione</option>
-                                @foreach ($sistemas as $id => $nombre)
-                                    <option value="{{ $nombre }}">{{ $nombre }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="comentarios">Comentarios</label>
-                            <textarea name="comentarios" id="comentarios" cols="20" rows="5" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="definicion">Definición</label>
-                            <input type="text" name="definicion" id="definicion" class="form-control"
-                                value="">
-                        </div>
-                        <div class="form-group">
-                            <label for="cantidad">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control" id="cantidad" required>
-                        </div>
-                        {{-- <div class="form-group mt-3">
-                            <label for="foto">Foto</label>
-                            <input type="file" name="fotos[]" multiple class="form-control" id="fotos">
-                        </div>
-                        <div class="form-group">
-                            <div id="preview"></div>
-
-                        </div> --}}
-
-                    <div class="form-group mt-3">
-                        <label for="fotos">Fotos:</label>
-                        <div id="dropzone" class="dropzone"></div>
-                    </div>
-
-
-
-
                     <div class="form-group mt-3">
                         <button class="btn btn-primary mb-5" id="boton-agregar-articulo" type="button">Agregar
                             artículo</button>
@@ -154,11 +102,11 @@
                 </div>
             </div>
             <div id="articulos">
-                <input type="hidden" name="contadorArticulos" value="2">
+                <input type="hidden" name="articulos-temporales" id="articulos-temporales">
 
             </div>
 
-            
+
             <div id="comentariosPedido">
                 {{-- comentarios del pedido --}}
                 <label for="comentario">Comentarios del pedido</label>
@@ -234,30 +182,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 
-    <script>
-        // Configuración de Dropzone
-        Dropzone.options.dropzone = {
-            url: '{{ route('fotos.store') }}', // Ruta que recibirá el archivo
-            paramName: 'fotos', // Nombre del campo que contiene los archivos
-            maxFilesize: 2, // Tamaño máximo de cada archivo (en MB)
-            addRemoveLinks: true, // Mostrar el enlace para remover cada archivo
-            dictRemoveFile: 'Remover', // Texto del enlace para remover cada archivo
-            dictDefaultMessage: 'Arrastra tus archivos aquí o haz clic para seleccionar', // Texto por defecto
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            init: function() {
-                this.on('success', function(file, response) {
-                    // Cuando un archivo se carga exitosamente, agregar el ID del archivo a un campo oculto
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: 'fotos_ids[]',
-                        value: response.id
-                    }).appendTo('form');
-                });
-            }
-        };
-    </script>
+
 
 
     <script>
@@ -278,8 +203,8 @@
                 $('#numero_documento').val($(this).data('identificacion'));
                 $('#direccion').val($(this).data('direccion'));
                 $('#telefono').val($(this).data('telefono'));
-                $('#wp_cliente').attr('href', 'https://wa.me/' + $(this).data('telefono'));
-                $('#wp_contacto').attr('href', 'https://wa.me/' + $(this).data('telefono'));
+                $('#wp_cliente').attr('href', 'https://wa.me/+57' + $(this).data('telefono'));
+                $('#wp_contacto').attr('href', 'https://wa.me/+57' + $(this).data('telefono'));
 
                 $('#email').val($(this).data('email'));
                 cargarMaquinas();
@@ -371,16 +296,19 @@
             let contadorArticulos = 1;
 
             $('#boton-agregar-articulo').on('click', function() {
+
                 $('#articulos').append(`
+
                 <hr>
                 <div class="form-group">
                     <label for="referencia">Referencia</label>
                     <select name="referencia${contadorArticulos}" id="referencia${contadorArticulos}" class="form-select">
                         <option value="">Seleccione</option>
                         @foreach ($articulos as $id => $articulo)
-                            <option value="{{ $articulo->id }}">{{ $articulo->referencia }}</option>
+                            <option value="{{ $articulo->referencia }}">{{ $articulo->referencia }}</option>
                         @endforeach
                     </select>
+                    
                 </div>
                 <div class="form-group">
                     <label for="sistema">Sistema</label>
@@ -404,77 +332,24 @@
                     <label for="cantidad">Cantidad</label>
                     <input type="number" name="cantidad${contadorArticulos}" class="form-control" id="cantidad${contadorArticulos}" required>
                 </div>
-
-                
+                <div class="form-group mt-3">
+                    <label for="foto">Fotos (puede agregar varias)</label>
+                    <input type="file" name="fotos${contadorArticulos}[]" multiple class="form-control" id="fotos${contadorArticulos}">
+                </div>
                 </hr>
 
             `);
+            
+            $('#articulos-temporales').val(contadorArticulos++);
 
-                contadorArticulos++;
             });
 
-            
+
         });
         if ($('#cantidad').val() == '') {
             $('#cantidad').val(1);
 
         }
-
-        // $('#fotos').on('change', function() {
-        //     // Limpiar la vista previa existente
-        //     $('#preview').empty();
-
-        //     // Obtener las imágenes seleccionadas
-        //     var files = $(this).get(0).files;
-
-        //     // Iterar sobre las imágenes y mostrar miniaturas
-        //     for (var i = 0; i < files.length; i++) {
-        //         var file = files[i];
-        //         var reader = new FileReader();
-
-        //         reader.onload = function(e) {
-        //             // Crear un elemento <img> con la miniatura
-        //             var img = $('<img>').attr('src', e.target.result).css('width', '100px');
-        //             // Agregar la miniatura al contenedor de vista previa
-        //             $('#preview').append(img);
-        //         };
-
-        //         // Leer el archivo y mostrar la miniatura
-        //         reader.readAsDataURL(file);
-        //     }
-        // });
-
-
-        $('#boton-agregar-articulos').click(function() {
-            // obtener los valores del formulario
-            var sistema = $('#sistema').val();
-            var definicion = $('#definicion').val();
-            var referencia = $('#referencia').val();
-            var cantidad = $('#cantidad').val();
-            var comentarios = $('#comentarios').val();
-
-            // crear la fila de la tabla
-            var fila = '<tr>' +
-                '<td>' + sistema + '</td>' +
-                '<td>' + definicion + '</td>' +
-                '<td>' + referencia + '</td>' +
-                '<td>' + cantidad + '</td>' +
-                '<td>' + comentarios + '</td>' +
-                '<td>' +
-                '<button type="button" class="btn btn-danger">X</button>' +
-                '</td>' +
-                '</tr>';
-
-            // agregar la fila a la tabla
-            $('#tabla-articulos tbody').append(fila);
-
-            // limpiar los campos del formulario
-            $('#sistema').val(null).trigger('change');
-            $('#definicion').val('');
-            $('#referencia').val(null).trigger('change');
-            $('#cantidad').val(1);
-            $('#comentarios').val('');
-
-        });
+        
     </script>
 @endsection

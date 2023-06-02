@@ -58,7 +58,7 @@ class PedidoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'tercero_id' => 'nullable|exists:terceros,id',
             'user_id' => 'nullable|exists:users,id',
             'contacto_id' => 'nullable|exists:contactos,id',
@@ -74,7 +74,7 @@ class PedidoController extends Controller
         $pedido->estado = $request->input('estado');
         $pedido->save();
 
-        // Agregar cada maquina al pedido
+        // Agregar cada máquina al pedido
         $maquinas = $request->input('maquina_id', []);
         if ($maquinas) {
             foreach ($maquinas as $maquina) {
@@ -82,49 +82,45 @@ class PedidoController extends Controller
             }
         }
 
-        // Agregar cada articulo al pedido
-        $data = [
-            'contadorArticulos' => $request->input('contadorArticulos'),
-            // Otros datos que necesites
-        ];
-        for ($i = 1; $i <= $data['contadorArticulos']; $i++) {
-            // Validar los datos del formulario del artículo temporal
+        // Agregar cada artículo temporal al pedido
+        $contadorArticulos = $request->input('articulos-temporales');
+
+        for ($i = 1; $i <= $contadorArticulos; $i++) {
+            // Validar los datos del artículo temporal
             $dataArticulo = $request->validate([
-                'referencia' . $i => ['nullable', 'string', 'max:255'],
-                'definicion' . $i => ['nullable', 'string', 'max:255'],
-                'comentario' . $i => ['nullable', 'string', 'max:255'],
+                "referencia{$i}" => ['nullable', 'string', 'max:255'],
+                "definicion{$i}" => ['nullable', 'string', 'max:255'],
+                "comentarios{$i}" => ['nullable', 'string', 'max:255'],
+                // Otros campos del artículo temporal
             ]);
 
             // Crear el artículo temporal
             $articuloTemporal = new ArticuloTemporal();
-            $articuloTemporal->pedido_id = $pedido->id;
-            $articuloTemporal->referencia = $request->input('referencia' . $i);
-            $articuloTemporal->definicion = $request->input('definicion' . $i);
-            $articuloTemporal->comentarios = $request->input('comentario' . $i);
+            $articuloTemporal->referencia = $request->input("referencia{$i}");
+            $articuloTemporal->definicion = $request->input("definicion{$i}");
+            $articuloTemporal->comentarios = $request->input("comentarios{$i}");
+
             $articuloTemporal->save();
 
             // Agregar la relación a la tabla pivot
             $pedido->articulosTemporales()->attach($articuloTemporal->id);
         }
 
-        // Sincronizar los artículos asociados al pedido
-        $pedido->articulosTemporales()->sync($request->articulosTemporales);
+        // Redirigir o hacer cualquier otra acción necesaria
+        // ...
 
-        return redirect()->route('pedidos.show', ['id' => $pedido->id])
-            ->with('success', 'El pedido se ha creado exitosamente.');
-
-
-
-        return redirect()->route('pedidos.index')
-            ->with('success', 'Pedido creado satisfactoriamente.');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
+
 
     public function show(Pedido $pedido, $id)
     {
         $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales'])->find($id);
+        $articulos = Articulo::all();
 
-        return view('pedidos.show', compact('pedido'));
+        return view('pedidos.show', compact('pedido', 'articulos'));
     }
+
 
     public function edit($id)
     {
@@ -153,14 +149,23 @@ class PedidoController extends Controller
         $articulosTemporales = $request->input('articulos-temporales');
 
         if (!is_null($articulosTemporales)) {
+            $contadorArticulos = 1; // Inicializa el contador
+
             foreach ($articulosTemporales as $articuloTemporalData) {
-                $articuloTemporal = ArticuloTemporal::find($articuloTemporalData['id']);
-                $articuloTemporal->referencia = $articuloTemporalData['referencia'];
-                $articuloTemporal->definicion = $articuloTemporalData['definicion'];
-                // ... actualizar otros campos del articuloTemporal ...
+                $articuloTemporal = new ArticuloTemporal();
+                $articuloTemporal->pedido_id = $pedido->id;
+                $articuloTemporal->referencia = $request->input("referencia{$contadorArticulos}");
+                $articuloTemporal->definicion = $request->input("definicion{$contadorArticulos}");
+                $articuloTemporal->comentarios = $request->input("comentarios{$contadorArticulos}");
+                // Asigna otros campos del artículo temporal si es necesario
+
                 $articuloTemporal->save();
+
+                $contadorArticulos++; // Incrementa el contador después de cada iteración
             }
         }
+
+
 
         return redirect()->route('pedidos.show', ['id' => $pedido->id])
             ->with('success', 'Pedido actualizado satisfactoriamente.');

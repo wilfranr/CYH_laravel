@@ -152,7 +152,7 @@
                         <hr>
                         <h2>Contactos de tercero</h2>
                         <div id="contactos">
-                            <input type="hidden" name="contadorContactos" value="2">
+                            <input type="hidden" name="contadorContactos" value="3">
 
                         </div>
 

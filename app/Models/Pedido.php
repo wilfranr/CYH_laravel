@@ -4,6 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Articulo;
+use App\Models\Tercero;
+use App\Models\User;
+use App\Models\Maquina;
+use App\Models\Contacto;
+use App\Models\ItemPedido;
+use App\Models\ArticuloTemporal;
 
 class Pedido extends Model
 {
@@ -50,8 +57,7 @@ class Pedido extends Model
     }
 
     public function articulosTemporales()
-{
-    return $this->hasMany(ArticuloTemporal::class);
-}
-
+    {
+        return $this->belongsToMany(ArticuloTemporal::class, 'pedidos_articulos_temporales', 'pedido_id', 'articulo_temporal_id')->withTimestamps();
+    }
 }

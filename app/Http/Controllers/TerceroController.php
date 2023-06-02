@@ -103,7 +103,7 @@ class TerceroController extends Controller
 
         // Guardar el archivo de certificación bancaria (si se ha proporcionado uno)
         if ($request->hasFile('certificacion_bancaria')) {
-            $certificacion = $request->file('certificacion_bancaria')->store('certificaciones');
+            $certificacion = $request->file('certificacion_bancaria')->storePublicy('certificaciones', 'public');
             $tercero->certificacion_bancaria = $certificacion;
         }
         //guardar archivo rut
@@ -196,6 +196,12 @@ class TerceroController extends Controller
     {
         $tercero = Tercero::findOrFail($id);
         $pathToFile = storage_path('app/' . $tercero->certificacion_bancaria);
+        return response()->download($pathToFile);
+    }
+    public function downloadRut($id)
+    {
+        $tercero = Tercero::findOrFail($id);
+        $pathToFile = storage_path('app/public/' . $tercero->rut);
         return response()->download($pathToFile);
     }
 

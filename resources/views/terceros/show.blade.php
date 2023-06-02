@@ -16,9 +16,17 @@
 
         <p>Sitio Web: {{ $tercero->sitio_web }}</p>
         
+        @if ($tercero->certificacion_bancaria)
         <p>Certificación bancaria:
             <a href="{{ route('terceros.downloadCertificacion', ['id' => $tercero->id]) }}">Descargar</a>
         </p>
+        @endif
+
+        @if ($tercero->rut)
+        <p>RUT:
+            <a href="{{ route('terceros.downloadRut', ['id' => $tercero->id]) }}">Descargar</a>
+        </p>
+        @endif
 
         @if ($tercero->tipo == 'cliente')
         <h3>Maquinas:</h3>

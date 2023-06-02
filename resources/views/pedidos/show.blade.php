@@ -9,7 +9,7 @@
         {{-- validar si trae telefono crear link para whatsapp, si no dejar N/A --}}
         @if ($pedido->contacto)
             @if ($pedido->contacto->telefono)
-                <p>Teléfono: <a href="https://wa.me/{{ $pedido->contacto->telefono }}">{{ $pedido->contacto->telefono }}</a>
+                <p>Teléfono Contacto: <a href="https://wa.me/+57{{ $pedido->contacto->telefono }}">{{ $pedido->contacto->telefono }}</a>
                 </p>
             @else
                 <p>Teléfono: N/A</p>
@@ -34,6 +34,7 @@
         <p>Definición: {{ $articuloTemporal->definicion }}</p>
         <p>Sistema: {{ $articuloTemporal->sistema }}</p>
         <p>Cantidad: {{ $articuloTemporal->cantidad }}</p>
+        <p>Comentarios: {{ $articuloTemporal->comentarios }}</p>
         <!-- Mostrar otros campos si es necesario -->
     </div>
 @endforeach

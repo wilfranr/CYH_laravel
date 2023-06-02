@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pedido;
 
 class ArticuloTemporal extends Model
 {
@@ -27,13 +28,13 @@ class ArticuloTemporal extends Model
 
     public function pedido()
     {
-        return $this->belongsToMany(Pedido::class);
+        return $this->belongsToMany(Pedido::class, 'pedidos_articulos_temporales', 'articulo_temporal_id', 'pedido_id')->withTimestamps();
     }
+
+
 
     public function fotosArticuloTemporal()
     {
         return $this->hasMany(FotoArticuloTemporal::class);
     }
-
-    
 }
