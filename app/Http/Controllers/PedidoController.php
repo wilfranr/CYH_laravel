@@ -98,9 +98,32 @@ class PedidoController extends Controller
             $articuloTemporal = new ArticuloTemporal();
             $articuloTemporal->referencia = $request->input("referencia{$i}");
             $articuloTemporal->definicion = $request->input("definicion{$i}");
+            $articuloTemporal->sistema = $request->input("sistema{$i}");
+            $articuloTemporal->cantidad = $request->input("cantidad{$i}");
             $articuloTemporal->comentarios = $request->input("comentarios{$i}");
 
             $articuloTemporal->save();
+
+            // Obtener las fotos del formulario
+            $fotos = $request->file("fotos{$i}");
+
+            if ($fotos) {
+                foreach ($fotos as $foto) {
+                    // Generar un nombre único para la foto
+                    $nombreFoto = uniqid() . '.' . $foto->getClientOriginalExtension();
+
+                    // Almacenar la foto en la carpeta de almacenamiento
+                    $foto->storeAs('fotos-articulo-temporal', $nombreFoto, 'public');
+
+                    // Crear una instancia de FotoArticuloTemporal
+                    $fotoArticuloTemporal = new FotoArticuloTemporal();
+                    $fotoArticuloTemporal->articuloTemporal()->associate($articuloTemporal);
+                    $fotoArticuloTemporal->foto_path = $nombreFoto;
+                    $fotoArticuloTemporal->save();
+                }
+            }
+            
+
 
             // Agregar la relación a la tabla pivot
             $pedido->articulosTemporales()->attach($articuloTemporal->id);
@@ -115,7 +138,7 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido, $id)
     {
-        $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales'])->find($id);
+        $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales.fotosArticuloTemporal'])->find($id);
         $articulos = Articulo::all();
 
         return view('pedidos.show', compact('pedido', 'articulos'));

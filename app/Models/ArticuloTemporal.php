@@ -23,7 +23,7 @@ class ArticuloTemporal extends Model
 
     public function fotos()
     {
-        return $this->morphMany(Foto::class, 'imageable');
+        return $this->hasMany(FotoArticuloTemporal::class, 'articulo_temporal_id');
     }
 
     public function pedido()

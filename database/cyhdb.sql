@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2023 a las 04:21:21
+-- Tiempo de generación: 03-06-2023 a las 08:35:28
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -64,7 +64,8 @@ INSERT INTO `articulos` (`id`, `marca`, `sistema`, `definicion`, `referencia`, `
 (14, 'CATERPILLAR', NULL, 'Sello de labio', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:54:48', '2023-05-29 03:54:48'),
 (15, 'CATERPILLAR', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
 (16, 'KOMATSU', NULL, 'Plow Bolt', 'arandela', NULL, NULL, 'prueba2', '200', '1685314927_OIP (6).jpeg', 'no-imagen.jpg', '2023-05-29 04:02:07', '2023-05-29 04:02:07'),
-(17, 'KOMATSU', NULL, 'Plow Bolt', 'arandela', NULL, NULL, 'prueba2', '200', '1685314994_OIP (6).jpeg', 'no-imagen.jpg', '2023-05-29 04:03:14', '2023-05-29 04:03:14');
+(17, 'KOMATSU', NULL, 'Plow Bolt', 'arandela', NULL, NULL, 'prueba2', '200', '1685314994_OIP (6).jpeg', 'no-imagen.jpg', '2023-05-29 04:03:14', '2023-05-29 04:03:14'),
+(18, 'CATERPILLAR', NULL, '50', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-31 09:34:31', '2023-05-31 09:34:31');
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,8 @@ INSERT INTO `articulo_medida` (`id`, `articulo_id`, `medida_id`, `created_at`, `
 (60, 15, 9, NULL, NULL),
 (61, 15, 10, NULL, NULL),
 (62, 16, 11, NULL, NULL),
-(63, 17, 12, NULL, NULL);
+(63, 17, 12, NULL, NULL),
+(64, 18, 13, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,6 @@ INSERT INTO `articulo_medida` (`id`, `articulo_id`, `medida_id`, `created_at`, `
 
 CREATE TABLE `articulo_temporal` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `pedido_id` bigint(20) UNSIGNED NOT NULL,
   `referencia` varchar(255) DEFAULT NULL,
   `definicion` varchar(255) DEFAULT NULL,
   `sistema` varchar(255) DEFAULT NULL,
@@ -120,11 +121,59 @@ CREATE TABLE `articulo_temporal` (
 -- Volcado de datos para la tabla `articulo_temporal`
 --
 
-INSERT INTO `articulo_temporal` (`id`, `pedido_id`, `referencia`, `definicion`, `sistema`, `cantidad`, `comentarios`, `created_at`, `updated_at`) VALUES
-(7, 10, '1', 'aa', NULL, 1, NULL, '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
-(8, 11, '1', 'aa', NULL, 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
-(9, 11, 'arandela', 'def', 'sis', 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
-(10, 12, NULL, 'Emaquetadura de botella', NULL, NULL, NULL, '2023-05-17 08:38:50', '2023-05-17 08:38:50');
+INSERT INTO `articulo_temporal` (`id`, `referencia`, `definicion`, `sistema`, `cantidad`, `comentarios`, `created_at`, `updated_at`) VALUES
+(7, '1', 'aa', NULL, 1, NULL, '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
+(8, '1', 'aa', NULL, 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
+(9, 'arandela', 'def', 'sis', 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
+(10, NULL, 'Emaquetadura de botella', NULL, NULL, NULL, '2023-05-17 08:38:50', '2023-05-17 08:38:50'),
+(11, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:50:05', '2023-06-02 06:50:05'),
+(12, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:53:42', '2023-06-02 06:53:42'),
+(13, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
+(14, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
+(15, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:15:36', '2023-06-02 02:15:36'),
+(16, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
+(17, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
+(18, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
+(19, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
+(20, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(21, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(22, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(23, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(24, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(25, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(26, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(27, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(28, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(29, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
+(30, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
+(31, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
+(32, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
+(33, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:50:57', '2023-06-02 03:50:57'),
+(34, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
+(35, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
+(36, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
+(37, NULL, NULL, NULL, NULL, NULL, '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
+(38, NULL, NULL, NULL, NULL, NULL, '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
+(39, '1', NULL, NULL, NULL, NULL, '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
+(40, '4', 'arandela de motor', NULL, NULL, 'Piston', '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
+(41, NULL, NULL, NULL, NULL, 'Tornillo', '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
+(42, '12', NULL, NULL, NULL, NULL, '2023-06-02 04:11:53', '2023-06-02 04:11:53'),
+(43, '2043233', NULL, NULL, NULL, 'Comentario del articulo temporal', '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
+(44, 'dasd33', 'Definicion de articulo temporal', NULL, NULL, 'Comentario de articulo temporal', '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
+(45, 'copa', 'Definicion de articulo temporal', 'Motoniveladora', 4, 'Comentario de articulo', '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
+(46, 'dasd33', 'Definicion de articulo temporal', 'Transmision', 2, 'Comentario de articulo temporal', '2023-06-03 05:34:32', '2023-06-03 05:34:32'),
+(47, 'dasd33', 'Definicion de articulo temporal', 'Transmision', 2, 'Comentario de articulo temporal', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
+(48, '3F5108', NULL, 'Transmision', 2, NULL, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(49, 'FDFDF', NULL, 'Bomba hidráulica', 3, NULL, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(50, 'dasd33', NULL, 'Transmision', 1, NULL, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(51, 'copa', NULL, 'Motor', 2, NULL, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(52, 'dasd33', NULL, NULL, 1, NULL, '2023-06-03 06:10:37', '2023-06-03 06:10:37'),
+(53, 'dasd33', NULL, NULL, 1, NULL, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(54, 'dasd33', NULL, 'Transmision', 2, NULL, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(55, 'dasd33', NULL, NULL, 2, NULL, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(56, 'arandela', NULL, 'Motor', 2, NULL, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(57, 'dasd33', NULL, 'Transmision', 1, NULL, '2023-06-03 06:18:23', '2023-06-03 06:18:23'),
+(58, 'arandela', NULL, NULL, 2, NULL, '2023-06-03 06:18:23', '2023-06-03 06:18:23');
 
 -- --------------------------------------------------------
 
@@ -4574,7 +4623,14 @@ INSERT INTO `contactos` (`id`, `nombre`, `telefono`, `email`, `created_at`, `upd
 (69, 'contacto cliente 7', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:26:53', '2023-05-29 01:26:53'),
 (70, 'contacto de cliente 2', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:41:21', '2023-05-29 01:41:21'),
 (71, 'contacto cliente 7', '6578676', 'wilfranr@gmail.com', '2023-05-29 01:41:21', '2023-05-29 01:41:21'),
-(72, 'contacto de cliente 2', '6578676', 'email@fact', '2023-05-29 01:43:06', '2023-05-29 01:43:06');
+(72, 'contacto de cliente 2', '6578676', 'email@fact', '2023-05-29 01:43:06', '2023-05-29 01:43:06'),
+(73, 'Esposa Carlos Castro', '3016490698', NULL, '2023-06-02 06:32:28', '2023-06-02 06:32:28'),
+(74, 'hermano Hernan ramirez', '3137038949', 'email@fact', '2023-06-02 03:05:02', '2023-06-02 03:05:02'),
+(75, 'esposa hernan', '6578676', NULL, '2023-06-02 03:05:02', '2023-06-02 03:05:02'),
+(76, 'hijo juan perez', '6578676', NULL, '2023-06-02 03:15:03', '2023-06-02 03:15:03'),
+(77, 'contacto de cliente 5', '6578676', 'email@fact', '2023-06-02 03:15:49', '2023-06-02 03:15:49'),
+(78, 'contacto de cliente 7', '3137038949', NULL, '2023-06-02 03:16:41', '2023-06-02 03:16:41'),
+(79, 'esposa hernan', '3137038949', 'wilfranr@gmail.com', '2023-06-02 03:16:41', '2023-06-02 03:16:41');
 
 -- --------------------------------------------------------
 
@@ -4595,14 +4651,13 @@ CREATE TABLE `contacto_tercero` (
 --
 
 INSERT INTO `contacto_tercero` (`id`, `contacto_id`, `tercero_id`, `created_at`, `updated_at`) VALUES
-(64, 65, 54, NULL, NULL),
-(65, 66, 55, NULL, NULL),
-(66, 67, 55, NULL, NULL),
-(67, 68, 56, NULL, NULL),
-(68, 69, 56, NULL, NULL),
-(69, 70, 61, NULL, NULL),
-(70, 71, 61, NULL, NULL),
-(71, 72, 63, NULL, NULL);
+(72, 73, 1, NULL, NULL),
+(73, 74, 2, NULL, NULL),
+(74, 75, 2, NULL, NULL),
+(75, 76, 3, NULL, NULL),
+(76, 77, 4, NULL, NULL),
+(77, 78, 5, NULL, NULL),
+(78, 79, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4633,6 +4688,43 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fotos_articulo_temporal`
+--
+
+CREATE TABLE `fotos_articulo_temporal` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `articulo_temporal_id` bigint(20) UNSIGNED NOT NULL,
+  `foto_path` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `fotos_articulo_temporal`
+--
+
+INSERT INTO `fotos_articulo_temporal` (`id`, `articulo_temporal_id`, `foto_path`, `created_at`, `updated_at`) VALUES
+(1, 47, '647ad12a265a0.png', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
+(2, 47, '647ad12a28434.png', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
+(3, 47, '647ad12a29326.jpeg', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
+(4, 48, '647ad8098b631.png', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(5, 49, '647ad8098f62c.jpeg', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(6, 49, '647ad8098ff3b.jpeg', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(7, 50, 'fotos-articulo-temporal/RJcE626EHf8UN1PgvfJrbhmr0EY7d39TZaU8ewdM.png', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(8, 51, 'fotos-articulo-temporal/XwA5Zlb7dtwSL9jRbn5MhM2G7GFyN9ttSpK60qBC.jpg', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(9, 51, 'fotos-articulo-temporal/9X7ppQDunr9mZC6sFjD5PIteso41BCAx42wtbbyi.jpg', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(10, 53, '647ad984d182c.png', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(11, 54, '647ad984d55ce.jpeg', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(12, 54, '647ad984d6595.jpeg', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(13, 55, 'fotos-articulo-temporal/QcgEG2h63GqikeT9UYtTu0dlXHi7UpLPraOPHyDX.png', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(14, 56, 'fotos-articulo-temporal/BclMzccrvk0c6uJhIYIGymvhfXKb6Sn1ZIIeLPwK.png', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(15, 56, 'fotos-articulo-temporal/h0B9aVIfITB4bTIjsYvuB75757TDelzrhzgTf207.png', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(16, 57, '647adb2f93390.png', '2023-06-03 06:18:23', '2023-06-03 06:18:23'),
+(17, 58, '647adb2f9674f.png', '2023-06-03 06:18:23', '2023-06-03 06:18:23');
 
 -- --------------------------------------------------------
 
@@ -4675,6 +4767,7 @@ CREATE TABLE `listas` (
   `nombre` varchar(255) NOT NULL,
   `definicion` text DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
+  `fotoMedida` varchar(300) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4683,48 +4776,50 @@ CREATE TABLE `listas` (
 -- Volcado de datos para la tabla `listas`
 --
 
-INSERT INTO `listas` (`id`, `tipo`, `nombre`, `definicion`, `foto`, `created_at`, `updated_at`) VALUES
-(1, 'Medida', 'diametro', 'Línea recta que une dos puntos de una circunferencia, de una curva cerrada o de la superficie de una esfera pasando por su centro.', '1682964539_R (1).jpeg', '2023-04-15 11:47:42', '2023-05-01 23:08:59'),
-(2, 'Marca', 'CATERPILLAR', 'Marca norte americana que maneja diferentes repuestos', '1682964585_caterpillar-1127-logo-png-transparent.png', '2023-04-15 11:52:53', '2023-05-01 23:09:45'),
-(3, 'Marca', 'PERKINS', 'Marca inglesa que maneja repuestos varios', '1682964680_R (1).png', '2023-04-15 13:12:22', '2023-05-01 23:11:20'),
-(4, 'Sistema', 'Transmision', 'Se encarga de transferir potencia', '1682959494_OIP (8).jpeg', '2023-04-15 13:16:47', '2023-05-01 21:44:54'),
-(5, 'Sistema', 'Motor', 'Engrane', '1682959520_engranajes-y-transmisiones.jpg', '2023-04-15 13:17:16', '2023-05-01 21:45:20'),
-(6, 'Medida', 'peso', 'Fuerza con que la Tierra atrae a un cuerpo, por acción de la gravedad.', 'no-imagen.jpg', '2023-04-15 18:10:47', '2023-05-01 23:09:09'),
-(7, 'Descripción común', 'Seal O Ring', 'Un O-Ring es una junta de \r\nforma toroidal, habitualmente \r\nde goma, cuya función es la de \r\nasegurar la estanqueidad de \r\nfluidos', '1682959829_istockphoto-1215506363-170667a.jpg', '2023-04-25 04:39:09', '2023-05-01 21:50:29'),
-(8, 'Descripción común', 'Sello de labio', 'Un sello de labio es un dispositivo mecánico pasivo que se usa para sellar los puntos de salida del eje en motores eléctricos y otras máquinas de salida rotativas y recíprocas.', '1682959850_OIP (9).jpeg', '2023-04-25 04:54:35', '2023-05-01 21:50:50'),
-(9, 'Descripción común', 'otro', 'otro', 'no-imagen.jpg', '2023-04-25 04:55:14', '2023-05-01 21:50:58'),
-(10, 'Sistema', 'otro', 'otro', 'no-imagen.jpg', '2023-04-25 04:55:40', '2023-05-01 21:51:04'),
-(11, 'Marca', 'XCMG', 'Es una empresa multinacional de China fundada en marzo de 1989 en la ciudad de Xuzhou. Su equipo de fabricación. Incluye:  cargadoras, excavadoras, camiones pesados, bombas de hormigón, bulldozers, plataformas elevadoras y más.\r\n\r\nCuentan con nuevos productos, uno de ellos es una grúa de 200 toneladas, tiene tubos de 4000 toneladas, cargadoras de 12 toneladas y más.', '1682959893_R (2).png', '2023-04-29 09:41:10', '2023-05-01 21:51:33'),
-(12, 'Marca', 'HITACHI', 'Hitachi, es otra de las empresas japonesas que se suman a esta lista. Se dedican a la elaboración de: volquete, máquinas de reciclaje, carretillas elevadoras, cargadoras de ruedas, compactadoras y excavadoras.', '1682959945_OIP (10).jpeg', '2023-04-29 09:44:36', '2023-05-01 21:52:25'),
-(14, 'Tipo Maquina', 'Bulldozer', 'Los bulldozers son máquinas versátiles que permiten realizar diversos trabajos en sectores como la construcción, la minería y las fuerzas armadas. Algunos de sus usos son: Roturación del terreno. Empuje de materiales y balones sueltos. Nivelación y recebo de pistas. Excavaciones en línea recta.', '1682959984_R.jpeg', '2023-04-29 09:52:26', '2023-05-01 21:53:04'),
-(15, 'Tipo Maquina', 'Excavadora', 'Se denomina excavadora (pala excavadora) a una máquina autopropulsada, sobre neumáticos u orugas, con una estructura capaz de girar al menos 360º que excava terrenos, o carga, eleva, gira y descarga material por la acción de la cuchara, fijada a un conjunto formado por pluma y brazo o balancín, sin que la estructura portante o chasis se desplace.', '1682959998_OIP (2).jpeg', '2023-04-29 09:53:39', '2023-05-01 21:53:18'),
-(16, 'Modelo Maquina', 'D6R', 'Bulldozer fabricado por \r\nCaterpillar, con números de \r\nserie.', 'no-imagen.jpg', '2023-04-29 10:07:56', '2023-05-01 21:53:25'),
-(17, 'Modelo Maquina', 'PC200-7', 'Excavadora fabricada por komatsu', 'no-imagen.jpg', '2023-04-29 10:09:55', '2023-05-01 21:53:29'),
-(18, 'Modelo Maquina', '4FRT555T', 'Cargador Komatsu', '1682960024_OIP (4).jpeg', '2023-04-29 10:38:05', '2023-05-01 21:53:44'),
-(19, 'Tipo Maquina', 'Cargador', 'Se le conoce también como cargador de cubo, pala o cargador frontal y es un tipo de tractor que tiene un cangilón ancho y cuadrado. Este va unido por dos brazos que recogen el material suelto de la tierra (arena o grava por ejemplo). Estos brazos del cargador se mueven por el suelo de un lugar a otro, sin empujar el material. Dicho de otro modo, un cargador se usa para mover un material almacenado a nivel del suelo y depositarlo en un camión de carga o en una excavación de zanja abierta. El cargador puede aparecer como un accesorio desprendible o estar montado permanentemente.', '1682960036_OIP (1).jpeg', '2023-04-29 10:39:28', '2023-05-01 21:53:56'),
-(20, 'Marca', 'KOMATSU', 'Es una de las empresas de maquinaria pesada originaria de Japón, sus equipos se especializan en maquinarias de construcción, equipamiento industrial, equipo de minería y material militar. La compañía japonesa, bajó el precio de sus productos un 20% debido a la devaluación del Yen Japonés frente al dólar estadounidense.', '1682960065_R (3).png', '2023-04-29 10:40:51', '2023-05-01 21:54:25'),
-(21, 'Modelo Maquina', '936', 'Cargador de ruedas', 'no-imagen.jpg', '2023-04-29 10:45:11', '2023-05-01 21:54:32'),
-(22, 'Sistema', 'Bomba hidráulica', 'Una bomba hidráulica o bomba de agua es una máquina generadora que transforma la energía con la que es accionada (generalmente energía mecánica) en energía del fluido incompresible que mueve.', 'no-imagen.jpg', '2023-04-29 13:31:36', '2023-05-01 21:54:40'),
-(23, 'Marca', 'VOLVO', 'MAQUINARIA VOLVO', '1682960188_R (2).jpeg', '2023-04-29 17:46:54', '2023-05-01 21:56:28'),
-(24, 'Sistema', 'Motoniveladora', 'Motoniveladora', 'no-imagen.jpg', '2023-04-29 17:54:27', '2023-04-29 17:59:30'),
-(25, 'Sistema', '120M', '120M', 'no-imagen.jpg', '2023-04-29 17:54:52', '2023-04-29 17:59:09'),
-(27, 'Tipo Maquina', 'Motor', 'Motor', 'no-imagen.jpg', '2023-05-01 20:16:25', '2023-05-01 20:16:25'),
-(28, 'Modelo Maquina', '4.108', 'El Perkins 4.108 es un motor de ciclo Diésel diseñado por la empresa británica Perkins Engines y fabricado bajo licencia por varias empresas alrededor del mundo.', 'no-imagen.jpg', '2023-05-01 20:17:16', '2023-05-01 20:17:16'),
-(29, 'Tipo Maquina', 'Tractor', 'Un tractor es una máquina que tiene la capacidad de generar tracción (el acto de tirar de una cosa para desplazarla).', 'no-imagen.jpg', '2023-05-01 21:01:48', '2023-05-01 21:01:48'),
-(30, 'Marca', 'TOYOTA', 'TOYOTA', '1682960159_OIP (7).jpeg', '2023-05-01 21:05:43', '2023-05-01 21:55:59'),
-(33, 'Unidad medida', 'mm', 'milímetros', 'no-imagen.jpg', '2023-05-01 23:57:12', '2023-05-01 23:57:12'),
-(34, 'Unidad medida', 'Kg', 'Kilogramos', 'no-imagen.jpg', '2023-05-01 23:57:31', '2023-05-01 23:57:31'),
-(35, 'Unidad medida', 'cc', 'Centímetros', 'no-imagen.jpg', '2023-05-01 23:57:44', '2023-05-01 23:57:44'),
-(36, 'Marca', 'Otro', 'Otro', 'no-imagen.jpg', '2023-05-06 06:37:38', '2023-05-06 06:37:38'),
-(37, 'Descripción común', 'Tornillo', 'Tornillo', 'no-imagen.jpg', '2023-05-06 07:14:02', '2023-05-06 07:14:02'),
-(38, 'Medida', 'Alto', 'Alto', 'no-imagen.jpg', '2023-05-06 09:54:36', '2023-05-06 09:54:36'),
-(39, 'Medida', 'Largo', 'Largo', 'no-imagen.jpg', '2023-05-06 09:54:45', '2023-05-06 09:54:45'),
-(40, 'Medida', 'Ancho', 'Ancho', 'no-imagen.jpg', '2023-05-06 09:54:55', '2023-05-06 09:54:55'),
-(41, 'Medida', 'Radio', 'Radio', 'no-imagen.jpg', '2023-05-06 09:55:39', '2023-05-06 09:55:39'),
-(42, 'Medida', 'Volumen', 'Volumen', 'no-imagen.jpg', '2023-05-11 07:27:36', '2023-05-11 07:27:36'),
-(44, 'Sistema', 'prueba', 'prueba', 'no-imagen.jpg', '2023-05-11 07:30:36', '2023-05-11 07:30:36'),
-(47, 'Descripción común', 'Plow Bolt', 'Tornillo avellanado', '1684291893_832588a47488d1064f175392e9e6732c--countersunk-bolts-zero.jpg', '2023-05-17 07:51:33', '2023-05-17 07:51:33'),
-(49, 'Unidad medida', 'In', 'Pulgada', 'no-imagen.jpg', '2023-05-17 08:23:18', '2023-05-17 08:23:18');
+INSERT INTO `listas` (`id`, `tipo`, `nombre`, `definicion`, `foto`, `fotoMedida`, `created_at`, `updated_at`) VALUES
+(1, 'Medida', 'diametro', 'Línea recta que une dos puntos de una circunferencia, de una curva cerrada o de la superficie de una esfera pasando por su centro.', '1682964539_R (1).jpeg', NULL, '2023-04-15 11:47:42', '2023-05-01 23:08:59'),
+(2, 'Marca', 'CATERPILLAR', 'Marca norte americana que maneja diferentes repuestos', '1682964585_caterpillar-1127-logo-png-transparent.png', NULL, '2023-04-15 11:52:53', '2023-05-01 23:09:45'),
+(3, 'Marca', 'PERKINS', 'Marca inglesa que maneja repuestos varios', '1682964680_R (1).png', NULL, '2023-04-15 13:12:22', '2023-05-01 23:11:20'),
+(4, 'Sistema', 'Transmision', 'Se encarga de transferir potencia', '1682959494_OIP (8).jpeg', NULL, '2023-04-15 13:16:47', '2023-05-01 21:44:54'),
+(5, 'Sistema', 'Motor', 'Engrane', '1682959520_engranajes-y-transmisiones.jpg', NULL, '2023-04-15 13:17:16', '2023-05-01 21:45:20'),
+(6, 'Medida', 'peso', 'Fuerza con que la Tierra atrae a un cuerpo, por acción de la gravedad.', 'no-imagen.jpg', NULL, '2023-04-15 18:10:47', '2023-05-01 23:09:09'),
+(7, 'Descripción común', 'Seal O Ring', 'Un O-Ring es una junta de \r\nforma toroidal, habitualmente \r\nde goma, cuya función es la de \r\nasegurar la estanqueidad de \r\nfluidos', '1682959829_istockphoto-1215506363-170667a.jpg', NULL, '2023-04-25 04:39:09', '2023-05-01 21:50:29'),
+(8, 'Descripción común', 'Sello de labio', 'Un sello de labio es un dispositivo mecánico pasivo que se usa para sellar los puntos de salida del eje en motores eléctricos y otras máquinas de salida rotativas y recíprocas.', '1682959850_OIP (9).jpeg', NULL, '2023-04-25 04:54:35', '2023-05-01 21:50:50'),
+(9, 'Descripción común', 'otro', 'otro', 'no-imagen.jpg', NULL, '2023-04-25 04:55:14', '2023-05-01 21:50:58'),
+(10, 'Sistema', 'otro', 'otro', 'no-imagen.jpg', NULL, '2023-04-25 04:55:40', '2023-05-01 21:51:04'),
+(11, 'Marca', 'XCMG', 'Es una empresa multinacional de China fundada en marzo de 1989 en la ciudad de Xuzhou. Su equipo de fabricación. Incluye:  cargadoras, excavadoras, camiones pesados, bombas de hormigón, bulldozers, plataformas elevadoras y más.\r\n\r\nCuentan con nuevos productos, uno de ellos es una grúa de 200 toneladas, tiene tubos de 4000 toneladas, cargadoras de 12 toneladas y más.', '1682959893_R (2).png', NULL, '2023-04-29 09:41:10', '2023-05-01 21:51:33'),
+(12, 'Marca', 'HITACHI', 'Hitachi, es otra de las empresas japonesas que se suman a esta lista. Se dedican a la elaboración de: volquete, máquinas de reciclaje, carretillas elevadoras, cargadoras de ruedas, compactadoras y excavadoras.', '1682959945_OIP (10).jpeg', NULL, '2023-04-29 09:44:36', '2023-05-01 21:52:25'),
+(14, 'Tipo Maquina', 'Bulldozer', 'Los bulldozers son máquinas versátiles que permiten realizar diversos trabajos en sectores como la construcción, la minería y las fuerzas armadas. Algunos de sus usos son: Roturación del terreno. Empuje de materiales y balones sueltos. Nivelación y recebo de pistas. Excavaciones en línea recta.', '1682959984_R.jpeg', NULL, '2023-04-29 09:52:26', '2023-05-01 21:53:04'),
+(15, 'Tipo Maquina', 'Excavadora', 'Se denomina excavadora (pala excavadora) a una máquina autopropulsada, sobre neumáticos u orugas, con una estructura capaz de girar al menos 360º que excava terrenos, o carga, eleva, gira y descarga material por la acción de la cuchara, fijada a un conjunto formado por pluma y brazo o balancín, sin que la estructura portante o chasis se desplace.', '1682959998_OIP (2).jpeg', NULL, '2023-04-29 09:53:39', '2023-05-01 21:53:18'),
+(16, 'Modelo Maquina', 'D6R', 'Bulldozer fabricado por \r\nCaterpillar, con números de \r\nserie.', 'no-imagen.jpg', NULL, '2023-04-29 10:07:56', '2023-05-01 21:53:25'),
+(17, 'Modelo Maquina', 'PC200-7', 'Excavadora fabricada por komatsu', 'no-imagen.jpg', NULL, '2023-04-29 10:09:55', '2023-05-01 21:53:29'),
+(18, 'Modelo Maquina', '4FRT555T', 'Cargador Komatsu', '1682960024_OIP (4).jpeg', NULL, '2023-04-29 10:38:05', '2023-05-01 21:53:44'),
+(19, 'Tipo Maquina', 'Cargador', 'Se le conoce también como cargador de cubo, pala o cargador frontal y es un tipo de tractor que tiene un cangilón ancho y cuadrado. Este va unido por dos brazos que recogen el material suelto de la tierra (arena o grava por ejemplo). Estos brazos del cargador se mueven por el suelo de un lugar a otro, sin empujar el material. Dicho de otro modo, un cargador se usa para mover un material almacenado a nivel del suelo y depositarlo en un camión de carga o en una excavación de zanja abierta. El cargador puede aparecer como un accesorio desprendible o estar montado permanentemente.', '1682960036_OIP (1).jpeg', NULL, '2023-04-29 10:39:28', '2023-05-01 21:53:56'),
+(20, 'Marca', 'KOMATSU', 'Es una de las empresas de maquinaria pesada originaria de Japón, sus equipos se especializan en maquinarias de construcción, equipamiento industrial, equipo de minería y material militar. La compañía japonesa, bajó el precio de sus productos un 20% debido a la devaluación del Yen Japonés frente al dólar estadounidense.', '1682960065_R (3).png', NULL, '2023-04-29 10:40:51', '2023-05-01 21:54:25'),
+(21, 'Modelo Maquina', '936', 'Cargador de ruedas', 'no-imagen.jpg', NULL, '2023-04-29 10:45:11', '2023-05-01 21:54:32'),
+(22, 'Sistema', 'Bomba hidráulica', 'Una bomba hidráulica o bomba de agua es una máquina generadora que transforma la energía con la que es accionada (generalmente energía mecánica) en energía del fluido incompresible que mueve.', 'no-imagen.jpg', NULL, '2023-04-29 13:31:36', '2023-05-01 21:54:40'),
+(23, 'Marca', 'VOLVO', 'MAQUINARIA VOLVO', '1682960188_R (2).jpeg', NULL, '2023-04-29 17:46:54', '2023-05-01 21:56:28'),
+(24, 'Sistema', 'Motoniveladora', 'Motoniveladora', 'no-imagen.jpg', NULL, '2023-04-29 17:54:27', '2023-04-29 17:59:30'),
+(25, 'Sistema', '120M', '120M', 'no-imagen.jpg', NULL, '2023-04-29 17:54:52', '2023-04-29 17:59:09'),
+(27, 'Tipo Maquina', 'Motor', 'Motor', 'no-imagen.jpg', NULL, '2023-05-01 20:16:25', '2023-05-01 20:16:25'),
+(28, 'Modelo Maquina', '4.108', 'El Perkins 4.108 es un motor de ciclo Diésel diseñado por la empresa británica Perkins Engines y fabricado bajo licencia por varias empresas alrededor del mundo.', 'no-imagen.jpg', NULL, '2023-05-01 20:17:16', '2023-05-01 20:17:16'),
+(29, 'Tipo Maquina', 'Tractor', 'Un tractor es una máquina que tiene la capacidad de generar tracción (el acto de tirar de una cosa para desplazarla).', 'no-imagen.jpg', NULL, '2023-05-01 21:01:48', '2023-05-01 21:01:48'),
+(30, 'Marca', 'TOYOTA', 'TOYOTA', '1682960159_OIP (7).jpeg', NULL, '2023-05-01 21:05:43', '2023-05-01 21:55:59'),
+(33, 'Unidad medida', 'mm', 'milímetros', 'no-imagen.jpg', NULL, '2023-05-01 23:57:12', '2023-05-01 23:57:12'),
+(34, 'Unidad medida', 'Kg', 'Kilogramos', 'no-imagen.jpg', NULL, '2023-05-01 23:57:31', '2023-05-01 23:57:31'),
+(35, 'Unidad medida', 'cc', 'Centímetros', 'no-imagen.jpg', NULL, '2023-05-01 23:57:44', '2023-05-01 23:57:44'),
+(36, 'Marca', 'Otro', 'Otro', 'no-imagen.jpg', NULL, '2023-05-06 06:37:38', '2023-05-06 06:37:38'),
+(37, 'Descripción común', 'Tornillo', 'Tornillo', 'no-imagen.jpg', NULL, '2023-05-06 07:14:02', '2023-05-06 07:14:02'),
+(38, 'Medida', 'Alto', 'Alto', 'no-imagen.jpg', NULL, '2023-05-06 09:54:36', '2023-05-06 09:54:36'),
+(39, 'Medida', 'Largo', 'Largo', 'no-imagen.jpg', NULL, '2023-05-06 09:54:45', '2023-05-06 09:54:45'),
+(40, 'Medida', 'Ancho', 'Ancho', 'no-imagen.jpg', NULL, '2023-05-06 09:54:55', '2023-05-06 09:54:55'),
+(41, 'Medida', 'Radio', 'Radio', 'no-imagen.jpg', NULL, '2023-05-06 09:55:39', '2023-05-06 09:55:39'),
+(42, 'Medida', 'Volumen', 'Volumen', 'no-imagen.jpg', NULL, '2023-05-11 07:27:36', '2023-05-11 07:27:36'),
+(44, 'Sistema', 'prueba', 'prueba', 'no-imagen.jpg', NULL, '2023-05-11 07:30:36', '2023-05-11 07:30:36'),
+(47, 'Descripción común', 'Plow Bolt', 'Tornillo avellanado', '1684291893_832588a47488d1064f175392e9e6732c--countersunk-bolts-zero.jpg', NULL, '2023-05-17 07:51:33', '2023-05-17 07:51:33'),
+(49, 'Unidad medida', 'In', 'Pulgada', 'no-imagen.jpg', NULL, '2023-05-17 08:23:18', '2023-05-17 08:23:18'),
+(50, 'Definición', 'Tornillo', 'Tornillo', '1685499670_R (3).jpeg', '1685499670_832588a47488d1064f175392e9e6732c--countersunk-bolts-zero.jpg', '2023-05-31 07:21:10', '2023-05-31 07:21:10'),
+(51, 'Definición', 'arandela', 'arandela', '1685505000_engranajes-y-transmisiones.jpg', '1685505000_istockphoto-1215506363-170667a.jpg', '2023-05-31 08:50:00', '2023-05-31 08:50:00');
 
 -- --------------------------------------------------------
 
@@ -4750,7 +4845,8 @@ INSERT INTO `lista_padres` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 (7, 'Tipo Maquina', '2023-04-29 09:31:22', '2023-04-29 09:31:22'),
 (8, 'Modelo Maquina', '2023-04-29 09:31:38', '2023-04-29 09:31:38'),
 (9, 'Marca', '2023-05-01 22:47:53', '2023-05-01 22:47:53'),
-(12, 'Unidad medida', '2023-05-01 23:56:48', '2023-05-01 23:56:48');
+(12, 'Unidad medida', '2023-05-01 23:56:48', '2023-05-01 23:56:48'),
+(13, 'Definición', '2023-05-31 07:09:10', '2023-05-31 07:09:10');
 
 -- --------------------------------------------------------
 
@@ -4803,15 +4899,63 @@ CREATE TABLE `maquinas_pedido` (
 --
 
 INSERT INTO `maquinas_pedido` (`id`, `maquina_id`, `pedido_id`, `created_at`, `updated_at`) VALUES
-(107, 5, 4, '2023-05-16 06:52:53', '2023-05-16 06:52:53'),
-(108, 2, 5, '2023-05-16 07:02:58', '2023-05-16 07:02:58'),
-(109, 1, 6, '2023-05-16 07:04:03', '2023-05-16 07:04:03'),
-(110, 2, 7, '2023-05-16 07:11:05', '2023-05-16 07:11:05'),
-(111, 2, 8, '2023-05-16 07:13:46', '2023-05-16 07:13:46'),
-(112, 2, 9, '2023-05-16 07:14:12', '2023-05-16 07:14:12'),
-(113, 2, 10, '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
-(114, 2, 11, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
-(115, 7, 12, '2023-05-17 08:38:50', '2023-05-17 08:38:50');
+(116, 4, 1, '2023-06-02 06:50:05', '2023-06-02 06:50:05'),
+(117, 4, 2, '2023-06-02 06:53:42', '2023-06-02 06:53:42'),
+(118, 4, 3, '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
+(119, 4, 4, '2023-06-02 02:15:36', '2023-06-02 02:15:36'),
+(120, 4, 5, '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
+(121, 4, 6, '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
+(122, 4, 7, '2023-06-02 02:35:05', '2023-06-02 02:35:05'),
+(123, 4, 8, '2023-06-02 02:35:40', '2023-06-02 02:35:40'),
+(124, 4, 9, '2023-06-02 02:35:56', '2023-06-02 02:35:56'),
+(125, 4, 10, '2023-06-02 02:36:53', '2023-06-02 02:36:53'),
+(126, 4, 11, '2023-06-02 02:36:59', '2023-06-02 02:36:59'),
+(127, 4, 12, '2023-06-02 02:37:00', '2023-06-02 02:37:00'),
+(128, 4, 13, '2023-06-02 02:37:02', '2023-06-02 02:37:02'),
+(129, 4, 14, '2023-06-02 02:37:31', '2023-06-02 02:37:31'),
+(130, 4, 15, '2023-06-02 02:38:18', '2023-06-02 02:38:18'),
+(131, 4, 16, '2023-06-02 02:38:35', '2023-06-02 02:38:35'),
+(132, 4, 17, '2023-06-02 02:38:40', '2023-06-02 02:38:40'),
+(133, 4, 18, '2023-06-02 02:39:05', '2023-06-02 02:39:05'),
+(134, 2, 19, '2023-06-02 03:21:35', '2023-06-02 03:21:35'),
+(135, 2, 20, '2023-06-02 03:22:41', '2023-06-02 03:22:41'),
+(136, 2, 21, '2023-06-02 03:23:31', '2023-06-02 03:23:31'),
+(137, 2, 22, '2023-06-02 03:24:13', '2023-06-02 03:24:13'),
+(138, 2, 23, '2023-06-02 03:31:10', '2023-06-02 03:31:10'),
+(139, 4, 23, '2023-06-02 03:31:10', '2023-06-02 03:31:10'),
+(140, 2, 24, '2023-06-02 03:34:02', '2023-06-02 03:34:02'),
+(141, 4, 24, '2023-06-02 03:34:02', '2023-06-02 03:34:02'),
+(142, 2, 25, '2023-06-02 03:34:16', '2023-06-02 03:34:16'),
+(143, 4, 25, '2023-06-02 03:34:16', '2023-06-02 03:34:16'),
+(144, 2, 26, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(145, 4, 26, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(146, 4, 27, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(147, 2, 28, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(148, 2, 29, '2023-06-02 03:42:27', '2023-06-02 03:42:27'),
+(149, 4, 30, '2023-06-02 03:45:00', '2023-06-02 03:45:00'),
+(150, 4, 31, '2023-06-02 03:47:27', '2023-06-02 03:47:27'),
+(151, 4, 32, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
+(152, 4, 33, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
+(153, 4, 35, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
+(154, 4, 36, '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
+(155, 2, 37, '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
+(156, 2, 38, '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
+(157, 4, 39, '2023-06-02 04:04:50', '2023-06-02 04:04:50'),
+(158, 4, 40, '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
+(159, 2, 41, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
+(160, 4, 41, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
+(161, 4, 43, '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
+(162, 4, 44, '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
+(163, 4, 45, '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
+(164, 4, 46, '2023-06-03 05:34:32', '2023-06-03 05:34:32'),
+(165, 4, 47, '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
+(166, 4, 48, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(167, 4, 49, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(168, 2, 50, '2023-06-03 06:10:37', '2023-06-03 06:10:37'),
+(169, 2, 51, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(170, 2, 52, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(171, 3, 52, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(172, 2, 53, '2023-06-03 06:18:23', '2023-06-03 06:18:23');
 
 -- --------------------------------------------------------
 
@@ -4883,7 +5027,8 @@ INSERT INTO `medidas` (`id`, `nombre`, `unidad`, `valor`, `tipo`, `idMedida`, `f
 (9, 'diametro', 'Kg', '1', NULL, '7', NULL, '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
 (10, 'peso', 'Kg', '678', NULL, '7', NULL, '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
 (11, 'diametro', 'mm', '1', NULL, '7', NULL, '2023-05-29 04:02:07', '2023-05-29 04:02:07'),
-(12, 'diametro', 'mm', '1', NULL, '7', NULL, '2023-05-29 04:03:14', '2023-05-29 04:03:14');
+(12, 'diametro', 'mm', '1', NULL, '7', NULL, '2023-05-29 04:03:14', '2023-05-29 04:03:14'),
+(13, 'diametro', 'cc', '1', NULL, '7', NULL, '2023-05-31 09:34:31', '2023-05-31 09:34:31');
 
 -- --------------------------------------------------------
 
@@ -4930,7 +5075,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (34, '2023_05_16_021614_create_pedidos_articulos_temporales_table', 21),
 (35, '2023_05_28_163134_create_marcas_table', 22),
 (37, '2023_05_28_163813_create_terceros_marcas_table', 23),
-(38, '2023_05_28_192729_create_sistemas_table', 24);
+(38, '2023_05_28_192729_create_sistemas_table', 24),
+(39, '2023_06_02_235815_create_fotos_articulo_temporal_table', 25);
 
 -- --------------------------------------------------------
 
@@ -5266,7 +5412,6 @@ CREATE TABLE `pedidos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `tercero_id` int(11) NOT NULL,
-  `maquina_id` int(11) DEFAULT NULL,
   `comentario` varchar(255) DEFAULT NULL,
   `contacto_id` int(11) DEFAULT NULL,
   `estado` varchar(255) NOT NULL DEFAULT 'Nuevo',
@@ -5278,16 +5423,60 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `user_id`, `tercero_id`, `maquina_id`, `comentario`, `contacto_id`, `estado`, `created_at`, `updated_at`) VALUES
-(4, 1, 3, NULL, '5', NULL, 'Nuevo', '2023-05-16 06:52:53', '2023-05-16 06:52:53'),
-(5, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:02:58', '2023-05-16 07:02:58'),
-(6, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:04:03', '2023-05-16 07:04:03'),
-(7, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:11:05', '2023-05-16 07:11:05'),
-(8, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:13:46', '2023-05-16 07:13:46'),
-(9, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:14:12', '2023-05-16 07:14:12'),
-(10, 1, 1, NULL, NULL, 28, 'Nuevo', '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
-(11, 1, 1, NULL, NULL, 28, 'Procesando', '2023-05-16 07:21:34', '2023-05-16 07:47:05'),
-(12, 1, 4, NULL, NULL, 29, 'Procesando', '2023-05-17 08:38:50', '2023-05-17 08:48:14');
+INSERT INTO `pedidos` (`id`, `user_id`, `tercero_id`, `comentario`, `contacto_id`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 06:50:05', '2023-06-02 06:50:05'),
+(2, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 06:53:42', '2023-06-02 06:53:42'),
+(3, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
+(4, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:15:36', '2023-06-02 02:15:36'),
+(5, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
+(6, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
+(7, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:35:05', '2023-06-02 02:35:05'),
+(8, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:35:40', '2023-06-02 02:35:40'),
+(9, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:35:56', '2023-06-02 02:35:56'),
+(10, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:36:53', '2023-06-02 02:36:53'),
+(11, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:36:59', '2023-06-02 02:36:59'),
+(12, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:37:00', '2023-06-02 02:37:00'),
+(13, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:37:02', '2023-06-02 02:37:02'),
+(14, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:37:31', '2023-06-02 02:37:31'),
+(15, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:38:18', '2023-06-02 02:38:18'),
+(16, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:38:35', '2023-06-02 02:38:35'),
+(17, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:38:40', '2023-06-02 02:38:40'),
+(18, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:39:05', '2023-06-02 02:39:05'),
+(19, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:21:35', '2023-06-02 03:21:35'),
+(20, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:22:41', '2023-06-02 03:22:41'),
+(21, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:23:31', '2023-06-02 03:23:31'),
+(22, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:24:13', '2023-06-02 03:24:13'),
+(23, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:31:10', '2023-06-02 03:31:10'),
+(24, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:34:02', '2023-06-02 03:34:02'),
+(25, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:34:16', '2023-06-02 03:34:16'),
+(26, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(27, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(28, 1, 2, NULL, 74, 'Nuevo', '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(29, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:42:27', '2023-06-02 03:42:27'),
+(30, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:45:00', '2023-06-02 03:45:00'),
+(31, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:47:27', '2023-06-02 03:47:27'),
+(32, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
+(33, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
+(34, 1, 4, NULL, 77, 'Nuevo', '2023-06-02 03:50:57', '2023-06-02 03:50:57'),
+(35, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
+(36, 1, 1, 'qqq', 73, 'Nuevo', '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
+(37, 1, 2, '11', 74, 'Nuevo', '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
+(38, 1, 2, 'asd', 74, 'Nuevo', '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
+(39, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 04:04:50', '2023-06-02 04:04:50'),
+(40, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
+(41, 1, 4, 'Sin comentarios', 77, 'Nuevo', '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
+(42, 1, 5, NULL, 78, 'Nuevo', '2023-06-02 04:11:53', '2023-06-02 04:11:53'),
+(43, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
+(44, 1, 1, 'Comentario de pedido', 73, 'Nuevo', '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
+(45, 1, 1, 'Comentarios de pedido', 73, 'Nuevo', '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
+(46, 1, 1, 'Comentarios de pedido', 73, 'Nuevo', '2023-06-03 05:34:32', '2023-06-03 05:34:32'),
+(47, 1, 1, 'Comentarios de pedido', 73, 'Nuevo', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
+(48, 1, 1, NULL, 73, 'Nuevo', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(49, 1, 1, NULL, 73, 'Nuevo', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(50, 1, 2, NULL, 74, 'Nuevo', '2023-06-03 06:10:37', '2023-06-03 06:10:37'),
+(51, 1, 2, NULL, 74, 'Nuevo', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(52, 1, 3, NULL, 76, 'Nuevo', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(53, 1, 5, NULL, 78, 'Nuevo', '2023-06-03 06:18:23', '2023-06-03 06:18:23');
 
 -- --------------------------------------------------------
 
@@ -5302,6 +5491,49 @@ CREATE TABLE `pedidos_articulos_temporales` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos_articulos_temporales`
+--
+
+INSERT INTO `pedidos_articulos_temporales` (`id`, `pedido_id`, `articulo_temporal_id`, `created_at`, `updated_at`) VALUES
+(5, 26, 20, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(6, 26, 21, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(7, 26, 22, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
+(8, 27, 23, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(9, 27, 24, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(10, 27, 25, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
+(11, 28, 26, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(12, 28, 27, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(13, 28, 28, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
+(14, 32, 29, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
+(15, 32, 30, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
+(16, 33, 31, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
+(17, 33, 32, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
+(18, 34, 33, '2023-06-02 03:50:57', '2023-06-02 03:50:57'),
+(19, 35, 34, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
+(20, 35, 35, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
+(21, 36, 36, '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
+(22, 37, 37, '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
+(23, 38, 38, '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
+(24, 40, 39, '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
+(25, 41, 40, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
+(26, 41, 41, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
+(27, 42, 42, '2023-06-02 04:11:53', '2023-06-02 04:11:53'),
+(28, 43, 43, '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
+(29, 44, 44, '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
+(30, 45, 45, '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
+(31, 47, 47, '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
+(32, 48, 48, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(33, 48, 49, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
+(34, 49, 50, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(35, 49, 51, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
+(36, 51, 53, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(37, 51, 54, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
+(38, 52, 55, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(39, 52, 56, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
+(40, 53, 57, '2023-06-03 06:18:23', '2023-06-03 06:18:23'),
+(41, 53, 58, '2023-06-03 06:18:23', '2023-06-03 06:18:23');
 
 -- --------------------------------------------------------
 
@@ -5378,18 +5610,25 @@ CREATE TABLE `terceros` (
 --
 
 INSERT INTO `terceros` (`id`, `nombre`, `tipo_documento`, `numero_documento`, `direccion`, `telefono`, `email`, `dv`, `CiudadID`, `PaisCodigo`, `codigo_postal`, `estado`, `forma_pago`, `email_factura_electronica`, `rut`, `certificacion_bancaria`, `sitio_web`, `puntos`, `created_at`, `updated_at`, `tipo`) VALUES
-(52, 'PROVEEDOR 1', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:21:09', '2023-05-29 01:21:09', 'proveedor'),
-(53, 'proveedor 2', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:22:24', '2023-05-29 01:22:24', 'proveedor'),
-(54, 'proveedor 3', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:25:17', '2023-05-29 01:25:17', 'proveedor'),
-(55, 'proveedor 4', 'nit', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:26:22', '2023-05-29 01:26:22', 'proveedor'),
-(56, 'proveedor 4', 'nit', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:26:53', '2023-05-29 01:26:53', 'proveedor'),
-(57, 'cliente con contacto7', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:27:25', '2023-05-29 01:27:25', 'proveedor'),
-(58, 'Provvedor 5', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:38:45', '2023-05-29 01:38:45', 'proveedor'),
-(59, 'cliente 1', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 552, 'BDI', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.provvedor.com', NULL, '2023-05-29 01:39:20', '2023-05-29 01:39:20', 'cliente'),
-(60, 'damian', 'nit', '80896995', 'asdf', '6578676', 'w@q', '8', 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:40:10', '2023-05-29 01:40:10', 'cliente'),
-(61, 'cliente con contacto7', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-05-29 01:41:21', '2023-05-29 01:41:21', 'cliente'),
-(62, 'damian', 'cedula', '11111', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.prveedor.com', NULL, '2023-05-29 01:42:33', '2023-05-29 01:42:33', 'cliente'),
-(63, 'damiareeee', 'cedula', '11111', 'asdf', '6578676', 'wilfranr@gmail.com', NULL, 56, 'AGO', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.prveedor.com', NULL, '2023-05-29 01:43:06', '2023-05-29 01:43:06', 'proveedor');
+(1, 'Carlos Castro', 'cedula', '11111', 'av siempre viva 123', '3174266407', 'carlos.castro@gmail.com', NULL, NULL, NULL, NULL, 'activo', NULL, 'carlos.castro@gmail.com', NULL, NULL, NULL, NULL, '2023-06-02 06:32:28', '2023-06-02 03:02:44', 'cliente'),
+(2, 'Hernan Ramirez', 'cedula', '12345', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, 'www.cliente.com', NULL, '2023-06-02 03:05:02', '2023-06-02 03:05:02', 'cliente'),
+(3, 'Juan Perez', 'cedula', '11111343434', 'asdf', '6578676', 'juan.perez@gmail.com', NULL, 2257, 'COL', NULL, 'activo', NULL, 'email@fact', NULL, NULL, NULL, NULL, '2023-06-02 03:15:03', '2023-06-02 03:15:03', 'cliente'),
+(4, 'camilo Perez', 'cedula', '1111177', 'asdf', '6578676', 'wilfranr@gmail.com', NULL, 2296, 'COG', NULL, 'activo', NULL, 'email@fact', NULL, NULL, NULL, NULL, '2023-06-02 03:15:49', '2023-06-02 03:15:49', 'cliente'),
+(5, 'damian', 'cedula', '80896995', 'asdf', '6578676', 'w@q', NULL, 2257, 'COL', NULL, 'activo', NULL, 'w@q', NULL, NULL, NULL, NULL, '2023-06-02 03:16:41', '2023-06-02 03:16:41', 'cliente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `terceros_sistemas`
+--
+
+CREATE TABLE `terceros_sistemas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tercero_id` bigint(20) UNSIGNED NOT NULL,
+  `sistema_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -5410,8 +5649,17 @@ CREATE TABLE `tercero_maquina` (
 --
 
 INSERT INTO `tercero_maquina` (`id`, `tercero_id`, `maquina_id`, `created_at`, `updated_at`) VALUES
-(45, 61, 1, NULL, NULL),
-(46, 61, 4, NULL, NULL);
+(47, 1, 4, NULL, NULL),
+(48, 2, 2, NULL, NULL),
+(49, 3, 1, NULL, NULL),
+(50, 3, 2, NULL, NULL),
+(51, 3, 3, NULL, NULL),
+(52, 3, 4, NULL, NULL),
+(53, 4, 1, NULL, NULL),
+(54, 4, 2, NULL, NULL),
+(55, 4, 3, NULL, NULL),
+(56, 4, 4, NULL, NULL),
+(57, 5, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5426,18 +5674,6 @@ CREATE TABLE `tercero_marca` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `tercero_marca`
---
-
-INSERT INTO `tercero_marca` (`tercero_id`, `marca_id`, `created_at`, `updated_at`) VALUES
-(52, 1, NULL, NULL),
-(53, 1, NULL, NULL),
-(54, 1, NULL, NULL),
-(55, 3, NULL, NULL),
-(56, 3, NULL, NULL),
-(58, 1, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -5451,16 +5687,6 @@ CREATE TABLE `tercero_sistema` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `tercero_sistema`
---
-
-INSERT INTO `tercero_sistema` (`id`, `tercero_id`, `sistema_id`, `created_at`, `updated_at`) VALUES
-(19, 54, 3, NULL, NULL),
-(20, 55, 4, NULL, NULL),
-(21, 56, 4, NULL, NULL),
-(22, 58, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5550,6 +5776,13 @@ ALTER TABLE `departamentos`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indices de la tabla `fotos_articulo_temporal`
+--
+ALTER TABLE `fotos_articulo_temporal`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fotos_articulo_temporal_articulo_temporal_id_foreign` (`articulo_temporal_id`);
 
 --
 -- Indices de la tabla `foto_articulo`
@@ -5668,6 +5901,12 @@ ALTER TABLE `terceros`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `terceros_sistemas`
+--
+ALTER TABLE `terceros_sistemas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tercero_maquina`
 --
 ALTER TABLE `tercero_maquina`
@@ -5705,19 +5944,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `articulo_medida`
 --
 ALTER TABLE `articulo_medida`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `articulo_temporal`
 --
 ALTER TABLE `articulo_temporal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -5729,13 +5968,13 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `contactos`
 --
 ALTER TABLE `contactos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto_tercero`
 --
 ALTER TABLE `contacto_tercero`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -5748,6 +5987,12 @@ ALTER TABLE `departamentos`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `fotos_articulo_temporal`
+--
+ALTER TABLE `fotos_articulo_temporal`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `foto_articulo`
@@ -5765,13 +6010,13 @@ ALTER TABLE `imagenes_articulo`
 -- AUTO_INCREMENT de la tabla `listas`
 --
 ALTER TABLE `listas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `lista_padres`
 --
 ALTER TABLE `lista_padres`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
@@ -5783,7 +6028,7 @@ ALTER TABLE `maquinas`
 -- AUTO_INCREMENT de la tabla `maquinas_pedido`
 --
 ALTER TABLE `maquinas_pedido`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT de la tabla `maquina_articulo`
@@ -5801,13 +6046,13 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `medidas`
 --
 ALTER TABLE `medidas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -5819,13 +6064,13 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos_articulos_temporales`
 --
 ALTER TABLE `pedidos_articulos_temporales`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -5843,13 +6088,19 @@ ALTER TABLE `sistemas`
 -- AUTO_INCREMENT de la tabla `terceros`
 --
 ALTER TABLE `terceros`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `terceros_sistemas`
+--
+ALTER TABLE `terceros_sistemas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tercero_maquina`
 --
 ALTER TABLE `tercero_maquina`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `tercero_sistema`
@@ -5886,6 +6137,12 @@ ALTER TABLE `contacto_tercero`
 --
 ALTER TABLE `departamentos`
   ADD CONSTRAINT `departamentos_pais_id_foreign` FOREIGN KEY (`pais_id`) REFERENCES `paises` (`id`);
+
+--
+-- Filtros para la tabla `fotos_articulo_temporal`
+--
+ALTER TABLE `fotos_articulo_temporal`
+  ADD CONSTRAINT `fotos_articulo_temporal_articulo_temporal_id_foreign` FOREIGN KEY (`articulo_temporal_id`) REFERENCES `articulo_temporal` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `maquinas_pedido`

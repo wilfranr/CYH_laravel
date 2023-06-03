@@ -9,7 +9,7 @@ class FotoArticuloTemporal extends Model
 {
     use HasFactory;
 
-    protected $table = 'foto_articulo_temporal';
+    protected $table = 'fotos_articulo_temporal';
 
     protected $fillable = [
         'articulo_temporal_id',
@@ -18,7 +18,7 @@ class FotoArticuloTemporal extends Model
 
     public function articuloTemporal()
     {
-        return $this->belongsTo(ArticuloTemporal::class);
+        return $this->belongsTo(ArticuloTemporal::class, 'articulo_temporal_id');
     }
 }
 
