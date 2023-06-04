@@ -45,7 +45,6 @@
                                         alt="Foto de medida" width="200px">
                                 </a>
                             </div>
-
                         </div>
                         @foreach ($articulo->medidas as $index => $medida)
                             <h3>Medida {{ $index + 1 }}</h3>

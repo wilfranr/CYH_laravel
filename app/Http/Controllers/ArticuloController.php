@@ -32,7 +32,7 @@ class ArticuloController extends Controller
         foreach ($definicionesConFoto as $definicion) {
             $definicionesFotoMedida[$definicion->id] = $definicion->fotoMedida;
         }
-        
+
 
         //dd($definicionesFotoMedida);
 
@@ -83,8 +83,8 @@ class ArticuloController extends Controller
         }
 
         // Procesar la foto de la medida, si se proporcionó
-        if ($request->hasFile('fotoMedida')) {
-            $fotoMedida = $request->file('fotoMedida');
+        if ($request->hasFile('fotoMedida2')) {
+            $fotoMedida = $request->file('fotoMedida2');
             $filename = time() . '_' . $fotoMedida->getClientOriginalName();
             $filepath = $fotoMedida->storeAs('public/articulos', $filename);
             $articulo->fotoMedida = $filename;
@@ -101,32 +101,48 @@ class ArticuloController extends Controller
 
 
         $articulo->save();
-        // dd($contadorMedidas);
         // Crear las medidas del articulo
         //si no se ingresan meiddas, continuar
 
         // Obtener los datos del formulario de medidas
         $dataMedida = $request->only(['contadorMedidas', 'tipoMedida', 'valorMedida', 'unidadMedida', 'idMedida']);
 
-        // Crear y asociar las medidas al artículo
-        for ($i = 0; $i < $dataMedida['contadorMedidas']; $i++) {
-            $medida = new Medida();
-            $medida->nombre = $dataMedida['tipoMedida'][$i] ?: null;
-            $medida->valor = $dataMedida['valorMedida'][$i] ?: null;
-            $medida->unidad = $dataMedida['unidadMedida'][$i] ?: null;
-            $medida->idMedida = $dataMedida['idMedida'][$i] ?: null;
-            $medida->save();
+        // Verificar si el índice 'tipoMedida' existe
+        if (isset($dataMedida['tipoMedida'])) {
+            // Obtener el contador de medidas
+            $contadorMedidas = $dataMedida['contadorMedidas'];
 
-            // Asociar la medida al artículo en la tabla pivot
-            $articulo->medidas()->attach($medida->id);
+            // Recorrer el bucle para crear y asociar las medidas al artículo
+            for ($i = 0; $i < $contadorMedidas; $i++) {
+                $medida = new Medida();
+
+                // Verificar si el índice 'tipoMedida' en la posición $i existe
+                if (isset($dataMedida['tipoMedida'][$i])) {
+                    $medida->nombre = $dataMedida['tipoMedida'][$i];
+                }
+
+                // Verificar si el índice 'valorMedida' en la posición $i existe
+                if (isset($dataMedida['valorMedida'][$i])) {
+                    $medida->valor = $dataMedida['valorMedida'][$i];
+                }
+
+                // Verificar si el índice 'unidadMedida' en la posición $i existe
+                if (isset($dataMedida['unidadMedida'][$i])) {
+                    $medida->unidad = $dataMedida['unidadMedida'][$i];
+                }
+
+                // Verificar si el índice 'idMedida' en la posición $i existe
+                if (isset($dataMedida['idMedida'][$i])) {
+                    $medida->idMedida = $dataMedida['idMedida'][$i];
+                }
+                
+
+                $medida->save();
+
+                // Asociar la medida al artículo en la tabla pivot
+                $articulo->medidas()->attach($medida->id);
+            }
         }
-
-
-
-
-
-
-
 
         return redirect()->route('articulos.show', $articulo->id)->with('success', 'Artículo agregado correctamente.');
     }
@@ -134,9 +150,11 @@ class ArticuloController extends Controller
     public function show(Articulo $articulo, $id)
     {
         $articulo = Articulo::find($id);
+        $definiciones = Lista::where('tipo', 'Descripcion comun')->pluck('nombre', 'fotoMedida', 'id');
 
-        return view('articulos.show', compact('articulo'));
+        return view('articulos.show', compact('articulo', 'definiciones'));
     }
+    
 
     public function edit($id)
     {

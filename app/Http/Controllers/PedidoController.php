@@ -122,7 +122,7 @@ class PedidoController extends Controller
                     $fotoArticuloTemporal->save();
                 }
             }
-            
+
 
 
             // Agregar la relación a la tabla pivot
@@ -140,8 +140,25 @@ class PedidoController extends Controller
     {
         $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales.fotosArticuloTemporal'])->find($id);
         $articulos = Articulo::all();
+        $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
+        $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre', 'id');
 
-        return view('pedidos.show', compact('pedido', 'articulos'));
+        // Obtener las definiciones con su respectiva foto de medida
+        $definicionesConFoto = Lista::where('tipo', 'Definición')->select('id', 'fotoMedida')->get();
+
+        $definicionesFotoMedida = [];
+        foreach ($definicionesConFoto as $definicion) {
+            $definicionesFotoMedida[$definicion->id] = $definicion->fotoMedida;
+        }
+
+
+        //dd($definicionesFotoMedida);
+
+        $medidas = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
+        $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
+        $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
+
+        return view('pedidos.show', compact('pedido', 'sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion'));
     }
 
 

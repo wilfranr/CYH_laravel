@@ -138,6 +138,7 @@ Route::delete('/articulos/{id}', [ArticuloController::class, 'destroy'])->name('
 
 
 
+
 //rutas listas padre
 Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listasPadre.index');
 Route::get('/listasPadre/create', [ListaPadreController::class, 'create'])->name('listasPadre.create');
