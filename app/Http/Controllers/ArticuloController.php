@@ -248,6 +248,46 @@ class ArticuloController extends Controller
         return redirect()->route('articulos.index')->with('success', 'Artículo actualizado correctamente.');
     }
 
+    public function definicion(Request $request)
+    {
+        $request->validate([
+            'tipo' => 'required',
+            'nombre' => 'required',
+            'definicion' => 'required',
+            'fotoLista' => 'image|nullable',
+            'fotoMedida' => 'image|nullable'
+        ]);
+
+        $lista = new Lista;
+        $lista->tipo = $request->tipo;
+        $lista->nombre = $request->nombre;
+        $lista->definicion = $request->definicion;
+
+        // Procesar la foto de la lista, si se proporcionó
+        if ($request->hasFile('fotoLista')) {
+            $foto = $request->file('fotoLista');
+            $filename = time() . '_' . $foto->getClientOriginalName();
+            $filepath = $foto->storeAs('public/listas', $filename);
+            $lista->foto = $filename;
+        }else{
+            $lista->foto = 'no-imagen.jpg';
+        }
+
+        // Procesar la foto de la medida si se proporcionó
+        if ($request->hasFile('fotoMedida')) {
+            $foto = $request->file('fotoMedida');
+            $filename = time() . '_' . $foto->getClientOriginalName();
+            $filepath = $foto->storeAs('public/listas', $filename);
+            $lista->fotoMedida = $filename;
+        }else{
+            $lista->fotoMedida = 'no-imagen.jpg';
+        }
+
+        $lista->save();
+
+        return redirect()->route('listas.index')->with('success', 'La lista ha sido creada exitosamente.');
+    }
+
     public function destroy($id)
     {
         $articulo = Articulo::find($id);

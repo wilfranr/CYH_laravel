@@ -87,9 +87,5 @@
                 $('.fotoMedida').hide();
             }
         });
-
-        
-
-
     </script>
 @endsection

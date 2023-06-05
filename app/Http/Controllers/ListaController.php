@@ -27,7 +27,8 @@ class ListaController extends Controller
             'tipo' => 'required',
             'nombre' => 'required',
             'definicion' => 'required',
-            'foto' => 'image|nullable'
+            'fotoLista' => 'image|nullable',
+            'fotoMedida' => 'image|nullable'
         ]);
 
         $lista = new Lista;

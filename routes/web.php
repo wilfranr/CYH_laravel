@@ -134,6 +134,7 @@ Route::get('/articulos/{id}', [ArticuloController::class, 'show'])->name('articu
 Route::get('/articulos/{id}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
 Route::put('/articulos/{id}/update', [ArticuloController::class, 'update'])->name('articulos.update');
 Route::delete('/articulos/{id}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
+Route::post('/articulos/definicion', [ArticuloController::class, 'definicion'])->name('articulos.definicion');
 
 
 

@@ -25,13 +25,44 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Definición') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-select" id="definicion" name="definicion"
-                                        onchange="mostrarFotoMedida(this.value)">
-                                        <option value="">Seleccione una definición</option>
-                                        @foreach ($definiciones as $id => $nombre)
-                                            <option value="{{ $id }}">{{ $nombre }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="row">
+                                        <div class="col">
+                                            <select class="form-select" id="select-definicion" name="definicion"
+                                                onchange="mostrarFotoMedida(this.value)">
+                                                <option value="">Seleccione una definición</option>
+                                                @foreach ($definiciones as $id => $nombre)
+                                                    <option value="{{ $id }}">{{ $nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-primary"
+                                                data-bs-toggle="modal" data-bs-target="#modalCrearDefinicion">
+                                                +
+                                            </button>
+                                        </div>
+                                        {{-- Modal de crear Definicion --}}
+                                        <div class="modal fade" id="modalCrearDefinicion"
+                                            aria-labelledby="modalCrearDefinicionLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalCrearDefinicionLabel">Crear
+                                                            definición</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @component('components.crear-lista-form', [])
+                                                        @endcomponent
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -173,9 +204,7 @@
 
                             <img id="fotoMedida" src="{{ asset('storage/listas') }}/no-imagen.jpg"
                                 alt="Foto de medida" width="300px">
-                                <input type="file" name="fotoMedida2" id="fotoMedida2">
                         </div>
-
                     </div>
 
                     <button type="button" class="btn btn-success" id="agregar-medida">Agregar medida</button>
@@ -193,9 +222,6 @@
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- Agregar enlaces al archivo JS y CSS de Dropzone -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 
 
 <script>
@@ -208,7 +234,8 @@
         console.log(fotoMedida);
         document.getElementById('fotoMedida').src = fotoMedida;
         document.getElementById('fotoMedidaContainer').style.display = definicionId ? 'block' : 'none';
-        $('#fotoMedida2').val(fotoMedida);
+
+
     }
 </script>
 
@@ -278,7 +305,7 @@
         //Ocultar boton de agregar medida
         $('#agregar-medida').hide();
         // Mostrar boton de agregar medida si se selecciona una definicion
-        $('#definicion').on('change', function() {
+        $('#select-definicion').on('change', function() {
             $('#agregar-medida').show();
             // Obtener referencias a los elementos select e imagen
 
