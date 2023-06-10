@@ -141,14 +141,14 @@ class PedidoController extends Controller
         $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales.fotosArticuloTemporal'])->find($id);
         $articulos = Articulo::all();
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
-        $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre', 'id');
+        $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre');
 
         // Obtener las definiciones con su respectiva foto de medida
-        $definicionesConFoto = Lista::where('tipo', 'Definición')->select('id', 'fotoMedida')->get();
+        $definicionesConFoto = Lista::where('tipo', 'Definición')->select('nombre', 'fotoMedida')->get();
 
         $definicionesFotoMedida = [];
         foreach ($definicionesConFoto as $definicion) {
-            $definicionesFotoMedida[$definicion->id] = $definicion->fotoMedida;
+            $definicionesFotoMedida[$definicion->nombre] = $definicion->fotoMedida;
         }
 
 

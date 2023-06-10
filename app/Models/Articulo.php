@@ -26,12 +26,11 @@ class Articulo extends Model
         return $this->belongsToMany(Medida::class, 'articulo_medida', 'articulo_id', 'medida_id');
     }
 
-    public function pedido()
+    public function pedidos()
     {
-        return $this->belongsTo(Pedido::class);
+        return $this->belongsToMany(Pedido::class, 'articulo_pedido')
+            ->withTimestamps();
     }
-
-
 
     public function fotos()
     {

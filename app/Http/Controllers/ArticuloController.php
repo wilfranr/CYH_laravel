@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Lista;
 use App\Models\Maquina;
 use App\Models\Medida;
+use App\Models\Pedido;
 
 
 class ArticuloController extends Controller
@@ -23,14 +24,14 @@ class ArticuloController extends Controller
     {
         $articulos = Articulo::all();
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
-        $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre', 'id');
+        $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre');
 
         // Obtener las definiciones con su respectiva foto de medida
-        $definicionesConFoto = Lista::where('tipo', 'Definición')->select('id', 'fotoMedida')->get();
+        $definicionesConFoto = Lista::where('tipo', 'Definición')->select('nombre', 'fotoMedida')->get();
 
         $definicionesFotoMedida = [];
         foreach ($definicionesConFoto as $definicion) {
-            $definicionesFotoMedida[$definicion->id] = $definicion->fotoMedida;
+            $definicionesFotoMedida[$definicion->nombre] = $definicion->fotoMedida;
         }
 
 
@@ -52,7 +53,7 @@ class ArticuloController extends Controller
             //'tipo_maquina' => 'nullable|exists:maquinas,id',
             'marca' => 'nullable|string',
             //'sistema' => 'nullable|string',
-            'definicion' => 'nullable|string',
+            'select-definicion' => 'nullable|string',
             'referencia' => 'nullable|string',
             'descripcion_especifica' => 'nullable|string',
             'comentarios' => 'nullable|string',
@@ -66,7 +67,7 @@ class ArticuloController extends Controller
         //$articulo->tipo_maquina_id = $validatedData['tipo_maquina'];
         $articulo->marca = $validatedData['marca'];
         // $articulo->sistema = $validatedData['sistema'];
-        $articulo->definicion = $validatedData['definicion'];
+        $articulo->definicion = $validatedData['select-definicion'];
         $articulo->referencia = $validatedData['referencia'];
         $articulo->descripcionEspecifica = $validatedData['descripcion_especifica'];
         $articulo->comentarios = $validatedData['comentarios'];
@@ -101,6 +102,17 @@ class ArticuloController extends Controller
 
 
         $articulo->save();
+        // Verificar si el artículo está asociado a un pedido
+        if ($request->has('pedido_id')) {
+            $pedido = Pedido::find($request->pedido_id);
+
+            // Verificar si se encontró el pedido
+            if ($pedido) {
+                // Asociar el artículo al pedido mediante la relación muchos a muchos
+                $pedido->articulos()->attach($articulo->id);
+            }
+        }
+
         // Crear las medidas del articulo
         //si no se ingresan meiddas, continuar
 
@@ -135,7 +147,7 @@ class ArticuloController extends Controller
                 if (isset($dataMedida['idMedida'][$i])) {
                     $medida->idMedida = $dataMedida['idMedida'][$i];
                 }
-                
+
 
                 $medida->save();
 
@@ -144,7 +156,8 @@ class ArticuloController extends Controller
             }
         }
 
-        return redirect()->route('articulos.show', $articulo->id)->with('success', 'Artículo agregado correctamente.');
+        //redireccionar recargando la pagina
+        return redirect()->route('articulos.create')->with('success', 'Artículo creado correctamente.');
     }
 
     public function show(Articulo $articulo, $id)
@@ -154,7 +167,7 @@ class ArticuloController extends Controller
 
         return view('articulos.show', compact('articulo', 'definiciones'));
     }
-    
+
 
     public function edit($id)
     {
@@ -269,7 +282,7 @@ class ArticuloController extends Controller
             $filename = time() . '_' . $foto->getClientOriginalName();
             $filepath = $foto->storeAs('public/listas', $filename);
             $lista->foto = $filename;
-        }else{
+        } else {
             $lista->foto = 'no-imagen.jpg';
         }
 
@@ -279,13 +292,13 @@ class ArticuloController extends Controller
             $filename = time() . '_' . $foto->getClientOriginalName();
             $filepath = $foto->storeAs('public/listas', $filename);
             $lista->fotoMedida = $filename;
-        }else{
+        } else {
             $lista->fotoMedida = 'no-imagen.jpg';
         }
 
         $lista->save();
 
-        return redirect()->route('listas.index')->with('success', 'La lista ha sido creada exitosamente.');
+        return redirect()->route('articulos.create')->with('success', 'La lista ha sido creada exitosamente.');
     }
 
     public function destroy($id)

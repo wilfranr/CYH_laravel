@@ -4,14 +4,15 @@
         @csrf
 
         <input type="hidden" id="tipo" name="tipo" value="Definición">
+       
 
         <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" required>
+            <input type="text" class="form-control" name="nombre" id="nombre" >
         </div>
         <div class="form-group">
             <label for="definicion">Definición:</label>
-            <textarea class="form-control" name="definicion" id="definicion" required></textarea>
+            <textarea class="form-control" name="definicion" id="definicion" ></textarea>
         </div>
         <div class="form-group">
             <label for="fotoLista">Foto:</label>
@@ -87,6 +88,7 @@
 
         // realizar solicitud ajax
         $.ajax({
+
             url: "{{ route('articulos.definicion') }}",
             type: 'POST',
             headers: {
@@ -98,8 +100,11 @@
             processData: false,
             success: function(response) {
                 console.log(response);
-                // redireccionar
-                window.location.href = "{{ route('articulos.index') }}";
+                // recargar pagina actual
+                location.reload();
+                
+                
+
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);

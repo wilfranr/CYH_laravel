@@ -23,3 +23,5 @@ SELECT * FROM maquinas_pedido;
 SELECT * FROM contactos_pedido;
 --traer datos de articulo_temporal
 SELECT * FROM articulo_temporal;
+--traer datos de listas
+SELECT * FROM listas;

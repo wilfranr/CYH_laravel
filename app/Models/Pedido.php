@@ -25,7 +25,8 @@ class Pedido extends Model
     ];
     public function articulos()
     {
-        return $this->hasMany(Articulo::class);
+        return $this->belongsToMany(Articulo::class, 'articulo_pedido')
+            ->withTimestamps();
     }
 
     //relacion terceros

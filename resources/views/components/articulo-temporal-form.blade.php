@@ -1,3 +1,7 @@
+@props(['articulos', 'maquinas', 'definiciones', 'sistemas', 'medidas', 'unidadMedidas', 'definicionesFotoMedida', 'pedido'])
+
+<!-- Resto del código del componente -->
+
 <div class="container">
     <div class="row justify-content-center">
         <form method="POST" action="{{ route('articulos.store') }}" enctype="multipart/form-data">
@@ -7,6 +11,41 @@
                     <div class="card">
                         <div class="card-header">{{ __('Crear artículo') }}</div>
                         <div class="card-body">
+                            <input type="text" value="{{ isset($pedido) ? $pedido->id : '' }}" name="pedido_id">
+
+                            
+                            <div class="form-group row">
+                                <label for="select-definicion"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Definición') }}</label>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col">
+                                                <select class="form-select" id="select-definicion" name="select-definicion"
+                                                onchange="mostrarFotoMedida(this.value)" required>
+                                                <option value="">Seleccione una definición</option>
+                                                @foreach ($definiciones as $id => $nombre)
+                                                    <option value="{{ $nombre }}">{{ $nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-primary"
+                                                id="btn-crear-deficion">
+                                                +
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="divCrearDefinicion">
+                                <div class="col-md-9">
+                                    @component('components.crear-lista-form')
+                                    @endcomponent
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="marca"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Marca fabricante') }}</label>
@@ -20,52 +59,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="definicion"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Definición') }}</label>
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col">
-                                            <select class="form-select" id="select-definicion" name="definicion"
-                                                onchange="mostrarFotoMedida(this.value)">
-                                                <option value="">Seleccione una definición</option>
-                                                @foreach ($definiciones as $id => $nombre)
-                                                    <option value="{{ $id }}">{{ $nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col">
-                                            <button type="button" class="btn btn-outline-primary"
-                                                data-bs-toggle="modal" data-bs-target="#modalCrearDefinicion">
-                                                +
-                                            </button>
-                                        </div>
-                                        {{-- Modal de crear Definicion --}}
-                                        <div class="modal fade" id="modalCrearDefinicion"
-                                            aria-labelledby="modalCrearDefinicionLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCrearDefinicionLabel">Crear
-                                                            definición</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            data-bs-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        @component('components.crear-lista-form', [])
-                                                        @endcomponent
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="form-group row">
                                 <label for="referencia"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Referencia') }}</label>
@@ -200,10 +193,11 @@
                     <div id="medidas">
                         <input type="hidden" name="contadorMedidas" value="1">
                         <div>
-                            <label for="fotMedida">Foto de la Medida:</label>
-
-                            <img id="fotoMedida" src="{{ asset('storage/listas') }}/no-imagen.jpg"
-                                alt="Foto de medida" width="300px">
+                            <label for="fotMedida3">Foto de la Medida:</label>
+                            <a href="" target="_blank" id="link-foto-medida">
+                                <img id="fotoMedida3" src="{{ asset('storage/listas') }}/no-imagen.jpg"
+                                    alt="Foto de medida" width="300px">
+                            </a>
                         </div>
                     </div>
 
@@ -232,8 +226,8 @@
         var fotoMedida = "{{ asset('storage/listas') }}/" + (definicionId && definicionId in definicionesFotoMedida ?
             definicionesFotoMedida[definicionId] : 'no-imagen.jpg');
         console.log(fotoMedida);
-        document.getElementById('fotoMedida').src = fotoMedida;
-        document.getElementById('fotoMedidaContainer').style.display = definicionId ? 'block' : 'none';
+        $('#fotoMedida3').attr('src', fotoMedida);
+        $('#link-foto-medida').attr('href', fotoMedida);
 
 
     }
@@ -308,9 +302,18 @@
         $('#select-definicion').on('change', function() {
             $('#agregar-medida').show();
             // Obtener referencias a los elementos select e imagen
-
-
         });
+        //ocultar div crear definición
+        $('#divCrearDefinicion').hide();
+        // Mostrar div crear definición si se selecciona la opción +
+        $('#btn-crear-deficion').on('click', function() {
+            $('#divCrearDefinicion').show();
+        });
+        //ocultar div al seleccionar una definición
+        $('#select-definicion').on('change', function() {
+            $('#divCrearDefinicion').hide();
+        });
+
     });
 </script>
 
@@ -324,6 +327,3 @@
         reader.readAsDataURL(e.target.files[0]);
     });
 </script>
-
-</tbody>
-</table>
