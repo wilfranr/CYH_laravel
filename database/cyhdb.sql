@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2023 a las 08:35:28
+-- Tiempo de generación: 10-06-2023 a las 20:04:30
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -48,24 +48,17 @@ CREATE TABLE `articulos` (
 --
 
 INSERT INTO `articulos` (`id`, `marca`, `sistema`, `definicion`, `referencia`, `cantidad`, `comentarios`, `descripcionEspecifica`, `peso`, `fotoDescriptiva`, `fotoMedida`, `created_at`, `updated_at`) VALUES
-(1, 'CATERPILLAR', NULL, 'Seal O Ring', 'dasd33', NULL, NULL, 'Seal', NULL, '1683347004_engranajes-y-transmisiones.jpg', '1683347004_R (3).jpeg', '2023-05-06 09:23:24', '2023-05-06 09:23:24'),
-(2, 'CATERPILLAR', NULL, 'Seal O Ring', 'FDFDF', NULL, NULL, 'Seal', NULL, '1683347210_engranajes-y-transmisiones.jpg', '1683347210_R (3).jpeg', '2023-05-06 09:26:50', '2023-05-06 09:26:50'),
-(3, 'HITACHI', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', NULL, '1683347247_engranajes-y-transmisiones.jpg', '1683347247_R (3).jpeg', '2023-05-06 09:27:27', '2023-05-06 09:27:27'),
-(4, 'CATERPILLAR', NULL, 'Plow Bolt', '3F5108', NULL, NULL, 'Tornillo para cuchillería', NULL, '1684292369_R (4).jpeg', 'no-imagen.jpg', '2023-05-17 07:59:29', '2023-05-17 07:59:29'),
-(5, 'KOMATSU', NULL, 'Plow Bolt', '2043233', NULL, NULL, 'Tornilo para cuchillería de bulldozer', NULL, '1684292929_R (5).jpeg', 'no-imagen.jpg', '2023-05-17 08:08:49', '2023-05-17 08:08:49'),
-(6, 'Otro', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', '1685312879_OIP (4).jpeg', 'no-imagen.jpg', '2023-05-29 03:27:59', '2023-05-29 03:27:59'),
-(7, 'PERKINS', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:33:56', '2023-05-29 03:33:56'),
-(8, 'CATERPILLAR', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:39:33', '2023-05-29 03:39:33'),
-(9, 'XCMG', NULL, 'otro', 'Cadena', NULL, NULL, 'Sello', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:40:26', '2023-05-29 03:40:26'),
-(10, 'PERKINS', NULL, 'otro', 'arandela', NULL, NULL, 'prueba2', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:46:12', '2023-05-29 03:46:12'),
-(11, 'PERKINS', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'prueba2', '2332', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:47:10', '2023-05-29 03:47:10'),
-(12, 'CATERPILLAR', NULL, 'Seal O Ring', 'copa', NULL, NULL, 'Sello', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:47:43', '2023-05-29 03:47:43'),
-(13, 'PERKINS', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:50:52', '2023-05-29 03:50:52'),
-(14, 'CATERPILLAR', NULL, 'Sello de labio', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:54:48', '2023-05-29 03:54:48'),
-(15, 'CATERPILLAR', NULL, 'Seal O Ring', 'arandela', NULL, NULL, 'Seal', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
-(16, 'KOMATSU', NULL, 'Plow Bolt', 'arandela', NULL, NULL, 'prueba2', '200', '1685314927_OIP (6).jpeg', 'no-imagen.jpg', '2023-05-29 04:02:07', '2023-05-29 04:02:07'),
-(17, 'KOMATSU', NULL, 'Plow Bolt', 'arandela', NULL, NULL, 'prueba2', '200', '1685314994_OIP (6).jpeg', 'no-imagen.jpg', '2023-05-29 04:03:14', '2023-05-29 04:03:14'),
-(18, 'CATERPILLAR', NULL, '50', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-05-31 09:34:31', '2023-05-31 09:34:31');
+(20, 'CATERPILLAR', NULL, '50', 'arandela', NULL, 'hghg', 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 14:00:46', '2023-06-10 14:00:46'),
+(21, 'PERKINS', NULL, 'copa', 'copa', NULL, 'xfd', 'Sello', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 14:02:08', '2023-06-10 14:02:08'),
+(22, 'CATERPILLAR', NULL, 'Tornillo', 'arandela', NULL, 'fgfg', 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 14:19:43', '2023-06-10 14:19:43'),
+(23, 'CATERPILLAR', NULL, 'Tornillo', 'dasd33', NULL, NULL, 'Seal', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 16:45:48', '2023-06-10 16:45:48'),
+(24, 'PERKINS', NULL, 'Tornillo', 'Tornillo-34d', NULL, 'Sin comentarios', 'Tornillo 3/4', '200', '1686418722_R (3).jpeg', 'no-imagen.jpg', '2023-06-10 17:38:43', '2023-06-10 17:38:43'),
+(25, 'CATERPILLAR', NULL, 'Tornillo', 'dasd33', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 17:40:21', '2023-06-10 17:40:21'),
+(26, 'CATERPILLAR', NULL, 'Tornillo', 'arandela', NULL, NULL, 'Seal', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 17:43:52', '2023-06-10 17:43:52'),
+(27, 'PERKINS', NULL, 'copa', 'arandela', NULL, NULL, 'Sello', '200', 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 17:44:47', '2023-06-10 17:44:47'),
+(28, 'CATERPILLAR', NULL, 'arandela', 'arandela', NULL, NULL, 'Seal', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 17:50:39', '2023-06-10 17:50:39'),
+(29, 'CATERPILLAR', NULL, 'Tornillo', 'articulo4', NULL, NULL, 'Seal', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 18:01:48', '2023-06-10 18:01:48'),
+(30, 'CATERPILLAR', NULL, 'arandela', 'arandela', NULL, NULL, 'Seal', NULL, 'no-imagen.jpg', 'no-imagen.jpg', '2023-06-10 18:03:03', '2023-06-10 18:03:03');
 
 -- --------------------------------------------------------
 
@@ -81,24 +74,29 @@ CREATE TABLE `articulo_medida` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `articulo_medida`
+-- Estructura de tabla para la tabla `articulo_pedido`
 --
 
-INSERT INTO `articulo_medida` (`id`, `articulo_id`, `medida_id`, `created_at`, `updated_at`) VALUES
-(52, 8, 1, NULL, NULL),
-(53, 8, 2, NULL, NULL),
-(54, 9, 3, NULL, NULL),
-(55, 9, 4, NULL, NULL),
-(56, 13, 5, NULL, NULL),
-(57, 13, 6, NULL, NULL),
-(58, 14, 7, NULL, NULL),
-(59, 14, 8, NULL, NULL),
-(60, 15, 9, NULL, NULL),
-(61, 15, 10, NULL, NULL),
-(62, 16, 11, NULL, NULL),
-(63, 17, 12, NULL, NULL),
-(64, 18, 13, NULL, NULL);
+CREATE TABLE `articulo_pedido` (
+  `pedido_id` bigint(20) UNSIGNED NOT NULL,
+  `articulo_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `articulo_pedido`
+--
+
+INSERT INTO `articulo_pedido` (`pedido_id`, `articulo_id`, `created_at`, `updated_at`) VALUES
+(1, 25, '2023-06-10 17:40:21', '2023-06-10 17:40:21'),
+(1, 27, '2023-06-10 17:44:47', '2023-06-10 17:44:47'),
+(1, 28, '2023-06-10 17:50:39', '2023-06-10 17:50:39'),
+(1, 29, '2023-06-10 18:01:48', '2023-06-10 18:01:48'),
+(2, 30, '2023-06-10 18:03:03', '2023-06-10 18:03:03');
 
 -- --------------------------------------------------------
 
@@ -122,58 +120,9 @@ CREATE TABLE `articulo_temporal` (
 --
 
 INSERT INTO `articulo_temporal` (`id`, `referencia`, `definicion`, `sistema`, `cantidad`, `comentarios`, `created_at`, `updated_at`) VALUES
-(7, '1', 'aa', NULL, 1, NULL, '2023-05-16 07:15:26', '2023-05-16 07:15:26'),
-(8, '1', 'aa', NULL, 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
-(9, 'arandela', 'def', 'sis', 2, NULL, '2023-05-16 07:21:34', '2023-05-16 07:21:34'),
-(10, NULL, 'Emaquetadura de botella', NULL, NULL, NULL, '2023-05-17 08:38:50', '2023-05-17 08:38:50'),
-(11, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:50:05', '2023-06-02 06:50:05'),
-(12, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:53:42', '2023-06-02 06:53:42'),
-(13, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
-(14, NULL, NULL, NULL, NULL, NULL, '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
-(15, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:15:36', '2023-06-02 02:15:36'),
-(16, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
-(17, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
-(18, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
-(19, NULL, NULL, NULL, NULL, NULL, '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
-(20, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(21, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(22, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(23, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(24, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(25, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(26, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(27, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(28, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(29, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
-(30, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
-(31, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
-(32, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
-(33, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:50:57', '2023-06-02 03:50:57'),
-(34, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
-(35, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
-(36, NULL, NULL, NULL, NULL, NULL, '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
-(37, NULL, NULL, NULL, NULL, NULL, '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
-(38, NULL, NULL, NULL, NULL, NULL, '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
-(39, '1', NULL, NULL, NULL, NULL, '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
-(40, '4', 'arandela de motor', NULL, NULL, 'Piston', '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
-(41, NULL, NULL, NULL, NULL, 'Tornillo', '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
-(42, '12', NULL, NULL, NULL, NULL, '2023-06-02 04:11:53', '2023-06-02 04:11:53'),
-(43, '2043233', NULL, NULL, NULL, 'Comentario del articulo temporal', '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
-(44, 'dasd33', 'Definicion de articulo temporal', NULL, NULL, 'Comentario de articulo temporal', '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
-(45, 'copa', 'Definicion de articulo temporal', 'Motoniveladora', 4, 'Comentario de articulo', '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
-(46, 'dasd33', 'Definicion de articulo temporal', 'Transmision', 2, 'Comentario de articulo temporal', '2023-06-03 05:34:32', '2023-06-03 05:34:32'),
-(47, 'dasd33', 'Definicion de articulo temporal', 'Transmision', 2, 'Comentario de articulo temporal', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
-(48, '3F5108', NULL, 'Transmision', 2, NULL, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(49, 'FDFDF', NULL, 'Bomba hidráulica', 3, NULL, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(50, 'dasd33', NULL, 'Transmision', 1, NULL, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(51, 'copa', NULL, 'Motor', 2, NULL, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(52, 'dasd33', NULL, NULL, 1, NULL, '2023-06-03 06:10:37', '2023-06-03 06:10:37'),
-(53, 'dasd33', NULL, NULL, 1, NULL, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(54, 'dasd33', NULL, 'Transmision', 2, NULL, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(55, 'dasd33', NULL, NULL, 2, NULL, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(56, 'arandela', NULL, 'Motor', 2, NULL, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(57, 'dasd33', NULL, 'Transmision', 1, NULL, '2023-06-03 06:18:23', '2023-06-03 06:18:23'),
-(58, 'arandela', NULL, NULL, 2, NULL, '2023-06-03 06:18:23', '2023-06-03 06:18:23');
+(1, NULL, NULL, NULL, 20, 'Tornillo 3/4', '2023-06-03 23:15:44', '2023-06-03 23:15:44'),
+(2, 'dasd33', NULL, 'Motor', 2, NULL, '2023-06-03 23:15:44', '2023-06-03 23:15:44'),
+(3, NULL, 'arandela de motor', NULL, 4, 'CAdena', '2023-06-10 18:02:46', '2023-06-10 18:02:46');
 
 -- --------------------------------------------------------
 
@@ -4708,23 +4657,7 @@ CREATE TABLE `fotos_articulo_temporal` (
 --
 
 INSERT INTO `fotos_articulo_temporal` (`id`, `articulo_temporal_id`, `foto_path`, `created_at`, `updated_at`) VALUES
-(1, 47, '647ad12a265a0.png', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
-(2, 47, '647ad12a28434.png', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
-(3, 47, '647ad12a29326.jpeg', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
-(4, 48, '647ad8098b631.png', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(5, 49, '647ad8098f62c.jpeg', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(6, 49, '647ad8098ff3b.jpeg', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(7, 50, 'fotos-articulo-temporal/RJcE626EHf8UN1PgvfJrbhmr0EY7d39TZaU8ewdM.png', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(8, 51, 'fotos-articulo-temporal/XwA5Zlb7dtwSL9jRbn5MhM2G7GFyN9ttSpK60qBC.jpg', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(9, 51, 'fotos-articulo-temporal/9X7ppQDunr9mZC6sFjD5PIteso41BCAx42wtbbyi.jpg', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(10, 53, '647ad984d182c.png', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(11, 54, '647ad984d55ce.jpeg', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(12, 54, '647ad984d6595.jpeg', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(13, 55, 'fotos-articulo-temporal/QcgEG2h63GqikeT9UYtTu0dlXHi7UpLPraOPHyDX.png', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(14, 56, 'fotos-articulo-temporal/BclMzccrvk0c6uJhIYIGymvhfXKb6Sn1ZIIeLPwK.png', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(15, 56, 'fotos-articulo-temporal/h0B9aVIfITB4bTIjsYvuB75757TDelzrhzgTf207.png', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(16, 57, '647adb2f93390.png', '2023-06-03 06:18:23', '2023-06-03 06:18:23'),
-(17, 58, '647adb2f9674f.png', '2023-06-03 06:18:23', '2023-06-03 06:18:23');
+(18, 1, '647bc9a078104.jpeg', '2023-06-03 23:15:44', '2023-06-03 23:15:44');
 
 -- --------------------------------------------------------
 
@@ -4819,7 +4752,25 @@ INSERT INTO `listas` (`id`, `tipo`, `nombre`, `definicion`, `foto`, `fotoMedida`
 (47, 'Descripción común', 'Plow Bolt', 'Tornillo avellanado', '1684291893_832588a47488d1064f175392e9e6732c--countersunk-bolts-zero.jpg', NULL, '2023-05-17 07:51:33', '2023-05-17 07:51:33'),
 (49, 'Unidad medida', 'In', 'Pulgada', 'no-imagen.jpg', NULL, '2023-05-17 08:23:18', '2023-05-17 08:23:18'),
 (50, 'Definición', 'Tornillo', 'Tornillo', '1685499670_R (3).jpeg', '1685499670_832588a47488d1064f175392e9e6732c--countersunk-bolts-zero.jpg', '2023-05-31 07:21:10', '2023-05-31 07:21:10'),
-(51, 'Definición', 'arandela', 'arandela', '1685505000_engranajes-y-transmisiones.jpg', '1685505000_istockphoto-1215506363-170667a.jpg', '2023-05-31 08:50:00', '2023-05-31 08:50:00');
+(51, 'Definición', 'arandela', 'arandela', '1685505000_engranajes-y-transmisiones.jpg', '1685505000_istockphoto-1215506363-170667a.jpg', '2023-05-31 08:50:00', '2023-05-31 08:50:00'),
+(52, 'Definición', 'copa', 'copa', '1685908190_kisspng-symbol-computer-icons-arrow-sad-emoji-5ac49d5631cd61.443182081522834774204.png', 'no-imagen.jpg', '2023-06-04 19:49:50', '2023-06-04 19:49:50'),
+(53, 'Definición', 'Cadena', 'Cadena', '1685934981_istockphoto-1215506363-170667a.jpg', 'no-imagen.jpg', '2023-06-05 03:16:21', '2023-06-05 03:16:21'),
+(54, 'Definición', 'correa', 'correa', '1685935524_Iconos gratuitos de Caja De Regalo diseñados por Freepik.png', '1685935524_Iconos gratuitos de Lista De Verificación diseñados por Freepik.png', '2023-06-05 03:25:24', '2023-06-05 03:25:24'),
+(55, 'Definición', 'definicicon de prueba', 'definicion de prueba', '1686402219_kisspng-vector-graphics-clip-art-image-drawing-cartoon-product-uploading-xelogix-5b80154617d356.4812255715351207100976.png', '1686402219_kisspng-symbol-computer-icons-arrow-sad-emoji-5ac49d5631cd61.443182081522834774204.png', '2023-06-10 13:03:39', '2023-06-10 13:03:39'),
+(56, 'Definición', 'Definicion 2', 'Definicion 2', '1686403673_kisspng-vector-graphics-clip-art-image-drawing-cartoon-product-uploading-xelogix-5b80154617d356.4812255715351207100976.png', '1686403673_OIP (8).jpeg', '2023-06-10 13:27:53', '2023-06-10 13:27:53'),
+(57, 'Definición', 'definicion 3', 'definiicon 3', '1686403774_istockphoto-1215506363-170667a.jpg', '1686403774_R (3).jpeg', '2023-06-10 13:29:34', '2023-06-10 13:29:34'),
+(58, 'Definición', 'definicion4', 'definiicon4', '1686403917_istockphoto-1215506363-170667a.jpg', '1686403917_R (3).jpeg', '2023-06-10 13:31:58', '2023-06-10 13:31:58'),
+(59, 'Definición', 'definicion4', 'definiicon4', '1686403924_istockphoto-1215506363-170667a.jpg', '1686403924_R (3).jpeg', '2023-06-10 13:32:04', '2023-06-10 13:32:04'),
+(60, 'Definición', 'definicion4', 'definiicon4', '1686403971_istockphoto-1215506363-170667a.jpg', '1686403971_R (3).jpeg', '2023-06-10 13:32:51', '2023-06-10 13:32:51'),
+(61, 'Definición', 'definicion 5', 'definicion 5', '1686404108_kisspng-vector-graphics-clip-art-image-drawing-cartoon-product-uploading-xelogix-5b80154617d356.4812255715351207100976.png', '1686404108_R (1).jpeg', '2023-06-10 13:35:08', '2023-06-10 13:35:08'),
+(62, 'Definición', 'definicion 5', 'definicion 5', '1686404112_kisspng-vector-graphics-clip-art-image-drawing-cartoon-product-uploading-xelogix-5b80154617d356.4812255715351207100976.png', '1686404112_R (1).jpeg', '2023-06-10 13:35:12', '2023-06-10 13:35:12'),
+(63, 'Definición', 'definicion 6', 'definicion 6', '1686404179_R.jpeg', '1686404179_R (4).jpeg', '2023-06-10 13:36:19', '2023-06-10 13:36:19'),
+(64, 'Definición', 'definicion 7', 'definicion 7', '1686404433_R (4).jpeg', '1686404433_OIP (6).jpeg', '2023-06-10 13:40:33', '2023-06-10 13:40:33'),
+(65, 'Definición', 'definicion 8', 'definicion 8', '1686404514_istockphoto-1215506363-170667a.jpg', '1686404514_cat.jpg', '2023-06-10 13:41:54', '2023-06-10 13:41:54'),
+(66, 'Definición', 'definicion 9', 'definicion 9', '1686404630_istockphoto-1215506363-170667a.jpg', '1686404630_R (1).jpeg', '2023-06-10 13:43:50', '2023-06-10 13:43:50'),
+(67, 'undefined', 'definicion 10', 'definicion 10', '1686407477_OIP (8).jpeg', '1686407477_istockphoto-1215506363-170667a.jpg', '2023-06-10 14:31:17', '2023-06-10 14:31:17'),
+(68, 'undefined', 'definicion 11', 'definicion 11', '1686407533_kisspng-vector-graphics-clip-art-image-drawing-cartoon-product-uploading-xelogix-5b80154617d356.4812255715351207100976.png', '1686407533_kisspng-symbol-computer-icons-arrow-sad-emoji-5ac49d5631cd61.443182081522834774204.png', '2023-06-10 14:32:13', '2023-06-10 14:32:13'),
+(69, 'Definición', 'defincion 12', 'defincion 12', '1686407659_istockphoto-1215506363-170667a.jpg', '1686407659_WhatsApp Image 2023-05-09 at 7.10.37 PM.jpeg', '2023-06-10 14:34:19', '2023-06-10 14:34:19');
 
 -- --------------------------------------------------------
 
@@ -4899,63 +4850,8 @@ CREATE TABLE `maquinas_pedido` (
 --
 
 INSERT INTO `maquinas_pedido` (`id`, `maquina_id`, `pedido_id`, `created_at`, `updated_at`) VALUES
-(116, 4, 1, '2023-06-02 06:50:05', '2023-06-02 06:50:05'),
-(117, 4, 2, '2023-06-02 06:53:42', '2023-06-02 06:53:42'),
-(118, 4, 3, '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
-(119, 4, 4, '2023-06-02 02:15:36', '2023-06-02 02:15:36'),
-(120, 4, 5, '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
-(121, 4, 6, '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
-(122, 4, 7, '2023-06-02 02:35:05', '2023-06-02 02:35:05'),
-(123, 4, 8, '2023-06-02 02:35:40', '2023-06-02 02:35:40'),
-(124, 4, 9, '2023-06-02 02:35:56', '2023-06-02 02:35:56'),
-(125, 4, 10, '2023-06-02 02:36:53', '2023-06-02 02:36:53'),
-(126, 4, 11, '2023-06-02 02:36:59', '2023-06-02 02:36:59'),
-(127, 4, 12, '2023-06-02 02:37:00', '2023-06-02 02:37:00'),
-(128, 4, 13, '2023-06-02 02:37:02', '2023-06-02 02:37:02'),
-(129, 4, 14, '2023-06-02 02:37:31', '2023-06-02 02:37:31'),
-(130, 4, 15, '2023-06-02 02:38:18', '2023-06-02 02:38:18'),
-(131, 4, 16, '2023-06-02 02:38:35', '2023-06-02 02:38:35'),
-(132, 4, 17, '2023-06-02 02:38:40', '2023-06-02 02:38:40'),
-(133, 4, 18, '2023-06-02 02:39:05', '2023-06-02 02:39:05'),
-(134, 2, 19, '2023-06-02 03:21:35', '2023-06-02 03:21:35'),
-(135, 2, 20, '2023-06-02 03:22:41', '2023-06-02 03:22:41'),
-(136, 2, 21, '2023-06-02 03:23:31', '2023-06-02 03:23:31'),
-(137, 2, 22, '2023-06-02 03:24:13', '2023-06-02 03:24:13'),
-(138, 2, 23, '2023-06-02 03:31:10', '2023-06-02 03:31:10'),
-(139, 4, 23, '2023-06-02 03:31:10', '2023-06-02 03:31:10'),
-(140, 2, 24, '2023-06-02 03:34:02', '2023-06-02 03:34:02'),
-(141, 4, 24, '2023-06-02 03:34:02', '2023-06-02 03:34:02'),
-(142, 2, 25, '2023-06-02 03:34:16', '2023-06-02 03:34:16'),
-(143, 4, 25, '2023-06-02 03:34:16', '2023-06-02 03:34:16'),
-(144, 2, 26, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(145, 4, 26, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(146, 4, 27, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(147, 2, 28, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(148, 2, 29, '2023-06-02 03:42:27', '2023-06-02 03:42:27'),
-(149, 4, 30, '2023-06-02 03:45:00', '2023-06-02 03:45:00'),
-(150, 4, 31, '2023-06-02 03:47:27', '2023-06-02 03:47:27'),
-(151, 4, 32, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
-(152, 4, 33, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
-(153, 4, 35, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
-(154, 4, 36, '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
-(155, 2, 37, '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
-(156, 2, 38, '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
-(157, 4, 39, '2023-06-02 04:04:50', '2023-06-02 04:04:50'),
-(158, 4, 40, '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
-(159, 2, 41, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
-(160, 4, 41, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
-(161, 4, 43, '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
-(162, 4, 44, '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
-(163, 4, 45, '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
-(164, 4, 46, '2023-06-03 05:34:32', '2023-06-03 05:34:32'),
-(165, 4, 47, '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
-(166, 4, 48, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(167, 4, 49, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(168, 2, 50, '2023-06-03 06:10:37', '2023-06-03 06:10:37'),
-(169, 2, 51, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(170, 2, 52, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(171, 3, 52, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(172, 2, 53, '2023-06-03 06:18:23', '2023-06-03 06:18:23');
+(173, 4, 1, '2023-06-03 23:15:44', '2023-06-03 23:15:44'),
+(174, 2, 2, '2023-06-10 18:02:46', '2023-06-10 18:02:46');
 
 -- --------------------------------------------------------
 
@@ -5016,19 +4912,14 @@ CREATE TABLE `medidas` (
 --
 
 INSERT INTO `medidas` (`id`, `nombre`, `unidad`, `valor`, `tipo`, `idMedida`, `foto`, `created_at`, `updated_at`) VALUES
-(1, 'Volumen', 'cc', '200', NULL, 'D', NULL, '2023-05-29 03:39:33', '2023-05-29 03:39:33'),
-(2, 'Volumen', 'cc', '200', NULL, 'D', NULL, '2023-05-29 03:39:33', '2023-05-29 03:39:33'),
-(3, 'diametro', 'mm', '30', NULL, 'E', NULL, '2023-05-29 03:40:26', '2023-05-29 03:40:26'),
-(4, 'diametro', 'mm', '30', NULL, 'E', NULL, '2023-05-29 03:40:26', '2023-05-29 03:40:26'),
-(5, 'Alto', 'Kg', '76', NULL, '76', NULL, '2023-05-29 03:50:52', '2023-05-29 03:50:52'),
-(6, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-29 03:50:52', '2023-05-29 03:50:52'),
-(7, 'Radio', 'cc', '2', NULL, '7', NULL, '2023-05-29 03:54:48', '2023-05-29 03:54:48'),
-(8, NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-29 03:54:48', '2023-05-29 03:54:48'),
-(9, 'diametro', 'Kg', '1', NULL, '7', NULL, '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
-(10, 'peso', 'Kg', '678', NULL, '7', NULL, '2023-05-29 03:57:41', '2023-05-29 03:57:41'),
-(11, 'diametro', 'mm', '1', NULL, '7', NULL, '2023-05-29 04:02:07', '2023-05-29 04:02:07'),
-(12, 'diametro', 'mm', '1', NULL, '7', NULL, '2023-05-29 04:03:14', '2023-05-29 04:03:14'),
-(13, 'diametro', 'cc', '1', NULL, '7', NULL, '2023-05-31 09:34:31', '2023-05-31 09:34:31');
+(1, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-06-04 00:49:46', '2023-06-04 00:49:46'),
+(2, NULL, NULL, NULL, NULL, NULL, 'no-imagen.jpg', '2023-06-04 00:49:46', '2023-06-04 00:49:46'),
+(3, '1', 'Kg', '678', NULL, '7', NULL, '2023-06-04 00:54:57', '2023-06-04 00:54:57'),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, '2023-06-04 00:54:57', '2023-06-04 00:54:57'),
+(5, '41', 'cc', '1', NULL, '7', NULL, '2023-06-04 00:55:39', '2023-06-04 00:55:39'),
+(6, '1', 'Kg', '1', NULL, '7', NULL, '2023-06-04 00:55:39', '2023-06-04 00:55:39'),
+(7, '1', 'Kg', '1', NULL, '7', NULL, '2023-06-04 00:58:33', '2023-06-04 00:58:33'),
+(8, NULL, NULL, NULL, NULL, NULL, NULL, '2023-06-04 00:58:33', '2023-06-04 00:58:33');
 
 -- --------------------------------------------------------
 
@@ -5076,7 +4967,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (35, '2023_05_28_163134_create_marcas_table', 22),
 (37, '2023_05_28_163813_create_terceros_marcas_table', 23),
 (38, '2023_05_28_192729_create_sistemas_table', 24),
-(39, '2023_06_02_235815_create_fotos_articulo_temporal_table', 25);
+(39, '2023_06_02_235815_create_fotos_articulo_temporal_table', 25),
+(40, '2023_06_10_122428_create_articulo_pedido_table', 26);
 
 -- --------------------------------------------------------
 
@@ -5424,59 +5316,8 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `user_id`, `tercero_id`, `comentario`, `contacto_id`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 06:50:05', '2023-06-02 06:50:05'),
-(2, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 06:53:42', '2023-06-02 06:53:42'),
-(3, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 06:56:03', '2023-06-02 06:56:03'),
-(4, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:15:36', '2023-06-02 02:15:36'),
-(5, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:20:22', '2023-06-02 02:20:22'),
-(6, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:23:36', '2023-06-02 02:23:36'),
-(7, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:35:05', '2023-06-02 02:35:05'),
-(8, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:35:40', '2023-06-02 02:35:40'),
-(9, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:35:56', '2023-06-02 02:35:56'),
-(10, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:36:53', '2023-06-02 02:36:53'),
-(11, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:36:59', '2023-06-02 02:36:59'),
-(12, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:37:00', '2023-06-02 02:37:00'),
-(13, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:37:02', '2023-06-02 02:37:02'),
-(14, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:37:31', '2023-06-02 02:37:31'),
-(15, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:38:18', '2023-06-02 02:38:18'),
-(16, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:38:35', '2023-06-02 02:38:35'),
-(17, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:38:40', '2023-06-02 02:38:40'),
-(18, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 02:39:05', '2023-06-02 02:39:05'),
-(19, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:21:35', '2023-06-02 03:21:35'),
-(20, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:22:41', '2023-06-02 03:22:41'),
-(21, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:23:31', '2023-06-02 03:23:31'),
-(22, 1, 5, NULL, 79, 'Nuevo', '2023-06-02 03:24:13', '2023-06-02 03:24:13'),
-(23, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:31:10', '2023-06-02 03:31:10'),
-(24, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:34:02', '2023-06-02 03:34:02'),
-(25, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:34:16', '2023-06-02 03:34:16'),
-(26, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(27, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(28, 1, 2, NULL, 74, 'Nuevo', '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(29, 1, 3, NULL, 76, 'Nuevo', '2023-06-02 03:42:27', '2023-06-02 03:42:27'),
-(30, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:45:00', '2023-06-02 03:45:00'),
-(31, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:47:27', '2023-06-02 03:47:27'),
-(32, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
-(33, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
-(34, 1, 4, NULL, 77, 'Nuevo', '2023-06-02 03:50:57', '2023-06-02 03:50:57'),
-(35, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
-(36, 1, 1, 'qqq', 73, 'Nuevo', '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
-(37, 1, 2, '11', 74, 'Nuevo', '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
-(38, 1, 2, 'asd', 74, 'Nuevo', '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
-(39, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 04:04:50', '2023-06-02 04:04:50'),
-(40, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
-(41, 1, 4, 'Sin comentarios', 77, 'Nuevo', '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
-(42, 1, 5, NULL, 78, 'Nuevo', '2023-06-02 04:11:53', '2023-06-02 04:11:53'),
-(43, 1, 1, NULL, 73, 'Nuevo', '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
-(44, 1, 1, 'Comentario de pedido', 73, 'Nuevo', '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
-(45, 1, 1, 'Comentarios de pedido', 73, 'Nuevo', '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
-(46, 1, 1, 'Comentarios de pedido', 73, 'Nuevo', '2023-06-03 05:34:32', '2023-06-03 05:34:32'),
-(47, 1, 1, 'Comentarios de pedido', 73, 'Nuevo', '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
-(48, 1, 1, NULL, 73, 'Nuevo', '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(49, 1, 1, NULL, 73, 'Nuevo', '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(50, 1, 2, NULL, 74, 'Nuevo', '2023-06-03 06:10:37', '2023-06-03 06:10:37'),
-(51, 1, 2, NULL, 74, 'Nuevo', '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(52, 1, 3, NULL, 76, 'Nuevo', '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(53, 1, 5, NULL, 78, 'Nuevo', '2023-06-03 06:18:23', '2023-06-03 06:18:23');
+(1, 1, 1, NULL, 73, 'Nuevo', '2023-06-03 23:15:44', '2023-06-03 23:15:44'),
+(2, 1, 2, NULL, 74, 'Nuevo', '2023-06-10 18:02:46', '2023-06-10 18:02:46');
 
 -- --------------------------------------------------------
 
@@ -5497,43 +5338,9 @@ CREATE TABLE `pedidos_articulos_temporales` (
 --
 
 INSERT INTO `pedidos_articulos_temporales` (`id`, `pedido_id`, `articulo_temporal_id`, `created_at`, `updated_at`) VALUES
-(5, 26, 20, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(6, 26, 21, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(7, 26, 22, '2023-06-02 03:35:10', '2023-06-02 03:35:10'),
-(8, 27, 23, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(9, 27, 24, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(10, 27, 25, '2023-06-02 03:37:51', '2023-06-02 03:37:51'),
-(11, 28, 26, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(12, 28, 27, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(13, 28, 28, '2023-06-02 03:41:48', '2023-06-02 03:41:48'),
-(14, 32, 29, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
-(15, 32, 30, '2023-06-02 03:48:42', '2023-06-02 03:48:42'),
-(16, 33, 31, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
-(17, 33, 32, '2023-06-02 03:50:01', '2023-06-02 03:50:01'),
-(18, 34, 33, '2023-06-02 03:50:57', '2023-06-02 03:50:57'),
-(19, 35, 34, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
-(20, 35, 35, '2023-06-02 03:51:50', '2023-06-02 03:51:50'),
-(21, 36, 36, '2023-06-02 03:56:50', '2023-06-02 03:56:50'),
-(22, 37, 37, '2023-06-02 04:00:27', '2023-06-02 04:00:27'),
-(23, 38, 38, '2023-06-02 04:03:38', '2023-06-02 04:03:38'),
-(24, 40, 39, '2023-06-02 04:05:01', '2023-06-02 04:05:01'),
-(25, 41, 40, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
-(26, 41, 41, '2023-06-02 04:05:57', '2023-06-02 04:05:57'),
-(27, 42, 42, '2023-06-02 04:11:53', '2023-06-02 04:11:53'),
-(28, 43, 43, '2023-06-02 04:13:05', '2023-06-02 04:13:05'),
-(29, 44, 44, '2023-06-03 03:09:23', '2023-06-03 03:09:23'),
-(30, 45, 45, '2023-06-03 04:55:34', '2023-06-03 04:55:34'),
-(31, 47, 47, '2023-06-03 05:35:38', '2023-06-03 05:35:38'),
-(32, 48, 48, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(33, 48, 49, '2023-06-03 06:04:57', '2023-06-03 06:04:57'),
-(34, 49, 50, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(35, 49, 51, '2023-06-03 06:09:00', '2023-06-03 06:09:00'),
-(36, 51, 53, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(37, 51, 54, '2023-06-03 06:11:16', '2023-06-03 06:11:16'),
-(38, 52, 55, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(39, 52, 56, '2023-06-03 06:15:53', '2023-06-03 06:15:53'),
-(40, 53, 57, '2023-06-03 06:18:23', '2023-06-03 06:18:23'),
-(41, 53, 58, '2023-06-03 06:18:23', '2023-06-03 06:18:23');
+(1, 1, 1, '2023-06-03 23:15:44', '2023-06-03 23:15:44'),
+(2, 1, 2, '2023-06-03 23:15:44', '2023-06-03 23:15:44'),
+(3, 2, 3, '2023-06-10 18:02:46', '2023-06-10 18:02:46');
 
 -- --------------------------------------------------------
 
@@ -5730,6 +5537,13 @@ ALTER TABLE `articulo_medida`
   ADD PRIMARY KEY (`id`),
   ADD KEY `articulo_medida_articulo_id_foreign` (`articulo_id`),
   ADD KEY `articulo_medida_medida_id_foreign` (`medida_id`);
+
+--
+-- Indices de la tabla `articulo_pedido`
+--
+ALTER TABLE `articulo_pedido`
+  ADD KEY `articulo_pedido_pedido_id_foreign` (`pedido_id`),
+  ADD KEY `articulo_pedido_articulo_id_foreign` (`articulo_id`);
 
 --
 -- Indices de la tabla `articulo_temporal`
@@ -5944,19 +5758,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `articulo_medida`
 --
 ALTER TABLE `articulo_medida`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `articulo_temporal`
 --
 ALTER TABLE `articulo_temporal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -5992,7 +5806,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `fotos_articulo_temporal`
 --
 ALTER TABLE `fotos_articulo_temporal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `foto_articulo`
@@ -6010,7 +5824,7 @@ ALTER TABLE `imagenes_articulo`
 -- AUTO_INCREMENT de la tabla `listas`
 --
 ALTER TABLE `listas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `lista_padres`
@@ -6028,7 +5842,7 @@ ALTER TABLE `maquinas`
 -- AUTO_INCREMENT de la tabla `maquinas_pedido`
 --
 ALTER TABLE `maquinas_pedido`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
 -- AUTO_INCREMENT de la tabla `maquina_articulo`
@@ -6046,13 +5860,13 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `medidas`
 --
 ALTER TABLE `medidas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -6064,13 +5878,13 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos_articulos_temporales`
 --
 ALTER TABLE `pedidos_articulos_temporales`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -6124,6 +5938,13 @@ ALTER TABLE `users`
 ALTER TABLE `articulo_medida`
   ADD CONSTRAINT `articulo_medida_articulo_id_foreign` FOREIGN KEY (`articulo_id`) REFERENCES `articulos` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `articulo_medida_medida_id_foreign` FOREIGN KEY (`medida_id`) REFERENCES `medidas` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `articulo_pedido`
+--
+ALTER TABLE `articulo_pedido`
+  ADD CONSTRAINT `articulo_pedido_articulo_id_foreign` FOREIGN KEY (`articulo_id`) REFERENCES `articulos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `articulo_pedido_pedido_id_foreign` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `contacto_tercero`
