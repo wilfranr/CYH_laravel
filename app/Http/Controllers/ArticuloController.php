@@ -109,7 +109,7 @@ class ArticuloController extends Controller
             // Verificar si se encontró el pedido
             if ($pedido) {
                 // Asociar el artículo al pedido mediante la relación muchos a muchos
-                $pedido->articulos()->attach($articulo->id);
+                $pedido->articulos()->attach($articulo->id, ['cantidad' => $request->cantidad]);
             }
         }
 
@@ -178,7 +178,7 @@ class ArticuloController extends Controller
         $medidas = $articulo->medidas;
 
         //obtener las definiciones de la lista 
-        $definiciones = Lista::where('tipo', 'Descripcion comun')->pluck('nombre', 'id');
+        $definiciones = Lista::where('tipo', 'Definición')->get();
         $tipoMedida = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
         $unidades = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
 

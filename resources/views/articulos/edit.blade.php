@@ -27,20 +27,21 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="form-group row">
                                 <label for="definicion"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Definición') }}</label>
-
                                 <div class="col-md-6">
                                     <select class="form-select" id="definicion" name="definicion">
                                         <option value="">Seleccione una descripción común</option>
-                                        @foreach ($definiciones as $id => $nombre)
-                                            <option value="{{ $nombre }}" {{ $nombre == $nombre ? 'selected' : '' }}>
-                                                {{ $nombre }}</option>
+                                        {{-- mostrar la definicion del articulo primero --}}
+                                        @foreach ($definiciones as $definicion)
+                                            <option value="{{ $definicion->nombre }}"
+                                                {{ $definicion->nombre == $articulo->definicion ? 'selected' : '' }}>
+                                                {{ $definicion->nombre }}</option>
                                         @endforeach
+
                                     </select>
                                 </div>
                             </div>
@@ -73,46 +74,47 @@
                                 </div>
                             </div>
                             {{-- Foto descriptiva --}}
-                            <div class="form-group">
+                            <div class="form-group border border-warning p-3 mb-3">
                                 <label for="foto-descriptiva">Foto Descriptiva</label>
                                 <input type="hidden" name="foto_descriptiva_actual"
                                     value="{{ $articulo->fotoDescriptiva }}">
                                 <input type="file" class="form-control-file" name="foto-descriptiva">
                                 <a href="{{ asset('storage/articulos/' . $articulo->fotoDescriptiva) }}" target="_blank">
                                     <img src="{{ asset('storage/articulos/' . $articulo->fotoDescriptiva) }}"
-                                    alt="Foto Descriptiva" width="100px">
+                                        alt="Foto Descriptiva" width="300px">
                                 </a>
                             </div>
-                            
+
                             {{-- Foto Medida --}}
-                            <div class="form-group">
+                            <div class="form-group border border-warning p-3 mb-3">
                                 <label for="fotoMedida">Foto Medida</label>
-                                <input type="hidden" name="fotoMedida_actual"
-                                    value="{{ $articulo->fotoMedida }}">
-                                <input type="file" class="form-control-file" name="fotoMedida">
-                                <a href="{{ asset('storage/articulos/' . $articulo->fotoMedida) }}" target="_blank">
-                                    <img src="{{ asset('storage/articulos/' . $articulo->fotoMedida) }}"
-                                    alt="Foto Medida" width="100px">
-                                </a>
+                                    @foreach ($definiciones as $definicion)
+                                        @if ($definicion->nombre == $articulo->definicion)
+                                            <a href="{{ asset('storage/listas/' . $definicion->fotoMedida) }}"
+                                                target="_blank">
+                                                <img src="{{ asset('storage/listas/' . $definicion->fotoMedida) }}"
+                                                    alt="Foto Medida" width="300px">
+                                            </a>
+                                        @endif
+                                    @endforeach
                             </div>
 
                             <!-- Campos de las medidas -->
                             <h2>Medidas</h2>
-                            
+
                             @foreach ($articulo->medidas as $index => $medida)
-                            @endforeach
                                 <div class="form-group">
                                     <label for="tipoMedida{{ $index }}">Tipo de medida {{ $index }}</label>
                                     <select name="tipoMedida" id="tipoMedida" class="form-select">
                                         <option value="">Seleccione un tipo de medida</option>
                                         @foreach ($medidas as $medida)
                                         @endforeach
-                                            <option value="{{ $medida->id }}"
-                                                {{ $medida->id == $medida->id ? 'selected' : '' }}>
-                                                {{ $medida->nombre }}</option>
-                                                @foreach ($tipoMedida as $tipo)
-                                                <option value="{{ $tipo}}">{{ $tipo }}</option>
-                                                @endforeach
+                                        <option value="{{ $medida->id }}"
+                                            {{ $medida->id == $medida->id ? 'selected' : '' }}>
+                                            {{ $medida->nombre }}</option>
+                                        @foreach ($tipoMedida as $tipo)
+                                            <option value="{{ $tipo }}">{{ $tipo }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -123,18 +125,18 @@
                                     <label for="unidad{{ $index }}">Unidad {{ $index }}</label>
                                     <select name="unidad" id="unidad" class="form-select">
                                         <option value="">Seleccione una unidad</option>
-                                        
-                                            <option value="{{ $medida->id }}"
-                                                {{ $medida->id == $medida->id ? 'selected' : '' }}>
-                                                {{ $medida->unidad }}</option>
-                                                @foreach ($unidades as $unidad)
-                                                <option value="{{ $unidad }}">{{ $unidad }}</option>
-                                                @endforeach
-                                                
+
+                                        <option value="{{ $medida->id }}"
+                                            {{ $medida->id == $medida->id ? 'selected' : '' }}>
+                                            {{ $medida->unidad }}</option>
+                                        @foreach ($unidades as $unidad)
+                                            <option value="{{ $unidad }}">{{ $unidad }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <button class="btn btn-outline-primary" type="submit">Guardar</button>
-                                <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
+                            @endforeach
+                            <button class="btn btn-outline-primary" type="submit">Guardar</button>
+                            <a href="{{ route('articulos.index') }}" class="btn btn-secondary">Volver</a>
                         </form>
                     </div>
                 </div>

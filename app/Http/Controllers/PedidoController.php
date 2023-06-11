@@ -138,8 +138,12 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido, $id)
     {
-        $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales.fotosArticuloTemporal'])->find($id);
-        $articulos = Articulo::all();
+        // Obtener el pedido con sus relaciones
+        $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales.fotosArticuloTemporal', 'articulos'])->find($id);
+
+        // Obtener todos los artículos asociados al pedido
+        $articulos = $pedido->articulos;
+
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
         $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre');
 
@@ -151,15 +155,13 @@ class PedidoController extends Controller
             $definicionesFotoMedida[$definicion->nombre] = $definicion->fotoMedida;
         }
 
-
-        //dd($definicionesFotoMedida);
-
         $medidas = Lista::where('tipo', 'Medida')->pluck('nombre', 'id');
         $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
         $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
 
         return view('pedidos.show', compact('pedido', 'sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion'));
     }
+
 
 
     public function edit($id)
@@ -209,6 +211,14 @@ class PedidoController extends Controller
 
         return redirect()->route('pedidos.show', ['id' => $pedido->id])
             ->with('success', 'Pedido actualizado satisfactoriamente.');
+    }
+
+    public function detachArticulo($pedidoId, $articuloId)
+    {
+        $pedido = Pedido::findOrFail($pedidoId);
+        $pedido->articulos()->detach($articuloId);
+
+        return redirect()->back()->with('message', 'La relación entre el pedido y el artículo ha sido eliminada.');
     }
 
 

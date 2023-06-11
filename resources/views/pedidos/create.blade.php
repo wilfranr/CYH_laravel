@@ -277,22 +277,7 @@
 
             }
 
-            // traer datos de referencia si se selecciona una
-            $('#referencia').change(function() {
-                var referencia = $('#referencia').val();
-                $.ajax({
-                    type: "GET",
-                    url: "/articulos/" + referencia,
-                    success: function(data) {
-                        console.log(data);
-                        $('#sistema').val(data.sistema);
-                        $('#definicion').val(data.definicion);
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error);
-                    }
-                });
-            });
+
             let contadorArticulos = 1;
 
             $('#boton-agregar-articulo').on('click', function() {
@@ -339,8 +324,32 @@
                 </hr>
 
             `);
-            
-            $('#articulos-temporales').val(contadorArticulos++);
+
+                $('#articulos-temporales').val(contadorArticulos++);
+
+                // Almacenar los datos de $articulos en una variable JavaScript
+                var articulos = {!! json_encode($articulos) !!};
+                console.log(articulos);
+
+                // Llenar campos de acuerdo a la referencia seleccionada
+                $(`#referencia${contadorArticulos-1}`).change(function() {
+                    var referencia = $(this).val();
+                    console.log(referencia);
+
+                    // Buscar el artículo en la lista de artículos
+                    var articuloEncontrado = articulos.find(function(articulo) {
+                        return articulo.referencia === referencia;
+                    });
+
+                    console.log(articuloEncontrado);
+
+                    if (articuloEncontrado) {
+                        $(`#sistema${contadorArticulos-1}`).val(articuloEncontrado.sistema);
+                        $(`#definicion${contadorArticulos-1}`).val(articuloEncontrado.definicion);
+                    } else {
+                        console.log('No se encontró el artículo');
+                    }
+                });
 
             });
 
@@ -350,6 +359,5 @@
             $('#cantidad').val(1);
 
         }
-        
     </script>
 @endsection

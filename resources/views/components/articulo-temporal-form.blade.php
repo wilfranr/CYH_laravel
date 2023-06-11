@@ -9,9 +9,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">{{ __('Crear artículo') }}</div>
+                        <div class="card-header">{{ __('Datos de artículo') }}</div>
                         <div class="card-body">
-                            <input type="text" value="{{ isset($pedido) ? $pedido->id : '' }}" name="pedido_id">
+                            <input type="hidden" value="{{ isset($pedido) ? $pedido->id : '' }}" name="pedido_id">
 
                             
                             <div class="form-group row">
@@ -87,6 +87,24 @@
                                         required>
 
                                     @error('descripcion_especifica')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- cantidad int --}}
+                            <div class="form-group row">
+                                <label for="cantidad"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Cantidad') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="cantidad" type="number"
+                                        class="form-control @error('cantidad') is-invalid @enderror" name="cantidad"
+                                        value="{{ old('cantidad') }}" required min="1">
+
+                                    @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

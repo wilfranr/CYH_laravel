@@ -26,6 +26,7 @@ class Pedido extends Model
     public function articulos()
     {
         return $this->belongsToMany(Articulo::class, 'articulo_pedido')
+            ->withPivot('cantidad')
             ->withTimestamps();
     }
 

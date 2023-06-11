@@ -112,8 +112,10 @@ Route::put('/pedidos/{id}/update', [PedidoController::class, 'update'])->name('p
 Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
 //foto articulo temporal
 Route::get('/pedidos/{articuloTemporal}/fotos', [FotoArticuloTemporalController::class, 'index'])->name('fotos.index');
-
 Route::post('/fotos', [FotoArticuloTemporalController::class, 'store'])->name('fotos.store');
+//Ruta para eliminar relación entre pedido y articulo
+Route::delete('/pedido/{pedidoId}/articulo/{articuloId}/detach', [PedidoController::class, 'detachArticulo'])->name('pedidos.detachArticulo');
+
 
 
 

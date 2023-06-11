@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h1>Artículos</h1>
         <div class="row">
             <div class="col-md-12">
                 <a href="{{ route('articulos.create') }}" class="btn btn-primary">Crear Artículo</a>
