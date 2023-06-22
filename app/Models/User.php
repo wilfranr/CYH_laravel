@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 
 class User extends Authenticatable
 {
@@ -21,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'rol'
+        'role',
     ];
 
     /**
@@ -42,9 +44,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    //cifrar password
-    public function setPasswordAttribute($value)
+
+    // roles
+    public function isSuperUsuario()
     {
-        $this->attributes['password'] = bcrypt($value);
+        return $this->role === 'superusuario';
     }
+
+    public function isVendedor()
+    {
+        return $this->role === 'vendedor';
+    }
+
+    public function isCliente()
+    {
+        return $this->role === 'cliente';
+    }
+    
+    public function isAnalistaPartes()
+    {
+        return $this->role === 'analista_partes';
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+    
 }

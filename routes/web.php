@@ -1,8 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LogoController;
@@ -17,6 +16,9 @@ use App\Http\Controllers\ListaPadreController;
 use App\Http\Controllers\FotoArticuloTemporalController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\ArticuloTemporalController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+
 
 
 
@@ -37,23 +39,11 @@ use App\Http\Controllers\ArticuloTemporalController;
 
 //ruta raiz
 Route::get('/', function () {
-    return view('home.index');
+    return view('auth.login');
 });
-
-//obtener registro
-Route::get('/register', [RegisterController::class, 'show']);//->middleware('guest');
-//registrar usuario
-Route::post('/register', [RegisterController::class, 'register']);
-//obtener login
-Route::get('/login', [LoginController::class, 'show']);
-//autenticar usuario
-Route::post('/login', [LoginController::class, 'login']);
 
 //ruta home
 Route::get('/home', [HomeController::class, 'index']);
-
-//cerrar sesion
-Route::get('/logout', [LogoutController::class, 'logout']);
 
 //ruta de logo
 Route::get('/resize-logo', 'LogoController@resizeLogo');
@@ -61,7 +51,7 @@ Route::get('/resize-logo', 'LogoController@resizeLogo');
 //ruta terceros
 Route::get('/terceros', [TerceroController::class, 'index'])->name('terceros.index');
 Route::get('/terceros/create', [TerceroController::class, 'create'])->name('terceros.create');
-Route::post('/terceros',[TerceroController::class, 'store'])->name('terceros.store');
+Route::post('/terceros', [TerceroController::class, 'store'])->name('terceros.store');
 Route::get('/terceros/{id}/edit', [TerceroController::class, 'edit'])->name('terceros.edit');
 Route::put('/terceros/{id}/update', [TerceroController::class, 'update'])->name('terceros.update');
 Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros.show');
@@ -141,29 +131,18 @@ Route::post('/articulos/definicion', [ArticuloController::class, 'definicion'])-
 
 
 
+Route::group(['middleware' => 'role:superusuario'], function () {
+    // rutas accesibles solo para usuarios con rol 'superusuario'
 
-//rutas listas padre
-Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listasPadre.index');
-Route::get('/listasPadre/create', [ListaPadreController::class, 'create'])->name('listasPadre.create');
-Route::post('/listasPadre', [ListaPadreController::class, 'store'])->name('listasPadre.store');
-Route::get('/listasPadre/{listaPadre}/edit', [ListaPadreController::class, 'edit'])->name('listasPadre.edit');
-Route::put('/listasPadre/{id}/update', [ListaPadreController::class, 'update'])->name('listasPadre.update');
-Route::delete('/listasPadre/{listaPadre}', [ListaPadreController::class, 'destroy'])->name('listasPadre.destroy');
+    //rutas listas padre
+    Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listasPadre.index');
+    Route::get('/listasPadre/create', [ListaPadreController::class, 'create'])->name('listasPadre.create');
+    Route::post('/listasPadre', [ListaPadreController::class, 'store'])->name('listasPadre.store');
+    Route::get('/listasPadre/{listaPadre}/edit', [ListaPadreController::class, 'edit'])->name('listasPadre.edit');
+    Route::put('/listasPadre/{id}/update', [ListaPadreController::class, 'update'])->name('listasPadre.update');
+    Route::delete('/listasPadre/{listaPadre}', [ListaPadreController::class, 'destroy'])->name('listasPadre.destroy');
+});
 
+Auth::routes();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

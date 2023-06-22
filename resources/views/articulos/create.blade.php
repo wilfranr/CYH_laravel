@@ -1,4 +1,5 @@
-@extends('layouts.app-master')
+@extends('adminlte::page')
+@section('title', 'Crear Artículo')
 
 @section('content')
     @component('components.articulo-temporal-form', [

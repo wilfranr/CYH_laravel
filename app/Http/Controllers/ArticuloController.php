@@ -41,7 +41,7 @@ class ArticuloController extends Controller
         $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
         $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
 
-        return view('articulos.create', compact('sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion'));
+        return view('articulos.create', compact('sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida'));
     }
 
 
@@ -49,10 +49,7 @@ class ArticuloController extends Controller
     public function store(Request $request, Articulo $articulo)
     {
         $validatedData = $request->validate([
-            //'maquina' => 'nullable|exists:maquinas,id',
-            //'tipo_maquina' => 'nullable|exists:maquinas,id',
             'marca' => 'nullable|string',
-            //'sistema' => 'nullable|string',
             'select-definicion' => 'nullable|string',
             'referencia' => 'nullable|string',
             'descripcion_especifica' => 'nullable|string',
@@ -63,10 +60,7 @@ class ArticuloController extends Controller
         //dd($request->all()) ;
 
         $articulo = new Articulo();
-        //$articulo->maquina_id = $validatedData['maquina'];
-        //$articulo->tipo_maquina_id = $validatedData['tipo_maquina'];
         $articulo->marca = $validatedData['marca'];
-        // $articulo->sistema = $validatedData['sistema'];
         $articulo->definicion = $validatedData['select-definicion'];
         $articulo->referencia = $validatedData['referencia'];
         $articulo->descripcionEspecifica = $validatedData['descripcion_especifica'];

@@ -1,4 +1,4 @@
-@extends('layouts.app-master')
+@extends('adminlte::page')
 
 @section('content')
     <div class="container">
@@ -25,15 +25,23 @@
             </div>
             <div class="form-group">
                 <label for="fotoLista">Foto:</label>
-                <input type="file" class="form-control" name="fotoLista" id="fotoLista">
+                <div class="input-group">
+                    <input type="file" class="custom-file-input" name="fotoLista" id="fotoLista">
+                    <label class="custom-file-label" for="fotoLista">Seleccionar imágen</label>
+                </div>
+
                 <img id="preview" src="#" alt="Vista previa de la imagen"
                     style="max-width: 200px; max-height: 200px;">
             </div>
             <div class="form-group fotoMedida">
                 <label for="fotoMedida">Foto Medida:</label>
-                <input type="file" class="form-control" name="fotoMedida" id="fotoMedida">
+                <div class="input-group">
+                    <input type="file" class="custom-file-input" name="fotoMedida" id="fotoMedida">
+                    <label class="custom-file-label" for="fotoMedida">Seleccionar imágen</label>
+                </div>
                 
             </div>
+            
             <button type="submit" class="btn btn-primary">Crear Lista</button>
         </form>
     </div>
