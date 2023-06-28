@@ -39,13 +39,15 @@
                     <div class="articulo-temporal">
                         <h4>Artículo {{ $index + 1 }}</h4>
                         @if ($articuloTemporal->referencia)
-                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                data-bs-target="#modalEditarArticulo">
+                            <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                                data-target="#modalEditarArticulo">
                                 Editar artículo
                             </button>
+                            
+                            
                         @else
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalCrearArticulo">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalCrearArticulo">
                                 Crear artículo
                             </button>
                         @endif
@@ -89,7 +91,19 @@
             @endforeach
 
 
-            <button type="button" class="btn btn-primary">Enviar a cotizar</button>
+            <form action="{{ route('pedidos.cambiarEstado', $pedido->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+            
+                
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="tercero_id" value="{{ $pedido->tercero_id }}">
+
+
+                <input type="hidden" name="estado" value="Costeo">
+                <button type="submit">Enviar a Costeo</button>
+            </form>
+            
 
 
         </div>
@@ -98,7 +112,7 @@
     {{-- Modal de editar articulo --}}
     <div class="modal fade" id="modalEditarArticulo" tabindex="-1" aria-labelledby="modalEditarArticuloLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-right">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalEditarArticuloLabel">Editar artículo</h5>
@@ -123,7 +137,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalCrearArticuloLabel">Crear artículo | Pedido # {{ $pedido->id }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

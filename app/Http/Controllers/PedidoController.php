@@ -9,9 +9,7 @@ use App\Models\Pais;
 use App\Models\Maquina;
 use App\Models\Lista;
 use App\Models\Articulo;
-use App\Models\Contacto;
 use App\Models\ArticuloTemporal;
-use App\Models\FotoArticulo;
 use App\Models\FotoArticuloTemporal;
 
 
@@ -21,7 +19,10 @@ class PedidoController extends Controller
     public function index()
     {
         $pedidos = Pedido::with(['tercero', 'contacto', 'maquinas'])->get();
-        return view('pedidos.index', compact('pedidos'));
+        $pedidosNuevos = Pedido::where('estado', 'Nuevo')->count();
+
+
+        return view('pedidos.index', compact('pedidos', 'pedidosNuevos'));
     }
 
 
@@ -135,7 +136,6 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
 
-
     public function show(Pedido $pedido, $id)
     {
         // Obtener el pedido con sus relaciones
@@ -162,8 +162,6 @@ class PedidoController extends Controller
         return view('pedidos.show', compact('pedido', 'sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion'));
     }
 
-
-
     public function edit($id)
     {
         $pedido = Pedido::findOrFail($id);
@@ -171,8 +169,6 @@ class PedidoController extends Controller
 
         return view('pedidos.edit', compact('pedido', 'articulosTemporales'));
     }
-
-
 
     public function update(Request $request, $id)
     {
@@ -212,6 +208,22 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.show', ['id' => $pedido->id])
             ->with('success', 'Pedido actualizado satisfactoriamente.');
     }
+
+    public function cambiarEstado(Request $request, $id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        // Obtén el nuevo estado desde el formulario o cualquier otra fuente de entrada
+        $nuevoEstado = $request->input('estado');
+
+        // Actualiza el estado del pedido
+        $pedido->estado = $nuevoEstado;
+        
+        $pedido->save();
+
+        // Redirige a la página de detalles del pedido o a cualquier otra página relevante
+        return redirect()->route('pedidos.index', $pedido->id)->with('success', 'Estado del pedido actualizado exitosamente.');
+    }
+
 
     public function detachArticulo($pedidoId, $articuloId)
     {

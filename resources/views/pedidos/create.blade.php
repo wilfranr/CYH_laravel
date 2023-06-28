@@ -5,9 +5,10 @@
         <h1>Pedido # {{ $ultimoPedido }}</h1>
         <form action="{{ route('pedidos.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+            
             <div class="form-group">
                 {{-- boton para buscar cliente --}}
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalClientes">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalClientes">
                     Buscar cliente
                 </button>
                 {{-- dirigir a crear tercero --}}
@@ -127,10 +128,10 @@
     {{-- Modal de clientes --}}
     <div class="modal fade" id="modalClientes" tabindex="-1" aria-labelledby="modalClientesLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content bg-secondary">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalClientesLabel">Buscar cliente</h5>
-                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal"
+                    <button type="button" class="close" data-dismiss="modal" data-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

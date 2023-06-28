@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -46,34 +47,10 @@ class User extends Authenticatable
     ];
 
     // roles
-    public function isSuperUsuario()
+    public function hasRole($roleName)
     {
-        return $this->role === 'superusuario';
-    }
-
-    public function isVendedor()
-    {
-        return $this->role === 'vendedor';
-    }
-
-    public function isCliente()
-    {
-        return $this->role === 'cliente';
+        return $this->role === $roleName;
     }
     
-    public function isAnalistaPartes()
-    {
-        return $this->role === 'analista_partes';
-    }
-
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
-    public function isUser()
-    {
-        return $this->role === 'user';
-    }
     
 }

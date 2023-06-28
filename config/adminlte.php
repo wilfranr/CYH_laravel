@@ -167,7 +167,7 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_card' => 'card-outline card-warning',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
@@ -192,11 +192,15 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-warning elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-warning navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
+
+
+    // Modo oscuro
+    'dark_mode' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -211,11 +215,11 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
+    'sidebar_collapse' => true,
+    'sidebar_collapse_auto_size' => true,
+    'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
+    'sidebar_scrollbar_theme' => 'os-theme-dark',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
     'sidebar_nav_animation_speed' => 300,
@@ -231,14 +235,14 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
+    'right_sidebar' => 'control-sidebar-open',
+    'right_sidebar_disable_top_button' => true,
+    'right_sidebar_enable_button' => 'manage-users',
 
-    'right_sidebar' => false,
-    'right_sidebar_icon' => 'fas fa-cogs',
-    'right_sidebar_theme' => 'dark',
-    'right_sidebar_slide' => true,
-    'right_sidebar_push' => true,
-    'right_sidebar_scrollbar_theme' => 'os-theme-light',
-    'right_sidebar_scrollbar_auto_hide' => 'l',
+
+
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -253,13 +257,13 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'welcome',
+    'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -301,6 +305,8 @@ return [
             'topnav_right' => true,
         ],
 
+
+
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
@@ -314,13 +320,28 @@ return [
                     'text' => 'Ver pedidos',
                     'url'  => '/pedidos',
                     'icon' => 'fas fa-fw fa-eye',
-                    'label'=> 4,
+                    // Mostrar cantidad de pedidos nuevos
+                    'label'       => isset($pedidosNuevos) ? $pedidosNuevos : 0,
                     'label_color' => 'success',
                 ],
                 [
                     'text' => 'Crear pedido',
                     'url'  => '/pedidos/create',
                     'icon' => 'fas fa-fw fa-plus',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Costeos',
+            'icon' => 'fas fa-fw fa-calculator',
+            'submenu' => [
+                [
+                    'text' => 'Ver pedidos en costeo',
+                    'url'  => '/costeos',
+                    'icon' => 'fas fa-fw fa-eye',
+                    // Mostrar cantidad de pedidos nuevos
+                    'label'       => isset($pedidosNuevos) ? $pedidosNuevos : 0,
+                    'label_color' => 'success',
                 ],
             ],
         ],
@@ -359,13 +380,13 @@ return [
                     'text' => 'Ver lista Padre',
                     'url'  => '/listasPadre',
                     'icon' => 'fas fa-fw fa-tasks',
-                    'can'  => 'superusuario',
+                    'can' => 'acceso-lista-padre'
                 ],
                 [
                     'text' => 'Crear lista Padre',
                     'url'  => '/listasPadre/create',
                     'icon' => 'fas fa-fw fa-plus',
-                    'can'  => 'superusuario',
+                    'can' => 'acceso-lista-padre'
                 ],
             ],
         ],
@@ -385,7 +406,24 @@ return [
                 ],
             ],
         ],
-        
+        [
+            'text' => 'Maquinas',
+            'icon' => 'fas fa-fw fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Ver maquinas',
+                    'url'  => '/maquinas',
+                    'icon' => 'fas fa-fw fa-binoculars',
+                ],
+                [
+                    'text' => 'Crear Maquina',
+                    'url'  => '/maquinas/create',
+                    'icon' => 'fas fa-fw fa-plus',
+                ],
+            ],
+        ],
+
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -413,7 +451,13 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+
+
+
     ],
+
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -500,7 +544,7 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],

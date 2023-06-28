@@ -19,6 +19,6 @@ class CheckRole
         if (!$request->user() || !in_array($request->user()->role, $roles)) {
             abort(403, 'No tienes permiso para acceder a esta página.');
         }
-        return $next($request);
+        return $next($request); 
     }
 }

@@ -103,7 +103,7 @@ class TerceroController extends Controller
 
         // Guardar el archivo de certificación bancaria (si se ha proporcionado uno)
         if ($request->hasFile('certificacion_bancaria')) {
-            $certificacion = $request->file('certificacion_bancaria')->storePublicy('certificaciones', 'public');
+            $certificacion = $request->file('certificacion_bancaria')->storePublicly('certificaciones', 'public');
             $tercero->certificacion_bancaria = $certificacion;
         }
         //guardar archivo rut

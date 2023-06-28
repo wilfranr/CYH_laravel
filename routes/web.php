@@ -18,6 +18,7 @@ use App\Http\Controllers\FotoController;
 use App\Http\Controllers\ArticuloTemporalController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CosteoController;
 
 
 
@@ -100,6 +101,14 @@ Route::get('/pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.sh
 Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
 Route::put('/pedidos/{id}/update', [PedidoController::class, 'update'])->name('pedidos.update');
 Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
+//Cambiar estado de pedido
+Route::put('/pedidos/{id}/cambiarEstado', [PedidoController::class, 'cambiarEstado'])->name('pedidos.cambiarEstado');
+
+//rutas costeo
+Route::get('/costeos', [CosteoController::class, 'index'])->name('costeos.index');
+Route::get('/costeos/costear/{id}', [CosteoController::class, 'costear'])->name('costeos.costear');
+
+
 //foto articulo temporal
 Route::get('/pedidos/{articuloTemporal}/fotos', [FotoArticuloTemporalController::class, 'index'])->name('fotos.index');
 Route::post('/fotos', [FotoArticuloTemporalController::class, 'store'])->name('fotos.store');
@@ -110,13 +119,14 @@ Route::delete('/pedido/{pedidoId}/articulo/{articuloId}/detach', [PedidoControll
 
 
 //rutas usuarios
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+//middleware para proteger la ruta 'can:users.index
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('can:users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->middleware('can:users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('can:users.destroy');
 
 //rutas articulos
 Route::get('/articulos', [ArticuloController::class, 'index'])->name('articulos.index');
@@ -131,7 +141,7 @@ Route::post('/articulos/definicion', [ArticuloController::class, 'definicion'])-
 
 
 
-Route::group(['middleware' => 'role:superusuario'], function () {
+Route::group(['middleware' => 'role:superadmin'], function () {
     // rutas accesibles solo para usuarios con rol 'superusuario'
 
     //rutas listas padre
@@ -146,3 +156,9 @@ Route::group(['middleware' => 'role:superusuario'], function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/set-dark-mode', function (\Illuminate\Http\Request $request) {
+    $darkMode = $request->input('dark_mode');
+    session(['dark_mode' => $darkMode]);
+    return response()->json(['success' => true]);
+});

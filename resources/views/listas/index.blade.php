@@ -10,7 +10,7 @@
 
 
         <h1>Listas</h1>
-        
+
 
 
 
@@ -42,14 +42,16 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('listas.show', $lista->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="{{ route('listas.show', $lista->id) }}" class="btn btn-sm btn-success"><i
+                                    class="fa fa-eye" aria-hidden="true"></i></a>
                             <a href="{{ route('listas.edit', $lista->id) }}" class="btn btn-sm btn-primary">🖋</a>
-                            <form action="{{ route('listas.destroy', $lista->id) }}" method="POST"
+                            <form id="deleteForm" action="{{ route('listas.destroy', $lista->id) }}" method="POST"
                                 style="display: inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('¿Está seguro de que desea eliminar esta lista?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn btn-sm btn-danger delete-lista" id="delete-lista">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -58,21 +60,57 @@
         </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script>
         //filtrar listas por tipo
         $(document).ready(function() {
+            //confirmar eliminar lista
+            $('.delete-lista').on('click', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, bórralo!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('deleteForm').submit();
+                        Swal.fire(
+                            'Borrado!',
+                            'La lista ha sido borrada.',
+                            'success'
+                        )
+                    }
+                })
+            })
             
+
+
             $(function() {
-            $('#listas').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+                $('#listas').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "responsive": true,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                    },
+                });
+
             });
-        });
+
+
+
+
+
+
         });
     </script>
 @endsection

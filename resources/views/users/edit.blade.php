@@ -83,6 +83,7 @@
                                     </select>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-primary float-right">Actualizar</button>
                         </form>
                     </div>
                 </div>

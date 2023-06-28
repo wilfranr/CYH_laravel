@@ -133,6 +133,18 @@ class MaquinaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            // Buscar la máquina por su ID
+            $maquina = Maquina::findOrFail($id);
+
+            // Eliminar la máquina
+            $maquina->delete();
+
+            // Redireccionar a una ruta o mostrar un mensaje de éxito
+            return redirect()->route('maquinas.index')->with('success', 'Máquina eliminada correctamente');
+        } catch (\Exception $e) {
+            // Manejar cualquier excepción ocurrida durante la eliminación
+            return redirect()->back()->with('error', 'Ocurrió un error al eliminar la máquina');
+        }
     }
 }

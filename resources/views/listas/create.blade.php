@@ -39,10 +39,13 @@
                     <input type="file" class="custom-file-input" name="fotoMedida" id="fotoMedida">
                     <label class="custom-file-label" for="fotoMedida">Seleccionar imágen</label>
                 </div>
-                
+                <img id="preview2" src="#" alt="Vista previa de la imágen"
+                    style="max-width: 200px; max-height: 200px;">
+
             </div>
-            
+
             <button type="submit" class="btn btn-primary">Crear Lista</button>
+            <a href="{{ route('listas.index') }}" class="btn btn-secondary">Volver</a>
         </form>
     </div>
     <!-- Incluye la librería de jQuery -->
@@ -53,40 +56,37 @@
         $(document).ready(function() {
             $('.fotoMedida').hide();
         });
-        
-        // Obtener el elemento del input de carga de archivo y el elemento de la vista previa
+
+        // Obtener los elementos del input de carga de archivo y los elementos de la vista previa
         var inputImagen = document.getElementById('fotoLista');
         var imagenPreview = document.getElementById('preview');
+        var inputImagen2 = document.getElementById('fotoMedida');
+        var imagenPreview2 = document.getElementById('preview2');
 
-        // Agregar un evento de cambio al input de carga de archivo
-        inputImagen.addEventListener('change', function() {
-            // Verificar si se seleccionó un archivo
-            if (inputImagen.files && inputImagen.files[0]) {
-                // Crear un objeto FileReader para leer el archivo
-                var reader = new FileReader();
+        // Agregar un evento change al input de carga de archivo
+        inputImagen.addEventListener('change', function(event) {
+            // Obtener el archivo seleccionado
+            var archivo = event.target.files[0];
 
-                // Configurar la función de carga del FileReader
-                reader.onload = function(e) {
-                    // Asignar la imagen cargada a la vista previa
-                    imagenPreview.src = e.target.result;
+            // Crear un objeto URL para la imagen seleccionada
+            var urlImagen = URL.createObjectURL(archivo);
 
-                    // Boton para remover foto
-                    var botonRemover = document.createElement('button');
-                    botonRemover.classList.add('btn', 'btn-danger');
-                    botonRemover.textContent = 'X';
-                    botonRemover.type = 'button';
-                    botonRemover.addEventListener('click', function() {
-                        imagenPreview.src = '#';
-                        inputImagen.value = '';
-                        botonRemover.remove();
-                    });
-                    imagenPreview.insertAdjacentElement('afterend', botonRemover);
-                }
-
-                // Leer el archivo seleccionado como una URL de datos
-                reader.readAsDataURL(inputImagen.files[0]);
-            }
+            // Mostrar la imagen en la vista previa
+            imagenPreview.src = urlImagen;
         });
+
+        // Agregar un evento change al segundo input de carga de archivo
+        inputImagen2.addEventListener('change', function(event) {
+            // Obtener el archivo seleccionado
+            var archivo = event.target.files[0];
+
+            // Crear un objeto URL para la imagen seleccionada
+            var urlImagen = URL.createObjectURL(archivo);
+
+            // Mostrar la imagen en la vista previa
+            imagenPreview2.src = urlImagen;
+        });
+
         //si se selecciona tipo Definición, se muestra el campo para cargar la foto de la medida
         $('#tipo').on('change', function() {
             if (this.value == 'Definición') {

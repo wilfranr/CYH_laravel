@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 @foreach ($pedidos as $pedido)
-                    @if ($pedido->estado == 'Nuevo')
+                    @if ($pedido->estado == 'Costeo')
                         <tr>
                             <td>{{ $pedido->id }}</td>
                             <td>{{ $pedido->tercero->nombre }}</td>
@@ -44,22 +44,9 @@
                             <td>{{ $pedido->created_at }}</td>
                             <td>{{ $pedido->estado }}</td>
                             <td>
-                                <a href="{{ route('pedidos.show', $pedido->id) }}" class="btn btn-primary">
+                                <a href="{{ route('costeos.costear', $pedido->id) }}" class="btn btn-primary">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST"
-                                    style="display: inline">
-                                    @csrf
-
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('¿Está seguro de que desea eliminar este pedido?')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                     @endif

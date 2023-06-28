@@ -47,7 +47,8 @@
                                                 <a href="{{ route('articulos.show', $articulo->id) }}"
                                                     class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 <a href="{{ route('articulos.edit', $articulo->id) }}"
-                                                    class="btn btn-sm btn-warning">🖋</a>
+                                                    class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>
+                                                </a>
                                                 <form action="{{ route('articulos.destroy', $articulo->id) }}"
                                                     method="POST" style="display: inline">
                                                     @csrf
@@ -78,6 +79,9 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                },
             });
         });
     </script>
