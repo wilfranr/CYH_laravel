@@ -519,18 +519,18 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
         ],
         'Chartjs' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
@@ -545,12 +545,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],
         'Pace' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'css',
@@ -561,6 +561,21 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'Toastr' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js',
                 ],
             ],
         ],

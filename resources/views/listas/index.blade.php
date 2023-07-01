@@ -2,16 +2,12 @@
 
 @section('content')
     <div class="container">
+        <h1>Listas</h1>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
             </div>
         @endif
-
-
-        <h1>Listas</h1>
-
-
 
 
         <a href="{{ route('listas.create') }}" class="btn btn-primary mb-2">Crear Lista</a>
@@ -37,8 +33,7 @@
                         <td>{{ $lista->definicion }}</td>
                         <td>
                             <a href="{{ asset('storage/listas/' . $lista->foto) }}" target="_blank">
-                                <img src="{{ asset('storage/listas/' . $lista->foto) }}" alt="Foto de la lista"
-                                    width="100px">
+                                <img src="{{ asset('storage/listas/' . $lista->foto) }}" alt="Foto de la lista" width="100px">
                             </a>
                         </td>
                         <td>
@@ -49,7 +44,7 @@
                                 style="display: inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger delete-lista" id="delete-lista">
+                                <button type="submit" class="btn btn-sm btn-danger delete" id="delete-lista">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </form>
@@ -59,58 +54,40 @@
             </tbody>
         </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+@endsection
+@section('js')
+<script>
 
-    <script>
-        //filtrar listas por tipo
         $(document).ready(function() {
-            //confirmar eliminar lista
-            $('.delete-lista').on('click', function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "No podrás revertir esto!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sí, bórralo!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById('deleteForm').submit();
+            $('#listas').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                }
+            });
+        });
+        $('.delete').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit();
+                    //tiempo de espera para que se ejecute el submit
+                    setTimeout(function() {
                         Swal.fire(
-                            'Borrado!',
-                            'La lista ha sido borrada.',
+                            '¡Eliminado!',
+                            'El registro ha sido eliminado.',
                             'success'
                         )
-                    }
-                })
+                    }, 500);
+                }
             })
-            
-
-
-            $(function() {
-                $('#listas').DataTable({
-                    "paging": true,
-                    "lengthChange": true,
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": true,
-                    "responsive": true,
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-                    },
-                });
-
-            });
-
-
-
-
-
-
         });
     </script>
 @endsection

@@ -45,7 +45,8 @@
 
                                             <td>
                                                 <a href="{{ route('articulos.show', $articulo->id) }}"
-                                                    class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    class="btn btn-sm btn-primary"><i class="fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 <a href="{{ route('articulos.edit', $articulo->id) }}"
                                                     class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>
                                                 </a>
@@ -53,8 +54,8 @@
                                                     method="POST" style="display: inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('¿Está seguro de que desea eliminar este artículo?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    <button type="submit" class="btn btn-sm btn-danger delete"><i
+                                                            class="fas fa-trash-alt"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -83,6 +84,30 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
                 },
             });
+        });
+        $('.delete').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit();
+                    //tiempo de espera para que se ejecute el submit
+                    setTimeout(function() {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El registro ha sido eliminado.',
+                            'success'
+                        )
+                    }, 500);
+                }
+            })
         });
     </script>
 @endsection

@@ -55,8 +55,7 @@
                                     @csrf
 
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('¿Está seguro de que desea eliminar este pedido?')">
+                                    <button type="submit" class="btn btn-sm btn-danger delete">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
@@ -86,6 +85,30 @@
                     },
                 });
             });
+            $('.delete').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit();
+                    //tiempo de espera para que se ejecute el submit
+                    setTimeout(function() {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El registro ha sido eliminado.',
+                            'success'
+                        )
+                    }, 500);
+                }
+            })
+        });
         });
     </script>
 @endsection

@@ -69,8 +69,9 @@
                                         <option value="">{{ __('Seleccione un rol') }}</option>
                                         <option value="superusuario">SuperUsusario</option>
                                         <option value="administrador">Administrador</option>
-                                        <option value="usuario">Usuario</option>
-
+                                        <option value="vendedor">Vendedor</option>
+                                        <option value="analista_partes">Analista de partes</option>
+                                        <option value="logistica">Auxiliar de logística</option>
 
                                     </select>
                                 </div>

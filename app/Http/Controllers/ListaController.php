@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ListaPadre;
 
 
+
 class ListaController extends Controller
 {
     public function index()

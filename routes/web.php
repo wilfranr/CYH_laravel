@@ -128,6 +128,7 @@ Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edi
 Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('can:users.destroy');
 
+
 //rutas articulos
 Route::get('/articulos', [ArticuloController::class, 'index'])->name('articulos.index');
 Route::get('/articulos/create', [ArticuloController::class, 'create'])->name('articulos.create');
@@ -137,6 +138,7 @@ Route::get('/articulos/{id}/edit', [ArticuloController::class, 'edit'])->name('a
 Route::put('/articulos/{id}/update', [ArticuloController::class, 'update'])->name('articulos.update');
 Route::delete('/articulos/{id}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
 Route::post('/articulos/definicion', [ArticuloController::class, 'definicion'])->name('articulos.definicion');
+
 
 
 

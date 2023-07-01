@@ -76,8 +76,8 @@
                                         <option value="vendedor" @if (old('role', $user->role) == 'vendedor') selected @endif>
                                             Vendedor
                                         </option>
-                                        <option value="Analista" @if (old('role', $user->role) == 'Analista') selected @endif>
-                                            Analista
+                                        <option value="analista_partes" @if (old('role', $user->role) == 'analistaPartes') selected @endif>
+                                            Analista de partes
                                         </option>
 
                                     </select>
