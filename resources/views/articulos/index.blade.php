@@ -3,6 +3,14 @@
 @section('content')
     <div class="container">
         <h1>Artículos</h1>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <a href="{{ route('articulos.create') }}" class="btn btn-primary">Crear Artículo</a>
@@ -73,7 +81,7 @@
     <script>
         $(function() {
             $('#articulos').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": true,
                 "searching": true,
                 "ordering": true,
@@ -83,6 +91,9 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
                 },
+                "scrollY": true,
+                "scrollY": "550px",
+                "scrollCollapse": true,                
             });
         });
         $('.delete').click(function(e) {

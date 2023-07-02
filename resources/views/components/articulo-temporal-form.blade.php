@@ -6,9 +6,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-primary">
+                <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Artículos</h3>
+                        <h3 class="card-title">Crear artículo</h3>
                     </div>
                     {{-- Aca va el formulario --}}
                     <form method="POST" action="{{ route('articulos.store') }}" enctype="multipart/form-data">
@@ -16,7 +16,6 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="card">
-                                    <div class="card-header">{{ __('Datos de artículo') }}</div>
                                     <div class="card-body">
                                         <input type="hidden" value="{{ isset($pedido) ? $pedido->id : '' }}"
                                             name="pedido_id">
@@ -29,7 +28,7 @@
                                             <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <select class="form-control" id="select-definicion"
+                                                        <select class="form-control select2" id="select-definicion"
                                                             name="select-definicion"
                                                             onchange="mostrarFotoMedida(this.value)" required>
                                                             <option value="">Seleccione una definición</option>
@@ -61,7 +60,7 @@
                                                 class="col-md-4 col-form-label text-md-right">{{ __('Marca fabricante') }}</label>
 
                                             <div class="col-md-6">
-                                                <select class="form-control" id="marca" name="marca">
+                                                <select class="form-control select2" id="marca" name="marca">
                                                     <option value="">Seleccione una marca fabricante</option>
                                                     @foreach ($maquinas as $id => $nombre)
                                                         <option value="{{ $nombre }}">{{ $nombre }}</option>
@@ -112,7 +111,7 @@
                                             <div class="col-md-6">
                                                 <input id="cantidad" type="number"
                                                     class="form-control @error('cantidad') is-invalid @enderror"
-                                                    name="cantidad" value="{{ old('cantidad') }}" required
+                                                    name="cantidad" value="{{ old('cantidad') }}" 
                                                     min="1">
 
                                                 @error('cantidad')
@@ -128,13 +127,7 @@
                                                 class="col-md-4 col-form-label text-md-right">{{ __('Comentarios') }}</label>
 
                                             <div class="col-md-6">
-                                                <textarea id="comentarios" class="form-control @error('comentarios') is-invalid @enderror" name="comentarios">{{ old('comentarios') }}</textarea>
-
-                                                @error('comentarios')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <textarea id="comentarios" class="form-control"  name="comentarios">{{ old('comentarios') }}</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -143,14 +136,8 @@
 
                                             <div class="col-md-6">
                                                 <input id="peso" type="text"
-                                                    class="form-control @error('peso') is-invalid @enderror"
+                                                    class="form-control"
                                                     name="peso" value="{{ old('peso') }}">
-
-                                                @error('peso')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         {{-- Foto descriptiva --}}
@@ -161,12 +148,13 @@
                                             <div class="col-md-6">
                                                 <input type="file" name="foto-descriptiva" id="foto-descriptiva"
                                                     class="custom-file-input">
-                                                    <label class="custom-file-label" for="exampleInputFile">Seleccionar imágen</label>
+                                                <label class="custom-file-label" for="exampleInputFile">Seleccionar
+                                                    imágen</label>
                                                 <img id="preview2" src="#" alt="Vista previa de la imagen"
                                                     style="max-width: 200px; max-height: 200px;">
                                             </div>
                                         </div>
-                                        
+
 
                                     </div>
                                 </div>
@@ -240,7 +228,8 @@
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary mt-3">Crear</button>
                                         {{-- boton para volver a articulos.index --}}
-                                        <a href="{{ route('articulos.index') }}" class="btn btn-danger mt-3">Cancelar</a>
+                                        <a href="{{ route('articulos.index') }}"
+                                            class="btn btn-danger mt-3">Cancelar</a>
                                     </div>
                                 </div>
                             </div>
@@ -255,30 +244,27 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+@section('js')
+    <script>
+        function mostrarFotoMedida(definicionId) {
+            console.log(definicionId);
+            var definicionesFotoMedida = @json($definicionesFotoMedida);
+            console.log(definicionesFotoMedida);
+            var fotoMedida = "{{ asset('storage/listas') }}/" + (definicionId && definicionId in definicionesFotoMedida ?
+                definicionesFotoMedida[definicionId] : 'no-imagen.jpg');
+            console.log(fotoMedida);
+            $('#fotoMedida3').attr('src', fotoMedida);
+            $('#link-foto-medida').attr('href', fotoMedida);
 
 
-<script>
-    function mostrarFotoMedida(definicionId) {
-        console.log(definicionId);
-        var definicionesFotoMedida = @json($definicionesFotoMedida);
-        console.log(definicionesFotoMedida);
-        var fotoMedida = "{{ asset('storage/listas') }}/" + (definicionId && definicionId in definicionesFotoMedida ?
-            definicionesFotoMedida[definicionId] : 'no-imagen.jpg');
-        console.log(fotoMedida);
-        $('#fotoMedida3').attr('src', fotoMedida);
-        $('#link-foto-medida').attr('href', fotoMedida);
+        }
+    
+        $(document).ready(function() {
 
-
-    }
-</script>
-
-<script>
-    $(document).ready(function() {
-
-        let contadorMedidas = 1;
-        $('#agregar-medida').on('click', function() {
-            $('#medidas').append(`
+            let contadorMedidas = 1;
+            $('#agregar-medida').on('click', function() {
+                $('#medidas').append(`
                 <div class="card">
                         <div class="card-header">{{ __('Medidas') }}</div>
                             <div class="card-body">
@@ -334,36 +320,37 @@
                     </div>
                 </div>
             `);
-            contadorMedidas++;
-        });
-        //Ocultar boton de agregar medida
-        $('#agregar-medida').hide();
-        // Mostrar boton de agregar medida si se selecciona una definicion
-        $('#select-definicion').on('change', function() {
-            $('#agregar-medida').show();
-            // Obtener referencias a los elementos select e imagen
-        });
-        //ocultar div crear definición
-        $('#divCrearDefinicion').hide();
-        // Mostrar div crear definición si se selecciona la opción +
-        $('#btn-crear-deficion').on('click', function() {
-            $('#divCrearDefinicion').show();
-        });
-        //ocultar div al seleccionar una definición
-        $('#select-definicion').on('change', function() {
+                contadorMedidas++;
+            });
+            //Ocultar boton de agregar medida
+            $('#agregar-medida').hide();
+            // Mostrar boton de agregar medida si se selecciona una definicion
+            $('#select-definicion').on('change', function() {
+                $('#agregar-medida').show();
+                // Obtener referencias a los elementos select e imagen
+            });
+            //ocultar div crear definición
             $('#divCrearDefinicion').hide();
+            // Mostrar div crear definición si se selecciona la opción +
+            $('#btn-crear-deficion').on('click', function() {
+                $('#divCrearDefinicion').show();
+            });
+            //ocultar div al seleccionar una definición
+            $('#select-definicion').on('change', function() {
+                $('#divCrearDefinicion').hide();
+            });
+            // Vista previa de la imagen
+            document.getElementById("foto-descriptiva").addEventListener("change", function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("preview2").src = e.target.result;
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            });
+
+            // select2
+            $('.select2').select2();
+
         });
-
-    });
-</script>
-
-<script>
-    // Vista previa de la imagen
-    document.getElementById("foto-descriptiva").addEventListener("change", function(e) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById("preview2").src = e.target.result;
-        };
-        reader.readAsDataURL(e.target.files[0]);
-    });
-</script>
+    </script>
+@endsection

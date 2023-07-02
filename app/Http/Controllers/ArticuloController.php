@@ -151,7 +151,7 @@ class ArticuloController extends Controller
         }
 
         //redireccionar recargando la pagina
-        return redirect()->route('articulos.create')->with('success', 'Artículo creado correctamente.');
+        return redirect()->route('articulos.index')->with('success', 'Artículo creado correctamente.');
     }
 
     public function show(Articulo $articulo, $id)

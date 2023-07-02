@@ -143,6 +143,8 @@ class PedidoController extends Controller
 
         // Obtener todos los artículos asociados al pedido
         $articulos = $pedido->articulos;
+        //obtener todas las referencias de los articulos
+        $referencias = Articulo::all();
 
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
         $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre');
@@ -159,7 +161,7 @@ class PedidoController extends Controller
         $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
         $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
 
-        return view('pedidos.show', compact('pedido', 'sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion'));
+        return view('pedidos.show', compact('pedido', 'sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion', 'referencias'));
     }
 
     public function edit($id)

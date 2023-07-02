@@ -11,8 +11,19 @@
 
 
         <a href="{{ route('listas.create') }}" class="btn btn-primary mb-2">Crear Lista</a>
+
         <table id="listas" class="table table-bordered table-striped">
             <thead>
+                <select class="form-control" id="filtro-tipo">
+                    <option value="">Filtrar Todos</option>
+                    <option value="Marca">Marca</option>
+                    <option value="Definición">Definición</option>
+                    <option value="Sistema">Sistema</option>
+                    <option value="Medida">Medida</option>
+                    <option value="TipoMedida">Tipo de Medida</option>
+                    <option value="Definición">Definición</option>
+
+                </select>
                 <tr>
                     <th>Tipo</th>
                     <th>Nombre</th>
@@ -33,7 +44,8 @@
                         <td>{{ $lista->definicion }}</td>
                         <td>
                             <a href="{{ asset('storage/listas/' . $lista->foto) }}" target="_blank">
-                                <img src="{{ asset('storage/listas/' . $lista->foto) }}" alt="Foto de la lista" width="100px">
+                                <img src="{{ asset('storage/listas/' . $lista->foto) }}" alt="Foto de la lista"
+                                    width="100px">
                             </a>
                         </td>
                         <td>
@@ -56,13 +68,21 @@
     </div>
 @endsection
 @section('js')
-<script>
-
+    <script>
         $(document).ready(function() {
             $('#listas').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-                }
+                },
+                "scrollY": "550px", 
+                "scrollCollapse": true, 
+                "paging": false, 
+            });
+            // Agregar filtro por tipo
+            $('#filtro-tipo').on('change', function() {
+                var table = $('#listas').DataTable();
+                var tipo = $(this).val();
+                table.column(0).search(tipo).draw();
             });
         });
         $('.delete').click(function(e) {

@@ -355,7 +355,7 @@ return [
                     'icon' => 'fas fa-fw fa-binoculars',
                 ],
                 [
-                    'text' => 'Crear producto',
+                    'text' => 'Crear artículo',
                     'url'  => '/articulos/create',
                     'icon' => 'fas fa-fw fa-plus',
                 ],

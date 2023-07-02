@@ -2,109 +2,283 @@
 
 @section('content')
     <!-- Contenido principal de la plantilla -->
-
-    <div class="border border-warning p-3 mb-3">
-        <h1>Pedido #{{ $pedido->id }}</h1>
-        <p>Cliente: {{ $pedido->tercero_id ? $pedido->tercero->nombre : 'N/A' }}</p>
-        <p>Vendedor: {{ $pedido->user ? $pedido->user->name : 'N/A' }}</p>
-        <p>Contacto: {{ $pedido->contacto ? $pedido->contacto->nombre : 'N/A' }}</p>
-        
-        {{-- Validar si trae teléfono, crear enlace para WhatsApp; de lo contrario, mostrar "N/A" --}}
-        @if ($pedido->contacto)
-            @if ($pedido->contacto->telefono)
-                <p>Teléfono Contacto: <a
-                        href="https://wa.me/+57{{ $pedido->contacto->telefono }}">{{ $pedido->contacto->telefono }}</a></p>
-            @else
-                <p>Teléfono: N/A</p>
-            @endif
-        @endif
-        
-        <p>Comentario: {{ $pedido->comentario ?? 'N/A' }}</p>
-        <p>Estado: {{ $pedido->estado ?? 'N/A' }}</p>
-        
-        <h2>Máquinas asociadas</h2>
-        <ul>
-            <!-- Mostrar el tipo de cada máquina -->
-            @foreach ($pedido->maquinas as $maquina)
-                <li>{{ $maquina->tipo }}</li>
-            @endforeach
-        </ul>
+    <div class="mt-3 mb-5">
+        <h4>
+            <span class="badge badge-warning"><i class="fas fa-shopping-cart"></i>Pedido #{{ $pedido->id }}</span>
+            <small class="float-right">Fecha de pedido: {{ $pedido->created_at }}</small><br>
+            <small class="float-right">Vendedor: {{ $pedido->user->name }}</small>
+        </h4>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Artículos temporales</h2>
-            <!-- Mostrar información sobre los artículos temporales -->
-            @foreach ($pedido->articulosTemporales as $index => $articuloTemporal)
-            <div class="border border-warning p-3 mb-3">
-                    <div class="articulo-temporal">
-                        <h4>Artículo {{ $index + 1 }}</h4>
-                        @if ($articuloTemporal->referencia)
-                            <button type="button" class="btn btn-outline-success" data-toggle="modal"
-                                data-target="#modalEditarArticulo">
-                                Editar artículo
-                            </button>
-                            
-                            
-                        @else
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#modalCrearArticulo">
-                                Crear artículo
-                            </button>
-                        @endif
-                        <p>Referencia: {{ $articuloTemporal->referencia }}</p>
-                        <p>Definición: {{ $articuloTemporal->definicion }}</p>
-                        <p>Sistema: {{ $articuloTemporal->sistema }}</p>
-                        <p>Cantidad: {{ $articuloTemporal->cantidad }}</p>
-                        <p>Comentarios: {{ $articuloTemporal->comentarios }}</p>
-                
-                        <h3>Fotos:</h3>
-                        <!-- Mostrar las fotos asociadas a cada artículo temporal -->
-                        @foreach ($articuloTemporal->fotosArticuloTemporal as $fotoArticuloTemporal)
-                            <a href="{{ asset('storage/fotos-articulo-temporal/' . $fotoArticuloTemporal->foto_path) }}"
-                                target="_blank">
-                                <img src="{{ asset('storage/fotos-articulo-temporal/' . $fotoArticuloTemporal->foto_path) }}"
-                                    alt="Foto" width="200px">
+    <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+
+        <!-- info row -->
+        <div class="card bg-light d-flex flex-fill">
+            <div class="card-header text-muted border-bottom-0">
+                Datos del cliente
+            </div>
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col-3">
+                        <p>Cliente</p>
+                        <h2 class="lead"><b><strong>{{ $pedido->tercero->nombre }}</strong></b></h2>
+                        <p class="text-muted text-sm">
+                            <b>
+                                @if ($pedido->tercero->tipo_documento == 'cedula')
+                                    <span class=""><i class="fas fa-lg fa-id-card"></i> CC:</span>
+                                @elseif ($pedido->tercero->tipo_documento == 'nit')
+                                    <span class=""><i class="fas fa-lg fa-id-card"></i> NIT:</span>
+                                @elseif ($pedido->tercero->tipo_documento == 'ce')
+                                    <span class=""><i class="fas fa-lg fa-id-card"></i> CE:</span>
+                                @endif
+                            </b> {{ $pedido->tercero->numero_documento }}
+                        </p>
+                        <p class="text-muted text-sm">
+                            <b>
+                                <span class=""><i class="fas fa-lg fa-building"></i> Dirección:</span>
+                            </b> {{ $pedido->tercero->direccion }}
+                        </p>
+                        <p class="text-muted text-sm">
+                            <b>
+                                <span class=""><i class="fab fa-2x fa-whatsapp"></i> Teléfono:</span>
+                            </b>
+                            <a href="https://wa.me/+57{{ $pedido->tercero->telefono }}" target="_blank">
+                                {{ $pedido->tercero->telefono }}
+
                             </a>
-                            @endforeach
-                        </div>
+                        </p>
+                        <p class="text-muted text-sm">
+                            <b>
+                                <span class=""><i class="fa fa-lg fa-envelope"></i> Email:</span>
+                            </b>
+                            <a href="mailto:{{ $pedido->tercero->email }}" target="_blank">
+                                {{ $pedido->tercero->email }}
+
+                            </a>
+
+
+
+                        </p>
                     </div>
-                @endforeach
+                    <div class="col-3">
+                        <p>Contacto del cliente</p>
+                        <h2 class="lead">
+                            <b>
+                                <strong>
+                                    @if ($pedido->contacto)
+                                        {{ $pedido->contacto->nombre }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </strong>
+                            </b>
+                        </h2>
+
+                        <p class="text-muted text-sm">
+                            <b>
+                                <span class=""><i class="fab fa-2x fa-whatsapp"></i> Teléfono:</span>
+                            </b>
+                            @if ($pedido->contacto)
+                                <a href="https://wa.me/+57{{ $pedido->contacto->telefono }}" target="_blank">
+                                    {{ $pedido->contacto->telefono }}
+                                @else
+                                    N/A
+                            @endif
+                            </a>
+                        </p>
+                        <p class="text-muted text-sm">
+                            <b>
+                                <span class=""><i class="fa fa-lg fa-envelope"></i> Email:</span>
+                            </b>
+                            @if ($pedido->contacto)
+                                <a href="mailto:{{ $pedido->contacto->email }}">
+                                    {{ $pedido->contacto->email }}
+                                </a>
+                            @else
+                                N/A
+                            @endif
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <p>Maquinas asociadas al pedido</p>
+                        @if ($pedido->maquinas->count() > 1)
+                            <h2 class="lead">
+                                <b>
+                                    <strong>
+                                        @foreach ($pedido->maquinas as $maquina)
+                                            <i class="fa fa-wrench"></i>
+                                            {{ $maquina->tipo }} <a href="{{ route('maquinas.show', $maquina->id) }}"
+                                                target="_blank">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endforeach
+                                    </strong>
+                                </b>
+                            </h2>
+
+
+                    </div>
+                    <div class="col-3 text-center">
+                        <img src="{{ asset('storage/maquinas/' . $maquina->foto) }}" alt="user-avatar"
+                            class="img-circle img-fluid">
+                    </div>
+                @else
+                    N/A
+                    @endif
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="text-right">
+                    <a href="https://wa.me/+57{{ $pedido->tercero->telefono }}" class="btn btn-sm bg-teal" target="_blank">
+                        <i class="fas fa-comments"></i>
+                    </a>
+                    <a href="{{ route('terceros.show', $pedido->tercero->id) }}" class="btn btn-sm btn-primary"
+                        target="_blank">
+                        <i class="fas fa-user"></i> Ver tercero
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <h2>Artículos reales</h2>
-            {{-- Mostrar articulos relacionados con el pedido --}}
-            @foreach ($pedido->articulos as $index => $articulo)
-                <div class="border border-warning mb-3 p-3">
-                    <h4>Artículo {{ $index + 1 }}</h4><a href="{{ route('articulos.show', $articulo->id) }}"
-                        class="btn btn-sm btn-primary" target="_blank">Ver</a>
-                    <p>Referencia: {{ $articulo->referencia }}</p>
-                    <p>Definición: {{ $articulo->definicion }}</p>
-                    <p>Cantidad: {{ $articulo->pivot->cantidad }}</p>
-                    <p>Comentarios: {{ $articulo->comentarios }}</p>
-                    {{-- agregar un boton que elimine la relación de articulo_pedido --}}
-                    <form action="{{ route('pedidos.detachArticulo', [$pedido->id, $articulo->id]) }}" method="POST">
+
+
+    </div>
+    <div class="container">
+
+        <div class="card bg-light d-flex flex-fill">
+            <div class="card-header text-muted border-bottom-0">
+                Artículos
+            </div>
+            <div class="card-body pt-0">
+                <table class="table table-bordered" id="articulos">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Referencia</th>
+                            <th>Definición</th>
+                            <th>Sistema</th>
+                            <th>Cantidad</th>
+                            <th>Comentarios</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pedido->articulosTemporales as $index => $articuloTemporal)
+                            <tr>
+                                <td>
+                                    <strong> {{ $index + 1 }}</strong>
+                                </td>
+                                <td>
+                                    <select class="form-control select2">
+                                        <option value="{{ $articuloTemporal->referencia }}">
+                                            {{ $articuloTemporal->referencia }}</option>
+                                        @foreach ($referencias as $referencia)
+                                            <option value="{{ $referencia->referencia }}">
+                                                {{ $referencia->referencia }}</option>
+                                        @endforeach
+                                        <!-- Agrega aquí más opciones del select si es necesario -->
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <input type="text" class="form-control" value="{{ $articuloTemporal->definicion }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="{{ $articuloTemporal->sistema }}">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" value="{{ $articuloTemporal->cantidad }}">
+                                </td>
+                                <td>
+                                    <textarea class="form-control">{{ $articuloTemporal->comentarios }}</textarea>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-success">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td colspan="7">
+                                <button type="button" class="btn btn-outline-primary" id="addRow">
+                                    Agregar artículo
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <div class="text-right">
+
+                    <a href="{{ route('terceros.show', $pedido->tercero->id) }}" class="btn btn-sm btn-primary"
+                        target="_blank">
+                        <i class="fa fa-paper-plane"></i> Enviar a costeo
+                    </a>
+                </div>
+            </div>
+
+            {{-- <div class="row">
+                <div class="col-md-12">
+                    <h2>Artículos reales</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Artículo</th>
+                                <th>Referencia</th>
+                                <th>Definición</th>
+                                <th>Cantidad</th>
+                                <th>Comentarios</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pedido->articulos as $index => $articulo)
+                                <tr>
+                                    <td>
+                                        <strong>Artículo {{ $index + 1 }}</strong>
+                                        <br>
+                                        <a href="{{ route('articulos.show', $articulo->id) }}"
+                                            class="btn btn-sm btn-primary" target="_blank">Ver</a>
+                                    </td>
+                                    <td>{{ $articulo->referencia }}</td>
+                                    <td>{{ $articulo->definicion }}</td>
+                                    <td>{{ $articulo->pivot->cantidad }}</td>
+                                    <td>{{ $articulo->comentarios }}</td>
+                                    <td>
+                                        <form action="{{ route('pedidos.detachArticulo', [$pedido->id, $articulo->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <form action="{{ route('pedidos.cambiarEstado', $pedido->id) }}" method="POST">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">X</button>
+                        @method('PUT')
+
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="tercero_id" value="{{ $pedido->tercero_id }}">
+
+                        <input type="hidden" name="estado" value="Costeo">
+                        <button type="submit" class="btn btn-primary">Enviar a Costeo</button>
                     </form>
                 </div>
-            @endforeach
-
-
-            <form action="{{ route('pedidos.cambiarEstado', $pedido->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-            
-                
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                <input type="hidden" name="tercero_id" value="{{ $pedido->tercero_id }}">
-
-
-                <input type="hidden" name="estado" value="Costeo">
-                <button type="submit">Enviar a Costeo</button>
-            </form>
-            
-
+            </div> --}}
 
         </div>
     </div>
@@ -116,7 +290,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalEditarArticuloLabel">Editar artículo</h5>
-                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -133,10 +308,11 @@
     <div class="modal fade" id="modalCrearArticulo" tabindex="-1" aria-labelledby="modalCrearArticuloLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-right">
-            
+
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCrearArticuloLabel">Crear artículo | Pedido # {{ $pedido->id }}</h5>
+                    <h5 class="modal-title" id="modalCrearArticuloLabel">Crear artículo | Pedido # {{ $pedido->id }}
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -163,5 +339,31 @@
             margin-right: 0 !important;
         }
     </style>
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#articulos').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                },
+            });
+            //agreagr filas
+            $('#addRow').on('click', function() {
+                addRow();
+            });
+            
 
+
+
+            $('.select2').select2();
+        });
+    </script>
 @endsection

@@ -26,12 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        //gate para super admin y admin
         Gate::define('users.index', function ($user) {
-            return $user->hasRole('superadmin');
-        });
-        Gate::define('users.create', function ($user) {
-            return $user->hasRole('superadmin');
+            return $user->hasRole('superadmin') || $user->hasRole('admin');
         });
         Gate::define('users.destroy', function ($user) {
             return $user->hasRole('superadmin');
@@ -43,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole('superadmin');
         });
         Gate::define('access-register', function ($user) {
-            return $user->hasRole('superadmin');
+            return $user->hasRole('superadmin') || $user->hasRole('admin');
         });
 
         
