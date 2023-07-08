@@ -1,12 +1,38 @@
 @extends('adminlte::page')
 
 @section('content')
-    <!-- Contenido principal de la plantilla -->
+    <style>
+        #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        #chat-box {
+            display: none;
+        }
+    </style>
+    <div id="chat-container">
+        <button id="chat-toggle" class="btn btn-info"><i class=" fa fa-comments"></i> </button>
+        <div id="chat-box" class="card">
+            <div class="card-header">
+                Chat
+            </div>
+            <div class="card-body">
+                <!-- Aquí puedes agregar el contenido del chat -->
+                <p>Bienvenido al chat. ¡Hazme una pregunta!</p>
+            </div>
+        </div>
+    </div>
+    <!-- Contenido principal de Pedido -->
     <div class="mt-3 mb-5">
         <h4>
             <span class="badge badge-warning"><i class="fas fa-shopping-cart"></i>Pedido #{{ $pedido->id }}</span>
             <small class="float-right">Fecha de pedido: {{ $pedido->created_at }}</small><br>
-            <small class="float-right">Vendedor: {{ $pedido->user->name }}</small>
+            <small class="float-right">Vendedor: {{ $pedido->user->name }}<a href="">
+                    <i class="fas fa-comments"></i>
+                </a></small>
         </h4>
     </div>
     <div class="container">
@@ -20,7 +46,7 @@
         @endif
 
 
-        <!-- info row -->
+        <!-- info pedido -->
         <div class="card bg-light d-flex flex-fill">
             <div class="card-header text-muted border-bottom-0">
                 Datos del cliente
@@ -63,9 +89,6 @@
                                 {{ $pedido->tercero->email }}
 
                             </a>
-
-
-
                         </p>
                     </div>
                     <div class="col-3">
@@ -109,19 +132,28 @@
                     </div>
                     <div class="col-3">
                         <p>Maquinas asociadas al pedido</p>
-                        @if ($pedido->maquinas->count() > 1)
+                        @if ($pedido->maquinas->count() >= 1)
                             <h2 class="lead">
-                                <b>
-                                    <strong>
-                                        @foreach ($pedido->maquinas as $maquina)
-                                            <i class="fa fa-wrench"></i>
-                                            {{ $maquina->tipo }} <a href="{{ route('maquinas.show', $maquina->id) }}"
-                                                target="_blank">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        @endforeach
-                                    </strong>
-                                </b>
+                                <strong>
+                                    @foreach ($pedido->maquinas as $maquina)
+                                        <ul>
+                                            <li>
+                                                <b>
+                                                    <i class="fa fa-wrench"></i>
+                                                    {{ $maquina->tipo }} <a
+                                                        href="{{ route('maquinas.show', $maquina->id) }}" target="_blank">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a><br>
+                                                </b>
+                                                <p>{{ $maquina->marca }}</p>
+                                                <p>{{ $maquina->modelo }}</p>
+
+
+                                            </li>
+                                        </ul>
+                                    @endforeach
+                                </strong>
+
                             </h2>
 
 
@@ -152,20 +184,19 @@
     </div>
     <div class="container">
 
+        {{-- Tabla con artículos --}}
         <div class="card bg-light d-flex flex-fill">
             <div class="card-header text-muted border-bottom-0">
                 Artículos
             </div>
             <div class="card-body pt-0">
-                <table class="table table-bordered" id="articulos">
+                <table id="articulos" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Referencia</th>
-                            <th>Definición</th>
-                            <th>Sistema</th>
-                            <th>Cantidad</th>
-                            <th>Comentarios</th>
+                            <th style="width: 35%;">Referencia--Definición</th>
+                            <th style="width: 10%;">Cantidad</th>
+                            <th style="width: 30%;">Comentarios</th>
                             <th>Editar</th>
                         </tr>
                     </thead>
@@ -176,46 +207,37 @@
                                     <strong> {{ $index + 1 }}</strong>
                                 </td>
                                 <td>
-                                    <select class="form-control select2">
+                                    <select class="form-control select2" style="width: 100%;" id="referencia">
                                         <option value="{{ $articuloTemporal->referencia }}">
-                                            {{ $articuloTemporal->referencia }}</option>
+                                            {{ $articuloTemporal->referencia }}--{{ $articuloTemporal->definicion }}
+                                        </option>
                                         @foreach ($referencias as $referencia)
                                             <option value="{{ $referencia->referencia }}">
-                                                {{ $referencia->referencia }}</option>
+                                                {{ $referencia->referencia }}--{{ $referencia->definicion }}</option>
                                         @endforeach
                                         <!-- Agrega aquí más opciones del select si es necesario -->
                                     </select>
                                 </td>
-
                                 <td>
-                                    <input type="text" class="form-control" value="{{ $articuloTemporal->definicion }}">
+                                    <input type="number" class="form-control" value="{{ $articuloTemporal->cantidad }}"
+                                        style="width: 100px;">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" value="{{ $articuloTemporal->sistema }}">
+                                    <textarea class="form-control" disabled>{{ $articuloTemporal->comentarios }}</textarea>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control" value="{{ $articuloTemporal->cantidad }}">
-                                </td>
-                                <td>
-                                    <textarea class="form-control">{{ $articuloTemporal->comentarios }}</textarea>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-success">
-                                        <i class="fas fa-check"></i>
+                                    <button type="button" class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
                                     </button>
-
                                 </td>
                             </tr>
                         @endforeach
-                        <tr>
-                            <td colspan="7">
-                                <button type="button" class="btn btn-outline-primary" id="addRow">
-                                    Agregar artículo
-                                </button>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
+                <div><button type="button" class="btn btn-outline-primary" id="addRow">
+                        Agregar artículo
+                    </button></div>
             </div>
             <div class="card-footer">
                 <div class="text-right">
@@ -284,7 +306,7 @@
     </div>
 
     {{-- Modal de editar articulo --}}
-    <div class="modal fade" id="modalEditarArticulo" tabindex="-1" aria-labelledby="modalEditarArticuloLabel"
+    {{-- <div class="modal fade" id="modalEditarArticulo" tabindex="-1" aria-labelledby="modalEditarArticuloLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -302,10 +324,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- Modal de crear articulo --}}
-    <div class="modal fade" id="modalCrearArticulo" tabindex="-1" aria-labelledby="modalCrearArticuloLabel"
+    {{-- <div class="modal fade" id="modalCrearArticulo" tabindex="-1" aria-labelledby="modalCrearArticuloLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-right">
 
@@ -319,51 +341,62 @@
                 </div>
                 <div class="modal-body">
                     @component('components.articulo-temporal-form', [
-                        'articulos' => $articulos,
-                        'maquinas' => $maquinas,
-                        'definiciones' => $definiciones,
-                        'sistemas' => $sistemas,
-                        'medidas' => $medidas,
-                        'unidadMedidas' => $unidadMedidas,
-                        'definicionesFotoMedida' => $definicionesFotoMedida,
-                        'pedido' => $pedido,
-                    ])
+    'articulos' => $articulos,
+    'maquinas' => $maquinas,
+    'definiciones' => $definiciones,
+    'sistemas' => $sistemas,
+    'medidas' => $medidas,
+    'unidadMedidas' => $unidadMedidas,
+    'definicionesFotoMedida' => $definicionesFotoMedida,
+    'pedido' => $pedido,
+])
                     @endcomponent
 
                 </div>
             </div>
         </div>
-    </div>
-    <style>
+    </div> --}}
+    {{-- <style>
         .modal-dialog-right {
             margin-right: 0 !important;
         }
-    </style>
+    </style> --}}
 @endsection
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#articulos').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-                },
-            });
-            //agreagr filas
-            $('#addRow').on('click', function() {
-                addRow();
-            });
-            
-
-
-
             $('.select2').select2();
+            $('#chat-toggle').click(function() {
+                $('#chat-box').slideToggle();
+            });
+            // Evento click para agregar una nueva fila
+            $('#addRow').click(function() {
+                var fila =
+                    '<tr>' +
+                    '<td><strong>1</strong></td>' +
+                    '<td>' +
+                    '<select class="form-control select2 referencia" style="width: 100%;" id="referencia">' +
+                    '<option value="">Seleccione</option>' +
+                    '@foreach ($referencias as $referencia)' +
+                    '<option value="{{ $referencia->referencia }}">{{ $referencia->referencia }}--{{ $referencia->definicion }}</option>' +
+                    '@endforeach' +
+                    '</select>' +
+                    '</td>' +
+                    '<td><input type="number" class="form-control cantidad" style="width: 100px;"></td>' +
+                    '<td><textarea class="form-control"></textarea></td>' +
+                    '<td><button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></td>' +
+                    '</tr>';
+
+                $('#articulos tbody').append(fila);
+                $('.select2').select2();
+
+                // Obtener la fila recién agregada
+                var nuevaFila = $('#articulos tbody tr:last');
+                var referenciaSeleccionada = nuevaFila.find('.referencia').val();
+                cambiarDefinicion(referenciaSeleccionada, nuevaFila);
+            });
+
+
         });
     </script>
 @endsection

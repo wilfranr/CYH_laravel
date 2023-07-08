@@ -1,6 +1,30 @@
 @extends('adminlte::page')
 
 @section('content')
+    <style>
+        #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        #chat-box {
+            display: none;
+        }
+    </style>
+    <div id="chat-container">
+        <button id="chat-toggle" class="btn btn-info"><i class=" fa fa-comments"></i> </button>
+        <div id="chat-box" class="card">
+            <div class="card-header">
+                Chat
+            </div>
+            <div class="card-body">
+                <!-- Aquí puedes agregar el contenido del chat -->
+                <p>Bienvenido al chat. ¡Hazme una pregunta!</p>
+            </div>
+        </div>
+    </div>
     <div class="container">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -89,6 +113,9 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
                 },
+            });
+            $('#chat-toggle').click(function() {
+                $('#chat-box').slideToggle();
             });
             $('.delete').click(function(e) {
                 e.preventDefault();
