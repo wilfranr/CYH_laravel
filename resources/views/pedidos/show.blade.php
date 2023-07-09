@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    <style>
+    {{-- <style>
         #chat-container {
             position: fixed;
             bottom: 20px;
@@ -24,7 +24,7 @@
                 <p>Bienvenido al chat. ¡Hazme una pregunta!</p>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Contenido principal de Pedido -->
     <div class="mt-3 mb-5">
         <h4>
@@ -166,6 +166,11 @@
                     N/A
                     @endif
                 </div>
+                <div>
+                    Comentarios del pedido: <br>
+                    <textarea class="form-control" disabled>{{ $pedido->comentario }}</textarea>
+
+                </div>
             </div>
             <div class="card-footer">
                 <div class="text-right">
@@ -207,17 +212,27 @@
                                     <strong> {{ $index + 1 }}</strong>
                                 </td>
                                 <td>
-                                    <select class="form-control select2" style="width: 100%;" id="referencia">
+                                    <div class="d-flex">
+                                      <select class="form-control select2" style="width: 100%;" id="referencia">
                                         <option value="{{ $articuloTemporal->referencia }}">
-                                            {{ $articuloTemporal->referencia }}--{{ $articuloTemporal->definicion }}
+                                          {{ $articuloTemporal->referencia }}--{{ $articuloTemporal->definicion }}
                                         </option>
                                         @foreach ($referencias as $referencia)
-                                            <option value="{{ $referencia->referencia }}">
-                                                {{ $referencia->referencia }}--{{ $referencia->definicion }}</option>
+                                          <option value="{{ $referencia->referencia }}">
+                                            {{ $referencia->referencia }}--{{ $referencia->definicion }}
+                                          </option>
                                         @endforeach
                                         <!-- Agrega aquí más opciones del select si es necesario -->
-                                    </select>
-                                </td>
+                                      </select>
+                                      <button class="btn btn-sm btn-outline-primary ml-2" type="button" onclick="agregarReferencia()">
+                                        <i class="fas fa-plus"></i>
+                                      </button>
+                                    </div>
+                                    <div id="agregarReferencia">
+<input type="text" class="form-control" placeholder="referencia" id="referencia" name="referencia" value="">
+                                    </div>
+                                  </td>
+                                  
                                 <td>
                                     <input type="number" class="form-control" value="{{ $articuloTemporal->cantidad }}"
                                         style="width: 100px;">
@@ -226,18 +241,35 @@
                                     <textarea class="form-control" disabled>{{ $articuloTemporal->comentarios }}</textarea>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-outline-danger">
+                                    <button type="button" class="btn btn-outline-danger delete-row-btn">
                                         <i class="fas fa-trash"></i>
                                     </button>
+
                                 </td>
                             </tr>
                         @endforeach
 
                     </tbody>
                 </table>
-                <div><button type="button" class="btn btn-outline-primary" id="addRow">
-                        Agregar artículo
-                    </button></div>
+                
+
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-outline-primary" id="addRow">
+                            <i class="fas fa-plus"></i>
+                            Agregar artículo
+                        </button>
+                    </div>
+                    <div>
+                        <a href="{{ route('articulos.create') }}" class="btn btn-outline-success" id="crearArticuloBtn">
+                            <i class="fas fa-cube"></i>
+                            Crear artículo nuevo
+                        </a>
+                    </div>
+                </div>
+
+
+
             </div>
             <div class="card-footer">
                 <div class="text-right">
@@ -356,11 +388,7 @@
             </div>
         </div>
     </div> --}}
-    {{-- <style>
-        .modal-dialog-right {
-            margin-right: 0 !important;
-        }
-    </style> --}}
+
 @endsection
 @section('js')
     <script>
@@ -369,34 +397,48 @@
             $('#chat-toggle').click(function() {
                 $('#chat-box').slideToggle();
             });
+            var contador = 1;
             // Evento click para agregar una nueva fila
-            $('#addRow').click(function() {
-                var fila =
-                    '<tr>' +
-                    '<td><strong>1</strong></td>' +
+            $(document).on('click', '#addRow', function() {
+                contador++;
+                var fila = '<tr>' +
+                    '<td><strong>' + contador + '</strong></td>' +
                     '<td>' +
-                    '<select class="form-control select2 referencia" style="width: 100%;" id="referencia">' +
-                    '<option value="">Seleccione</option>' +
+                    '<select class="form-control select2" style="width: 100%;" id="referencia">' +
+                    '<option value="">Seleccione una referencia</option>' +
                     '@foreach ($referencias as $referencia)' +
-                    '<option value="{{ $referencia->referencia }}">{{ $referencia->referencia }}--{{ $referencia->definicion }}</option>' +
+                    '<option value="{{ $referencia->referencia }}">' +
+                    '{{ $referencia->referencia }}--{{ $referencia->definicion }}</option>' +
                     '@endforeach' +
                     '</select>' +
                     '</td>' +
-                    '<td><input type="number" class="form-control cantidad" style="width: 100px;"></td>' +
-                    '<td><textarea class="form-control"></textarea></td>' +
-                    '<td><button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></td>' +
+                    '<td>' +
+                    '<input type="number" class="form-control" value="1" style="width: 100px;">' +
+                    '</td>' +
+                    '<td>' +
+                    '<textarea class="form-control" disabled></textarea>' +
+                    '</td>' +
+                    '<td>' +
+                    '<button type="button" class="btn btn-outline-danger delete-row-btn">' +
+                    '<i class="fas fa-trash"></i>' +
+                    '</button>' +
+                    '</td>' +
                     '</tr>';
-
                 $('#articulos tbody').append(fila);
                 $('.select2').select2();
-
-                // Obtener la fila recién agregada
-                var nuevaFila = $('#articulos tbody tr:last');
-                var referenciaSeleccionada = nuevaFila.find('.referencia').val();
-                cambiarDefinicion(referenciaSeleccionada, nuevaFila);
             });
-
+            //ocultar div agregar referencia
+            $('#agregarReferencia').hide();
 
         });
+
+        // Evento change para eliminar fila
+        $(document).on('click', '.delete-row-btn', function() {
+            $(this).closest('tr').remove();
+        });
+        //mostrar div agregar referencia
+        function agregarReferencia() {
+            $('#agregarReferencia').show();
+        }
     </script>
 @endsection

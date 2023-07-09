@@ -143,6 +143,7 @@ Route::post('/articulos/definicion', [ArticuloController::class, 'definicion'])-
 
 
 
+
 Route::group(['middleware' => 'role:superadmin'], function () {
     // rutas accesibles solo para usuarios con rol 'superusuario'
 

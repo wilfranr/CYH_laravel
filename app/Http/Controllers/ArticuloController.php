@@ -162,7 +162,7 @@ class ArticuloController extends Controller
         return view('articulos.show', compact('articulo', 'definiciones'));
     }
 
-
+   
     public function edit($id)
     {
         // Obtener el artículo que se va a editar

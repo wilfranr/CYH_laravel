@@ -217,7 +217,7 @@
                                         <label for="fotMedida3">Foto de la Medida:</label>
                                         <a href="" target="_blank" id="link-foto-medida">
                                             <img id="fotoMedida3" src="{{ asset('storage/listas') }}/no-imagen.jpg"
-                                                alt="Foto de medida" width="300px">
+                                                alt="Foto de medida" width="200px">
                                         </a>
                                     </div>
                                 </div>
