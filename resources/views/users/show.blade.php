@@ -10,7 +10,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p><strong>Email:</strong> {{ $user->email }}</p>
-                        <p><strong>Rol:</strong> {{ $user->rol }}</p>
+                        <p><strong>Rol:</strong> {{ $user->role }}</p>
+                        <p><strong>Teléfono:</strong> {{ $user->phone }}</p>
                     </div>
                     <div class="col-md-6">
                         <p><strong>Creado en:</strong> {{ $user->created_at }}</p>

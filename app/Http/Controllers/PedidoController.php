@@ -211,6 +211,13 @@ class PedidoController extends Controller
             ->with('success', 'Pedido actualizado satisfactoriamente.');
     }
 
+    public function costear($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $articulosTemporales = $pedido->articulosTemporales;
+
+        return view('pedidos.costear', compact('pedido', 'articulosTemporales'));
+    }
     public function cambiarEstado(Request $request, $id)
     {
         $pedido = Pedido::findOrFail($id);

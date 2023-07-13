@@ -1,38 +1,16 @@
 @extends('adminlte::page')
 
 @section('content')
-    {{-- <style>
-        #chat-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-
-        #chat-box {
-            display: none;
-        }
-    </style>
-    <div id="chat-container">
-        <button id="chat-toggle" class="btn btn-info"><i class=" fa fa-comments"></i> </button>
-        <div id="chat-box" class="card">
-            <div class="card-header">
-                Chat
-            </div>
-            <div class="card-body">
-                <!-- Aquí puedes agregar el contenido del chat -->
-                <p>Bienvenido al chat. ¡Hazme una pregunta!</p>
-            </div>
-        </div>
-    </div> --}}
+    
     <!-- Contenido principal de Pedido -->
     <div class="mt-3 mb-5">
         <h4>
             <span class="badge badge-warning"><i class="fas fa-shopping-cart"></i>Pedido #{{ $pedido->id }}</span>
             <small class="float-right">Fecha de pedido: {{ $pedido->created_at }}</small><br>
-            <small class="float-right">Vendedor: {{ $pedido->user->name }}<a href="">
-                    <i class="fas fa-comments"></i>
-                </a></small>
+            <small class="float-right">Vendedor: {{ $pedido->user->name }} <a
+                    href="https://wa.me/+57{{ $pedido->user->phone }}" target="_blank"><i
+                        class="fab fa-whatsapp"></i></a></small><br>
+
         </h4>
     </div>
     <div class="container">
@@ -198,11 +176,11 @@
                 <table id="articulos" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th style="width: 3%">#</th>
                             <th style="width: 35%;">Referencia--Definición</th>
                             <th style="width: 10%;">Cantidad</th>
                             <th style="width: 30%;">Comentarios</th>
-                            <th>Editar</th>
+                            <th style="width: 3%;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -213,26 +191,28 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                      <select class="form-control select2" style="width: 100%;" id="referencia">
-                                        <option value="{{ $articuloTemporal->referencia }}">
-                                          {{ $articuloTemporal->referencia }}--{{ $articuloTemporal->definicion }}
-                                        </option>
-                                        @foreach ($referencias as $referencia)
-                                          <option value="{{ $referencia->referencia }}">
-                                            {{ $referencia->referencia }}--{{ $referencia->definicion }}
-                                          </option>
-                                        @endforeach
-                                        <!-- Agrega aquí más opciones del select si es necesario -->
-                                      </select>
-                                      <button class="btn btn-sm btn-outline-primary ml-2" type="button" onclick="agregarReferencia()">
-                                        <i class="fas fa-plus"></i>
-                                      </button>
+                                        <select class="form-control select2" style="width: 100%;" id="referencia">
+                                            <option value="{{ $articuloTemporal->referencia }}">
+                                                {{ $articuloTemporal->referencia }}--{{ $articuloTemporal->definicion }}
+                                            </option>
+                                            @foreach ($referencias as $referencia)
+                                                <option value="{{ $referencia->referencia }}">
+                                                    {{ $referencia->referencia }}--{{ $referencia->definicion }}
+                                                </option>
+                                            @endforeach
+                                            <!-- Agrega aquí más opciones del select si es necesario -->
+                                        </select>
+                                        {{-- <button class="btn btn-sm btn-outline-primary ml-2" type="button"
+                                            onclick="agregarReferencia()">
+                                            <i class="fas fa-plus"></i>
+                                        </button> --}}
                                     </div>
-                                    <div id="agregarReferencia">
-<input type="text" class="form-control" placeholder="referencia" id="referencia" name="referencia" value="">
-                                    </div>
-                                  </td>
-                                  
+                                    {{-- <div id="agregarReferencia">
+                                        <input type="text" class="form-control" placeholder="Referencia"
+                                            id="referenciaParcial" name="referenciaParcial" value="">
+                                    </div> --}}
+                                </td>
+
                                 <td>
                                     <input type="number" class="form-control" value="{{ $articuloTemporal->cantidad }}"
                                         style="width: 100px;">
@@ -251,7 +231,7 @@
 
                     </tbody>
                 </table>
-                
+
 
                 <div class="d-flex justify-content-between">
                     <div>
@@ -261,7 +241,8 @@
                         </button>
                     </div>
                     <div>
-                        <a href="{{ route('articulos.create') }}" class="btn btn-outline-success" id="crearArticuloBtn">
+                        <a href="{{ route('articulos.create') }}" class="btn btn-outline-success" id="crearArticuloBtn"
+                            target="_blank">
                             <i class="fas fa-cube"></i>
                             Crear artículo nuevo
                         </a>
@@ -280,6 +261,15 @@
                     </a>
                 </div>
             </div>
+
+
+
+            {{-- boton modal modalCrearArticulo --}}
+            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearArticulo">
+                <i class="fas fa-plus"></i>
+                Agregar artículo
+            </button> --}}
+
 
             {{-- <div class="row">
                 <div class="col-md-12">
@@ -373,15 +363,15 @@
                 </div>
                 <div class="modal-body">
                     @component('components.articulo-temporal-form', [
-    'articulos' => $articulos,
-    'maquinas' => $maquinas,
-    'definiciones' => $definiciones,
-    'sistemas' => $sistemas,
-    'medidas' => $medidas,
-    'unidadMedidas' => $unidadMedidas,
-    'definicionesFotoMedida' => $definicionesFotoMedida,
-    'pedido' => $pedido,
-])
+                        'articulos' => $articulos,
+                        'maquinas' => $maquinas,
+                        'definiciones' => $definiciones,
+                        'sistemas' => $sistemas,
+                        'medidas' => $medidas,
+                        'unidadMedidas' => $unidadMedidas,
+                        'definicionesFotoMedida' => $definicionesFotoMedida,
+                        'pedido' => $pedido,
+                    ])
                     @endcomponent
 
                 </div>
@@ -400,10 +390,12 @@
             var contador = 1;
             // Evento click para agregar una nueva fila
             $(document).on('click', '#addRow', function() {
+                $('#agregarReferencia').hide();
                 contador++;
                 var fila = '<tr>' +
                     '<td><strong>' + contador + '</strong></td>' +
                     '<td>' +
+                    '<div class="d-flex">' +
                     '<select class="form-control select2" style="width: 100%;" id="referencia">' +
                     '<option value="">Seleccione una referencia</option>' +
                     '@foreach ($referencias as $referencia)' +
@@ -411,6 +403,11 @@
                     '{{ $referencia->referencia }}--{{ $referencia->definicion }}</option>' +
                     '@endforeach' +
                     '</select>' +
+                    '<button class="btn btn-sm btn-outline-primary ml-2" type="button" onclick="agregarReferencia()">' +
+                    '<i class="fas fa-plus"></i>' +
+                    '</button>' +
+                    '</div>' +
+
                     '</td>' +
                     '<td>' +
                     '<input type="number" class="form-control" value="1" style="width: 100px;">' +
@@ -429,6 +426,7 @@
             });
             //ocultar div agregar referencia
             $('#agregarReferencia').hide();
+
 
         });
 
