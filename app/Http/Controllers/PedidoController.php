@@ -168,8 +168,12 @@ class PedidoController extends Controller
     {
         $pedido = Pedido::findOrFail($id);
         $articulosTemporales = $pedido->articulosTemporales;
+        //foto de articulo temporal
+        $fotosArticuloTemporal = FotoArticuloTemporal::all();
+        // dd($fotosArticuloTemporal);
+        
 
-        return view('pedidos.edit', compact('pedido', 'articulosTemporales'));
+        return view('pedidos.edit', compact('pedido', 'articulosTemporales', 'fotosArticuloTemporal'));
     }
 
     public function update(Request $request, $id)
@@ -215,6 +219,8 @@ class PedidoController extends Controller
     {
         $pedido = Pedido::findOrFail($id);
         $articulosTemporales = $pedido->articulosTemporales;
+        
+        //traer los articulos de la tabla
 
         return view('pedidos.costear', compact('pedido', 'articulosTemporales'));
     }

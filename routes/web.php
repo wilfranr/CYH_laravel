@@ -103,6 +103,7 @@ Route::put('/pedidos/{id}/update', [PedidoController::class, 'update'])->name('p
 Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
 //Cambiar estado de pedido
 Route::put('/pedidos/{id}/cambiarEstado', [PedidoController::class, 'cambiarEstado'])->name('pedidos.cambiarEstado');
+//Ruta
 
 //rutas costeo
 Route::get('/costeos', [CosteoController::class, 'index'])->name('costeos.index');

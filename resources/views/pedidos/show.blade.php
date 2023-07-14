@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    
+
     <!-- Contenido principal de Pedido -->
     <div class="mt-3 mb-5">
         <h4>
@@ -180,12 +180,15 @@
                             <th style="width: 35%;">Referencia--Definición</th>
                             <th style="width: 10%;">Cantidad</th>
                             <th style="width: 30%;">Comentarios</th>
+
+                            <th style="width: 10%;">Imágen</th>
+
                             <th style="width: 3%;"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pedido->articulosTemporales as $index => $articuloTemporal)
-                            <tr>
+                        <tr>
+                            @foreach ($pedido->articulosTemporales as $index => $articuloTemporal)
                                 <td>
                                     <strong> {{ $index + 1 }}</strong>
                                 </td>
@@ -220,19 +223,35 @@
                                 <td>
                                     <textarea class="form-control" disabled>{{ $articuloTemporal->comentarios }}</textarea>
                                 </td>
+
+
+                                {{-- Aca va la foto del articulo temporal --}}
+                                @if ($articuloTemporal->fotosArticuloTemporal->count() > 0)
+                                    <td>
+                                        <a href="{{ asset('storage/fotos-articulo-temporal/' . $articuloTemporal->fotosArticuloTemporal->first()->foto_path) }}"
+                                            target="_blank">
+                                            <img src="{{ asset('storage/fotos-articulo-temporal/' . $articuloTemporal->fotosArticuloTemporal->first()->foto_path) }}"
+                                                alt="Foto del artículo" width="50px">
+                                        </a>
+                                    </td>
+                                @else
+                                    <td>
+                                        <img src="{{ asset('storage/fotos-articulo-temporal/no-imagen.jpg') }}"
+                                            alt="Foto del artículo" width="50px">
+                                    </td>
+                                @endif
+
                                 <td>
                                     <button type="button" class="btn btn-outline-danger delete-row-btn">
                                         <i class="fas fa-trash"></i>
                                     </button>
 
                                 </td>
-                            </tr>
+                        </tr>
                         @endforeach
 
                     </tbody>
                 </table>
-
-
                 <div class="d-flex justify-content-between">
                     <div>
                         <button type="button" class="btn btn-outline-primary" id="addRow">
@@ -248,9 +267,6 @@
                         </a>
                     </div>
                 </div>
-
-
-
             </div>
             <div class="card-footer">
                 <div class="text-right">
@@ -262,122 +278,8 @@
                 </div>
             </div>
 
-
-
-            {{-- boton modal modalCrearArticulo --}}
-            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearArticulo">
-                <i class="fas fa-plus"></i>
-                Agregar artículo
-            </button> --}}
-
-
-            {{-- <div class="row">
-                <div class="col-md-12">
-                    <h2>Artículos reales</h2>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Artículo</th>
-                                <th>Referencia</th>
-                                <th>Definición</th>
-                                <th>Cantidad</th>
-                                <th>Comentarios</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pedido->articulos as $index => $articulo)
-                                <tr>
-                                    <td>
-                                        <strong>Artículo {{ $index + 1 }}</strong>
-                                        <br>
-                                        <a href="{{ route('articulos.show', $articulo->id) }}"
-                                            class="btn btn-sm btn-primary" target="_blank">Ver</a>
-                                    </td>
-                                    <td>{{ $articulo->referencia }}</td>
-                                    <td>{{ $articulo->definicion }}</td>
-                                    <td>{{ $articulo->pivot->cantidad }}</td>
-                                    <td>{{ $articulo->comentarios }}</td>
-                                    <td>
-                                        <form action="{{ route('pedidos.detachArticulo', [$pedido->id, $articulo->id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    <form action="{{ route('pedidos.cambiarEstado', $pedido->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="tercero_id" value="{{ $pedido->tercero_id }}">
-
-                        <input type="hidden" name="estado" value="Costeo">
-                        <button type="submit" class="btn btn-primary">Enviar a Costeo</button>
-                    </form>
-                </div>
-            </div> --}}
-
         </div>
     </div>
-
-    {{-- Modal de editar articulo --}}
-    {{-- <div class="modal fade" id="modalEditarArticulo" tabindex="-1" aria-labelledby="modalEditarArticuloLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditarArticuloLabel">Editar artículo</h5>
-                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Acá se va a editar el articulo</p>
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- Modal de crear articulo --}}
-    {{-- <div class="modal fade" id="modalCrearArticulo" tabindex="-1" aria-labelledby="modalCrearArticuloLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-right">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCrearArticuloLabel">Crear artículo | Pedido # {{ $pedido->id }}
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @component('components.articulo-temporal-form', [
-                        'articulos' => $articulos,
-                        'maquinas' => $maquinas,
-                        'definiciones' => $definiciones,
-                        'sistemas' => $sistemas,
-                        'medidas' => $medidas,
-                        'unidadMedidas' => $unidadMedidas,
-                        'definicionesFotoMedida' => $definicionesFotoMedida,
-                        'pedido' => $pedido,
-                    ])
-                    @endcomponent
-
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
 @endsection
 @section('js')
@@ -403,9 +305,6 @@
                     '{{ $referencia->referencia }}--{{ $referencia->definicion }}</option>' +
                     '@endforeach' +
                     '</select>' +
-                    '<button class="btn btn-sm btn-outline-primary ml-2" type="button" onclick="agregarReferencia()">' +
-                    '<i class="fas fa-plus"></i>' +
-                    '</button>' +
                     '</div>' +
 
                     '</td>' +
