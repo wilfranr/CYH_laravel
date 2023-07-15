@@ -3,7 +3,11 @@
 @section('content')
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
+            <div>
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <strong>¡Éxito!</strong>
+                {{ session('success') }}
+            </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -53,22 +57,24 @@
                                             <td>{{ $pedido->created_at }}</td>
                                             <td>{{ $pedido->estado }}</td>
                                             <td>
-                                                <a href="{{ route('pedidos.show', $pedido->id) }}" class="btn btn-primary"
-                                                    title="Ver">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning"
-                                                    title="Editar">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST"
-                                                    style="display: inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger delete" title="Eliminar">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                                <div>
+                                                    <a href="{{ route('pedidos.show', $pedido->id) }}" class="btn btn-outline-primary btn-sm"
+                                                        title="Ver">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    {{-- <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning"
+                                                        title="Editar">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a> --}}
+                                                    <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST"
+                                                        style="display: inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm delete" title="Eliminar">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif

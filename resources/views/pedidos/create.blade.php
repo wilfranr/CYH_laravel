@@ -259,10 +259,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="referencia">Referencia</label>
-                                <select name="referencia${contadorArticulos}" id="referencia${contadorArticulos}" class="form-control">
+                                <select name="referencia${contadorArticulos}" id="referencia${contadorArticulos}" class="form-control select2">
                                     <option value="">Seleccione</option>
                                     @foreach ($articulos as $id => $articulo)
-                                    <option value="{{ $articulo->referencia }}">{{ $articulo->referencia }}</option>
+                                    <option value="{{ $articulo->referencia }}">{{ $articulo->referencia }}--{{$articulo->definicion}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -290,7 +290,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="cantidad">Cantidad</label>
-                                <input type="number" name="cantidad${contadorArticulos}" class="form-control" id="cantidad${contadorArticulos}" required>
+                                <input type="number" name="cantidad${contadorArticulos}" class="form-control" id="cantidad${contadorArticulos}" value="1" required>
                             </div>
                         </div>
                     </div>
@@ -345,6 +345,7 @@
                 placeholder: "Seleccione una opción",
                 allowClear: true
             });
+            
 
         });
         if ($('#cantidad').val() == '') {

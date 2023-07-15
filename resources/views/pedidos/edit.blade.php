@@ -83,7 +83,7 @@
 
 
 
-                    <input type="hidden" name="estado" id="estado" value="Procesando">
+                    <input type="hidden" name="estado" id="estado" value="Costeo">
                     <!-- Mostrar otros campos si es necesario -->
                 </div>
             @endforeach

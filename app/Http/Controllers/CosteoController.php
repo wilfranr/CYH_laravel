@@ -17,8 +17,11 @@ class CosteoController extends Controller
     public function costear(Pedido $pedido, $id)
     {
         $pedido = Pedido::with(['tercero', 'contacto', 'maquinas', 'articulosTemporales.fotosArticuloTemporal', 'articulos'])->find($id);
-        $proveedores = Tercero::where('tipo', 'proveedor')->get();
-        return view('costeos.costear', compact('pedido', 'proveedores'));
+        //traer todos los terceros donde PaisCodigo = COL y tipo = proveedor
+        $proveedoresNacionales = Tercero::where('PaisCodigo', 'COL')->where('tipo', 'proveedor')->get();
+        $proveedoresInternacionales = Tercero::where('PaisCodigo', '!=', 'COL')->where('tipo', 'proveedor')->get();
+
+        return view('costeos.costear', compact('pedido', 'proveedoresNacionales', 'proveedoresInternacionales'));
     }
 
     

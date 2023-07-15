@@ -320,9 +320,6 @@ return [
                     'text' => 'Ver pedidos',
                     'url'  => '/pedidos',
                     'icon' => 'fas fa-fw fa-eye',
-                    // Mostrar cantidad de pedidos nuevos
-                    'label'       => isset($pedidosNuevos) ? $pedidosNuevos : 0,
-                    'label_color' => 'success',
                 ],
                 [
                     'text' => 'Crear pedido',
@@ -342,7 +339,7 @@ return [
                     // Mostrar cantidad de pedidos nuevos
                     'label'       => isset($pedidosNuevos) ? $pedidosNuevos : 0,
                     'label_color' => 'success',
-                ],
+                ]
             ],
         ],
         [

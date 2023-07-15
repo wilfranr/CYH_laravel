@@ -23,149 +23,159 @@
             </div>
         @endif
 
-
-        <!-- info pedido -->
-        <div class="card bg-light d-flex flex-fill">
-            <div class="card-header text-muted border-bottom-0">
-                Datos del cliente
-            </div>
-            <div class="card-body pt-0">
-                <div class="row">
-                    <div class="col-3">
-                        <p>Cliente</p>
-                        <h2 class="lead"><b><strong>{{ $pedido->tercero->nombre }}</strong></b></h2>
-                        <p class="text-muted text-sm">
-                            <b>
-                                @if ($pedido->tercero->tipo_documento == 'cedula')
-                                    <span class=""><i class="fas fa-lg fa-id-card"></i> CC:</span>
-                                @elseif ($pedido->tercero->tipo_documento == 'nit')
-                                    <span class=""><i class="fas fa-lg fa-id-card"></i> NIT:</span>
-                                @elseif ($pedido->tercero->tipo_documento == 'ce')
-                                    <span class=""><i class="fas fa-lg fa-id-card"></i> CE:</span>
-                                @endif
-                            </b> {{ $pedido->tercero->numero_documento }}
-                        </p>
-                        <p class="text-muted text-sm">
-                            <b>
-                                <span class=""><i class="fas fa-lg fa-building"></i> Dirección:</span>
-                            </b> {{ $pedido->tercero->direccion }}
-                        </p>
-                        <p class="text-muted text-sm">
-                            <b>
-                                <span class=""><i class="fab fa-2x fa-whatsapp"></i> Teléfono:</span>
-                            </b>
-                            <a href="https://wa.me/+57{{ $pedido->tercero->telefono }}" target="_blank">
-                                {{ $pedido->tercero->telefono }}
-
-                            </a>
-                        </p>
-                        <p class="text-muted text-sm">
-                            <b>
-                                <span class=""><i class="fa fa-lg fa-envelope"></i> Email:</span>
-                            </b>
-                            <a href="mailto:{{ $pedido->tercero->email }}" target="_blank">
-                                {{ $pedido->tercero->email }}
-
-                            </a>
-                        </p>
-                    </div>
-                    <div class="col-3">
-                        <p>Contacto del cliente</p>
-                        <h2 class="lead">
-                            <b>
-                                <strong>
-                                    @if ($pedido->contacto)
-                                        {{ $pedido->contacto->nombre }}
+        <form action="{{ route('pedidos.update', $pedido->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <!-- info pedido -->
+            <div class="card bg-light d-flex flex-fill">
+                <div class="card-header text-muted border-bottom-0">
+                    Datos del cliente
+                </div>
+                <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Cliente</p>
+                            <input type="hidden" name="tercero_id" id="tercero_id" value="{{ $pedido->tercero->id }}"
+                                readonly>
+                            <input type="hidden" name="user_id" id="user_id" value="{{ $pedido->user->id }}">
+                            <input type="hidden" name="estado" id="estado" value="Costeo">
+                            <input type="hidden" name="comentario" id="comentario" value="{{ $pedido->comentario }}">
+                            <input type="hidden" name="contacto_id" id="contacto_id" value="{{ $pedido->contacto->id }}">
+                            <input type="hidden" name="maquina_id" id="maquina_id"
+                                value="{{ $pedido->maquinas->first()->id }}">
+                            <h2 class="lead"><b><strong>{{ $pedido->tercero->nombre }}</strong></b></h2>
+                            <p class="text-muted text-sm">
+                                <b>
+                                    @if ($pedido->tercero->tipo_documento == 'cedula')
+                                        <span class=""><i class="fas fa-lg fa-id-card"></i> CC:</span>
+                                    @elseif ($pedido->tercero->tipo_documento == 'nit')
+                                        <span class=""><i class="fas fa-lg fa-id-card"></i> NIT:</span>
+                                    @elseif ($pedido->tercero->tipo_documento == 'ce')
+                                        <span class=""><i class="fas fa-lg fa-id-card"></i> CE:</span>
+                                    @endif
+                                </b> {{ $pedido->tercero->numero_documento }}
+                            </p>
+                            <p class="text-muted text-sm">
+                                <b>
+                                    <span class=""><i class="fas fa-lg fa-building"></i> Dirección:</span>
+                                </b> {{ $pedido->tercero->direccion }}
+                            </p>
+                            <p class="text-muted text-sm">
+                                <b>
+                                    <span class=""><i class="fab fa-2x fa-whatsapp"></i> Teléfono:</span>
+                                </b>
+                                <a href="https://wa.me/+57{{ $pedido->tercero->telefono }}" target="_blank">
+                                    {{ $pedido->tercero->telefono }}
+                                </a>
+                            </p>
+                            <p class="text-muted text-sm">
+                                <b>
+                                    <span class=""><i class="fa fa-lg fa-envelope"></i> Email:</span>
+                                </b>
+                                <a href="mailto:{{ $pedido->tercero->email }}" target="_blank">
+                                    {{ $pedido->tercero->email }}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <p>Contacto del cliente</p>
+                            <h2 class="lead">
+                                <b>
+                                    <strong>
+                                        @if ($pedido->contacto)
+                                            {{ $pedido->contacto->nombre }}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </strong>
+                                </b>
+                            </h2>
+                            <p class="text-muted text-sm">
+                                <b>
+                                    <span class=""><i class="fab fa-2x fa-whatsapp"></i> Teléfono:</span>
+                                </b>
+                                @if ($pedido->contacto)
+                                    <a href="https://wa.me/+57{{ $pedido->contacto->telefono }}" target="_blank">
+                                        {{ $pedido->contacto->telefono }}
                                     @else
                                         N/A
-                                    @endif
-                                </strong>
-                            </b>
-                        </h2>
-
-                        <p class="text-muted text-sm">
-                            <b>
-                                <span class=""><i class="fab fa-2x fa-whatsapp"></i> Teléfono:</span>
-                            </b>
-                            @if ($pedido->contacto)
-                                <a href="https://wa.me/+57{{ $pedido->contacto->telefono }}" target="_blank">
-                                    {{ $pedido->contacto->telefono }}
+                                @endif
+                                </a>
+                            </p>
+                            <p class="text-muted text-sm">
+                                <b>
+                                    <span class=""><i class="fa fa-lg fa-envelope"></i> Email:</span>
+                                </b>
+                                @if ($pedido->contacto)
+                                    <a href="mailto:{{ $pedido->contacto->email }}">
+                                        {{ $pedido->contacto->email }}
+                                    </a>
                                 @else
                                     N/A
-                            @endif
-                            </a>
-                        </p>
-                        <p class="text-muted text-sm">
-                            <b>
-                                <span class=""><i class="fa fa-lg fa-envelope"></i> Email:</span>
-                            </b>
-                            @if ($pedido->contacto)
-                                <a href="mailto:{{ $pedido->contacto->email }}">
-                                    {{ $pedido->contacto->email }}
-                                </a>
-                            @else
-                                N/A
-                            @endif
-                        </p>
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <p>Maquinas asociadas al pedido</p>
+                            @if ($pedido->maquinas->count() >= 1)
+                                <h2 class="lead">
+                                    <strong>
+                                        @foreach ($pedido->maquinas as $maquina)
+                                            <ul>
+                                                <li>
+                                                    <b>
+                                                        <i class="fa fa-wrench"></i>
+                                                        {{ $maquina->tipo }} <a
+                                                            href="{{ route('maquinas.show', $maquina->id) }}"
+                                                            target="_blank">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a><br>
+                                                    </b>
+                                                    <p>{{ $maquina->marca }}</p>
+                                                    <p>{{ $maquina->modelo }}</p>
+
+
+                                                </li>
+                                            </ul>
+                                        @endforeach
+                                    </strong>
+
+                                </h2>
+
+
+                        </div>
+                        <div class="col-3 text-center">
+                            <img src="{{ asset('storage/maquinas/' . $maquina->foto) }}" alt="user-avatar"
+                                class="img-circle img-fluid">
+                        </div>
+                    @else
+                        N/A
+                        @endif
                     </div>
-                    <div class="col-3">
-                        <p>Maquinas asociadas al pedido</p>
-                        @if ($pedido->maquinas->count() >= 1)
-                            <h2 class="lead">
-                                <strong>
-                                    @foreach ($pedido->maquinas as $maquina)
-                                        <ul>
-                                            <li>
-                                                <b>
-                                                    <i class="fa fa-wrench"></i>
-                                                    {{ $maquina->tipo }} <a
-                                                        href="{{ route('maquinas.show', $maquina->id) }}" target="_blank">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a><br>
-                                                </b>
-                                                <p>{{ $maquina->marca }}</p>
-                                                <p>{{ $maquina->modelo }}</p>
-
-
-                                            </li>
-                                        </ul>
-                                    @endforeach
-                                </strong>
-
-                            </h2>
-
+                    <div>
+                        Comentarios del pedido: <br>
+                        <textarea class="form-control" disabled>{{ $pedido->comentario }}</textarea>
 
                     </div>
-                    <div class="col-3 text-center">
-                        <img src="{{ asset('storage/maquinas/' . $maquina->foto) }}" alt="user-avatar"
-                            class="img-circle img-fluid">
-                    </div>
-                @else
-                    N/A
-                    @endif
                 </div>
-                <div>
-                    Comentarios del pedido: <br>
-                    <textarea class="form-control" disabled>{{ $pedido->comentario }}</textarea>
-
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="text-right">
-                    <a href="https://wa.me/+57{{ $pedido->tercero->telefono }}" class="btn btn-sm bg-teal" target="_blank">
-                        <i class="fas fa-comments"></i>
-                    </a>
-                    <a href="{{ route('terceros.show', $pedido->tercero->id) }}" class="btn btn-sm btn-primary"
-                        target="_blank">
-                        <i class="fas fa-user"></i> Ver tercero
-                    </a>
+                <div class="card-footer">
+                    <div class="text-right">
+                        <a href="https://wa.me/+57{{ $pedido->tercero->telefono }}" class="btn btn-sm bg-teal"
+                            target="_blank">
+                            <i class="fas fa-comments"></i>
+                        </a>
+                        <a href="{{ route('terceros.show', $pedido->tercero->id) }}" class="btn btn-sm btn-primary"
+                            target="_blank">
+                            <i class="fas fa-user"></i> Ver tercero
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
     </div>
     <div class="container">
+
 
         {{-- Tabla con artículos --}}
         <div class="card bg-light d-flex flex-fill">
@@ -187,14 +197,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @foreach ($pedido->articulosTemporales as $index => $articuloTemporal)
+
+                        @foreach ($pedido->articulosTemporales as $index => $articuloTemporal)
+                            <tr>
                                 <td>
-                                    <strong> {{ $index + 1 }}</strong>
+                                    <strong>{{ $index + 1 }}</strong>
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <select class="form-control select2" style="width: 100%;" id="referencia">
+                                        <select class="form-control select2" style="width: 100%;"
+                                            name="referencia{{ $index + 1 }}">
                                             <option value="{{ $articuloTemporal->referencia }}">
                                                 {{ $articuloTemporal->referencia }}--{{ $articuloTemporal->definicion }}
                                             </option>
@@ -202,30 +214,20 @@
                                                 <option value="{{ $referencia->referencia }}">
                                                     {{ $referencia->referencia }}--{{ $referencia->definicion }}
                                                 </option>
-                                            @endforeach
+                                                @endforeach
+                                                <input type="hidden" value="{{ $articuloTemporal->definicion }}" name="definicion{{ $index + 1 }}">
                                             <!-- Agrega aquí más opciones del select si es necesario -->
                                         </select>
-                                        {{-- <button class="btn btn-sm btn-outline-primary ml-2" type="button"
-                                            onclick="agregarReferencia()">
-                                            <i class="fas fa-plus"></i>
-                                        </button> --}}
                                     </div>
-                                    {{-- <div id="agregarReferencia">
-                                        <input type="text" class="form-control" placeholder="Referencia"
-                                            id="referenciaParcial" name="referenciaParcial" value="">
-                                    </div> --}}
-                                </td>
-
-                                <td>
-                                    <input type="number" class="form-control" value="{{ $articuloTemporal->cantidad }}"
-                                        style="width: 100px;">
                                 </td>
                                 <td>
-                                    <textarea class="form-control" disabled>{{ $articuloTemporal->comentarios }}</textarea>
+                                    <input type="number" class="form-control" name="cantidad{{ $index + 1 }}"
+                                        value="{{ $articuloTemporal->cantidad }}" style="width: 100px;">
                                 </td>
-
-
-                                {{-- Aca va la foto del articulo temporal --}}
+                                <td>
+                                    <textarea class="form-control" name="comentarios{{ $index + 1 }}" disabled>{{ $articuloTemporal->comentarios }}</textarea>
+                                </td>
+                                <!-- Aca va la foto del articulo temporal -->
                                 @if ($articuloTemporal->fotosArticuloTemporal->count() > 0)
                                     <td>
                                         <a href="{{ asset('storage/fotos-articulo-temporal/' . $articuloTemporal->fotosArticuloTemporal->first()->foto_path) }}"
@@ -240,16 +242,13 @@
                                             alt="Foto del artículo" width="50px">
                                     </td>
                                 @endif
-
                                 <td>
                                     <button type="button" class="btn btn-outline-danger delete-row-btn">
                                         <i class="fas fa-trash"></i>
                                     </button>
-
                                 </td>
-                        </tr>
+                            </tr>
                         @endforeach
-
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-between">
@@ -268,17 +267,21 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="text-right">
-
-                    <a href="{{ route('terceros.show', $pedido->tercero->id) }}" class="btn btn-sm btn-primary"
-                        target="_blank">
-                        <i class="fa fa-paper-plane"></i> Enviar a costeo
-                    </a>
-                </div>
-            </div>
-
         </div>
+        <div class="card-footer">
+            <div class="text-right">
+
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="fa fa-paper-plane"></i> Enviar a costeo
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+    <input type="hidden" name="articulos-temporales" value="{{ $pedido->articulosTemporales->count() }}">
+
+    </form>
     </div>
 
 @endsection
@@ -289,7 +292,7 @@
             $('#chat-toggle').click(function() {
                 $('#chat-box').slideToggle();
             });
-            var contador = 1;
+            var contador = 0;
             // Evento click para agregar una nueva fila
             $(document).on('click', '#addRow', function() {
                 $('#agregarReferencia').hide();

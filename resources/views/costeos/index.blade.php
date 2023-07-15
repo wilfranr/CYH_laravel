@@ -17,6 +17,7 @@
                     <th>Comenatarios</th>
                     <th>Contacto Cliente</th>
                     <th>Fecha de Creación</th>
+                    <th>Fecha de Modificación</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -42,9 +43,10 @@
                                 @endif
                             </td>
                             <td>{{ $pedido->created_at }}</td>
+                            <td>{{ $pedido->updated_at }}</td>
                             <td>{{ $pedido->estado }}</td>
                             <td>
-                                <a href="{{ route('costeos.costear', $pedido->id) }}" class="btn btn-primary">
+                                <a href="{{ route('costeos.costear', $pedido->id) }}" class="btn btn-outline-primary btn-sm">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>
