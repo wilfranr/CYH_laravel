@@ -1,4 +1,4 @@
-@extends('layouts.app-master')
+@extends('adminlte::page')
 
 @section('content')
     <div class="container">
@@ -21,6 +21,21 @@
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Telefono --}}
+                            <div class="form-group row">
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="phone" type="text" min="0" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="phone">
+
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>El teléfono debe ser un número</strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -76,13 +91,14 @@
                                         <option value="vendedor" @if (old('role', $user->role) == 'vendedor') selected @endif>
                                             Vendedor
                                         </option>
-                                        <option value="Analista" @if (old('role', $user->role) == 'Analista') selected @endif>
-                                            Analista
+                                        <option value="analista_partes" @if (old('role', $user->role) == 'analistaPartes') selected @endif>
+                                            Analista de partes
                                         </option>
 
                                     </select>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-primary float-right">Actualizar</button>
                         </form>
                     </div>
                 </div>

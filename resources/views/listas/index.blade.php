@@ -1,7 +1,8 @@
-@extends('layouts.app-master')
+@extends('adminlte::page')
 
 @section('content')
     <div class="container">
+        <h1>Listas</h1>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -9,29 +10,20 @@
         @endif
 
 
-        <h1>Listas</h1>
-        <label for="tipo">Filtrar</label>
-        <select class="form-control" id="tipo" name="tipo" required>
-            <option value="">Todos</option>
-            @php
-                $tipos = [];
-            @endphp
-            @foreach ($listas as $l)
-                @php
-                    $tipos[] = $l->tipo;
-                @endphp
-            @endforeach
-            @foreach (array_unique($tipos) as $tipo)
-                <option value="{{ $tipo }}" {{ $tipo == $l->tipo ? 'selected' : '' }}>{{ $tipo }}
-                </option>
-            @endforeach
-        </select>
-
-
-
         <a href="{{ route('listas.create') }}" class="btn btn-primary mb-2">Crear Lista</a>
-        <table class="table">
+
+        <table id="listas" class="table table-bordered table-striped">
             <thead>
+                <select class="form-control" id="filtro-tipo">
+                    <option value="">Filtrar Todos</option>
+                    <option value="Marca">Marca</option>
+                    <option value="Definición">Definición</option>
+                    <option value="Sistema">Sistema</option>
+                    <option value="Medida">Medida</option>
+                    <option value="TipoMedida">Tipo de Medida</option>
+                    <option value="Definición">Definición</option>
+
+                </select>
                 <tr>
                     <th>Tipo</th>
                     <th>Nombre</th>
@@ -57,14 +49,16 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('listas.show', $lista->id) }}" class="btn btn-sm btn-success">Ver</a>
-                            <a href="{{ route('listas.edit', $lista->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                            <form action="{{ route('listas.destroy', $lista->id) }}" method="POST"
+                            <a href="{{ route('listas.show', $lista->id) }}" class="btn btn-sm btn-success"><i
+                                    class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="{{ route('listas.edit', $lista->id) }}" class="btn btn-sm btn-primary">🖋</a>
+                            <form id="deleteForm" action="{{ route('listas.destroy', $lista->id) }}" method="POST"
                                 style="display: inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('¿Está seguro de que desea eliminar esta lista?')">Eliminar</button>
+                                <button type="submit" class="btn btn-sm btn-danger delete" id="delete-lista">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -72,16 +66,48 @@
             </tbody>
         </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@endsection
+@section('js')
     <script>
-        //filtrar listas por tipo
         $(document).ready(function() {
-            $('#tipo').on('change', function() {
-                var value = $(this).val().toLowerCase();
-                $('table tbody tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
+            $('#listas').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                },
+                "scrollY": "550px", 
+                "scrollCollapse": true, 
+                "paging": false, 
             });
+            // Agregar filtro por tipo
+            $('#filtro-tipo').on('change', function() {
+                var table = $('#listas').DataTable();
+                var tipo = $(this).val();
+                table.column(0).search(tipo).draw();
+            });
+        });
+        $('.delete').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit();
+                    //tiempo de espera para que se ejecute el submit
+                    setTimeout(function() {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El registro ha sido eliminado.',
+                            'success'
+                        )
+                    }, 500);
+                }
+            })
         });
     </script>
 @endsection

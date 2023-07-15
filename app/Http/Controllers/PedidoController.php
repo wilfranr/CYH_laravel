@@ -9,9 +9,7 @@ use App\Models\Pais;
 use App\Models\Maquina;
 use App\Models\Lista;
 use App\Models\Articulo;
-use App\Models\Contacto;
 use App\Models\ArticuloTemporal;
-use App\Models\FotoArticulo;
 use App\Models\FotoArticuloTemporal;
 
 
@@ -50,7 +48,6 @@ class PedidoController extends Controller
 
         //obtener articulos
         $articulos = Articulo::all();
-
 
         //retornar la vista con los datos
         return view('pedidos.create')->with('ultimoPedido', $ultimoPedido)->with('usuario', $usuario)->with('Terceros', $Terceros)->with('paises', $paises)->with('maquinas', $maquinas)->with('sistemas', $sistemas)->with('articulos', $articulos);
@@ -135,7 +132,6 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
 
-
     public function show(Pedido $pedido, $id)
     {
         // Obtener el pedido con sus relaciones
@@ -143,6 +139,8 @@ class PedidoController extends Controller
 
         // Obtener todos los artículos asociados al pedido
         $articulos = $pedido->articulos;
+        //obtener todas las referencias de los articulos
+        $referencias = Articulo::all();
 
         $sistemas = Lista::where('tipo', 'sistema')->pluck('nombre', 'id');
         $definiciones = Lista::where('tipo', 'Definición')->pluck('nombre');
@@ -159,59 +157,108 @@ class PedidoController extends Controller
         $unidadMedidas = Lista::where('tipo', 'Unidad medida')->pluck('nombre', 'id');
         $maquinas = Lista::where('tipo', 'marca')->pluck('nombre', 'id');
 
-        return view('pedidos.show', compact('pedido', 'sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion'));
+        return view('pedidos.show', compact('pedido', 'sistemas', 'maquinas', 'medidas', 'unidadMedidas', 'articulos', 'definiciones', 'definicionesFotoMedida', 'definicion', 'referencias'));
     }
-
-
 
     public function edit($id)
     {
         $pedido = Pedido::findOrFail($id);
         $articulosTemporales = $pedido->articulosTemporales;
+        //foto de articulo temporal
+        $fotosArticuloTemporal = FotoArticuloTemporal::all();
+        // dd($fotosArticuloTemporal);
 
-        return view('pedidos.edit', compact('pedido', 'articulosTemporales'));
+
+        return view('pedidos.edit', compact('pedido', 'articulosTemporales', 'fotosArticuloTemporal'));
     }
-
-
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
+            'tercero_id' => 'nullable|exists:terceros,id',
+            'user_id' => 'nullable|exists:users,id',
+            'contacto_id' => 'nullable|exists:contactos,id',
             'comentario' => 'nullable|string',
             'estado' => 'nullable|string'
         ]);
 
         $pedido = Pedido::findOrFail($id);
+        $pedido->tercero_id = $request->input('tercero_id');
+        $pedido->user_id = auth()->user()->id;
+        $pedido->contacto_id = $request->input('contacto_id');
         $pedido->comentario = $request->input('comentario');
         $pedido->estado = $request->input('estado');
         $pedido->save();
 
-        // Actualizar los artículos temporales asociados al pedido
-        // Actualizar los registros relacionados en la relación "hasMany"
-        $articulosTemporales = $request->input('articulos-temporales');
+        // Actualizar la relación con las máquinas
+        $maquinas = $request->input('maquina_id', []);
+        $pedido->maquinas()->sync($maquinas);
 
-        if (!is_null($articulosTemporales)) {
-            $contadorArticulos = 1; // Inicializa el contador
+        // Actualizar los artículos temporales
+        $articulosTemporales = [];
 
-            foreach ($articulosTemporales as $articuloTemporalData) {
-                $articuloTemporal = new ArticuloTemporal();
-                $articuloTemporal->pedido_id = $pedido->id;
-                $articuloTemporal->referencia = $request->input("referencia{$contadorArticulos}");
-                $articuloTemporal->definicion = $request->input("definicion{$contadorArticulos}");
-                $articuloTemporal->comentarios = $request->input("comentarios{$contadorArticulos}");
-                // Asigna otros campos del artículo temporal si es necesario
+        for ($i = 1; $i <= $request->input('articulos-temporales', 0); $i++) {
+            $articuloTemporalId = $request->input("articulo_temporal_id_{$i}");
 
+            if ($articuloTemporalId) {
+                // Actualizar el artículo temporal existente
+                $articuloTemporal = ArticuloTemporal::findOrFail($articuloTemporalId);
+                $articuloTemporal->referencia = $request->input("referencia{$i}");
+                $articuloTemporal->definicion = $request->input("definicion{$i}");
+                $articuloTemporal->sistema = $request->input("sistema{$i}");
+                $articuloTemporal->cantidad = $request->input("cantidad{$i}");
+                $articuloTemporal->comentarios = $request->input("comentarios{$i}");
                 $articuloTemporal->save();
 
-                $contadorArticulos++; // Incrementa el contador después de cada iteración
+                $articulosTemporales[] = $articuloTemporalId;
+            } else {
+                // Crear un nuevo artículo temporal
+                $articuloTemporal = new ArticuloTemporal();
+                $articuloTemporal->referencia = $request->input("referencia{$i}");
+                $articuloTemporal->definicion = $request->input("definicion{$i}");
+                $articuloTemporal->sistema = $request->input("sistema{$i}");
+                $articuloTemporal->cantidad = $request->input("cantidad{$i}");
+                $articuloTemporal->comentarios = $request->input("comentarios{$i}");
+                $articuloTemporal->save();
+
+                $articulosTemporales[] = $articuloTemporal->id;
             }
         }
 
+        $pedido->articulosTemporales()->sync($articulosTemporales);
 
-
-        return redirect()->route('pedidos.show', ['id' => $pedido->id])
-            ->with('success', 'Pedido actualizado satisfactoriamente.');
+        // Redirigir o hacer cualquier otra acción necesaria
+        // ...
+        return redirect()->route('pedidos.index', $id)->with('success', 'El pedido ha sido enviado a costeo.');
     }
+
+    public function costear($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $articulosTemporales = $pedido->articulosTemporales;
+        //traer todos los terceros donde PaisCodigo = COL y tipo = proveedor
+        $proveedoresNacionales = Tercero::where('pais_codigo', 'COL')->where('tipo', 'proveedor')->get();
+
+        //traer los articulos de la tabla
+
+        return view('pedidos.costear', compact('pedido', 'articulosTemporales', 'proveedoresNacionales'));
+    }
+
+    public function cambiarEstado(Request $request, $id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        // Obtén el nuevo estado desde el formulario o cualquier otra fuente de entrada
+        $nuevoEstado = $request->input('estado');
+
+        // Actualiza el estado del pedido
+        $pedido->estado = $nuevoEstado;
+
+        $pedido->save();
+
+        // Redirige a la página de detalles del pedido o a cualquier otra página relevante
+        return redirect()->route('pedidos.index', $pedido->id)->with('success', 'Estado del pedido actualizado exitosamente.');
+    }
+
 
     public function detachArticulo($pedidoId, $articuloId)
     {

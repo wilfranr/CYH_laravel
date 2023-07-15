@@ -103,7 +103,7 @@ class TerceroController extends Controller
 
         // Guardar el archivo de certificación bancaria (si se ha proporcionado uno)
         if ($request->hasFile('certificacion_bancaria')) {
-            $certificacion = $request->file('certificacion_bancaria')->storePublicy('certificaciones', 'public');
+            $certificacion = $request->file('certificacion_bancaria')->storePublicly('certificaciones', 'public');
             $tercero->certificacion_bancaria = $certificacion;
         }
         //guardar archivo rut
@@ -141,48 +141,48 @@ class TerceroController extends Controller
             $tercero->maquinas()->attach($maquinas_ids);
         }
 
-        // Crear los contactos del tercero si se ha ingresado al menos un contacto
-        if ($data['contadorContactos'] >= 1) {
-            for ($i = 1; $i <= $data['contadorContactos']; $i++) {
-                // Validar los datos del formulario del contacto
-                $dataContacto = $request->validate([
-                    'nombre_contacto_' . $i => ['required', 'string', 'max:255'],
-                    'telefono_contacto_' . $i => ['nullable', 'string', 'max:20'],
-                    'email_contacto_' . $i => ['nullable', 'email', 'max:255'],
-                ]);
+        // // Crear los contactos del tercero si se ha ingresado al menos un contacto
+        // if ($data['contadorContactos'] >= 1) {
+        //     for ($i = 1; $i <= $data['contadorContactos']; $i++) {
+        //         // Validar los datos del formulario del contacto
+        //         $dataContacto = $request->validate([
+        //             'nombre_contacto_' . $i => ['required', 'string', 'max:255'],
+        //             'telefono_contacto_' . $i => ['nullable', 'string', 'max:20'],
+        //             'email_contacto_' . $i => ['nullable', 'email', 'max:255'],
+        //         ]);
 
-                // Crear el contacto
-                $contacto = new Contacto();
-                $contacto->nombre = $request->{'nombre_contacto_' . $i};
-                $contacto->telefono = $request->{'telefono_contacto_' . $i};
-                $contacto->email = $request->{'email_contacto_' . $i};
-                $contacto->save();
+        //         // Crear el contacto
+        //         $contacto = new Contacto();
+        //         $contacto->nombre = $request->{'nombre_contacto_' . $i};
+        //         $contacto->telefono = $request->{'telefono_contacto_' . $i};
+        //         $contacto->email = $request->{'email_contacto_' . $i};
+        //         $contacto->save();
 
-                // Agregar la relación a la tabla intermedia
-                $tercero->contactos()->attach($contacto->id);
-            }
-        } else {
-            // Validar los datos del formulario del contacto cuando hay un solo contacto
-            $dataContacto = $request->validate([
-                'nombre_contacto_1' => ['required', 'string', 'max:255'],
-                'telefono_contacto_1' => ['nullable', 'string', 'max:20'],
-                'email_contacto_1' => ['nullable', 'email', 'max:255'],
-            ]);
+        //         // Agregar la relación a la tabla intermedia
+        //         $tercero->contactos()->attach($contacto->id);
+        //     }
+        // } else {
+        //     // Validar los datos del formulario del contacto cuando hay un solo contacto
+        //     $dataContacto = $request->validate([
+        //         'nombre_contacto_1' => ['required', 'string', 'max:255'],
+        //         'telefono_contacto_1' => ['nullable', 'string', 'max:20'],
+        //         'email_contacto_1' => ['nullable', 'email', 'max:255'],
+        //     ]);
 
-            // Crear el contacto
-            $contacto = new Contacto();
-            $contacto->nombre = $request->nombre_contacto_1;
-            $contacto->telefono = $request->telefono_contacto_1;
-            $contacto->email = $request->email_contacto_1;
-            $contacto->save();
+        //     // Crear el contacto
+        //     $contacto = new Contacto();
+        //     $contacto->nombre = $request->nombre_contacto_1;
+        //     $contacto->telefono = $request->telefono_contacto_1;
+        //     $contacto->email = $request->email_contacto_1;
+        //     $contacto->save();
 
-            // Agregar la relación a la tabla intermedia
-            $tercero->contactos()->attach($contacto->id);
-        }
+        //     // Agregar la relación a la tabla intermedia
+        //     $tercero->contactos()->attach($contacto->id);
+        // }
 
 
         // Redirigir al usuario a la página de detalles del nuevo tercero con un mensaje de éxito
-        return redirect()->route('terceros.show', $tercero->id)->with('success', 'Tercero creado exitosamente');
+        return redirect()->route('terceros.index')->with('success', 'Tercero creado exitosamente');
     }
 
     public function show($id)

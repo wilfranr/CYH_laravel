@@ -1,4 +1,4 @@
-@extends('layouts.app-master')
+@extends('adminlte::page')
 @section('title', 'Terceros')
 
 @section('content')
@@ -46,15 +46,14 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('terceros.show', $tercero->id) }}" class="btn btn-sm btn-info">Ver</a>
-                            <a href="{{ route('terceros.edit', $tercero->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="{{ route('terceros.show', $tercero->id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('terceros.edit', $tercero->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                             <form action="{{ route('terceros.destroy', $tercero->id) }}" method="POST"
                                 style="display: inline">
                                 @csrf
 
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('¿Está seguro de que desea eliminar este tercero?')">Eliminar</button>
+                                <button type="submit" class="btn btn-sm btn-danger delete"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -73,6 +72,30 @@
                 $('table tbody tr').filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
+            });
+            $('.delete').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit();
+                    //tiempo de espera para que se ejecute el submit
+                    setTimeout(function() {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El registro ha sido eliminado.',
+                            'success'
+                        )
+                    }, 500);
+                }
+            })
             });
         });
     </script>

@@ -1,8 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LogoController;
@@ -17,6 +16,10 @@ use App\Http\Controllers\ListaPadreController;
 use App\Http\Controllers\FotoArticuloTemporalController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\ArticuloTemporalController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CosteoController;
+
 
 
 
@@ -37,23 +40,11 @@ use App\Http\Controllers\ArticuloTemporalController;
 
 //ruta raiz
 Route::get('/', function () {
-    return view('home.index');
+    return view('auth.login');
 });
-
-//obtener registro
-Route::get('/register', [RegisterController::class, 'show']);//->middleware('guest');
-//registrar usuario
-Route::post('/register', [RegisterController::class, 'register']);
-//obtener login
-Route::get('/login', [LoginController::class, 'show']);
-//autenticar usuario
-Route::post('/login', [LoginController::class, 'login']);
 
 //ruta home
 Route::get('/home', [HomeController::class, 'index']);
-
-//cerrar sesion
-Route::get('/logout', [LogoutController::class, 'logout']);
 
 //ruta de logo
 Route::get('/resize-logo', 'LogoController@resizeLogo');
@@ -61,7 +52,7 @@ Route::get('/resize-logo', 'LogoController@resizeLogo');
 //ruta terceros
 Route::get('/terceros', [TerceroController::class, 'index'])->name('terceros.index');
 Route::get('/terceros/create', [TerceroController::class, 'create'])->name('terceros.create');
-Route::post('/terceros',[TerceroController::class, 'store'])->name('terceros.store');
+Route::post('/terceros', [TerceroController::class, 'store'])->name('terceros.store');
 Route::get('/terceros/{id}/edit', [TerceroController::class, 'edit'])->name('terceros.edit');
 Route::put('/terceros/{id}/update', [TerceroController::class, 'update'])->name('terceros.update');
 Route::get('/terceros/{id}', [TerceroController::class, 'show'])->name('terceros.show');
@@ -110,6 +101,15 @@ Route::get('/pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.sh
 Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
 Route::put('/pedidos/{id}/update', [PedidoController::class, 'update'])->name('pedidos.update');
 Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
+//Cambiar estado de pedido
+Route::put('/pedidos/{id}/cambiarEstado', [PedidoController::class, 'cambiarEstado'])->name('pedidos.cambiarEstado');
+
+
+//rutas costeo
+Route::get('/costeos', [CosteoController::class, 'index'])->name('costeos.index');
+Route::get('/costeos/costear/{id}', [CosteoController::class, 'costear'])->name('costeos.costear');
+
+
 //foto articulo temporal
 Route::get('/pedidos/{articuloTemporal}/fotos', [FotoArticuloTemporalController::class, 'index'])->name('fotos.index');
 Route::post('/fotos', [FotoArticuloTemporalController::class, 'store'])->name('fotos.store');
@@ -120,13 +120,15 @@ Route::delete('/pedido/{pedidoId}/articulo/{articuloId}/detach', [PedidoControll
 
 
 //rutas usuarios
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+//middleware para proteger la ruta 'can:users.index
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('can:users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->middleware('can:users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('can:users.destroy');
+
 
 //rutas articulos
 Route::get('/articulos', [ArticuloController::class, 'index'])->name('articulos.index');
@@ -142,28 +144,25 @@ Route::post('/articulos/definicion', [ArticuloController::class, 'definicion'])-
 
 
 
-//rutas listas padre
-Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listasPadre.index');
-Route::get('/listasPadre/create', [ListaPadreController::class, 'create'])->name('listasPadre.create');
-Route::post('/listasPadre', [ListaPadreController::class, 'store'])->name('listasPadre.store');
-Route::get('/listasPadre/{listaPadre}/edit', [ListaPadreController::class, 'edit'])->name('listasPadre.edit');
-Route::put('/listasPadre/{id}/update', [ListaPadreController::class, 'update'])->name('listasPadre.update');
-Route::delete('/listasPadre/{listaPadre}', [ListaPadreController::class, 'destroy'])->name('listasPadre.destroy');
 
+Route::group(['middleware' => 'role:superadmin'], function () {
+    // rutas accesibles solo para usuarios con rol 'superusuario'
 
+    //rutas listas padre
+    Route::get('/listasPadre', [ListaPadreController::class, 'index'])->name('listasPadre.index');
+    Route::get('/listasPadre/create', [ListaPadreController::class, 'create'])->name('listasPadre.create');
+    Route::post('/listasPadre', [ListaPadreController::class, 'store'])->name('listasPadre.store');
+    Route::get('/listasPadre/{listaPadre}/edit', [ListaPadreController::class, 'edit'])->name('listasPadre.edit');
+    Route::put('/listasPadre/{id}/update', [ListaPadreController::class, 'update'])->name('listasPadre.update');
+    Route::delete('/listasPadre/{listaPadre}', [ListaPadreController::class, 'destroy'])->name('listasPadre.destroy');
+});
 
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::post('/set-dark-mode', function (\Illuminate\Http\Request $request) {
+    $darkMode = $request->input('dark_mode');
+    session(['dark_mode' => $darkMode]);
+    return response()->json(['success' => true]);
+});

@@ -1,4 +1,4 @@
-@extends('layouts.app-master')
+@extends('adminlte::page')
 
 @section('content')
     <div class="container">
@@ -33,8 +33,23 @@
             </div>
             <div class="form-group">
                 <label for="foto">Foto:</label>
+                <a href="{{ asset('storage/listas/' . $lista->foto) }}" target="_blank">
+                    <img src="{{ asset('storage/listas/' . $lista->foto) }}" alt="Foto de la lista"
+                        width="200px">
+                </a>
                 <input type="file" class="form-control-file" name="fotoLista" id="fotoLista">
             </div>
+            @if ($lista->tipo == 'Definición')
+                <div class="form-group">
+                    <label for="fotoMedida">Foto Medida:</label>
+                    <a href="{{ asset('storage/listas/' . $lista->fotoMedida) }}" target="_blank">
+                        <img src="{{ asset('storage/listas/' . $lista->fotoMedida) }}" alt="Foto de la lista"
+                            width="200px">
+                    </a>
+                    <input type="file" class="form-control-file" name="fotoMedida" id="fotoMedida">
+                </div>      
+            @endif      
+            
             <a href="{{ route('listas.index')}}" class="btn btn-secondary">Volver</a>
             <button type="submit" class="btn btn-primary">Actualizar</button>
         </form>

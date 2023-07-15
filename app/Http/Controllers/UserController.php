@@ -26,6 +26,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:8',
+            'role' => 'required',
         ]);
 
         $user = User::create($validated);
@@ -59,9 +60,9 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User updated successfully!');
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
+        $user = User::find($id);
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully!');
     }

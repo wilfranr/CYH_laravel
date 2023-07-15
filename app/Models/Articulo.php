@@ -18,7 +18,6 @@ class Articulo extends Model
         'descripcion_especifica',
         'peso',
         'fotoDescriptiva',
-        'fotoMedida',
     ];
 
     public function medidas()
